@@ -18,6 +18,7 @@
     traefik.enable = true;
     #   postgresql.enable = true;
     #   home-assistant.enable = true;
+    searxng.enable = true;
     adguard.enable = true;
   };
 
