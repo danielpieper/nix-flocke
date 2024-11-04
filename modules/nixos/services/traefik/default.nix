@@ -19,17 +19,17 @@ in
     ];
 
     systemd.services.traefik = {
-      # environment = {
-      #   CF_API_EMAIL = "hello@haseebmajid.dev";
-      # };
-      # serviceConfig = {
-      #   EnvironmentFile = [ config.sops.secrets.cloudflare_api_key.path ];
-      # };
+      environment = {
+        CF_API_EMAIL = "cloudflare@daniel-pieper.com";
+      };
+      serviceConfig = {
+        EnvironmentFile = [ config.sops.secrets.cloudflare_api_key.path ];
+      };
     };
 
-    # sops.secrets.cloudflare_api_key = {
-    #   sopsFile = ../secrets.yaml;
-    # };
+    sops.secrets.cloudflare_api_key = {
+      sopsFile = ../secrets.yaml;
+    };
 
     services = {
       tailscale.permitCertUid = "traefik";
@@ -76,15 +76,15 @@ in
           };
           certificatesResolvers = {
             tailscale.tailscale = { };
-            # letsencrypt = {
-            #   acme = {
-            #     email = "hello@daniel-pieper.com";
-            #     storage = "/var/lib/traefik/cert.json";
-            #     dnsChallenge = {
-            #       provider = "cloudflare";
-            #     };
-            #   };
-            # };
+            letsencrypt = {
+              acme = {
+                email = "cloudflare@daniel-pieper.com";
+                storage = "/var/lib/traefik/cert.json";
+                dnsChallenge = {
+                  provider = "cloudflare";
+                };
+              };
+            };
           };
           entryPoints.web = {
             address = "0.0.0.0:80";
@@ -100,8 +100,8 @@ in
               certResolver = "letsencrypt";
               domains = [
                 {
-                  main = "ts.daniel-pieper.com";
-                  sans = [ "*.ts.daniel-pieper.com" ];
+                  main = "homelab.daniel-pieper.com";
+                  sans = [ "*.homelab.daniel-pieper.com" ];
                 }
                 {
                   main = "daniel-pieper.com";

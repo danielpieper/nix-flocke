@@ -13,12 +13,13 @@
     server.enable = true;
   };
 
-  # services.flocke = {
-  #   traefik.enable = true;
-  #   postgresql.enable = true;
-  #   home-assistant.enable = true;
-  #   adguard.enable = true;
-  # };
+  services.flocke = {
+    cloudflared.enable = true;
+    traefik.enable = true;
+    #   postgresql.enable = true;
+    #   home-assistant.enable = true;
+    adguard.enable = true;
+  };
 
   topology.self = {
     hardware.info = "Dell Optiplex 9020";

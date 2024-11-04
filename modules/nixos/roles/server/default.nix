@@ -20,10 +20,10 @@ in
     };
 
     services = {
-      # flocke = {
-      #   avahi.enable = true;
-      #   tailscale.enable = true;
-      # };
+      flocke = {
+        #   avahi.enable = true;
+        tailscale.enable = true;
+      };
 
       getty.autologinUser = "nixos";
       # openiscsi = {
