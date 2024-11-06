@@ -45,6 +45,7 @@ nh home switch
 
 # Build ISO in result/ folder
 nix build .#install-isoConfigurations.graphical
+nix build .#install-isoConfigurations.minimal
 
 # Deploy my to remote server i.e. Home Lab (using SSH)
 deploy .#hal --hostname hal --ssh-user nixos --skip-checks

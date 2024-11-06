@@ -14,9 +14,21 @@ in
   };
 
   config = mkIf cfg.enable {
-    sops.secrets.cloudflared = {
-      sopsFile = ../secrets.yaml;
-      owner = "cloudflared";
+    sops.secrets = {
+      cloudflared = {
+        sopsFile = ../secrets.yaml;
+        owner = "cloudflared";
+      };
+      cloudflared-cert = {
+        sopsFile = ../secrets.yaml;
+        owner = "cloudflared";
+      };
+    };
+
+    environment.etc."cloudflared/cert.pem" = {
+      user = "cloudflared";
+      group = "cloudflared";
+      source = config.sops.secrets.cloudflared-cert.path;
     };
 
     services = {
