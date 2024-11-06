@@ -129,6 +129,11 @@
       url = "github:declancm/maximize.nvim";
       flake = false;
     };
+
+    teslamate = {
+      url = "github:teslamate-org/teslamate";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -162,6 +167,7 @@
         sops-nix.nixosModules.sops
         nix-topology.nixosModules.default
         authentik-nix.nixosModules.default
+        teslamate.nixosModules.default
       ];
 
       systems.hosts.framework.modules = with inputs; [
