@@ -1,6 +1,7 @@
 {
   disko.devices = {
     disk = {
+      # TODO: Change hal disks to "sda" (reinstall?)
       sdb = {
         type = "disk";
         device = "/dev/sda";
