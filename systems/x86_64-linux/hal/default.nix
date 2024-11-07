@@ -9,6 +9,8 @@
     ./disks.nix
   ];
 
+  system.impermanence.enable = true;
+
   roles = {
     server.enable = true;
   };
