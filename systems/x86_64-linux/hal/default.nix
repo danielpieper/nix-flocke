@@ -18,10 +18,12 @@
   services.flocke = {
     cloudflared.enable = true;
     traefik.enable = true;
+    nfs.enable = true;
     #   postgresql.enable = true;
     #   home-assistant.enable = true;
     searxng.enable = true;
     # adguard.enable = true;
+    # teslamate.enable = true;
   };
 
   topology.self = {
