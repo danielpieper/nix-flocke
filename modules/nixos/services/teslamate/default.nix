@@ -27,6 +27,7 @@ in
 
       postgres.enable_server = true;
       grafana.enable = true;
+      # mqtt.enable = true;
     };
 
     sops.secrets.teslamate = {

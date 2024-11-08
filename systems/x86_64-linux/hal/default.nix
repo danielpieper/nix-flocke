@@ -19,11 +19,12 @@
     cloudflared.enable = true;
     traefik.enable = true;
     nfs.enable = true;
+    jellyfin.enable = true;
+    searxng.enable = true;
+    # teslamate.enable = true;
     #   postgresql.enable = true;
     #   home-assistant.enable = true;
-    searxng.enable = true;
     # adguard.enable = true;
-    # teslamate.enable = true;
   };
 
   topology.self = {
