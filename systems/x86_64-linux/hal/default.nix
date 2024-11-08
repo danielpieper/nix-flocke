@@ -21,7 +21,7 @@
     nfs.enable = true;
     jellyfin.enable = true;
     searxng.enable = true;
-    # teslamate.enable = true;
+    teslamate.enable = true;
     #   postgresql.enable = true;
     #   home-assistant.enable = true;
     # adguard.enable = true;

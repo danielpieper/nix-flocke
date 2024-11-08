@@ -3804,15 +3804,16 @@
         "treefmt-nix": "treefmt-nix_5"
       },
       "locked": {
-        "lastModified": 1730972074,
-        "narHash": "sha256-q8IqOs7uYUryWwf5cxKHdjHEy/J5glaY5wggZkS6c3M=",
-        "owner": "teslamate-org",
+        "lastModified": 1730891370,
+        "narHash": "sha256-ane8ItjH+6inQk+O7ku5sttrAvBT4NdZeVaBQvI42rA=",
+        "owner": "peperunas",
         "repo": "teslamate",
-        "rev": "6403ba8f69de868c855d56d6deb4673ba4bc9892",
+        "rev": "d4108c246b682d2515c855dd17b7e4cfd2e34a9f",
         "type": "github"
       },
       "original": {
-        "owner": "teslamate-org",
+        "owner": "peperunas",
+        "ref": "patch-1",
         "repo": "teslamate",
         "type": "github"
       }

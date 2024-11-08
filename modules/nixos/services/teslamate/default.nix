@@ -19,9 +19,9 @@ in
 
     services.teslamate = {
       enable = true;
-      # listenAddress = "127.0.0.1";
-      # port = 4000;
-      # virtualHost = "tesla.homelab.daniel-pieper.com";
+      listenAddress = "127.0.0.1";
+      port = 4000;
+      virtualHost = "tesla.homelab.daniel-pieper.com";
 
       secretsFile = config.sops.secrets.teslamate.path;
 
@@ -36,27 +36,38 @@ in
       group = config.users.users.teslamate.group;
     };
 
-    # services.traefik = {
-    #   dynamicConfigOptions = {
-    #     http = {
-    #       services = {
-    #         teslamate.loadBalancer.servers = [
-    #           {
-    #             url = "http://localhost:4000";
-    #           }
-    #         ];
-    #       };
-    #
-    #       routers = {
-    #         teslamate = {
-    #           entryPoints = [ "websecure" ];
-    #           rule = "Host(`tesla.homelab.daniel-pieper.com`)";
-    #           service = "teslamate";
-    #           tls.certResolver = "letsencrypt";
-    #         };
-    #       };
-    #     };
-    #   };
-    # };
+    services.traefik = {
+      dynamicConfigOptions = {
+        http = {
+          services = {
+            teslamate.loadBalancer.servers = [
+              {
+                url = "http://localhost:4000";
+              }
+            ];
+            grafana.loadBalancer.servers = [
+              {
+                url = "http://localhost:3000";
+              }
+            ];
+          };
+
+          routers = {
+            teslamate = {
+              entryPoints = [ "websecure" ];
+              rule = "Host(`tesla.homelab.daniel-pieper.com`)";
+              service = "teslamate";
+              tls.certResolver = "letsencrypt";
+            };
+            grafana = {
+              entryPoints = [ "websecure" ];
+              rule = "Host(`grafana.homelab.daniel-pieper.com`)";
+              service = "grafana";
+              tls.certResolver = "letsencrypt";
+            };
+          };
+        };
+      };
+    };
   };
 }

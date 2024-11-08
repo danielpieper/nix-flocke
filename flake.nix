@@ -131,7 +131,9 @@
     };
 
     teslamate = {
-      url = "github:teslamate-org/teslamate";
+      # TODO: until https://github.com/teslamate-org/teslamate/pull/4360 is merged
+      # url = "github:teslamate-org/teslamate";
+      url = "github:peperunas/teslamate/patch-1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
