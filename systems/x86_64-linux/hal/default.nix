@@ -22,7 +22,9 @@
     jellyfin.enable = true;
     searxng.enable = true;
     teslamate.enable = true;
-    #   postgresql.enable = true;
+    postgresql.enable = true;
+    monitoring.enable = true;
+    gotify.enable = true;
     #   home-assistant.enable = true;
     # adguard.enable = true;
   };
