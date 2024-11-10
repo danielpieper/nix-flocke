@@ -51,11 +51,6 @@ in
                   url = "http://localhost:3031";
                 }
               ];
-              alertmanager.loadBalancer.servers = [
-                {
-                  url = "http://localhost:9093";
-                }
-              ];
             };
 
             routers = {
@@ -77,12 +72,6 @@ in
                 service = "promtail";
                 tls.certResolver = "letsencrypt";
               };
-              alertmanager = {
-                entryPoints = [ "websecure" ];
-                rule = "Host(`alertmanager.homelab.daniel-pieper.com`)";
-                service = "alertmanager";
-                tls.certResolver = "letsencrypt";
-              };
             };
           };
         };
@@ -92,36 +81,6 @@ in
         port = 3020;
         enable = true;
         checkConfig = "syntax-only";
-        alertmanager = {
-          enable = true;
-          configuration = {
-            # global = {
-            # The smarthost and SMTP sender used for mail notifications.
-            # smtp_smarthost = "mail.thalheim.io:587";
-            # smtp_from = "alertmanager@thalheim.io";
-            # smtp_auth_username = "alertmanager@thalheim.io";
-            # smtp_auth_password = "$SMTP_PASSWORD";
-            # };
-
-            route = {
-              receiver = "all";
-              group_by = [ "instance" ];
-              group_wait = "30s";
-              group_interval = "2m";
-              repeat_interval = "24h";
-            };
-
-            receivers = [
-              {
-                name = "all";
-                webhook_configs = [
-                  { url = "http://127.0.0.1:11000/alert"; } # matrix-hook
-                  { url = with config.services.gotify; "http://localhost:${environment.GOTIFY_SERVER_PORT}"; } # alertmanger-ntfy
-                ];
-              }
-            ];
-          };
-        };
 
         exporters = {
           node = {
@@ -332,6 +291,25 @@ in
               ];
             };
           };
+          alerting.contactPoints.settings.contactPoints = [
+            {
+              name = "Gotify template without token";
+              orgId = 1;
+              receivers = [
+                {
+                  uid = "167ff3bf-5780-4f81-b811-3e9e5002f40b";
+                  type = "webhook";
+                  settings = {
+                    # TODO: provision gotify token and add here
+                    url =
+                      with config.services.gotify;
+                      "http://localhost:${environment.GOTIFY_SERVER_PORT}/message?token=";
+                    httpMethod = "POST";
+                  };
+                }
+              ];
+            }
+          ];
         };
       };
     };
