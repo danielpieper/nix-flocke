@@ -29,7 +29,11 @@ in
         device = "//192.168.178.38/11tb";
         fsType = "cifs";
         options = [
-          "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s"
+          "x-systemd.automount"
+          "noauto"
+          "x-systemd.idle-timeout=60"
+          "x-systemd.device-timeout=5s"
+          "x-systemd.mount-timeout=5s"
         ];
       };
 
@@ -37,7 +41,11 @@ in
         device = "//192.168.178.38/5.5tb";
         fsType = "cifs";
         options = [
-          "x-systemd.automount,noauto,x-systemd.idle-timeout=60,x-systemd.device-timeout=5s,x-systemd.mount-timeout=5s"
+          "x-systemd.automount"
+          "noauto"
+          "x-systemd.idle-timeout=60"
+          "x-systemd.device-timeout=5s"
+          "x-systemd.mount-timeout=5s"
         ];
       };
     };
