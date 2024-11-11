@@ -25,7 +25,7 @@
     postgresql.enable = true;
     monitoring.enable = true;
     gotify.enable = true;
-    restic-server.enable = true;
+    restic.enable_server = true;
     #   home-assistant.enable = true;
     # adguard.enable = true;
   };

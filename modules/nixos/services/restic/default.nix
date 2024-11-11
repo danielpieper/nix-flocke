@@ -6,14 +6,14 @@
 with lib;
 with lib.flocke;
 let
-  cfg = config.services.flocke.restic-server;
+  cfg = config.services.flocke.restic;
 in
 {
-  options.services.flocke.restic-server = {
-    enable = mkEnableOption "Enable the restic backup server";
+  options.services.flocke.restic = {
+    enable_server = mkEnableOption "Enable the restic backup server";
   };
 
-  config = mkIf cfg.enable {
+  config = mkIf cfg.enable_server {
     # https://github.com/restic/rest-server
     services = {
       restic.server = {
@@ -48,6 +48,21 @@ in
           };
         };
       };
+
+      prometheus = {
+        scrapeConfigs = [
+          {
+            job_name = "restic";
+            basic_auth = {
+              username = "restic";
+              password_file = config.sops.secrets.restic_user_password.path;
+            };
+            static_configs = [
+              { targets = [ config.services.restic.server.listenAddress ]; }
+            ];
+          }
+        ];
+      };
     };
 
     sops.secrets = {
@@ -55,6 +70,11 @@ in
         sopsFile = ../secrets.yaml;
         owner = config.users.users.restic.name;
         group = config.users.users.restic.group;
+      };
+      restic_user_password = {
+        sopsFile = ../secrets.yaml;
+        owner = config.users.users.prometheus.name;
+        group = config.users.users.prometheus.group;
       };
     };
 

@@ -92,17 +92,6 @@ in
 
         # TODO: work out this is on a different host
         scrapeConfigs = [
-          # {
-          #   job_name = "home-assistant";
-          #   metrics_path = "/api/prometheus";
-          #   bearer_token_file = config.sops.secrets.home_assistant_token.path;
-          #   static_configs = [
-          #     {
-          #       targets = [ "s100:8123" ];
-          #     }
-          #   ];
-          # }
-
           {
             job_name = "nodes";
             static_configs = [
