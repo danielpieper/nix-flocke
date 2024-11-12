@@ -26,6 +26,7 @@
     monitoring.enable = true;
     gotify.enable = true;
     restic.enable_server = true;
+    valheim.enable = true;
     #   home-assistant.enable = true;
     # adguard.enable = true;
   };
