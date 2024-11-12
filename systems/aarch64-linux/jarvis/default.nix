@@ -15,10 +15,13 @@
     server.enable = true;
   };
 
-  services.flocke = {
-    restic.enable = true;
-    traefik.enable = true;
-    postgresql.enable = true;
+  services = {
+    fail2ban.enable = true;
+    flocke = {
+      restic.enable = true;
+      traefik.enable = true;
+      postgresql.enable = true;
+    };
   };
 
   topology.self = {
