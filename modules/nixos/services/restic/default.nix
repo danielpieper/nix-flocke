@@ -9,6 +9,10 @@ let
   cfg = config.services.flocke.restic;
 in
 {
+  imports = [
+    ./client.nix
+  ];
+
   options.services.flocke.restic = {
     enable_server = mkEnableOption "Enable the restic backup server";
   };

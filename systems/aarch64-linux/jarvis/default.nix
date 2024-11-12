@@ -16,6 +16,7 @@
   };
 
   services.flocke = {
+    restic.enable = true;
     traefik.enable = true;
     postgresql.enable = true;
   };
