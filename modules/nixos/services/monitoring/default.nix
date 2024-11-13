@@ -10,6 +10,10 @@ let
   cfg = config.services.flocke.monitoring;
 in
 {
+  imports = [
+    ./exporter.nix
+  ];
+
   options.services.flocke.monitoring = {
     enable = mkEnableOption "Enable The monitoring stack(loki, prometheus, grafana)";
   };
@@ -98,6 +102,7 @@ in
               {
                 targets = [
                   "127.0.0.1:${toString config.services.prometheus.exporters.node.port}"
+                  "jarvis:${toString config.services.prometheus.exporters.node.port}"
                 ];
               }
             ];

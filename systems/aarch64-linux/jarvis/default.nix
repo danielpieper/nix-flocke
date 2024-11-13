@@ -19,6 +19,7 @@
     fail2ban.enable = true;
     flocke = {
       restic.enable = true;
+      monitoring.enable_exporter = true;
       traefik.enable = true;
       postgresql.enable = true;
     };
