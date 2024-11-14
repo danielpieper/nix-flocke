@@ -285,25 +285,35 @@ in
               ];
             };
           };
-          alerting.contactPoints.settings.contactPoints = [
-            {
-              name = "Gotify template without token";
-              orgId = 1;
-              receivers = [
-                {
-                  uid = "167ff3bf-5780-4f81-b811-3e9e5002f40b";
-                  type = "webhook";
-                  settings = {
-                    # TODO: provision gotify token and add here
-                    url =
-                      with config.services.gotify;
-                      "http://localhost:${environment.GOTIFY_SERVER_PORT}/message?token=";
-                    httpMethod = "POST";
-                  };
-                }
-              ];
-            }
-          ];
+          alerting = {
+            contactPoints.settings.contactPoints = [
+              {
+                name = "Gotify template without token";
+                orgId = 1;
+                receivers = [
+                  {
+                    uid = "167ff3bf-5780-4f81-b811-3e9e5002f40b";
+                    type = "webhook";
+                    settings = {
+                      # TODO: provision gotify token and add here
+                      url =
+                        with config.services.gotify;
+                        "http://localhost:${environment.GOTIFY_SERVER_PORT}/message?token=";
+                      httpMethod = "POST";
+                    };
+                  }
+                ];
+              }
+            ];
+            # https://gist.github.com/krisek/62a98e2645af5dce169a7b506e999cd8
+            rules.path = ./alerts.yaml;
+            # rules.settings.deleteRules = [
+            #   {
+            #     orgId = 1;
+            #     uid = "";
+            #   }
+            # ];
+          };
         };
       };
     };
