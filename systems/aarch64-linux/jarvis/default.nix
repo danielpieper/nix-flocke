@@ -22,6 +22,7 @@
       monitoring.enable_exporter = true;
       traefik.enable = true;
       postgresql.enable = true;
+      website.enable = true;
     };
   };
 
