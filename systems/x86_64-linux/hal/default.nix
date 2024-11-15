@@ -18,6 +18,7 @@
   services.flocke = {
     cloudflared.enable = true;
     traefik.enable = true;
+    authentik.enable = true;
     nfs.enable = true;
     jellyfin.enable = true;
     searxng.enable = true;
@@ -26,7 +27,8 @@
     monitoring.enable = true;
     gotify.enable = true;
     restic.enable_server = true;
-    satisfactory.enable = true;
+    valheim.enable = false;
+    satisfactory.enable = false;
     #   home-assistant.enable = true;
     # adguard.enable = true;
   };
