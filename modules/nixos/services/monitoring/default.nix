@@ -19,21 +19,21 @@ in
   };
 
   config = mkIf cfg.enable {
-    # sops.secrets = {
-    #   home_assistant_token = {
-    #     sopsFile = ../secrets.yaml;
-    #   };
-    #
-    #   grafana_oauth2_client_id = {
-    #     sopsFile = ../secrets.yaml;
-    #     owner = "grafana";
-    #   };
-    #
-    #   grafana_oauth2_client_secret = {
-    #     sopsFile = ../secrets.yaml;
-    #     owner = "grafana";
-    #   };
-    # };
+    sops.secrets = {
+      #   home_assistant_token = {
+      #     sopsFile = ../secrets.yaml;
+      #   };
+      #
+      grafana_oauth2_client_id = {
+        sopsFile = ../secrets.yaml;
+        owner = "grafana";
+      };
+
+      grafana_oauth2_client_secret = {
+        sopsFile = ../secrets.yaml;
+        owner = "grafana";
+      };
+    };
 
     services = {
       traefik = {
@@ -217,22 +217,21 @@ in
             root_url = "https://grafana.homelab.daniel-pieper.com";
           };
 
-          # TODO: setup auth 
-          # "auth" = {
-          #   signout_redirect_url = "https://authentik.daniel-pieper.com/application/o/grafana/end-session/";
-          #   oauth_auto_login = true;
-          # };
-          #
-          # "auth.generic_oauth" = {
-          #   enabled = true;
-          #   client_id = "$__file{${config.sops.secrets.grafana_oauth2_client_id.path}}";
-          #   client_secret = "$__file{${config.sops.secrets.grafana_oauth2_client_secret.path}}";
-          #   scopes = "openid profile email";
-          #   auth_url = "https://authentik.daniel-pieper.com/application/o/authorize/";
-          #   token_url = "https://authentik.daniel-pieper.com/application/o/token/";
-          #   api_url = "https://authentik.daniel-pieper.com/application/o/userinfo/";
-          #   role_attribute_path = "contains(groups, 'Grafana Admins') && 'Admin' || contains(groups, 'Grafana Editors') && 'Editor' || 'Viewer'";
-          # };
+          "auth" = {
+            signout_redirect_url = "https://authentik.daniel-pieper.com/application/o/grafana/end-session/";
+            oauth_auto_login = true;
+          };
+
+          "auth.generic_oauth" = {
+            enabled = true;
+            client_id = "$__file{${config.sops.secrets.grafana_oauth2_client_id.path}}";
+            client_secret = "$__file{${config.sops.secrets.grafana_oauth2_client_secret.path}}";
+            scopes = "openid profile email";
+            auth_url = "https://authentik.daniel-pieper.com/application/o/authorize/";
+            token_url = "https://authentik.daniel-pieper.com/application/o/token/";
+            api_url = "https://authentik.daniel-pieper.com/application/o/userinfo/";
+            role_attribute_path = "contains(groups, 'Grafana Admins') && 'Admin' || contains(groups, 'Grafana Editors') && 'Editor' || 'Viewer'";
+          };
           database = {
             host = "/run/postgresql";
             user = "grafana";
