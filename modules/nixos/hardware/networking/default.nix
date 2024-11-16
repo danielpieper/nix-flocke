@@ -14,24 +14,43 @@ in
   };
 
   config = mkIf cfg.enable {
-    networking.firewall = {
-      enable = true;
-      allowedTCPPortRanges = [
-        {
-          from = 1714;
-          to = 1764;
-        }
-      ];
-      allowedUDPPortRanges = [
-        {
-          from = 1714;
-          to = 1764;
-        }
+    networking = {
+      firewall = {
+        enable = true;
+        allowedTCPPortRanges = [
+          {
+            from = 1714;
+            to = 1764;
+          }
+        ];
+        allowedUDPPortRanges = [
+          {
+            from = 1714;
+            to = 1764;
+          }
+        ];
+      };
+      networkmanager.enable = true;
+      nameservers = [
+        "45.90.28.0#e4e166.dns.nextdns.io"
+        "2a07:a8c0::#e4e166.dns.nextdns.io"
+        "45.90.30.0#e4e166.dns.nextdns.io"
+        "2a07:a8c1::#e4e166.dns.nextdns.io"
       ];
     };
-    networking.networkmanager.enable = true;
-    # environment.persistence."/persist".directories = [
-    #   "/etc/NetworkManager"
-    # ];
+
+    services.resolved = {
+      enable = true;
+      dnssec = "true";
+      domains = [ "~." ];
+      fallbackDns = [
+        "45.90.28.0#e4e166.dns.nextdns.io"
+        "2a07:a8c0::#e4e166.dns.nextdns.io"
+        "45.90.30.0#e4e166.dns.nextdns.io"
+        "2a07:a8c1::#e4e166.dns.nextdns.io"
+      ];
+      dnsovertls = "true";
+    };
   };
+
 }
