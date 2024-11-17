@@ -29,6 +29,7 @@
     restic.enable_server = true;
     valheim.enable = false;
     satisfactory.enable = false;
+    arr.enable = true;
     #   home-assistant.enable = true;
     # adguard.enable = true;
   };

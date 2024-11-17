@@ -24,7 +24,7 @@ in
         enable = true;
         listenAddress = "127.0.0.1:8012";
         prometheus = true;
-        dataDir = "/mnt/nas/restic";
+        dataDir = "/mnt/restic";
         # TODO: check if restic settings should be enabled
         privateRepos = false;
         appendOnly = false;
@@ -83,7 +83,7 @@ in
     };
 
     fileSystems = {
-      "/mnt/nas/restic" = {
+      "/mnt/restic" = {
         device = "//192.168.178.38/restic";
         fsType = "cifs";
         options = [
@@ -93,7 +93,6 @@ in
           "x-systemd.automount"
           "noauto"
           "x-systemd.idle-timeout=60"
-          "x-systemd.device-timeout=5s"
           "x-systemd.mount-timeout=5s"
         ];
       };

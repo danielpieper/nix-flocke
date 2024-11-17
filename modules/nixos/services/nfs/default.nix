@@ -15,10 +15,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    # sops.secrets.nfs_smb_secrets = {
-    #   sopsFile = ../secrets.yaml;
-    # };
-
     environment.systemPackages = with pkgs; [
       cifs-utils
       nfs-utils
@@ -29,10 +25,12 @@ in
         device = "//192.168.178.38/11tb";
         fsType = "cifs";
         options = [
-          "x-systemd.automount"
+          "file_mode=0777"
+          "dir_mode=0777"
+          "nounix"
           "noauto"
+          "x-systemd.automount"
           "x-systemd.idle-timeout=60"
-          "x-systemd.device-timeout=5s"
           "x-systemd.mount-timeout=5s"
         ];
       };
@@ -41,10 +39,12 @@ in
         device = "//192.168.178.38/5.5tb";
         fsType = "cifs";
         options = [
-          "x-systemd.automount"
+          "file_mode=0777"
+          "dir_mode=0777"
+          "nounix"
           "noauto"
+          "x-systemd.automount"
           "x-systemd.idle-timeout=60"
-          "x-systemd.device-timeout=5s"
           "x-systemd.mount-timeout=5s"
         ];
       };
