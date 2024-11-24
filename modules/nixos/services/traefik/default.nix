@@ -18,12 +18,18 @@ in
       443
     ];
 
-    systemd.services.traefik = {
-      environment = {
-        CF_API_EMAIL = "cloudflare@daniel-pieper.com";
-      };
-      serviceConfig = {
-        EnvironmentFile = [ config.sops.secrets.cloudflare_api_key.path ];
+    systemd = {
+      tmpfiles.rules = [
+        "d /var/log/traefik 0755 traefik traefik"
+      ];
+
+      services.traefik = {
+        environment = {
+          CF_API_EMAIL = "cloudflare@daniel-pieper.com";
+        };
+        serviceConfig = {
+          EnvironmentFile = [ config.sops.secrets.cloudflare_api_key.path ];
+        };
       };
     };
 
@@ -40,7 +46,7 @@ in
         staticConfigOptions = {
           log = {
             level = "INFO";
-            filePath = "/var/log/traefik.log";
+            filePath = "/var/log/traefik/traefik.log";
             # format = "json";  # Uses text format (common) by default
             noColor = false;
             maxSize = 100;
@@ -55,7 +61,7 @@ in
 
           accessLog = {
             addInternals = true;
-            filePath = "/var/log/traefik-access.log";
+            filePath = "/var/log/traefik/access.log";
             bufferingSize = 100; # Number of log lines
             fields = {
               names = {
