@@ -30,6 +30,7 @@
     valheim.enable = false;
     satisfactory.enable = false;
     arr.enable = true;
+    syncthing.enable = true;
     #   home-assistant.enable = true;
     # adguard.enable = true;
   };
