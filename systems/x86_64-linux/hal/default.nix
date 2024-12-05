@@ -31,6 +31,7 @@
     satisfactory.enable = false;
     arr.enable = true;
     syncthing.enable = true;
+    tandoor.enable = true;
     #   home-assistant.enable = true;
     # adguard.enable = true;
   };
@@ -45,7 +46,7 @@
     resumeDevice = "/dev/disk/by-label/nixos";
   };
 
-  # teslamate is unable to connect to teslamotors.com 
+  # teslamate is unable to connect to teslamotors.com
   # if the tailscale mullvad exit node is enabled.
   #
   # sudo tailscale exit-node suggest
