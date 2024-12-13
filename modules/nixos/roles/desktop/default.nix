@@ -30,10 +30,9 @@ in
       logitechMouse.enable = true;
     };
 
-    services = {
-      flocke.avahi.enable = true;
-      backup.enable = true;
-      vpn.enable = true;
+    services.flocke = {
+      avahi.enable = true;
+      restic.enable = true;
       virtualisation.podman.enable = true;
     };
 
@@ -47,7 +46,7 @@ in
     };
 
     user = {
-      name = "haseeb";
+      name = "daniel";
       initialPassword = "1";
     };
   };
