@@ -12,8 +12,15 @@
   system.impermanence.enable = true;
 
   roles = {
-    desktop.enable = true;
+    desktop = {
+      enable = true;
+      addons = {
+        hyprland.enable = true;
+      };
+    };
   };
+
+  networking.hostName = "tars";
 
   topology.self = {
     hardware.info = "Lenovo Thinkpad x250";
