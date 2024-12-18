@@ -288,6 +288,53 @@ in
           --trailhead-card-button-background-color: rgba(12, 12, 13, 0.3)!important;
           --trailhead-card-button-background-hover-color: rgba(12, 12, 13, 0.5)!important;
           --trailhead-card-button-background-active-color: rgba(12, 12, 13, 0.7)!important;
+
+        /* show bookmark toolbar in fullscreen */
+        :root[inFullscreen] #PersonalToolbar {
+          visibility: visible !important;
+        }
+
+        /* hide native tabs if sideberry is enabled */
+        /*
+          Set window preface value:
+          Sidebery settings > Help > Preface value
+          note: in this example: XXX
+        */
+        #main-window #TabsToolbar {
+            overflow: hidden;
+            max-height: 3em; /* Estado expandido */
+            transition: max-height 0.3s ease-in-out !important;
+        }
+        #main-window #TabsToolbar .toolbar-items {
+            overflow: hidden;
+            max-height: 40px; /* Estado expandido */
+            transition: max-height 0.3s ease-in-out !important;
+        }
+        #main-window[titlepreface*="XXX"] #TabsToolbar {
+            max-height: 0; /* Estado colapsado */
+            visibility: hidden; /* Evita conteúdo interativo enquanto colapsado */
+            transition: max-height 0.3s ease-in-out, visibility 0s 0.3s !important; /* atraso para ocultar */
+        }
+        #main-window[titlepreface*="XXX"] #TabsToolbar .toolbar-items {
+            max-height: 0;
+        }
+        #main-window[titlepreface*="XXX"] #tabbrowser-tabs {
+            z-index: 0 !important;
+        }
+
+        /* Decrease size of the sidebar header */
+        #sidebar-header {
+          font-size: 1.2em !important;
+          padding: 2px 6px 2px 3px !important;
+        }
+        #sidebar-header #sidebar-close {
+          padding: 3px !important;
+        }
+        #sidebar-header #sidebar-close .toolbarbutton-icon {
+          width: 14px !important;
+          height: 14px !important;
+          opacity: 0.6 !important;
+        }
         '';
 
         userContent = ''
