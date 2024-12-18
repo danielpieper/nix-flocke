@@ -87,11 +87,6 @@
     };
     hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
 
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     attic = {
       url = "github:zhaofengli/attic";
       inputs.nixpkgs.follows = "nixpkgs";
