@@ -34,17 +34,7 @@ in
         '';
 
         extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-          bitwarden
-          enhancer-for-youtube
-          languagetool
-          old-reddit-redirect
-          private-relay
-          return-youtube-dislikes
-          reddit-enhancement-suite
-          tab-stash
-          stylus
-          ublock-origin
-          vimium
+          onepassword-password-manager
         ];
 
         settings = {
