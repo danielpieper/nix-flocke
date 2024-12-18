@@ -21,6 +21,7 @@ in
 
       desktop.addons = {
         nautilus.enable = true;
+        _1password.enable = true;
       };
     };
 

@@ -18,7 +18,7 @@
   roles = {
     desktop.enable = true;
     social.enable = true;
-    video.enable = true;
+    video.enable = false;
   };
 
   flocke.user = {
