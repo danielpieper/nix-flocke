@@ -23,7 +23,7 @@
   networking.hostName = "tars";
 
   topology.self = {
-    hardware.info = "Lenovo Thinkpad x250";
+    hardware.info = "Lenovo Thinkpad X1 Carbon";
   };
 
   boot = {

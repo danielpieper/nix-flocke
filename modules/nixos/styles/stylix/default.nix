@@ -17,7 +17,7 @@ in
       enableDefaultPackages = true;
       fontDir.enable = true;
       packages = with pkgs; [
-        (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
+        nerd-fonts.symbols-only
       ];
 
       fontconfig = {

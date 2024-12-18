@@ -131,9 +131,7 @@
     };
 
     teslamate = {
-      # TODO: until https://github.com/teslamate-org/teslamate/pull/4360 is merged
-      # url = "github:teslamate-org/teslamate";
-      url = "github:peperunas/teslamate/patch-1";
+      url = "github:teslamate-org/teslamate";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -182,7 +180,7 @@
 
       overlays = with inputs; [
         nixgl.overlay
-        nur.overlay
+        nur.overlays.default
         nix-topology.overlays.default
       ];
 
