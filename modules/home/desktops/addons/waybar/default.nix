@@ -41,6 +41,7 @@ in
             "backlight"
             "battery"
             "pulseaudio"
+            "pulseaudio/slider"
             "network"
           ];
           "hyprland/workspaces" = {
@@ -143,8 +144,7 @@ in
           };
           pulseaudio = {
             scroll-step = 2;
-            format = "{icon} {volume}%";
-            format-bluetooth = " {icon} {volume}%";
+            format = "{icon}";
             format-muted = "  ";
             format-icons = {
               headphone = "  ";
@@ -154,6 +154,12 @@ in
                 "  "
               ];
             };
+            on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
+          };
+          "pulseaudio/slider" = {
+            min = 0;
+            max = 100;
+            orientation = "horizontal";
           };
           tray = {
             icon-size = 16;
