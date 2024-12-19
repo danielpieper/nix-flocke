@@ -131,9 +131,6 @@ in
         hms = "home-manager switch --flake ~/Projects/nix-flocke#${config.flocke.user.name}@${host}";
         nrs = "sudo nixos-rebuild switch --flake ~/Projects/nix-flocke#${host}";
 
-        # new commads
-        weather = "curl wttr.in/London";
-
         pfile = "fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'";
         gdub = "git fetch -p && git branch -vv | grep ': gone]' | awk '{print }' | xargs git branch -D $argv;";
         tldrf = "${pkgs.tldr}/bin/tldr --list | fzf --preview \"${pkgs.tldr}/bin/tldr {1} --color\" --preview-window=right,70% | xargs tldr";
@@ -141,6 +138,50 @@ in
         ds = "docker stop (docker ps -a -q)";
         drm = "docker rm (docker ps -a -q)";
         docker-compose = "podman-compose";
+        dc = "podman-compose";
+
+        # Git
+        g = "git";
+        ga = "git add";
+        gaa = "git add --all";
+
+        gb = "git branch";
+        gba = "git branch --all";
+        gbd = "git branch --delete";
+        gbD = "git branch --delete --force";
+        gbl = "git blame -b -w";
+        gbr = "git branch --remote";
+
+        gc = "git commit --verbose";
+        gca = "git commit --verbose --all";
+        gcam = "git commit --all --message";
+        gcb = "git checkout -b";
+
+        gcmsg = "git commit --message";
+        gco = "git checkout";
+        gcp = "git cherry-pick";
+
+        gd = "git diff";
+        gds = "git diff --staged";
+        gdt = "git diff-tree --no-commit-id --name-only -r";
+        gdw = "git diff --word-diff";
+
+        gl = "git pull";
+        glog = "git log --oneline --decorate --graph";
+
+        gm = "git merge";
+        gmtl = "git mergetool --no-prompt";
+
+        gp = "git push";
+        gpd = "git push --dry-run";
+        gpf = "git push --force-with-lease --force-if-includes";
+        gpr = "git pull --rebase";
+
+        grbi = "git rebase --interactive";
+        grba = "git rebase --abort";
+        grbc = "git rebase --continue";
+
+        gst = "git status";
       };
 
       functions = {
@@ -225,10 +266,10 @@ in
         #     sha256 = "sha256-iKNaD0E7IwiQZ+7pTrbPtrUcCJiTcVpb9ksVid1J6A0=";
         #   };
         # }
-        {
-          name = "git-abbr";
-          inherit (pkgs.fishPlugins.git-abbr) src;
-        }
+        # {
+        #   name = "git-abbr";
+        #   inherit (pkgs.fishPlugins.git-abbr) src;
+        # }
       ];
     };
   };

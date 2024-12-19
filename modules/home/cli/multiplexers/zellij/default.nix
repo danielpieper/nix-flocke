@@ -45,7 +45,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = [ sesh ];
+    home.packages = [ sesh pkgs.tmate ];
     programs.zoxide.enable = true;
     programs.zellij.enable = true;
 
