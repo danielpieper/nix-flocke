@@ -20,6 +20,24 @@ in
       recommendedEnvironment = true;
       xwayland.enable = true;
 
+      extraConfig = ''
+        device {
+          name = "kensington-slimblade-pro-trackball(wired)-kensington-slimblade-pro-trackball(wired)";
+          accel_profile = "adaptive";
+          sensitivity = -0.5;
+        }
+        device {
+          name = "kensington-slimblade-pro(2.4ghz-receiver)-kensington-slimblade-pro-trackball(2.4ghz-receiver)";
+          accel_profile = "adaptive";
+          sensitivity = -0.5;
+        }
+        device {
+          name = "logitech-g305-1";
+          accel_profile = "flat";
+          sensitivity = 0;
+          natural_scroll = false;
+        }
+      '';
       config = {
         input = {
           kb_layout = "us,de";
@@ -38,6 +56,7 @@ in
           inactive_border_color = "0xff${colors.base02}";
         };
 
+        gestures.workspace_swipe = true;
         decoration = {
           rounding = 5;
         };
@@ -54,6 +73,8 @@ in
             variable_framerate = true;
             variable_refresh = FULLSCREEN_ONLY;
             disable_autoreload = true;
+            # Unfullscreen when opening something
+            new_window_takes_over_fullscreen = 2;
           };
 
         source = [ "${config.home.homeDirectory}/.config/hypr/monitors.conf" ];

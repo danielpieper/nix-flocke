@@ -14,18 +14,23 @@ in
       let
         firefoxVideo = {
           class = [ "firefox" ];
+          title = [ "^(Picture-in-Picture|Firefox)$"];
         };
-        guildWars = {
-          title = [ "Guild Wars 2" ];
+        browsers = {
+          class = [ "^(firefox|google-chrome)$" ];
         };
-        bitwarden = {
-          title = [ ".*Bitwarden.*" ];
+        chat = {
+          class = [ "^(Signal|signal|discord|Slack)$" ];
+        };
+        gaming = {
+          class = [ "^(steam|lutris)$" ];
         };
       in
       lib.concatLists [
-        (map (rule [ "idleinhibit fullscreen" ]) [ firefoxVideo ])
-        (map (rule [ "fullscreen" ]) [ guildWars ])
-        (map (rule [ "float" ]) [ bitwarden ])
+        (map (rule [ "idleinhibit fullscreen" "float" "pin" "size 800 450" "move 100%-800 100%-480" ]) [ firefoxVideo ])
+        (map (rule [ "workspace 2" "suppressevent fullscreen" ]) [ browsers ])
+        (map (rule [ "workspace 4" ]) [ chat ])
+        (map (rule [ "workspace 6" ]) [ gaming ])
       ];
   };
 }

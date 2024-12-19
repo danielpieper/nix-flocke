@@ -1301,14 +1301,14 @@
       "locked": {
         "lastModified": 1718089837,
         "narHash": "sha256-E4Q+ruDcE1S+CrHLwdpB32NvcITKOJWrg9LhMs+/Of0=",
-        "owner": "spikespaz",
-        "repo": "hyprland-nix",
+        "owner": "hyprland-community",
+        "repo": "hyprnix",
         "rev": "cfb8fb276e605699589c578e27f0ddd8dbba102b",
         "type": "github"
       },
       "original": {
-        "owner": "spikespaz",
-        "repo": "hyprland-nix",
+        "owner": "hyprland-community",
+        "repo": "hyprnix",
         "type": "github"
       }
     },
@@ -2447,11 +2447,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1717868076,
-        "narHash": "sha256-c83Y9t815Wa34khrux81j8K8ET94ESmCuwORSKm2bQY=",
+        "lastModified": 1734435836,
+        "narHash": "sha256-kMBQ5PRiFLagltK0sH+08aiNt3zGERC2297iB6vrvlU=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "cd18e2ae9ab8e2a0a8d715b60c91b54c0ac35ff9",
+        "rev": "4989a246d7a390a859852baddb1013f825435cee",
         "type": "github"
       },
       "original": {
