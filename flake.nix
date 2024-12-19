@@ -165,8 +165,8 @@
         teslamate.nixosModules.default
       ];
 
-      systems.hosts.framework.modules = with inputs; [
-        nixos-hardware.nixosModules.framework-13-7040-amd
+      systems.hosts.tars.modules = with inputs; [
+        nixos-hardware.nixosModules.lenovo-thinkpad-x1-9th-gen
       ];
 
       # homes.modules = with inputs; [

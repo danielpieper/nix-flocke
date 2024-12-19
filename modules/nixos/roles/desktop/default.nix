@@ -35,6 +35,7 @@ in
       avahi.enable = true;
       restic.enable = true;
       virtualisation.podman.enable = true;
+        tailscale.enable = true;
     };
 
     system = {

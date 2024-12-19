@@ -22,9 +22,11 @@ in
 
       config = {
         input = {
-          kb_layout = "us";
-          touchpad = {
-            disable_while_typing = false;
+          kb_layout = "us,de";
+          kb_options = "eurosign:e,caps:escape,grp:alt_shift_toggle";
+            touchpad = {
+              disable_while_typing = false;
+            natural_scroll = true;
           };
         };
 

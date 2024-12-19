@@ -35,6 +35,7 @@ in
             "custom/notification"
             "clock"
             "idle_inhibitor"
+            "hyprland/language"
           ];
           modules-right = [
             "backlight"
@@ -61,7 +62,7 @@ in
             on-click = "activate";
           };
           clock = {
-            format = "󰃰 {:%a, %d %b, %I:%M %p}";
+            format = "󰃰 {:%d.%m %H:%M}";
             interval = 1;
             tooltip-format = "<tt><small>{calendar}</small></tt>";
             calendar = {
@@ -102,8 +103,8 @@ in
           "idle_inhibitor" = {
             format = "{icon}";
             format-icons = {
-              activated = "  ";
-              deactivated = "  ";
+              activated = "󰒳";
+              deactivated = "󰒲";
             };
           };
           backlight = {
@@ -134,7 +135,8 @@ in
             tooltip-format = ''
               {ifname}
               {ipaddr}/{cidr}
-              {signalstrength}
+              {signalStrength}
+              {frequency} Ghz
               Up: {bandwidthUpBits}
               Down: {bandwidthDownBits}
             '';
@@ -156,6 +158,10 @@ in
           tray = {
             icon-size = 16;
             spacing = 8;
+          };
+          "hyprland/language" = {
+            "format-en" = "en";
+            "format-de" = "de";
           };
         }
       ];
