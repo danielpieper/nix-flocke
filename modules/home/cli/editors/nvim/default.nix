@@ -14,9 +14,8 @@ let
     domain = "codeberg.org";
     owner = "naseschief";
     repo = "nvim";
-    rev = "d144538e8333f730a9406bf2616fb8ef1812991f";
-    sha256 = "sha256-maVQpqUTSH7jiIysI9TE13qTTPyQsbxLaLbQoEclZSg=";
-
+    rev = "b1ddde1e2d0fc006b6d01d17a8928f03e87d9d1a";
+    sha256 = "sha256-k2+s3U0m8Mo68E+GDykk6remOw3dZuuCHBw980BxMII=";
     postFetch = ''
       cp -vaR "$out/lua/." "$out"
       rm -rf "$out/lua"

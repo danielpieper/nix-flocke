@@ -51,6 +51,7 @@ in
 
       "org/gnome/desktop/interface" = {
         enable-hot-corners = false;
+        color-scheme = "prefer-dark";
       };
 
       "org/gnome/shell" = {
