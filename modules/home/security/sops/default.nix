@@ -25,9 +25,6 @@ in
         keyFile = "/home/${config.flocke.user.name}/.config/sops/age/keys.txt";
         sshKeyPaths = [ "/home/${config.flocke.user.name}/.ssh/id_ed25519" ];
       };
-
-      defaultSymlinkPath = "/run/user/1000/secrets";
-      defaultSecretsMountPoint = "/run/user/1000/secrets.d";
     };
   };
 }

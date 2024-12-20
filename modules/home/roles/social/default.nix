@@ -16,6 +16,7 @@ in
     programs = {
       discord.enable = true;
       shotwell.enable = true;
+      signal.enable = true;
     };
   };
 }

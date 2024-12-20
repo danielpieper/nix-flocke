@@ -49,7 +49,6 @@ in
 
     user = {
       name = "daniel";
-      initialPassword = "1";
     };
   };
 }

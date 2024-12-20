@@ -63,6 +63,16 @@ in
         marksman
         sqlfluff
         vtsls
+        # Golang:
+        go-tools
+        gotools
+        gopls
+        gofumpt
+        delve # debugger
+        gomodifytags
+        impl
+        golangci-lint
+
         markdownlint-cli
         nodePackages.eslint
         nodePackages.bash-language-server
@@ -80,10 +90,10 @@ in
         sumneko-lua-language-server
       ];
 
-      # sessionVariables = {
-      #   EDITOR = "nvim";
-      #   VISUAL = "nvim";
-      # };
+      sessionVariables = {
+        EDITOR = "nvim";
+        VISUAL = "nvim";
+      };
     };
   };
 }

@@ -56,6 +56,7 @@ in
         simplified_ui true
         default_shell "fish"
         copy_on_select true
+        session_serialization false
 
         plugins {
             status-bar { path "status-bar"; }

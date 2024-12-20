@@ -20,6 +20,9 @@
     };
   };
 
+  services.flocke.tlp.enable = true;
+  services.thermald.enable = true;
+
   networking.hostName = "tars";
 
   topology.self = {

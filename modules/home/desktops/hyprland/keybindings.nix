@@ -11,7 +11,7 @@ let
     #!/usr/bin/env bash
 
     if grep open /proc/acpi/button/lid/LID0/state; then
-    		hyprctl keyword monitor "eDP-1, 2256x1504@60, 0x0, 1"
+    		hyprctl keyword monitor "eDP-1, 1920x1200@60, 0x0, 1"
     else
     		if [[ `hyprctl monitors | grep "Monitor" | wc -l` != 1 ]]; then
     				hyprctl keyword monitor "eDP-1, disable"
@@ -141,8 +141,8 @@ in
         "SUPERSHIFT,u" = "movetoworkspace,special";
       };
       bindi = {
-        ",XF86MonBrightnessUp" = "exec, ${pkgs.brightnessctl}/bin/brightnessctl +5%";
-        ",XF86MonBrightnessDown" = "exec, ${pkgs.brightnessctl}/bin/brightnessctl -5% ";
+        ",XF86MonBrightnessUp" = "exec, ${pkgs.brightnessctl}/bin/brightnessctl s +5%";
+        ",XF86MonBrightnessDown" = "exec, ${pkgs.brightnessctl}/bin/brightnessctl s 5%-";
         ",XF86AudioRaiseVolume" = "exec, ${pkgs.pamixer}/bin/pamixer -i 5";
         ",XF86AudioLowerVolume" = "exec, ${pkgs.pamixer}/bin/pamixer -d 5";
         ",XF86AudioMute" = "exec, ${pkgs.pamixer}/bin/pamixer --toggle-mute";
