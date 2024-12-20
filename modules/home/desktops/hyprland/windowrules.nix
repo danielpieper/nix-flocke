@@ -20,7 +20,7 @@ in
           class = [ "^(firefox|google-chrome)$" ];
         };
         chat = {
-          class = [ "^(Signal|signal|discord|Slack)$" ];
+          class = [ "^(Signal|signal|discord|Slack|goofcord)$" ];
         };
         gaming = {
           class = [ "^(steam|lutris)$" ];
@@ -29,7 +29,7 @@ in
       lib.concatLists [
         (map (rule [ "idleinhibit fullscreen" "float" "pin" "size 800 450" "move 100%-800 100%-480" ]) [ firefoxVideo ])
         (map (rule [ "workspace 2" "suppressevent fullscreen" ]) [ browsers ])
-        (map (rule [ "workspace 4" ]) [ chat ])
+        (map (rule [ "workspace 5" ]) [ chat ])
         (map (rule [ "workspace 6" ]) [ gaming ])
       ];
   };

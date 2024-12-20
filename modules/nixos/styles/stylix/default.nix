@@ -52,6 +52,8 @@ in
       enable = true;
       autoEnable = true;
       base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+      # https://pltanton.dev/posts/2024/02/nix-based-dark-light-theme-switch/
+      polarity = lib.mkDefault "dark";
       homeManagerIntegration.autoImport = false;
       homeManagerIntegration.followSystem = false;
 

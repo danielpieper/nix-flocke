@@ -30,7 +30,8 @@ in
       enable = true;
       autoEnable = true;
       base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
-      targets.nixvim.enable = false;
+      # https://pltanton.dev/posts/2024/02/nix-based-dark-light-theme-switch/
+      polarity = lib.mkDefault "dark";
 
       image = pkgs.flocke.wallpapers.earth;
 
