@@ -20,11 +20,13 @@
     };
   };
 
-  services.flocke = {
-    tlp.enable = true;
-    syncthing.enable = true;
+  services = {
+    flocke = {
+      tlp.enable = true;
+      syncthing.enable = true;
+    };
+    fprintd.enable = true;
   };
-  services.fprintd.enable = true;
 
   networking.hostName = "tars";
 

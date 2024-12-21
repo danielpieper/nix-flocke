@@ -29,13 +29,14 @@ in
       audio.enable = true;
       bluetooth.enable = true;
       logitechMouse.enable = true;
+      dygmaKeyboard.enable = true;
     };
 
     services.flocke = {
       avahi.enable = true;
       restic.enable = true;
       virtualisation.podman.enable = true;
-        tailscale.enable = true;
+      tailscale.enable = true;
     };
 
     system = {
