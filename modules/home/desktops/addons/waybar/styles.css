@@ -55,6 +55,7 @@ window#waybar {
 #mode,
 #tray,
 #idle_inhibitor,
+#language,
 #custom-notification {
   border-style: solid;
   background-color: @accent_fg_color;
@@ -196,6 +197,10 @@ window#waybar {
   border-radius: 8px;
   background-color: @lavender;
   padding: 0;
+}
+
+#language {
+  color: @lavender;
 }
 
 tooltip {

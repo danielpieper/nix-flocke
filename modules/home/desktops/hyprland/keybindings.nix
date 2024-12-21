@@ -64,13 +64,12 @@ in
     wayland.windowManager.hyprland.keyBinds = {
       bind = {
         "SUPER, Return" = "exec, foot";
-        "SUPER, B" = "exec, ${config.desktops.addons.rofi.package}/bin/rofi -show drun -mode drun";
         "SUPER, Q" = "killactive,";
         "SUPER, F" = "Fullscreen,0";
+        "SUPER, S" = "togglesplit";
+        "SUPER, B" = "togglefloating,";
         "SUPER, R" = "exec, ${resize}/bin/resize";
-        "SUPER, Space" = "togglefloating,";
-        "SUPER, V" = "exec, ${pkgs.pyprland}/bin/pypr toggle pwvucontrol";
-        "SUPER_SHIFT, T" = "exec, ${pkgs.pyprland}/bin/pypr toggle term";
+        "SUPER, Space" = "exec, ${config.desktops.addons.rofi.package}/bin/rofi -show drun -mode drun";
 
         # Lock Screen
         ",XF86Launch5" = "exec,${pkgs.hyprlock}/bin/hyprlock";

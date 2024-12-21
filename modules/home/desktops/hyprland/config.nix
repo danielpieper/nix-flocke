@@ -42,8 +42,8 @@ in
         input = {
           kb_layout = "us,de";
           kb_options = "eurosign:e,caps:escape,grp:alt_shift_toggle";
-            touchpad = {
-              disable_while_typing = false;
+          touchpad = {
+            disable_while_typing = false;
             natural_scroll = true;
           };
         };
@@ -84,7 +84,6 @@ in
           "systemctl --user import-environment QT_QPA_PLATFORMTHEME"
           "${pkgs.kanshi}/bin/kanshi"
           "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
-          "${pkgs.pyprland}/bin/pypr"
           "${pkgs.clipse}/bin/clipse -listen"
           "${pkgs.solaar}/bin/solaar -w hide"
           "${pkgs.kdePackages.kdeconnect-kde}/bin/kdeconnect-indicator"

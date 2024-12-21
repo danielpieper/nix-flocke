@@ -15,11 +15,8 @@ in
 
   config = mkIf cfg.enable {
     home.packages = with pkgs; [
-      trayscale
-
       foliate
       pavucontrol
-      pwvucontrol
 
       sushi
       gnome-disk-utility

@@ -71,11 +71,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    pyprland = {
-      url = "github:hyprland-community/pyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     hyprland-git.url = "github:hyprwm/hyprland";
     hyprland-xdph-git.url = "github:hyprwm/xdg-desktop-portal-hyprland";
     hyprland-protocols-git.url = "github:hyprwm/xdg-desktop-portal-hyprland";

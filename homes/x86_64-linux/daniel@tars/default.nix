@@ -4,7 +4,6 @@
     hyprland = {
       enable = true;
       execOnceExtras = [
-        "${pkgs.trayscale}/bin/trayscale"
         "${pkgs.networkmanagerapplet}/bin/nm-applet"
         "${pkgs.blueman}/bin/blueman-applet"
       ];
