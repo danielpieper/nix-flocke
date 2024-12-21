@@ -24,6 +24,7 @@
     tlp.enable = true;
     syncthing.enable = true;
   };
+  services.fprintd.enable = true;
 
   networking.hostName = "tars";
 
