@@ -38,17 +38,17 @@ in
 
     programs.atuin = {
       enable = true;
-      flags = [
-        "--disable-up-arrow"
-      ];
+      enableFishIntegration = true;
       settings = {
-        sync_address = "https://majiy00-shell.fly.dev";
         sync_frequency = "15m";
-        dialect = "uk";
+        dialect = "us";
         enter_accept = false;
         records = true;
         search_mode = "skim";
-        # key_path = config.sops.secrets.atuin_key.path;
+        update_check = false;
+        style = "compact";
+        show_help = false;
+        key_path = config.sops.secrets.atuin_key.path;
       };
     };
 
