@@ -1,5 +1,6 @@
 {
   config,
+  pkgs,
   lib,
   ...
 }:
@@ -18,7 +19,7 @@ in
 {
   options.cli.programs.git = with types; {
     enable = mkBoolOpt false "Whether or not to enable git.";
-    email = mkOpt (nullOr str) "git@daniel-pieper.com" "The email to use with git.";
+    email = mkOpt (nullOr str) "daniel@daniel-pieper.com" "The email to use with git.";
     urlRewrites = mkOpt (attrsOf str) { } "url we need to rewrite i.e. ssh to http";
     allowedSigners = mkOpt str "" "The public key used for signing commits";
   };
@@ -30,16 +31,40 @@ in
       enable = true;
       userName = "Daniel Pieper";
       userEmail = cfg.email;
+      signing = {
+        signByDefault = true;
+        key = "~/.ssh/id_ed25519.pub";
+      };
+
+      ignores = [
+        "tags"
+        ".idea"
+        "*.sublime-project"
+        "*.sublime-workspace"
+        "_ide_helper.php"
+        "_ide_helper_models.php"
+        ".phpstorm.meta.php"
+        ".vscode"
+        ".projections.json"
+        ".php_cs.cache"
+        ".jira.d"
+        ".DS_Store"
+        ".vim"
+        "phpstan.neon"
+        ".direnv"
+      ];
 
       extraConfig = {
-        gpg.format = "ssh";
         gpg.ssh.allowedSignersFile = "~/.ssh/allowed_signers";
         commit.gpgsign = true;
-        user.signingkey = "~/.ssh/id_ed25519.pub";
+        gpg.format = "ssh";
+        "gpg \"ssh\"" = {
+          program = "${lib.getExe' pkgs._1password-gui "op-ssh-sign"}";
+        };
 
         core = {
-          editor = "nvim";
-          pager = "delta";
+          editor = lib.getExe pkgs.neovim;
+          pager = lib.getExe pkgs.delta;
         };
 
         color = {
@@ -47,15 +72,19 @@ in
         };
 
         interactive = {
-          diffFitler = "delta --color-only";
+          diffFilter = "delta --color-only";
         };
 
         delta = {
           enable = true;
-          navigate = true;
-          light = false;
-          side-by-side = false;
-          options.syntax-theme = "catppuccin";
+          options = {
+            dark = "true";
+            side-by-side = "false";
+            line-numbers = "true";
+            navigate = "true";
+            syntax-theme = "catppuccin";
+            # syntax-theme = "Monokai Extended";
+          };
         };
 
         pull = {
@@ -68,7 +97,26 @@ in
         };
 
         init = {
-          defaultBranch = "init";
+          defaultBranch = "main";
+        };
+
+        alias = {
+          fixup = "!git log -n 50 --pretty=format:'%h %s' --no-merges | fzf --bind 'j:down,k:up' | cut -c -7 | xargs -o git commit --fixup";
+        };
+
+        merge = {
+          tool = lib.getExe pkgs.neovim;
+        };
+        mergetool = {
+          prompt = false;
+          keepBackup = false;
+        };
+        "mergetool \"nvim\"" = {
+          cmd = "nvim -f -c \"Gdiffsplit!\" \"$MERGED\" ";
+        };
+        rebase = {
+          autoStash = true;
+          autoSquash = true;
         };
       } // rewriteURL;
     };
