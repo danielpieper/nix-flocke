@@ -39,10 +39,11 @@ in
           ];
           modules-right = [
             "backlight"
-            "battery"
+            "backlight/slider"
             "pulseaudio"
             "pulseaudio/slider"
             "network"
+            "battery"
           ];
           "hyprland/workspaces" = {
             format = "{icon}";
@@ -109,7 +110,24 @@ in
             };
           };
           backlight = {
-            format = " {percent}%";
+            format = "{icon}";
+            format-icons = [
+              "󱩎 "
+              "󱩏 "
+              "󱩐 "
+              "󱩑 "
+              "󱩒 "
+              "󱩓 "
+              "󱩔 "
+              "󱩕 "
+              "󱩖 "
+              "󰛨 "
+            ];
+          };
+          "backlight/slider" = {
+            min = 0;
+            max = 100;
+            orientation = "horizontal";
           };
           battery = {
             states = {
@@ -117,9 +135,9 @@ in
               warning = 50;
               critical = 15;
             };
-            format = "{icon} {capacity}%";
+            format = "{icon}{capacity}%";
             format-alt = "{time}";
-            format-charging = "  {capacity}%";
+            format-charging = " {capacity}%";
             format-icons = [
               "󰁻 "
               "󰁽 "
@@ -130,7 +148,7 @@ in
           };
           network = {
             interval = 1;
-            format-wifi = "  {essid}";
+            format-wifi = " {essid}";
             format-ethernet = " 󰈀 ";
             format-disconnected = " 󱚵  ";
             tooltip-format = ''
