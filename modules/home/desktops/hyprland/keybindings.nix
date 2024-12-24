@@ -7,19 +7,6 @@
 with lib;
 let
   cfg = config.desktops.hyprland;
-  laptop_lid_switch = pkgs.writeShellScriptBin "laptop_lid_switch" ''
-    #!/usr/bin/env bash
-
-    if grep open /proc/acpi/button/lid/LID0/state; then
-    		hyprctl keyword monitor "eDP-1, 1920x1200@60, 0x0, 1"
-    else
-    		if [[ `hyprctl monitors | grep "Monitor" | wc -l` != 1 ]]; then
-    				hyprctl keyword monitor "eDP-1, disable"
-    		else
-    				systemctl suspend
-    		fi
-    fi
-  '';
 
   resize = pkgs.writeShellScriptBin "resize" ''
     #!/usr/bin/env bash
@@ -150,9 +137,6 @@ in
         ",XF86AudioPrev" = "exec,playerctl previous";
         ",XF86AudioPlay" = "exec,playerctl play-pause";
         ",XF86AudioStop" = "exec,playerctl stop";
-      };
-      bindl = {
-        ",switch:Lid Switch" = "exec, ${laptop_lid_switch}/bin/laptop_lid_switch";
       };
       binde = {
         "SUPERALT, h" = "resizeactive, -20 0";
