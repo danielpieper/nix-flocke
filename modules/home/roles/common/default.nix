@@ -13,7 +13,10 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    browsers.firefox.enable = true;
+    browsers = {
+      firefox.enable = true;
+      tor.enable = true;
+    };
 
     system = {
       nix.enable = true;
