@@ -74,6 +74,7 @@
     hyprland-git.url = "github:hyprwm/hyprland";
     hyprland-xdph-git.url = "github:hyprwm/xdg-desktop-portal-hyprland";
     hyprland-protocols-git.url = "github:hyprwm/xdg-desktop-portal-hyprland";
+    hyprland-qtutils-git.url = "github:hyprwm/hyprland-qtutils";
     hyprland-nix.url = "github:hyprland-community/hyprnix";
     hyprland-nix.inputs = {
       hyprland.follows = "hyprland-git";

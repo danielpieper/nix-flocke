@@ -1,4 +1,5 @@
 {
+  pkgs,
   inputs,
   config,
   lib,
@@ -49,5 +50,9 @@ in
       hyprlock.enable = true;
       hypridle.enable = true;
     };
+
+    home.packages = with pkgs; [
+      hyprland-qtutils
+    ];
   };
 }

@@ -22,6 +22,7 @@ in
           hide_cursor = true;
           enable_fingerprint = true;
         };
+        auth.fingerprint.enabled = true;
 
         label = [
           {
