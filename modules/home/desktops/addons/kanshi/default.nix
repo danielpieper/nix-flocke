@@ -32,51 +32,19 @@ in
           ];
         }
         {
-          profile.name = "home_office_laptop_docked";
+          profile.name = "docked";
           profile.outputs = [
-            {
-              criteria = "GIGA-BYTE TECHNOLOGY CO. LTD. Gigabyte M32U  (DP-5 via HDMI)";
-              position = "3840,0";
-              mode = "3840x2160@144Hz";
-            }
-            {
-              criteria = "Dell Inc. DELL G3223Q 82X70P3 (DP-4)";
-              position = "0,0";
-              mode = "3840x2160@60Hz";
-            }
             {
               criteria = "eDP-1";
-              status = "disable";
-            }
-          ];
-        }
-        {
-          profile.name = "home_office";
-          profile.outputs = [
-            {
-              criteria = "GIGA-BYTE TECHNOLOGY CO. LTD. Gigabyte M32U  (DP-5 via HDMI)";
-              position = "3840,0";
-              mode = "3840x2160@144Hz";
-            }
-            {
-              criteria = "Dell Inc. DELL G3223Q 82X70P3 (DP-4)";
               position = "0,0";
-              mode = "3840x2160@60Hz";
-            }
-          ];
-        }
-        {
-          profile.name = "desktop";
-          profile.outputs = [
-            {
-              criteria = "GIGA-BYTE TECHNOLOGY CO., LTD. Gigabyte M32U 21351B000087";
-              position = "3840,0";
-              mode = "3840x2160@144Hz";
+              mode = "1920x1200@60Hz";
             }
             {
-              criteria = "Dell Inc. DELL G3223Q 82X70P3";
-              position = "0,0";
-              mode = "3840x2160@60Hz";
+              criteria = "Samsung Electric Company U28E590 HTPH403281";
+              position = "1920,0";
+              mode = "2560x1440@60Hz";
+              # mode = "3840x2160@60Hz";
+              # scale = 1.5;
             }
           ];
         }

@@ -56,6 +56,7 @@ window#waybar {
 #tray,
 #idle_inhibitor,
 #language,
+#systemd-failed-units,
 #custom-notification {
   border-style: solid;
   background-color: @accent_fg_color;
@@ -199,8 +200,13 @@ window#waybar {
   padding: 0;
 }
 
+#systemd-failed-units,
 #language {
   color: @lavender;
+}
+
+#systemd-failed-units.degraded {
+  color: @red;
 }
 
 tooltip {

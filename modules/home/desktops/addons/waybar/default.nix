@@ -32,8 +32,8 @@ in
             "tray"
           ];
           modules-center = [
-            "systemd-failed-units"
             "custom/notification"
+            "systemd-failed-units"
             "clock"
             "idle_inhibitor"
             "hyprland/language"
@@ -190,10 +190,7 @@ in
           };
           systemd-failed-units = {
             hide-on-ok = true;
-            format = "✗ {nr_failed}";
-            format-ok = "✓";
-            system = true;
-            user = true;
+            format = "{nr_failed} 󰚌 ";
           };
         }
       ];
