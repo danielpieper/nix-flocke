@@ -15,6 +15,7 @@ in
   config = lib.mkIf cfg.enable {
     browsers = {
       firefox.enable = true;
+      google-chrome.enable = true;
       tor.enable = true;
     };
 
