@@ -29,7 +29,7 @@
     restic.enable_server = true;
     valheim.enable = false;
     satisfactory.enable = false;
-    # arr.enable = true;
+    arr.enable = true;
     syncthing.enable = true;
     tandoor.enable = true;
     #   home-assistant.enable = true;
