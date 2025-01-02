@@ -15,7 +15,7 @@ in
 
   config = mkIf cfg.enable {
     i18n = {
-      defaultLocale = lib.mkDefault "de_DE.UTF-8";
+      defaultLocale = lib.mkDefault "en_US.UTF-8";
       extraLocaleSettings = {
         LC_ADDRESS = "de_DE.UTF-8";
         LC_IDENTIFICATION = "de_DE.UTF-8";
