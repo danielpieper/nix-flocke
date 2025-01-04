@@ -14,8 +14,8 @@ let
     domain = "codeberg.org";
     owner = "naseschief";
     repo = "nvim";
-    rev = "bb4d6cec0f1be70bcfedfd7ce9362594cf7514a8";
-    sha256 = "sha256-bBXZsnqQemHjL0+JXGhoNvgQshwtUwIRx5B2x8loJos=";
+    rev = "6f4a19c4adbed7735981689e6246eb1ae08c6b3a";
+    sha256 = "sha256-dJMlBQhv2oslN4ndtXLW682zRhlbGOTGIdYNEjsmZ/A=";
     postFetch = ''
       cp -vaR "$out/lua/." "$out"
       rm -rf "$out/lua"
@@ -51,7 +51,6 @@ in
       packages = with pkgs; [
         neovim
         lazygit
-        # nix
         nil
         nixfmt-rfc-style
 
