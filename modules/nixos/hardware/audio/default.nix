@@ -15,21 +15,23 @@ in
   };
 
   config = mkIf cfg.enable {
-    hardware.pulseaudio.enable = false;
-    security.rtkit.enable = true;
-    services.pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-      jack.enable = true;
-      wireplumber.enable = true;
+    services = {
+      pulseaudio.enable = false;
+      pipewire = {
+        enable = true;
+        alsa.enable = true;
+        alsa.support32Bit = true;
+        pulse.enable = true;
+        jack.enable = true;
+        wireplumber.enable = true;
+      };
+      udev.packages = with pkgs; [
+        headsetcontrol
+      ];
     };
-    programs.noisetorch.enable = true;
 
-    services.udev.packages = with pkgs; [
-      headsetcontrol
-    ];
+    security.rtkit.enable = true;
+    programs.noisetorch.enable = true;
 
     environment.systemPackages = with pkgs; [
       headsetcontrol
