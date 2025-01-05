@@ -20,6 +20,8 @@
     };
   };
 
+  environment.systemPackages = [ pkgs.moonlight-qt ];
+
   services = {
     flocke = {
       tlp.enable = true;

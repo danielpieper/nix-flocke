@@ -11,8 +11,8 @@ with inputs;
 let
   cfg = config.cli.editors.nvim;
   nvimConfig = pkgs.fetchFromGitea {
-    domain = "codeberg.org";
-    owner = "naseschief";
+    domain = "forgejo.homelab.daniel-pieper.com";
+    owner = "daniel";
     repo = "nvim";
     rev = "6f4a19c4adbed7735981689e6246eb1ae08c6b3a";
     sha256 = "sha256-dJMlBQhv2oslN4ndtXLW682zRhlbGOTGIdYNEjsmZ/A=";
