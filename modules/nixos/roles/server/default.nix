@@ -60,6 +60,10 @@ in
       };
     };
 
+    cli.programs = {
+      btop.enable = true;
+    };
+
     # Notice this also disables --help for some commands such es nixos-rebuild
     documentation = {
       enable = lib.mkDefault false;
