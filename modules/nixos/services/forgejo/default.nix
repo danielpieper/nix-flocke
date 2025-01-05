@@ -10,8 +10,10 @@ in
 {
   imports = [
     ./runner.nix
+    ./dump.nix
   ];
 
+  # see https://docs.goauthentik.io/integrations/services/gitea/
   options.services.flocke.forgejo = {
     enable = mkEnableOption "Enable Forgejo";
   };

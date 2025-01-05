@@ -35,6 +35,7 @@
     forgejo = {
       enable = true;
       enable-runner = true;
+      enable-dump = true;
     };
     #   home-assistant.enable = true;
     # adguard.enable = true;
