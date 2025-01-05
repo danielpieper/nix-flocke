@@ -32,6 +32,10 @@
     arr.enable = true;
     syncthing.enable = true;
     tandoor.enable = true;
+    forgejo = {
+      enable = true;
+      enable-runner = true;
+    };
     #   home-assistant.enable = true;
     # adguard.enable = true;
   };
