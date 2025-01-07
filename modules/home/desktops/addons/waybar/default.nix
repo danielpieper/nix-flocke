@@ -131,13 +131,14 @@ in
             orientation = "horizontal";
           };
           battery = {
+            interval = 5;
             states = {
-              good = 80;
-              warning = 50;
+              good = 60;
+              warning = 30;
               critical = 15;
             };
-            format = "{icon}{capacity}%";
-            format-alt = "{time}";
+            format = "{power}W {icon}{capacity}%";
+            format-alt = "{power}W {time}";
             format-charging = " {capacity}%";
             format-icons = [
               "󰁻 "
