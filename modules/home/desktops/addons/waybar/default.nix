@@ -137,8 +137,8 @@ in
               warning = 30;
               critical = 15;
             };
-            format = "{power}W {icon}{capacity}%";
-            format-alt = "{power}W {time}";
+            format = "{icon}{capacity}%";
+            format-alt = "{icon}{time}";
             format-charging = " {capacity}%";
             format-icons = [
               "󰁻 "
