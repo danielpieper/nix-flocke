@@ -169,8 +169,8 @@ in
               warning = 30;
               critical = 15;
             };
-            format = "{icon}{capacity}%";
-            format-alt = "{icon}{time}";
+            format = "{power}W {icon}{capacity}%";
+            format-alt = "{power}W {icon}{time}";
             format-charging = " {capacity}%";
             format-icons = [
               "󰁻 "
