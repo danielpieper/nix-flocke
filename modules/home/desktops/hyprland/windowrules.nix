@@ -23,7 +23,7 @@ in
           class = [ "^(Signal|signal|discord|Slack|goofcord)$" ];
         };
         gaming = {
-          class = [ "^(steam|lutris|moonlight)$" ];
+          class = [ "^(steam|lutris|com.moonlight_stream.Moonlight)$" ];
         };
       in
       lib.concatLists [
