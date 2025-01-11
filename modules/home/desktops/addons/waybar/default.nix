@@ -7,6 +7,38 @@
 with lib;
 let
   cfg = config.desktops.addons.waybar;
+  touchpadToggle = pkgs.writeShellScriptBin "touchpad-toggle" ''
+    set -euo pipefail
+    HYPRLAND_DEVICE="syna8008:00-06cb:ce58-touchpad"
+
+    if [ -z "$XDG_RUNTIME_DIR" ]; then
+      export XDG_RUNTIME_DIR=/run/user/$(id -u)
+    fi
+
+    export STATUS_FILE="$XDG_RUNTIME_DIR/touchpad.status"
+
+    enable_touchpad() {
+      printf "true" > "$STATUS_FILE"
+      # notify-send -u normal "Enabling Touchpad"
+      hyprctl keyword "device[$HYPRLAND_DEVICE]:enabled" true
+    }
+
+    disable_touchpad() {
+      printf "false" > "$STATUS_FILE"
+      # notify-send -u normal "Disabling Touchpad"
+      hyprctl keyword "device[$HYPRLAND_DEVICE]:enabled" false
+    }
+
+    if ! [ -f "$STATUS_FILE" ]; then
+      disable_touchpad
+    else
+      if [ $(cat "$STATUS_FILE") = "true" ]; then
+        disable_touchpad
+      elif [ $(cat "$STATUS_FILE") = "false" ]; then
+        enable_touchpad
+      fi
+    fi
+  '';
 in
 {
   options.desktops.addons.waybar = {
@@ -36,6 +68,7 @@ in
             "systemd-failed-units"
             "clock"
             "idle_inhibitor"
+            "custom/touchpad"
             "hyprland/language"
           ];
           modules-right = [
@@ -51,13 +84,12 @@ in
             sort-by-number = true;
             active-only = false;
             format-icons = {
-              "1" = " 󰲌 ";
+              "1" = "  ";
               "2" = "  ";
-              "3" = " 󰎞 ";
-              "4" = "  ";
+              "3" = "  ";
+              "4" = "  ";
               "5" = "  ";
-              "6" = " 󰺵 ";
-              "7" = "  ";
+              "6" = "  ";
               urgent = "  ";
               focused = "  ";
               default = "  ";
@@ -192,6 +224,10 @@ in
           systemd-failed-units = {
             hide-on-ok = true;
             format = "{nr_failed} 󰚌 ";
+          };
+          "custom/touchpad" = {
+            format = "󰟸 ";
+            on-click = "${touchpadToggle}/bin/touchpad-toggle";
           };
         }
       ];

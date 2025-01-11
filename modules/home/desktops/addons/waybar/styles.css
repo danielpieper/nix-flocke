@@ -57,6 +57,7 @@ window#waybar {
 #idle_inhibitor,
 #language,
 #systemd-failed-units,
+#custom-touchpad,
 #custom-notification {
   border-style: solid;
   background-color: @accent_fg_color;
@@ -201,6 +202,7 @@ window#waybar {
 }
 
 #systemd-failed-units,
+#custom-touchpad,
 #language {
   color: @lavender;
 }
