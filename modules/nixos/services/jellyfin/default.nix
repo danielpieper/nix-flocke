@@ -30,7 +30,10 @@ in
     };
 
     services = {
-      jellyfin.enable = true;
+      jellyfin = {
+        enable = true;
+        openFirewall = true;
+      };
 
       traefik = {
         dynamicConfigOptions = {
