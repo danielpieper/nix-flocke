@@ -32,6 +32,10 @@ in
       dygmaKeyboard.enable = true;
     };
 
+    security.flocke = {
+      ausweisapp.enable = true;
+    };
+
     services.flocke = {
       avahi.enable = true;
       restic.enable = true;
