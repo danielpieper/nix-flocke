@@ -21,6 +21,7 @@ in
           disable_loading_bar = true;
           hide_cursor = true;
           no_fade_out = true;
+          enable_fingerprint = false;
         };
         auth.fingerprint.enabled = true;
 
