@@ -56,6 +56,9 @@ in
             FROM = "homelab@daniel-pieper.com";
             USER = "postmaster@mail.daniel-pieper.com";
           };
+          log = {
+            LEVEL = "Warn";
+          };
         };
         secrets = {
           mailer = {

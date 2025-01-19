@@ -17,6 +17,7 @@ in
       forgejo.dump = {
         enable = true;
         backupDir = "/mnt/nas/5.5tb/forgejo";
+        file = "forgejo-dump";
       };
       flocke.nfs.enable = true;
     };
