@@ -88,6 +88,12 @@ in
                 storage = "/var/lib/traefik/cert.json";
                 dnsChallenge = {
                   provider = "cloudflare";
+                  resolvers = [
+                    "1.1.1.1:53"
+                    "8.8.8.8:53"
+                  ];
+                  disablePropagationCheck = true;
+                  delayBeforeCheck = 60;
                 };
               };
             };
