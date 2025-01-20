@@ -83,11 +83,6 @@
     };
     hyprpanel.url = "github:Jas-SinghFSU/HyprPanel";
 
-    attic = {
-      url = "github:zhaofengli/attic";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     firefox-gnome-theme = {
       url = "github:rafaelmardojai/firefox-gnome-theme";
       flake = false;

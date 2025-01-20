@@ -18,7 +18,6 @@ in
       multiplexers.zellij.enable = true;
 
       programs = {
-        # attic.enable = true;
         atuin.enable = true;
         bat.enable = true;
         bottom.enable = true;
