@@ -10,17 +10,6 @@ with lib.flocke;
 with inputs;
 let
   cfg = config.cli.editors.nvim;
-  nvimConfig = pkgs.fetchFromGitea {
-    domain = "forgejo.homelab.daniel-pieper.com";
-    owner = "daniel";
-    repo = "nvim";
-    rev = "6f4a19c4adbed7735981689e6246eb1ae08c6b3a";
-    sha256 = "sha256-dJMlBQhv2oslN4ndtXLW682zRhlbGOTGIdYNEjsmZ/A=";
-    postFetch = ''
-      cp -vaR "$out/lua/." "$out"
-      rm -rf "$out/lua"
-    '';
-  };
 in
 {
   options.cli.editors.nvim = with types; {
@@ -29,35 +18,16 @@ in
 
   config = mkIf cfg.enable {
     programs.neovim = {
+      enable = true;
       viAlias = true;
       vimAlias = true;
+      vimdiffAlias = true;
       defaultEditor = true;
-    };
-
-    sops.secrets = {
-      neovim-init = {
-        path = "${config.xdg.configHome}/nvim/init.lua";
-        sopsFile = ../../../secrets.yaml;
-      };
-      intelephenseLicenceKey = {
-        path = "${config.xdg.configHome}/intelephense/license.txt";
-        sopsFile = ../../../secrets.yaml;
-      };
-    };
-
-    home = {
-      file."${config.xdg.configHome}/nvim/lua".source = nvimConfig;
-
-      packages = with pkgs; [
-        neovim
+      extraPackages = with pkgs; [
         lazygit
-        nil
-        nixfmt-rfc-style
-
         stylua
         fd
         rust-analyzer
-        ktlint
         tree-sitter
         nodejs
         pgformatter
@@ -74,7 +44,11 @@ in
         impl
         golangci-lint
 
-        markdownlint-cli
+        # Nix
+        nil
+        nixfmt-rfc-style
+
+        markdownlint-cli2
         nodePackages.eslint
         nodePackages.bash-language-server
         nodePackages.dockerfile-language-server-nodejs
@@ -90,11 +64,21 @@ in
         nodePackages.tailwindcss
         sumneko-lua-language-server
       ];
+    };
 
-      sessionVariables = {
-        EDITOR = "nvim";
-        VISUAL = "nvim";
+    sops.secrets = {
+      neovim-init = {
+        path = "${config.xdg.configHome}/nvim/init.lua";
+        sopsFile = ../../../secrets.yaml;
       };
+      intelephenseLicenceKey = {
+        path = "${config.xdg.configHome}/intelephense/license.txt";
+        sopsFile = ../../../secrets.yaml;
+      };
+    };
+
+    xdg.configFile."nvim/lua" = {
+      source = "${inputs.lazyvim}/lua";
     };
   };
 }

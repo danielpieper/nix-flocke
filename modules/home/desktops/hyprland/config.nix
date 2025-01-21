@@ -37,6 +37,12 @@ in
           sensitivity = 0;
           natural_scroll = false;
         }
+        device {
+          name = "logitech-mx-master-3s";
+          accel_profile = "flat";
+          sensitivity = 0;
+          natural_scroll = false;
+        }
       '';
       config = {
         input = {

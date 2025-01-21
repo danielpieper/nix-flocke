@@ -2008,6 +2008,22 @@
         "type": "github"
       }
     },
+    "lazyvim": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1737365579,
+        "narHash": "sha256-X5m7a5dY/dvV7L5Gics37Vo//0XBqy9Y1WdnTLGEb5U=",
+        "ref": "refs/heads/main",
+        "rev": "4fc4f7c6d2d41e2adbdadc40cf14ee60c808acf2",
+        "revCount": 166,
+        "type": "git",
+        "url": "ssh://forgejo@forgejo.homelab.daniel-pieper.com/daniel/nvim.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://forgejo@forgejo.homelab.daniel-pieper.com/daniel/nvim.git"
+      }
+    },
     "libgit2": {
       "flake": false,
       "locked": {
@@ -2851,6 +2867,7 @@
         "hyprpanel": "hyprpanel",
         "impermanence": "impermanence",
         "lanzaboote": "lanzaboote",
+        "lazyvim": "lazyvim",
         "maximize-nvim": "maximize-nvim",
         "nix-index-database": "nix-index-database",
         "nix-topology": "nix-topology",

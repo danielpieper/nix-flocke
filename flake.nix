@@ -120,6 +120,11 @@
       url = "github:teslamate-org/teslamate";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    lazyvim = {
+      url = "git+ssh://forgejo@forgejo.homelab.daniel-pieper.com/daniel/nvim.git";
+      flake = false;
+    };
   };
 
   outputs =
