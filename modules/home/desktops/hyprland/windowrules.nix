@@ -38,8 +38,8 @@ in
           "workspace 2"
           "suppressevent fullscreen"
         ]) [ browsers ])
+        (map (rule [ "workspace 4" ]) [ gaming ])
         (map (rule [ "workspace 5" ]) [ chat ])
-        (map (rule [ "workspace 6" ]) [ gaming ])
       ];
   };
 }
