@@ -27,18 +27,18 @@
     monitoring.enable = true;
     gotify.enable = true;
     restic.enable_server = true;
-    valheim.enable = false;
-    satisfactory.enable = false;
-    arr.enable = true;
-    syncthing.enable = true;
-    tandoor.enable = true;
     forgejo = {
       enable = true;
       enable-runner = true;
       enable-dump = true;
     };
-    #   home-assistant.enable = true;
-    # adguard.enable = true;
+    actual.enable = true;
+
+    valheim.enable = false;
+    satisfactory.enable = false;
+    arr.enable = false;
+    syncthing.enable = true;
+    tandoor.enable = false;
   };
 
   topology.self = {
