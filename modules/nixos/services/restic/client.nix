@@ -91,6 +91,18 @@ in
       };
     };
 
+    # see https://github.com/NixOS/nixpkgs/issues/196547#issuecomment-2044540904
+    systemd.services."restic-backups-default" = {
+      serviceConfig = {
+        Restart = "on-failure";
+        RestartSec = "60s";
+      };
+      unitConfig = {
+        StartLimitIntervalSec = 3600;
+        StartLimitBurst = 15;
+      };
+    };
+
     services.prometheus.exporters = {
       node = {
         enable = true;
