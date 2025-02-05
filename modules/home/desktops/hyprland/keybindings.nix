@@ -50,7 +50,7 @@ in
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland.keyBinds = {
       bind = {
-        "SUPER, Return" = "exec, foot";
+        "SUPER, Return" = "exec, ghostty";
         "SUPER, Q" = "killactive,";
         "SUPER, F" = "Fullscreen,0";
         "SUPER, S" = "togglesplit";

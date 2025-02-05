@@ -24,8 +24,10 @@ in
     };
 
     cli = {
-      terminals.foot.enable = true;
-      terminals.kitty.enable = true;
+      terminals = {
+        foot.enable = true;
+        ghostty.enable = true;
+      };
       shells.fish.enable = true;
     };
     programs = {
