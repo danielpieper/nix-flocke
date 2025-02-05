@@ -27,17 +27,17 @@
     monitoring.enable = true;
     gotify.enable = true;
     restic.enable_server = true;
+    syncthing.enable = true;
     forgejo = {
       enable = true;
       enable-runner = true;
       enable-dump = true;
     };
-    actual.enable = true;
 
+    satisfactory.enable = true;
+    actual.enable = false;
     valheim.enable = false;
-    satisfactory.enable = false;
     arr.enable = false;
-    syncthing.enable = true;
     tandoor.enable = false;
   };
 
