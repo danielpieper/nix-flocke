@@ -21,6 +21,7 @@ in
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       nerd-fonts.symbols-only
+      nerd-fonts.jetbrains-mono
       # google-fonts
       open-sans
       plemoljp
@@ -59,8 +60,8 @@ in
         };
 
         monospace = {
-          package = pkgs.flocke.monolisa;
-          name = "MonoLisa Nerd Font";
+          package = pkgs.nerd-fonts.jetbrains-mono;
+          name = "JetBrainsMono Nerd Font";
         };
 
         emoji = {

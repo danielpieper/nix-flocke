@@ -83,8 +83,8 @@ in
         };
 
         monospace = {
-          package = pkgs.flocke.monolisa;
-          name = "MonoLisa Nerd Font";
+          package = pkgs.nerd-fonts.jetbrains-mono;
+          name = "JetBrainsMono Nerd Font";
         };
 
         emoji = {

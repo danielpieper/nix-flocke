@@ -24,7 +24,7 @@ in
       settings = {
         command = "fish";
         initial-command = "fish";
-        font-family = "MonoLisa Nerd Font";
+        font-family = "JetBrainsMono Nerd Font";
         font-size = 12;
       };
     };
