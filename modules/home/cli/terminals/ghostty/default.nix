@@ -24,7 +24,6 @@ in
         command = "fish";
         gtk-titlebar = false;
         font-size = 12;
-        cursor-style = "block";
         confirm-close-surface = false;
       };
     };
