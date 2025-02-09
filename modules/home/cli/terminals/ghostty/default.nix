@@ -16,16 +16,16 @@ in
   config = mkIf cfg.enable {
     programs.ghostty = {
       enable = true;
-
       enableFishIntegration = true;
-      enableBashIntegration = false;
-      enableZshIntegration = false;
 
       settings = {
+        theme = "catppuccin-mocha";
+        font-family = "${config.stylix.fonts.monospace.name}";
         command = "fish";
-        initial-command = "fish";
-        font-family = "JetBrainsMono Nerd Font";
+        gtk-titlebar = false;
         font-size = 12;
+        cursor-style = "block";
+        confirm-close-surface = false;
       };
     };
   };
