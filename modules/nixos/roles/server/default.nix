@@ -82,6 +82,8 @@ in
     users.mutableUsers = false;
 
     systemd = {
+      services.NetworkManager-wait-online.enable = false;
+      network.wait-online.enable = false;
       tmpfiles.rules = [
         "L+ /usr/local/bin - - - - /run/current-system/sw/bin/"
       ];

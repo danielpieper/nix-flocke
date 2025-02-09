@@ -12,21 +12,11 @@ let
   cfg = config.desktops.hyprland;
 in
 {
-  imports =
-    with inputs;
-    [
-      hyprland-nix.homeManagerModules.default
-    ]
-    ++ lib.snowfall.fs.get-non-default-nix-files ./.;
+  imports = lib.snowfall.fs.get-non-default-nix-files ./.;
 
   options.desktops.hyprland = {
-    enable = mkEnableOption "enable hyprland window manager";
+    enable = mkEnableOption "Enable hyprland window manager";
     execOnceExtras = mkOpt (listOf str) [ ] "Extra programs to exec once";
-  };
-
-  # FIX: this hack to use nix catppuccin module: https://github.com/catppuccin/nix/issues/102
-  options.wayland.windowManager.hyprland = {
-    settings = mkEnableOption "enable hyprland window manager";
   };
 
   config = mkIf cfg.enable {
@@ -35,11 +25,7 @@ in
       trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
     };
 
-    xdg.configFile."hypr".recursive = true;
-
     desktops.addons = {
-      gtk.enable = true;
-      # qt.enable = true;
       kanshi.enable = true;
       rofi.enable = true;
       swaync.enable = true;

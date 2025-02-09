@@ -7,17 +7,13 @@
 with lib;
 let
   cfg = config.desktops.hyprland;
-  inherit (config.lib.stylix) colors;
 in
 {
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland = {
       enable = true;
-      package = pkgs.hyprland;
-
-      reloadConfig = true;
-      systemdIntegration = true;
-      recommendedEnvironment = true;
+      systemd.enable = true;
+      systemd.enableXdgAutostart = true;
       xwayland.enable = true;
 
       extraConfig = ''
@@ -44,7 +40,7 @@ in
           natural_scroll = false;
         }
       '';
-      config = {
+      settings = {
         input = {
           kb_layout = "us,de";
           kb_options = "eurosign:e,caps:escape,grp:alt_shift_toggle";
@@ -58,8 +54,6 @@ in
           gaps_in = 3;
           gaps_out = 5;
           border_size = 3;
-          active_border_color = "0xff${colors.base07}";
-          inactive_border_color = "0xff${colors.base02}";
         };
 
         gestures.workspace_swipe = true;
@@ -72,20 +66,17 @@ in
             FULLSCREEN_ONLY = 2;
           in
           {
-            vrr = 2;
+            vrr = FULLSCREEN_ONLY;
             disable_hyprland_logo = true;
             disable_splash_rendering = true;
             force_default_wallpaper = 0;
-            variable_framerate = true;
-            variable_refresh = FULLSCREEN_ONLY;
-            disable_autoreload = true;
             # Unfullscreen when opening something
             new_window_takes_over_fullscreen = 2;
           };
 
         source = [ "${config.home.homeDirectory}/.config/hypr/monitors.conf" ];
 
-        exec_once = [
+        exec-once = [
           "dbus-update-activation-environment --systemd --all"
           "systemctl --user import-environment QT_QPA_PLATFORMTHEME"
           "${pkgs.kanshi}/bin/kanshi"
