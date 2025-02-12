@@ -51,7 +51,6 @@ in
         nixfmt-rfc-style
 
         markdownlint-cli2
-        nodePackages.eslint
         nodePackages.bash-language-server
         nodePackages.dockerfile-language-server-nodejs
         nodePackages.vscode-langservers-extracted

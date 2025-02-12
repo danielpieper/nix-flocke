@@ -45,9 +45,15 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = [ sesh pkgs.tmate ];
+    home.packages = [
+      sesh
+      pkgs.tmate
+    ];
     programs.zoxide.enable = true;
-    programs.zellij.enable = true;
+    programs.zellij = {
+      enable = true;
+      enableFishIntegration = lib.mkForce false;
+    };
 
     xdg.configFile = {
       "zellij/config.kdl".text = ''
