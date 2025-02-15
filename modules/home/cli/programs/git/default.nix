@@ -25,7 +25,10 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.file.".ssh/allowed_signers".text = "* ${cfg.allowedSigners}";
+    home.file.".ssh/allowed_signers".text = ''
+      * /home/daniel/.ssh/id_ed25519.pub
+      * ${cfg.allowedSigners}
+    '';
 
     programs.git = {
       enable = true;
@@ -33,7 +36,9 @@ in
       userEmail = cfg.email;
       signing = {
         signByDefault = true;
+        format = "ssh";
         key = "~/.ssh/id_ed25519.pub";
+        signer = "${lib.getExe' pkgs._1password-gui "op-ssh-sign"}";
       };
 
       ignores = [
@@ -57,10 +62,6 @@ in
       extraConfig = {
         gpg.ssh.allowedSignersFile = "~/.ssh/allowed_signers";
         commit.gpgsign = true;
-        gpg.format = "ssh";
-        "gpg \"ssh\"" = {
-          program = "${lib.getExe' pkgs._1password-gui "op-ssh-sign"}";
-        };
 
         core = {
           editor = lib.getExe pkgs.neovim;
