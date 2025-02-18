@@ -34,7 +34,7 @@
       enable-dump = true;
     };
 
-    satisfactory.enable = true;
+    satisfactory.enable = false;
     actual.enable = false;
     valheim.enable = false;
     arr.enable = false;
