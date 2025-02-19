@@ -45,7 +45,6 @@ in
       keymapp
 
       src-cli
-      optinix
 
       (hiPrio parallel)
       moreutils

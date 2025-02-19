@@ -37,7 +37,7 @@
     satisfactory.enable = false;
     actual.enable = false;
     valheim.enable = false;
-    arr.enable = false;
+    arr.enable = true;
     tandoor.enable = false;
   };
 
