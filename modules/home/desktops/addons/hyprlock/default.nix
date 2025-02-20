@@ -14,6 +14,13 @@ in
   };
 
   config = mkIf cfg.enable {
-    programs.hyprlock.enable = true;
+    programs.hyprlock = {
+      enable = true;
+      settings = {
+        auth = {
+          fingerprint.enabled = true;
+        };
+      };
+    };
   };
 }

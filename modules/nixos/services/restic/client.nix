@@ -17,9 +17,6 @@ let
       pkgs.restic
     ];
     text = ''
-      # Create directory.
-      [ -d ${textfileCollectorDir} ] || mkdir -p ${textfileCollectorDir}
-
       # Create a temp unique file, that will not be parsed by node exporter.
       TEMP_FILE="${textfileCollectorDir}/restic.prom.$$"
       PERM_FILE="${textfileCollectorDir}/restic.prom"
@@ -90,6 +87,9 @@ in
         };
       };
     };
+    systemd.tmpfiles.rules = [
+      "d ${textfileCollectorDir} 0777 root root"
+    ];
 
     # see https://github.com/NixOS/nixpkgs/issues/196547#issuecomment-2044540904
     systemd.services."restic-backups-default" = {
@@ -103,14 +103,12 @@ in
       };
     };
 
-    services.prometheus.exporters = {
-      node = {
-        enable = true;
-        enabledCollectors = [
-          "textfile"
-          "textfile.directory=${textfileCollectorDir}"
-        ];
-      };
+    services.prometheus.exporters.node = {
+      enable = true;
+      enabledCollectors = [
+        "textfile"
+        "textfile.directory=${textfileCollectorDir}"
+      ];
     };
 
     sops.secrets = {

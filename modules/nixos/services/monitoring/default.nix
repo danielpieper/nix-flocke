@@ -12,6 +12,7 @@ in
 {
   imports = [
     ./exporter.nix
+    ./mullvad.nix
   ];
 
   options.services.flocke.monitoring = {

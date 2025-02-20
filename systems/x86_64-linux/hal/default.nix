@@ -24,7 +24,10 @@
     searxng.enable = true;
     teslamate.enable = true;
     postgresql.enable = true;
-    monitoring.enable = true;
+    monitoring = {
+      enable = true;
+      enable_mullvad = true;
+    };
     gotify.enable = true;
     restic.enable_server = true;
     syncthing.enable = true;
@@ -33,11 +36,11 @@
       enable-runner = true;
       enable-dump = true;
     };
+    arr.enable = true;
 
     satisfactory.enable = false;
     actual.enable = false;
     valheim.enable = false;
-    arr.enable = true;
     tandoor.enable = false;
   };
 
