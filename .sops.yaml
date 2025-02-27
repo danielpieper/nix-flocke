@@ -7,6 +7,7 @@ keys:
   - &hal age1m8pjnmrge8yhsxds2s0khrnvp9w0ejsjr0uzt4wsyhz70vtk9pxqxmauyg
   - &jarvis age153kxcgxzk2n7pkyrr75mr7h0yksfgyw8e6y508eq3c0xgu2eqslsjuq6pn
   - &skynet age1rm5jkrd4qa5c35sem9mzq2vq7etz25sn0g8w6wjfvkg4uuq0jccq0e5tzh
+  - &case age17wuyca4fhhq66ytf68t7qzyzc0mcysl9vua6njafn5x6tpunacpq3csw5m
 
 creation_rules:
   - path_regex: modules/nixos/secrets.ya?ml$
@@ -18,6 +19,7 @@ creation_rules:
           - *hal
           - *jarvis
           - *skynet
+          - *case
 
   - path_regex: modules/nixos/services/secrets.ya?ml$
     key_groups:
@@ -28,6 +30,7 @@ creation_rules:
           - *hal
           - *jarvis
           - *skynet
+          - *case
 
   - path_regex: modules/home/secrets.ya?ml$
     key_groups:
@@ -38,3 +41,4 @@ creation_rules:
           - *hal
           - *jarvis
           - *skynet
+          - *case
