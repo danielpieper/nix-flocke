@@ -57,7 +57,7 @@ in
       homeManagerIntegration.autoImport = false;
       homeManagerIntegration.followSystem = false;
 
-      image = pkgs.flocke.wallpapers.tesla;
+      image = pkgs.flocke.wallpapers.earth;
 
       cursor = {
         name = "Bibata-Modern-Classic";
