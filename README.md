@@ -1,7 +1,8 @@
 # nix-flocke
+
 My NixOS Configuration
 
-Based on https://gitlab.com/hmajid2301/nixicle
+Based on <https://gitlab.com/hmajid2301/nixicle>
 
 ## 💽 Usage
 
@@ -19,7 +20,9 @@ cd nix-flocke
 
 nix develop
 
-nixos-anywhere --flake '.#zorg' nixos@192.168.1.8 # Replace with your IP
+nix-shell -p ssh-to-age --run 'cat /etc/ssh/ssh_host_ed25519_key.pub | ssh-to-age'
+
+nixos-anywhere --flake '.#case' nixos@192.168.X.X -i ~/.ssh/id_ed25519
 ```
 
 After building it you can copy the ISO from the `result` folder to your USB.
@@ -67,15 +70,15 @@ Some features of my config:
 - Different environments like **hyprland** and **gnome**
 - Homelab all configured in nix.
 
-
 ## Appendix
 
 ### Inspired By
-- Based on https://gitlab.com/hmajid2301/nixicle
-- Snowfall config: https://github.com/jakehamilton/config?tab=readme-ov-file
-- More snowfall config: https://github.dev/khaneliman/khanelinix/blob/f4f4149dd8a0fda1c01fa7b14894b2bcf5653572/flake.nix
-- My original structure and nixlang code: https://github.com/Misterio77/nix-config
-- Waybar & scripts: https://github.dev/yurihikari/garuda-sway-config
-- Neovim UI: https://github.com/NvChad/nvchad
-- README: https://github.com/notohh/snowflake/tree/master
-- README table: https://github.com/wimpysworld/nix-config
+
+- Based on <https://gitlab.com/hmajid2301/nixicle>
+- Snowfall config: <https://github.com/jakehamilton/config?tab=readme-ov-file>
+- More snowfall config: <https://github.dev/khaneliman/khanelinix/blob/f4f4149dd8a0fda1c01fa7b14894b2bcf5653572/flake.nix>
+- My original structure and nixlang code: <https://github.com/Misterio77/nix-config>
+- Waybar & scripts: <https://github.dev/yurihikari/garuda-sway-config>
+- Neovim UI: <https://github.com/NvChad/nvchad>
+- README: <https://github.com/notohh/snowflake/tree/master>
+- README table: <https://github.com/wimpysworld/nix-config>
