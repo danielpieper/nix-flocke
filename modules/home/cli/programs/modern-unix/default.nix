@@ -41,7 +41,8 @@ in
       procs
       tokei
       trash-cli
-      tailspin
+      # FIXME: build failure
+      # tailspin
       gtrash
       ripgrep
       sd
