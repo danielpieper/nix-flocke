@@ -20,6 +20,21 @@
     video.enable = false;
   };
 
+  cli.programs = {
+    git = {
+      email = "daniel@ventx.de";
+      signingKey = "/home/daniel/.ssh/id_ed25519_ventx.pub";
+      allowedSigners = "/home/daniel/.ssh/id_ed25519_ventx.pub";
+    };
+    ssh.extraHosts = {
+      "git.ventx.org" = {
+        hostname = "git.ventx.org";
+        identityFile = "/home/daniel/.ssh/id_ed25519_ventx.pub";
+        identitiesOnly = true;
+      };
+    };
+  };
+
   flocke.user = {
     enable = true;
     name = "daniel";

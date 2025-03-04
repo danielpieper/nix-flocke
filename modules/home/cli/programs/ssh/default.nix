@@ -24,6 +24,10 @@ in
               type = lib.types.str;
               description = "The path to the identity file for the SSH host.";
             };
+            identitiesOnly = lib.mkOption {
+              type = lib.types.bool;
+              description = "Only allow the specified identities for the SSH host.";
+            };
           };
         }
       );
@@ -34,6 +38,7 @@ in
           "gitlab-personal" = {
             hostname = "gitlab.com";
             identityFile = "~/.ssh/id_ed25519_personal";
+            identitiesOnly = true;
           };
         }
       '';
@@ -41,18 +46,8 @@ in
   };
 
   config = mkIf cfg.enable {
-    programs.keychain = {
-      enable = true;
-      keys = [ "id_ed25519" ];
-      agents = [
-        "gpg"
-        "ssh"
-      ];
-    };
-
     programs.ssh = {
       enable = true;
-      addKeysToAgent = "yes";
       matchBlocks = cfg.extraHosts;
     };
   };
