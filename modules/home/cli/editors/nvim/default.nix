@@ -50,6 +50,11 @@ in
         nil
         nixfmt-rfc-style
 
+        # Terraform
+        terraform
+        terraform-ls
+        tflint
+
         markdownlint-cli2
         nodePackages.bash-language-server
         nodePackages.dockerfile-language-server-nodejs
