@@ -16,7 +16,6 @@ in
   config = mkIf cfg.enable {
     programs.ghostty = {
       enable = true;
-      enableFishIntegration = true;
 
       settings = {
         theme = "catppuccin-mocha";

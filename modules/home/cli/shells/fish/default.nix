@@ -14,6 +14,17 @@ in
 {
   options.cli.shells.fish = with types; {
     enable = mkBoolOpt false "enable fish shell";
+    extraAbbrs = mkOption {
+      type = attrsOf str;
+      default = { };
+      description = "Extra shell abbreviations to add to fish";
+      example = literalExpression ''
+        {
+          gco = "git checkout";
+          gp = "git push";
+        }
+      '';
+    };
   };
 
   config = mkIf cfg.enable {
@@ -182,7 +193,7 @@ in
         grbc = "git rebase --continue";
 
         gst = "git status";
-      };
+      } // cfg.extraAbbrs;
 
       functions = {
         fish_greeting = '''';

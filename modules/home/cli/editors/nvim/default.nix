@@ -26,6 +26,10 @@ in
       # ensure init.lua is not writte by home manager:
       plugins = lib.mkForce [ ];
       extraPackages = with pkgs; [
+        # Avante/ Treesitter
+        gcc
+        gnumake
+
         lazygit
         stylua
         fd
