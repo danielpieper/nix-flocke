@@ -25,17 +25,12 @@ in
         jack.enable = true;
         wireplumber.enable = true;
       };
-      udev.packages = with pkgs; [
-        headsetcontrol
-      ];
     };
 
     security.rtkit.enable = true;
     programs.noisetorch.enable = true;
 
     environment.systemPackages = with pkgs; [
-      headsetcontrol
-      headset-charge-indicator
       pulsemixer
     ];
   };
