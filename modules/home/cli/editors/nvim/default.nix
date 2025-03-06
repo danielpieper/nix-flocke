@@ -23,7 +23,7 @@ in
       vimAlias = true;
       vimdiffAlias = true;
       defaultEditor = true;
-      # ensure init.lua is not writte by home manager:
+      # ensure init.lua is not written by home manager:
       plugins = lib.mkForce [ ];
       extraPackages = with pkgs; [
         # Avante/ Treesitter
