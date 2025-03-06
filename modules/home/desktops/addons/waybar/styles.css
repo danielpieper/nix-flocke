@@ -4,9 +4,11 @@
 @define-color red       #f38ba8;
 
 * {
+  all: unset;
   border: 0;
   padding: 0 0;
-  font-family: "JetBrainsMono Nerd Font";
+  font-family: "Inter Variable", "Symbols Nerd Font";
+  font-feature-settings: '"zero", "tnum", "ss01", "ss02", "ss03", "cv01", "cv05", "cv08", "cv10", "cv11", "cpsp", "case"';
   font-size: 18px;
   color: white;
 }

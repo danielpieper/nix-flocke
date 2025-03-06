@@ -22,6 +22,7 @@ in
     home.packages = with pkgs; [
       nerd-fonts.symbols-only
       nerd-fonts.jetbrains-mono
+      inter
       open-sans
       plemoljp
     ];
@@ -54,8 +55,8 @@ in
         };
 
         sansSerif = {
-          name = "Noto Sans";
-          package = pkgs.noto-fonts;
+          name = "Inter Variable";
+          package = pkgs.inter;
         };
 
         monospace = {

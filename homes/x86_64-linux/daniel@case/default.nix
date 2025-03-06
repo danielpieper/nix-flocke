@@ -12,6 +12,8 @@
 
   home.packages = with pkgs; [
     nwg-displays
+    blueman
+    networkmanagerapplet
   ];
 
   roles = {

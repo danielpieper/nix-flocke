@@ -36,7 +36,7 @@ in
         effect-vignette = cfg.vignette;
         fade-in = 0.2;
 
-        font = "JetBrainsMono Nerd Font";
+        font = "Inter Variable";
       };
     };
 

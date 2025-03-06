@@ -78,8 +78,8 @@ in
         };
 
         sansSerif = {
-          name = "Noto Sans";
-          package = pkgs.noto-fonts;
+          name = "Inter Variable";
+          package = pkgs.inter;
         };
 
         monospace = {
