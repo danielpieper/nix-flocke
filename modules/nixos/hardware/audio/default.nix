@@ -24,6 +24,11 @@ in
         pulse.enable = true;
         jack.enable = true;
         wireplumber.enable = true;
+        extraConfig.pipewire = {
+          "10-sbc-xq" = {
+            "bluez5.enable-sbc-xq" = true;
+          };
+        };
       };
     };
 
