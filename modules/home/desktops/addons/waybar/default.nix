@@ -45,6 +45,8 @@ in
             format = "{icon}";
             sort-by-number = true;
             active-only = false;
+            all-outputs = true;
+            move-to-monitor = true;
             format-icons = {
               "1" = "  ";
               "2" = "  ";
