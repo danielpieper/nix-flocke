@@ -42,6 +42,13 @@
     };
   };
 
+  browsers.firefox.additionalProfiles = [
+    {
+      name = "ventx";
+      id = 1;
+    }
+  ];
+
   flocke.user = {
     enable = true;
     name = "daniel";

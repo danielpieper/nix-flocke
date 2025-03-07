@@ -179,6 +179,31 @@ in
 {
   options.browsers.firefox = {
     enable = mkEnableOption "enable firefox browser";
+    additionalProfiles = mkOption {
+      description = "Additional Firefox profiles to create using the standard configuration";
+      type = types.listOf (
+        types.submodule {
+          options = {
+            name = mkOption {
+              type = types.str;
+              description = "Name of the Firefox profile";
+              example = "Work";
+            };
+            id = mkOption {
+              type = types.int;
+              description = "ID of the Firefox profile (sequential from 1)";
+              example = 1;
+            };
+            createDesktopEntry = mkOption {
+              type = types.bool;
+              description = "Whether to create a desktop entry for this profile";
+              default = true;
+            };
+          };
+        }
+      );
+      default = [ ];
+    };
   };
 
   config = mkIf cfg.enable {
@@ -193,28 +218,46 @@ in
 
     programs.firefox = {
       enable = true;
-      profiles = {
-        default = mkFirefoxProfile "Default" 0;
-        ventx = mkFirefoxProfile "ventx" 1;
-      };
+      profiles =
+        lib.foldl'
+          (
+            acc: profile:
+            acc
+            // {
+              "${lib.toLower profile.name}" = mkFirefoxProfile profile.name profile.id;
+            }
+          )
+          {
+            default = mkFirefoxProfile "Default" 0;
+          }
+          cfg.additionalProfiles;
     };
 
-    xdg.desktopEntries.firefox-ventx = {
-      name = "Firefox - ventx";
-      genericName = "Web Browser - ventx";
-      exec = "firefox -P ventx %U";
-      terminal = false;
-      icon = "firefox";
-      startupNotify = true;
-      categories = [
-        "Application"
-        "Network"
-        "WebBrowser"
-      ];
-      mimeType = [
-        "text/html"
-        "text/xml"
-      ];
-    };
+    xdg.desktopEntries = lib.foldl' (
+      acc: profile:
+      if profile.createDesktopEntry then
+        acc
+        // {
+          "firefox-${lib.toLower profile.name}" = {
+            name = "Firefox - ${profile.name}";
+            genericName = "Web Browser - ${profile.name}";
+            exec = "firefox -P ${profile.name} %U";
+            terminal = false;
+            icon = "firefox";
+            startupNotify = true;
+            categories = [
+              "Application"
+              "Network"
+              "WebBrowser"
+            ];
+            mimeType = [
+              "text/html"
+              "text/xml"
+            ];
+          };
+        }
+      else
+        acc
+    ) { } cfg.additionalProfiles;
   };
 }
