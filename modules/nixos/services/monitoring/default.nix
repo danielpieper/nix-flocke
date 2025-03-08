@@ -259,7 +259,7 @@ in
                     owner = "rfmoz";
                     repo = "grafana-dashboards";
                     rev = "master";
-                    sha256 = "sha256-9BYujV2xXRRDvNI4sjimZEB4Z2TY/0WhwJRh5P122rs=";
+                    sha256 = "sha256-ZkVijMRCd87sLckqezPh1wHfuiibExVhatA1AqRiKHc=";
                   }
                   + "/prometheus/node-exporter-full.json";
               }

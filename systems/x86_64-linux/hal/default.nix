@@ -21,7 +21,6 @@
     authentik.enable = true;
     nfs.enable = true;
     jellyfin.enable = true;
-    searxng.enable = true;
     teslamate.enable = true;
     postgresql.enable = true;
     monitoring = {
