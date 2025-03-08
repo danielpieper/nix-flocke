@@ -1,5 +1,4 @@
 {
-  pkgs,
   config,
   lib,
   ...
@@ -8,16 +7,6 @@ with lib;
 with lib.flocke;
 let
   cfg = config.desktops.addons.hypridle;
-  wifi-lock = pkgs.writeShellScriptBin "wifi-lock" ''
-    #!/usr/bin/env bash
-
-    TRUSTED_WIFI="404 Network unavailable"
-    CURRENT_WIFI=$(${pkgs.networkmanager}/bin/nmcli -t -f ACTIVE,SSID dev wifi | grep '^yes' | cut -d':' -f2)
-
-    if [ "$CURRENT_WIFI" != "$TRUSTED_WIFI" ]; then
-      loginctl lock-session
-    fi
-  '';
 in
 {
   options.desktops.addons.hypridle = with types; {
@@ -29,7 +18,7 @@ in
       enable = true;
       settings = {
         general = {
-          before_sleep_cmd = "${wifi-lock}/bin/wifi-lock";
+          before_sleep_cmd = "loginctl lock-session";
           after_sleep_cmd = "hyprctl dispatch dpms on";
           lock_cmd = "pidof hyprlock || hyprlock ";
         };
@@ -37,7 +26,7 @@ in
         listener = [
           {
             timeout = 300;
-            on-timeout = "${wifi-lock}/bin/wifi-lock";
+            on-timeout = "loginctl lock-session";
           }
           {
             timeout = 330;
