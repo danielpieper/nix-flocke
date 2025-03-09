@@ -24,6 +24,7 @@ in
         gtk-titlebar = false;
         font-size = 12;
         confirm-close-surface = false;
+        copy-on-select = true;
       };
     };
   };
