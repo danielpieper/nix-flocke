@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib;
@@ -25,6 +26,10 @@ in
       };
     };
 
+    # https://github.com/quic-go/quic-go/wiki/UDP-Buffer-Sizes
+    boot.kernel.sysctl."net.core.rmem_max" = 7500000;
+    boot.kernel.sysctl."net.core.wmem_max" = 7500000;
+
     environment.etc."cloudflared/cert.pem" = {
       user = "cloudflared";
       group = "cloudflared";
@@ -34,6 +39,8 @@ in
     services = {
       cloudflared = {
         enable = true;
+        # TODO: Remove when https://github.com/NixOS/nixpkgs/issues/370185 is resolved
+        package = pkgs.flocke.cloudflared;
         tunnels = {
           "4488062b-53ae-4932-ba43-db4804831f8a" = {
             credentialsFile = config.sops.secrets.cloudflared.path;
