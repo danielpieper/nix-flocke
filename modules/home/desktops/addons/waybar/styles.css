@@ -1,52 +1,90 @@
-@define-color blue      #89b4fa;
-@define-color lavender  #b4befe;
-@define-color green     #a6e3a1;
-@define-color red       #f38ba8;
+/*@define-color base00 #1e1e2e; @define-color base01 #181825; @define-color base02 #313244; @define-color base03 #45475a;*/
+/*@define-color base04 #585b70; @define-color base05 #cdd6f4; @define-color base06 #f5e0dc; @define-color base07 #b4befe;*/
+/*@define-color base08 #f38ba8; @define-color base09 #fab387; @define-color base0A #f9e2af; @define-color base0B #a6e3a1;*/
+/*@define-color base0C #94e2d5; @define-color base0D #89b4fa; @define-color base0E #cba6f7; @define-color base0F #f2cdcd;*/
+
+/*base00 - Default Background*/
+/*base01 - Lighter Background (Used for status bars, line number and folding marks)*/
+/*base02 - Selection Background*/
+/*base03 - Comments, Invisibles, Line Highlighting*/
+/*base04 - Dark Foreground (Used for status bars)*/
+/*base05 - Default Foreground, Caret, Delimiters, Operators*/
+/*base06 - Light Foreground (Not often used)*/
+/*base07 - Light Background (Not often used)*/
+/*base08 - Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted*/
+/*base09 - Integers, Boolean, Constants, XML Attributes, Markup Link Url*/
+/*base0A - Classes, Markup Bold, Search Text Background*/
+/*base0B - Strings, Inherited Class, Markup Code, Diff Inserted*/
+/*base0C - Support, Regular Expressions, Escape Characters, Markup Quotes*/
+/*base0D - Functions, Methods, Attribute IDs, Headings*/
+/*base0E - Keywords, Storage, Selector, Markup Italic, Diff Changed*/
+/*base0F - Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?>*/
+/**/
 
 * {
-  all: unset;
   border: 0;
   padding: 0 0;
   font-family: "Inter Variable", "Symbols Nerd Font";
   font-feature-settings: '"zero", "tnum", "ss01", "ss02", "ss03", "cv01", "cv05", "cv08", "cv10", "cv11", "cpsp", "case"';
   font-size: 18px;
-  color: white;
 }
 
 window#waybar {
-  border: 0px solid rgba(0, 0, 0, 0);
-  background-color: rgba(0, 0, 0, 0);
+  border: 0;
+  background-color: @base00;
 }
 
 #workspaces {
-  background-color: @accent_fg_color;
-  border-radius: 5px;
-  margin: 1px;
+  margin: 4px 2px; 
 }
 
 #workspaces button {
-  color: @window_bg_color;
-  border-radius: 5px;
+  color: @base03;
   padding-right: 5px;
   margin: 2px 4px;
 }
 
 #workspaces button:hover {
-  background-color: @lavender;
-  color: white;
+  background-color: @base03;
+  color: @base00;
 }
 
-#workspaces button.active * {
-  border-radius: 7px;
-  background-color: @lavender;
+#workspaces button.visible,
+#workspaces button.active {
+  color: @base04;
 }
 
-#workspaces button.visible {
-  background-color: @lavender;
+#workspaces button.visible:hover,
+#workspaces button.active:hover {
+  background-color: @base04;
+  color: @base00;
 }
 
-#workspaces button.visible * {
-  color: @window_bg_color;
+#workspaces button.hosting-monitor {
+  color: @base07;
+}
+
+#workspaces button.hosting-monitor:hover {
+  background-color: @base07;
+  color: @base00;
+}
+
+#workspaces button.hosting-monitor.active {
+  color: @base0B;
+}
+
+#workspaces button.hosting-monitor.active:hover {
+  background-color: @base0B;
+  color: @base00;
+}
+
+#workspaces button.urgent {
+  color: @base08;
+}
+
+#workspaces button.urgent:hover {
+  background-color: @base08;
+  color: @base00;
 }
 
 #clock,
@@ -57,7 +95,6 @@ window#waybar {
 #mode,
 #tray,
 #idle_inhibitor,
-#language,
 #systemd-failed-units,
 #custom-touchpad,
 #custom-notification {
@@ -71,26 +108,26 @@ window#waybar {
   margin-left: 10px;
   padding: 0 20px 0 20px;
   border-radius: 10px 0 0 10px;
-  color: @lavender;
+  color: @base07;
 }
 
 #clock {
   border-radius: 0;
   padding: 0 20px 0 10px;
-  font-weight: bold;
-  color: @lavender;
+  color: @base07;
 }
 
 #idle_inhibitor.deactivated {
   border-radius: 0 10px 10px 0;
   padding-right: 20px;
-  color: @lavender;
+  color: @base07;
 }
 
 #idle_inhibitor.activated {
-  border-radius: 0 10px 10px 0;
+  border-radius: 5px;
   padding-right: 20px;
-  color: @green;
+  color: @base00;
+  background-color: @base0B;
 }
 
 #tray {
@@ -109,8 +146,8 @@ window#waybar {
 }
 
 #tray menu menuitem:hover {
-  color: #000000;
-  background-color: @lavender;
+  color: @base00;
+  background-color: @base07;
 }
 
 #tray > .passive {
@@ -125,21 +162,21 @@ window#waybar {
 }
 
 #backlight {
-  color: @lavender;
+  color: @base07;
   padding: 0 10px 0 20px;
   border-radius: 10px 0 0 10px;
   margin-left: 10px;
 }
 
 #battery {
-  color: @lavender;
+  color: @base07;
   padding: 0 20px 0 10px;
   border-radius: 0 10px 10px 0;
   margin-right: 10px;
 }
 
 #battery.critical:not(.charging) {
-  color: @red;
+  color: @base08;
   animation-name: blink;
   animation-duration: 0.5s;
   animation-timing-function: linear;
@@ -148,36 +185,36 @@ window#waybar {
 }
 
 #battery.charging {
-  color: @green;
+  color: @base0B;
 }
 
 @keyframes blink {
   to {
-    color: @red;
+    color: @base08;
   }
 }
 
 #network {
-  color: @lavender;
+  color: @base07;
   border-radius: 0 10px 10px 0;
   margin-right: 10px;
   padding: 10px;
 }
 
 #network.disconnected {
-  color: @red;
+  color: @base08;
   margin-right: 10px;
   padding: 10px;
 }
 
 #pulseaudio {
-  color: @lavender;
+  color: @base07;
   border-radius: 10px 0 0 10px;
   padding: 10px;
 }
 
 #pulseaudio.muted {
-  color: @red;
+  color: @base08;
 }
 
 #backlight-slider slider, #pulseaudio-slider slider {
@@ -193,24 +230,23 @@ window#waybar {
   min-height: 10px;
   margin-bottom: -4px;
   border-radius: 8px;
-  background: #000000;
+  background: @base00;
   padding: 0;
 }
 
 #backlight-slider highlight, #pulseaudio-slider highlight {
   border-radius: 8px;
-  background-color: @lavender;
+  background-color: @base07;
   padding: 0;
 }
 
 #systemd-failed-units,
-#custom-touchpad,
-#language {
-  color: @lavender;
+#custom-touchpad {
+  color: @base07;
 }
 
 #systemd-failed-units.degraded {
-  color: @red;
+  color: @base08;
 }
 
 tooltip {

@@ -14,6 +14,7 @@ in
   };
 
   config = mkIf cfg.enable {
+    stylix.targets.waybar.addCss = false;
     programs.waybar = {
       enable = true;
       systemd.enable = true;
