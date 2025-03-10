@@ -1,106 +1,130 @@
-@define-color blue      #89b4fa;
-@define-color lavender  #b4befe;
-@define-color green     #a6e3a1;
-@define-color red       #f38ba8;
-
 * {
-  all: unset;
-  border: 0;
-  padding: 0 0;
+  border: none;
+  border-radius: 0;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
   font-family: "Inter Variable", "Symbols Nerd Font";
-  font-feature-settings: '"zero", "tnum", "ss01", "ss02", "ss03", "cv01", "cv05", "cv08", "cv10", "cv11", "cpsp", "case"';
+  font-feature-settings: '"calt"'; /* see https://rsms.me/inter/#features */
   font-size: 18px;
-  color: white;
 }
 
 window#waybar {
-  border: 0px solid rgba(0, 0, 0, 0);
-  background-color: rgba(0, 0, 0, 0);
+  background-color: @base00;
+  padding: 0 5px;
 }
 
-#workspaces {
-  background-color: @accent_fg_color;
-  border-radius: 5px;
-  margin: 1px;
-}
 
 #workspaces button {
-  color: @window_bg_color;
-  border-radius: 5px;
-  padding-right: 5px;
-  margin: 2px 4px;
+  border-radius: 10px;
+  color: @base03;
+  padding: 4px;
+  margin: 6px 4px;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
 #workspaces button:hover {
-  background-color: @lavender;
-  color: white;
+  background-color: @base03;
+  color: @base00;
 }
 
-#workspaces button.active * {
-  border-radius: 7px;
-  background-color: @lavender;
+#workspaces button.visible,
+#workspaces button.active {
+  color: @base04;
 }
 
-#workspaces button.visible {
-  background-color: @lavender;
+#workspaces button.visible:hover,
+#workspaces button.active:hover {
+  background-color: @base04;
+  color: @base00;
 }
 
-#workspaces button.visible * {
-  color: @window_bg_color;
+#workspaces button.hosting-monitor {
+  color: @base07;
 }
 
+#workspaces button.hosting-monitor:hover {
+  background-color: @base07;
+  color: @base00;
+}
+
+#workspaces button.hosting-monitor.active {
+  color: @base0B;
+}
+
+#workspaces button.hosting-monitor.active:hover {
+  background-color: @base0B;
+  color: @base00;
+}
+
+#workspaces button.urgent {
+  color: @base08;
+}
+
+#workspaces button.urgent:hover {
+  background-color: @base08;
+  color: @base00;
+}
+
+#workspaces,
 #clock,
 #battery,
-#backlight,
 #network,
-#pulseaudio,
-#mode,
 #tray,
 #idle_inhibitor,
-#language,
 #systemd-failed-units,
-#custom-touchpad,
+#backlight-slider,
+#pulseaudio-slider,
 #custom-notification {
-  border-style: solid;
-  background-color: @accent_fg_color;
-  margin: 1px 0;
-  padding: 5px 0;
+  margin: 0 10px;
+}
+
+#pulseaudio,
+#backlight {
+  margin: 0 0 0 10px;
 }
 
 #custom-notification {
-  margin-left: 10px;
-  padding: 0 20px 0 20px;
-  border-radius: 10px 0 0 10px;
-  color: @lavender;
+  border-radius: 10px;
+  padding: 0 8px;
+  margin: 6px 10px;
+  color: @base07;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+#custom-notification:hover {
+  background-color: @base07;
+  color: @base00;
 }
 
 #clock {
-  border-radius: 0;
-  padding: 0 20px 0 10px;
-  font-weight: bold;
-  color: @lavender;
+  color: @base07;
+}
+
+#idle_inhibitor {
+  border-radius: 10px;
+  padding: 0 8px;
+  margin: 6px 10px;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
 #idle_inhibitor.deactivated {
-  border-radius: 0 10px 10px 0;
-  padding-right: 20px;
-  color: @lavender;
+  color: @base07;
+}
+
+#idle_inhibitor:hover {
+  background-color: @base07;
+  color: @base00;
 }
 
 #idle_inhibitor.activated {
-  border-radius: 0 10px 10px 0;
-  padding-right: 20px;
-  color: @green;
-}
-
-#tray {
-  border-radius: 10px;
-  padding: 0 10px 0 10px;
-  margin-left: 10px;
+  color: @base00;
+  background-color: @base0B;
 }
 
 #tray menu {
   background-color: @accent_fg_color;
+  padding: 10px;
 }
 
 #tray menuitem,
@@ -109,8 +133,8 @@ window#waybar {
 }
 
 #tray menu menuitem:hover {
-  color: #000000;
-  background-color: @lavender;
+  color: @base00;
+  background-color: @base07;
 }
 
 #tray > .passive {
@@ -125,21 +149,15 @@ window#waybar {
 }
 
 #backlight {
-  color: @lavender;
-  padding: 0 10px 0 20px;
-  border-radius: 10px 0 0 10px;
-  margin-left: 10px;
+  color: @base07;
 }
 
 #battery {
-  color: @lavender;
-  padding: 0 20px 0 10px;
-  border-radius: 0 10px 10px 0;
-  margin-right: 10px;
+  color: @base07;
 }
 
 #battery.critical:not(.charging) {
-  color: @red;
+  color: @base08;
   animation-name: blink;
   animation-duration: 0.5s;
   animation-timing-function: linear;
@@ -148,43 +166,34 @@ window#waybar {
 }
 
 #battery.charging {
-  color: @green;
+  color: @base0B;
 }
 
 @keyframes blink {
   to {
-    color: @red;
+    color: @base08;
   }
 }
 
 #network {
-  color: @lavender;
-  border-radius: 0 10px 10px 0;
-  margin-right: 10px;
-  padding: 10px;
+  color: @base07;
 }
 
 #network.disconnected {
-  color: @red;
-  margin-right: 10px;
-  padding: 10px;
+  color: @base08;
 }
 
 #pulseaudio {
-  color: @lavender;
-  border-radius: 10px 0 0 10px;
-  padding: 10px;
+  color: @base07;
 }
 
 #pulseaudio.muted {
-  color: @red;
+  color: @base08;
 }
 
 #backlight-slider slider, #pulseaudio-slider slider {
   background-color: transparent;
   box-shadow: none;
-  margin-right: 5px;
-  padding: 0;
 }
 
 #backlight-slider trough, #pulseaudio-slider trough {
@@ -193,24 +202,23 @@ window#waybar {
   min-height: 10px;
   margin-bottom: -4px;
   border-radius: 8px;
-  background: #000000;
+  background-color: @base00;
   padding: 0;
+  box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.8);
 }
 
 #backlight-slider highlight, #pulseaudio-slider highlight {
   border-radius: 8px;
-  background-color: @lavender;
+  background-color: @base07;
   padding: 0;
 }
 
-#systemd-failed-units,
-#custom-touchpad,
-#language {
-  color: @lavender;
+#systemd-failed-units {
+  color: @base07;
 }
 
 #systemd-failed-units.degraded {
-  color: @red;
+  color: @base08;
 }
 
 tooltip {

@@ -14,6 +14,7 @@ in
   };
 
   config = mkIf cfg.enable {
+    stylix.targets.waybar.addCss = false;
     programs.waybar = {
       enable = true;
       systemd.enable = true;
@@ -41,18 +42,30 @@ in
             "battery"
           ];
           "hyprland/workspaces" = {
-            format = "{icon}";
-            sort-by-number = true;
             active-only = false;
             all-outputs = true;
             move-to-monitor = true;
+            format = "{windows}<sub>{name}</sub>";
+            window-rewrite-default = "󰣆 ";
+            window-rewrite = {
+              "class<google-chrome>" = " ";
+              "class<firefox>" = " ";
+              "class<Tor Browser>" = " ";
+              "class<(firefox|google-chrome)> title<.*\\bSlack\\b.*>" = " ";
+              "class<(firefox|google-chrome)> title<Spotify\\b.*>" = " ";
+              "class<(firefox|google-chrome)> title<YouTube\\b.*>" = " ";
+              "class<(firefox|google-chrome)> title<.*\\bMail\\b.*>" = "󰊫 ";
+              "class<(firefox|google-chrome)> title<.*\\bCalendar\\b.*>" = "󰃰 ";
+              "class<(firefox|google-chrome)> title<.*\\bForgejo\\b.*>" = " ";
+              "class<(firefox|google-chrome)> title<.*\\bGitLab\\b.*>" = " ";
+
+              "class<com.mitchellh.ghostty>" = " ";
+              "class<com.mitchellh.ghostty> title<Zellij\\b.*>" = " ";
+
+              "class<(steam|lutris|com.moonlight_stream.Moonlight)>" = " ";
+              "class<(signal|goofcord)>" = " ";
+            };
             format-icons = {
-              "1" = "  ";
-              "2" = "  ";
-              "3" = "  ";
-              "4" = "  ";
-              "5" = "  ";
-              "6" = "  ";
               urgent = "  ";
               focused = "  ";
               default = "  ";
@@ -60,7 +73,7 @@ in
             on-click = "activate";
           };
           clock = {
-            format = "󰃰 {:%d.%m %H:%M}";
+            format = "󰃰 {:%d.%m  %H:%M}";
             interval = 1;
             tooltip-format = "<tt><small>{calendar}</small></tt>";
             calendar = {
@@ -82,12 +95,12 @@ in
             tooltip = false;
             format = "{} {icon}";
             "format-icons" = {
-              notification = "󱅫";
-              none = "";
+              notification = "󱅫 ";
+              none = " ";
               "dnd-notification" = " ";
-              "dnd-none" = "󰂛";
+              "dnd-none" = "󰂛 ";
               "inhibited-notification" = " ";
-              "inhibited-none" = "";
+              "inhibited-none" = " ";
               "dnd-inhibited-notification" = " ";
               "dnd-inhibited-none" = " ";
             };
@@ -177,7 +190,7 @@ in
             orientation = "horizontal";
           };
           tray = {
-            icon-size = 16;
+            icon-size = 18;
             spacing = 8;
           };
           systemd-failed-units = {
