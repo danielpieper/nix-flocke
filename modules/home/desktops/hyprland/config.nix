@@ -42,8 +42,9 @@ in
       '';
       settings = {
         input = {
-          kb_layout = "us,de";
-          kb_options = "eurosign:e,caps:escape,grp:alt_shift_toggle";
+          kb_layout = "de";
+          kb_variant = "us";
+          kb_options = "caps:escape";
           touchpad = {
             disable_while_typing = false;
             natural_scroll = true;

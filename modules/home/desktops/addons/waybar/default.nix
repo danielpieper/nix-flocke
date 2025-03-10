@@ -31,7 +31,6 @@ in
             "systemd-failed-units"
             "clock"
             "idle_inhibitor"
-            "hyprland/language"
           ];
           modules-right = [
             "backlight"
@@ -180,10 +179,6 @@ in
           tray = {
             icon-size = 16;
             spacing = 8;
-          };
-          "hyprland/language" = {
-            "format-en" = "en";
-            "format-de" = "de";
           };
           systemd-failed-units = {
             hide-on-ok = true;

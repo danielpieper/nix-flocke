@@ -32,8 +32,8 @@ in
 
     # Configure keymap in X11
     services.xserver = {
-      xkb.layout = "us";
-      xkb.variant = "";
+      xkb.layout = "de";
+      xkb.variant = "us";
     };
     # Configure console keymap
     console.keyMap = "us";
