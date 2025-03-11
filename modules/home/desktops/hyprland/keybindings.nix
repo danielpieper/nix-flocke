@@ -57,6 +57,7 @@ in
         "SUPER, B, togglefloating,"
         "SUPER, R, exec, ${resize}/bin/resize"
         "SUPER, Space, exec, ${config.desktops.addons.rofi.package}/bin/rofi -show drun -mode drun"
+        "CONTROLSHIFT, Space, exec, ${pkgs._1password-gui}/bin/1password --quick-access"
 
         # Lock Screen
         ",XF86Launch5, exec,${pkgs.hyprlock}/bin/hyprlock"

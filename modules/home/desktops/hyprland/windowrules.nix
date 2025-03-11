@@ -16,6 +16,7 @@ in
         "workspace 5 silent,class:^(Signal|signal|discord|Slack|goofcord)$"
 
         "idleinhibit fullscreen, class:^(firefox|google-chrome)$"
+        "stayfocused,class:^(1Password)$,title:^(Quick Access)"
 
         "suppressevent fullscreen,class:^(firefox)$,title:^(Picture-in-Picture|Firefox)$"
         "float,class:^(firefox)$,title:^(Picture-in-Picture|Firefox)$"

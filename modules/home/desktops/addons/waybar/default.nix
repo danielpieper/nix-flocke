@@ -64,6 +64,7 @@ in
 
               "class<(steam|lutris|com.moonlight_stream.Moonlight)>" = " ";
               "class<(signal|goofcord)>" = " ";
+              "class<1Password>" = " ";
             };
             format-icons = {
               urgent = "  ";
