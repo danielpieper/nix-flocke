@@ -25,7 +25,7 @@
     postgresql.enable = true;
     monitoring = {
       enable = true;
-      enable_mullvad = true;
+      enable_mullvad = false;
     };
     gotify.enable = true;
     restic.enable_server = true;
@@ -35,7 +35,7 @@
       enable-runner = true;
       enable-dump = true;
     };
-    arr.enable = true;
+    arr.enable = false;
 
     satisfactory.enable = false;
     actual.enable = false;
@@ -60,13 +60,13 @@
   # sudo tailscale set --exit-node=<EXIT_NODE> --exit-node-allow-lan-access=true
   # nslookup teslamotors.com
   # sudo ip route add <IP_ADDRESS> via <ROUTER_IP_ADDRESS>
-  networking.interfaces.eno1.ipv4.routes = [
-    {
-      address = "209.11.133.106";
-      prefixLength = 24;
-      via = "192.168.178.1";
-    }
-  ];
+  # networking.interfaces.eno1.ipv4.routes = [
+  #   {
+  #     address = "209.11.133.106";
+  #     prefixLength = 24;
+  #     via = "192.168.178.1";
+  #   }
+  # ];
 
   system.stateVersion = "23.11";
 }
