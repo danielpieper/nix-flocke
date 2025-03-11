@@ -1,26 +1,12 @@
-{ pkgs, ... }:
 {
-  desktops = {
-    hyprland = {
-      enable = true;
-      execOnceExtras = [
-        "${pkgs.networkmanagerapplet}/bin/nm-applet"
-        "${pkgs.blueman}/bin/blueman-applet"
-      ];
-    };
-  };
-
-  home.packages = with pkgs; [
-    nwg-displays
-    blueman
-    networkmanagerapplet
-  ];
 
   roles = {
     desktop.enable = true;
     social.enable = true;
     video.enable = false;
   };
+
+  desktops.hyprland.enable = true;
 
   flocke.user = {
     enable = true;

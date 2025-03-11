@@ -86,6 +86,8 @@ in
           "${pkgs.solaar}/bin/solaar -w hide"
           "${pkgs.kdePackages.kdeconnect-kde}/bin/kdeconnect-indicator"
           "${pkgs._1password-gui}/bin/1password --silent"
+          "${pkgs.networkmanagerapplet}/bin/nm-applet"
+          "${pkgs.blueman}/bin/blueman-applet"
         ] ++ cfg.execOnceExtras;
       };
     };

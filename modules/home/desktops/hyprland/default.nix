@@ -38,6 +38,9 @@ in
 
     home.packages = with pkgs; [
       hyprland-qtutils
+      nwg-displays
+      blueman
+      networkmanagerapplet
     ];
   };
 }

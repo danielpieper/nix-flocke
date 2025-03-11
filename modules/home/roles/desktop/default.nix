@@ -49,7 +49,6 @@ in
       clipse
       pamixer
       playerctl
-
       grimblast
       slurp
       sway-contrib.grimshot
