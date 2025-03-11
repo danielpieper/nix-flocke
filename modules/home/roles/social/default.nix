@@ -15,8 +15,8 @@ in
   config = mkIf cfg.enable {
     programs = {
       discord.enable = true;
-      shotwell.enable = true;
       signal.enable = true;
+      shotwell.enable = false;
     };
   };
 }

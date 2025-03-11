@@ -18,8 +18,7 @@
 
   roles = {
     desktop.enable = true;
-    social.enable = false;
-    video.enable = false;
+    social.enable = true;
   };
 
   cli = {
