@@ -17,9 +17,8 @@ in
     programs.hyprlock = {
       enable = true;
       settings = {
-        auth = {
-          fingerprint.enabled = true;
-        };
+        general.enable_fingerprint = false;
+        auth.fingerprint.enabled = true;
         background = {
           path = lib.mkForce "screenshot";
           blur_passes = 2;
