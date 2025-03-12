@@ -24,18 +24,12 @@ in
       ];
 
       services.traefik = {
-        environment = {
-          CF_API_EMAIL = "cloudflare@daniel-pieper.com";
-        };
-        serviceConfig = {
-          EnvironmentFile = [ config.sops.secrets.cloudflare_api_key.path ];
-        };
+        environment.CF_API_EMAIL = "cloudflare@daniel-pieper.com";
+        serviceConfig.EnvironmentFile = [ config.sops.secrets.cloudflare_api_key.path ];
       };
     };
 
-    sops.secrets.cloudflare_api_key = {
-      sopsFile = ../secrets.yaml;
-    };
+    sops.secrets.cloudflare_api_key.sopsFile = ../secrets.yaml;
 
     services = {
       tailscale.permitCertUid = "traefik";

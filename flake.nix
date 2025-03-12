@@ -106,6 +106,11 @@
       flake = false;
     };
 
+    bhdl = {
+      url = "git+ssh://forgejo@forgejo.homelab.daniel-pieper.com/daniel/bhdl.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     ventx = {
       url = "git+ssh://git@git.ventx.org/daniel/nix.git";
       inputs.nixpkgs.follows = "nixpkgs";
