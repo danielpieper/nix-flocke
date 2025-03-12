@@ -1,4 +1,8 @@
 {
+  inputs,
+  ...
+}:
+{
   roles = {
     desktop.enable = true;
     social.enable = true;
@@ -36,6 +40,10 @@
     enable = true;
     name = "daniel";
   };
+
+  home.packages = [
+    inputs.ventx.packages.x86_64-linux.oidc2aws
+  ];
 
   home.stateVersion = "23.11";
 }

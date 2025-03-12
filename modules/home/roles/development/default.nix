@@ -30,6 +30,7 @@ in
         btop.enable = true;
         k8s.enable = true;
         iac.enable = true;
+        aws.enable = true;
         modern-unix.enable = true;
         network-tools.enable = true;
         nix-index.enable = true;

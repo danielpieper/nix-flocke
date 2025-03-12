@@ -105,6 +105,11 @@
       url = "git+ssh://forgejo@forgejo.homelab.daniel-pieper.com/daniel/nvim.git";
       flake = false;
     };
+
+    ventx = {
+      url = "git+ssh://git@git.ventx.org/daniel/nix.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

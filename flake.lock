@@ -1712,6 +1712,22 @@
         "type": "github"
       }
     },
+    "oidc2aws": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1716292433,
+        "narHash": "sha256-QCnYPbj8KTjiUaANsQieJpaZJ4ShR0YEP8rhCBXWr9o=",
+        "ref": "refs/heads/master",
+        "rev": "f0d111525ebb9e1226f5bd519f754bb9f89ba9dc",
+        "revCount": 22,
+        "type": "git",
+        "url": "ssh://git@git.ventx.org/ventx/aws/landing-zone/oidc2aws.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@git.ventx.org/ventx/aws/landing-zone/oidc2aws.git"
+      }
+    },
     "poetry2nix": {
       "inputs": {
         "flake-utils": "flake-utils_4",
@@ -1815,6 +1831,7 @@
         "sops-nix": "sops-nix",
         "stylix": "stylix",
         "teslamate": "teslamate",
+        "ventx": "ventx",
         "zjstatus": "zjstatus"
       }
     },
@@ -2334,6 +2351,27 @@
         "owner": "numtide",
         "repo": "flake-utils",
         "type": "github"
+      }
+    },
+    "ventx": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "oidc2aws": "oidc2aws"
+      },
+      "locked": {
+        "lastModified": 1741790461,
+        "narHash": "sha256-diBVDGSLxQPczvMP8rTtHcmQ9W9WMkSy3ovGZd+aGmc=",
+        "ref": "refs/heads/main",
+        "rev": "d614c344d8fc2b68a023ecf279457ce780e14f9c",
+        "revCount": 1,
+        "type": "git",
+        "url": "ssh://git@git.ventx.org/daniel/nix.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "ssh://git@git.ventx.org/daniel/nix.git"
       }
     },
     "zjstatus": {
