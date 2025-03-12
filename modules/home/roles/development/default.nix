@@ -29,6 +29,7 @@ in
         gpg.enable = true;
         btop.enable = true;
         k8s.enable = true;
+        iac.enable = true;
         modern-unix.enable = true;
         network-tools.enable = true;
         nix-index.enable = true;
