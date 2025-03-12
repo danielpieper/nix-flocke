@@ -10,9 +10,10 @@ with lib;
 let
   cfg = config.browsers.firefox;
 
-  mkFirefoxProfile = profileName: profileId: {
+  mkFirefoxProfile = profileName: profileId: isDefault: {
     name = profileName;
     id = profileId;
+    isDefault = isDefault;
 
     extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
       onepassword-password-manager
@@ -274,6 +275,11 @@ in
               description = "Whether to create a desktop entry for this profile";
               default = true;
             };
+            isDefault = mkOption {
+              type = types.bool;
+              description = "Whether this profile should be the default";
+              default = false;
+            };
           };
         }
       );
@@ -296,16 +302,29 @@ in
         "de"
       ];
       profiles =
+        let
+          # Reverse the list to find the last profile marked as default
+          reversedProfiles = lib.reverseList cfg.additionalProfiles;
+          # Find the last profile marked as default (if any)
+          lastDefaultProfile = lib.findFirst (p: p.isDefault or false) null reversedProfiles;
+          # Default profile should be default only if no other profile is explicitly marked as default
+          defaultIsDefault = lastDefaultProfile == null;
+
+          # Create a function to determine if a profile should be default
+          # Only the last profile marked as default should be default
+          shouldBeDefault =
+            profile: if lastDefaultProfile == null then false else profile.name == lastDefaultProfile.name;
+        in
         lib.foldl'
           (
             acc: profile:
             acc
             // {
-              "${lib.toLower profile.name}" = mkFirefoxProfile profile.name profile.id;
+              "${lib.toLower profile.name}" = mkFirefoxProfile profile.name profile.id (shouldBeDefault profile);
             }
           )
           {
-            default = mkFirefoxProfile "Default" 0;
+            default = mkFirefoxProfile "Default" 0 defaultIsDefault;
           }
           cfg.additionalProfiles;
     };

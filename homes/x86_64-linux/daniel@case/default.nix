@@ -33,6 +33,7 @@
     {
       name = "ventx";
       id = 1;
+      isDefault = true;
     }
   ];
 
