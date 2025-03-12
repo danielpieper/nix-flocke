@@ -95,14 +95,6 @@
       url = "github:catppuccin/obs";
       flake = false;
     };
-    gx-nvim = {
-      url = "github:chrishrb/gx.nvim";
-      flake = false;
-    };
-    maximize-nvim = {
-      url = "github:declancm/maximize.nvim";
-      flake = false;
-    };
 
     teslamate = {
       url = "github:teslamate-org/teslamate?rev=0ec408c8e182fe64e9568b6f137cbfb528717e8e"; # v1.32.0
@@ -149,9 +141,10 @@
         teslamate.nixosModules.default
       ];
 
-      systems.hosts.tars.modules = with inputs; [
-        nixos-hardware.nixosModules.lenovo-thinkpad-x1-9th-gen
-      ];
+      systems.hosts = {
+        tars.modules = with inputs; [ nixos-hardware.nixosModules.lenovo-thinkpad-x1-9th-gen ];
+        case.modules = with inputs; [ nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen1 ];
+      };
 
       # homes.modules = with inputs; [
       #   impermanence.nixosModules.home-manager.impermanence

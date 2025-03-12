@@ -959,22 +959,6 @@
         "type": "github"
       }
     },
-    "gx-nvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1736242098,
-        "narHash": "sha256-S7GDbKvcmSfysahfq7yCw55R2LGriWM29yAX1mPn1LQ=",
-        "owner": "chrishrb",
-        "repo": "gx.nvim",
-        "rev": "c7e6a0ace694a098a5248d92a866c290bd2da1cc",
-        "type": "github"
-      },
-      "original": {
-        "owner": "chrishrb",
-        "repo": "gx.nvim",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -1178,22 +1162,6 @@
       "original": {
         "owner": "libgit2",
         "repo": "libgit2",
-        "type": "github"
-      }
-    },
-    "maximize-nvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1724018013,
-        "narHash": "sha256-rwnvX+Sul+bwESZtpqbvaDJuk49SV9tLUnvgiAH4VMs=",
-        "owner": "declancm",
-        "repo": "maximize.nvim",
-        "rev": "d688b66344b03ee6e5a32a0a40af85d174490af8",
-        "type": "github"
-      },
-      "original": {
-        "owner": "declancm",
-        "repo": "maximize.nvim",
         "type": "github"
       }
     },
@@ -1828,14 +1796,12 @@
         "deploy-rs": "deploy-rs",
         "disko": "disko",
         "firefox-gnome-theme": "firefox-gnome-theme",
-        "gx-nvim": "gx-nvim",
         "home-manager": "home-manager",
         "hypr-contrib": "hypr-contrib",
         "hyprcursor": "hyprcursor",
         "impermanence": "impermanence",
         "lanzaboote": "lanzaboote",
         "lazyvim": "lazyvim",
-        "maximize-nvim": "maximize-nvim",
         "nix-index-database": "nix-index-database",
         "nix-topology": "nix-topology",
         "nixgl": "nixgl",
