@@ -34,10 +34,13 @@ in
 
     environment =
       {
-        systemPackages = [
-          pkgs.nfs-utils
-          # pkgs.openiscsi
-          pkgs.dnsutils
+        systemPackages = with pkgs; [
+          nfs-utils
+          dnsutils
+          ghostty.terminfo
+          alacritty.terminfo
+          kitty.terminfo
+          foot.terminfo
         ];
         # Print the URL instead on servers
         variables.BROWSER = "echo";
