@@ -26,10 +26,16 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.file.".ssh/allowed_signers".text = ''
-      * /home/daniel/.ssh/id_ed25519.pub
-      * ${cfg.allowedSigners}
-    '';
+    home = {
+      file.".ssh/allowed_signers".text = ''
+        * /home/daniel/.ssh/id_ed25519.pub
+        * ${cfg.allowedSigners}
+      '';
+      packages = with pkgs; [
+        git-extras
+        git-absorb
+      ];
+    };
 
     programs.git = {
       enable = true;
@@ -102,7 +108,7 @@ in
         };
 
         alias = {
-          fixup = "!git log -n 50 --pretty=format:'%h %s' --no-merges | fzf --bind 'j:down,k:up' | cut -c -7 | xargs -o git commit --fixup";
+          fixup = "!echo \"Use git absorb\"";
         };
 
         merge = {
