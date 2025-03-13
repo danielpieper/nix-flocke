@@ -10,10 +10,9 @@ with lib;
 let
   cfg = config.browsers.firefox;
 
-  mkFirefoxProfile = profileName: profileId: isDefault: {
+  mkFirefoxProfile = profileName: profileId: {
     name = profileName;
     id = profileId;
-    isDefault = isDefault;
 
     extensions.packages = with pkgs.nur.repos.rycee.firefox-addons; [
       onepassword-password-manager
@@ -254,7 +253,13 @@ let
 in
 {
   options.browsers.firefox = {
-    enable = mkEnableOption "enable firefox browser";
+    enable = mkEnableOption "Enable firefox browser";
+    defaultLinkProfile = mkOption {
+      description = "Name of the profile to use for opening links (must match one of the additionalProfiles names)";
+      type = types.nullOr types.str;
+      default = null;
+      example = "Work";
+    };
     additionalProfiles = mkOption {
       description = "Additional Firefox profiles to create using the standard configuration";
       type = types.listOf (
@@ -270,16 +275,6 @@ in
               description = "ID of the Firefox profile (sequential from 1)";
               example = 1;
             };
-            createDesktopEntry = mkOption {
-              type = types.bool;
-              description = "Whether to create a desktop entry for this profile";
-              default = true;
-            };
-            isDefault = mkOption {
-              type = types.bool;
-              description = "Whether this profile should be the default";
-              default = false;
-            };
           };
         }
       );
@@ -288,12 +283,22 @@ in
   };
 
   config = mkIf cfg.enable {
-    xdg.mimeApps.defaultApplications = {
-      "text/html" = [ "firefox.desktop" ];
-      "text/xml" = [ "firefox.desktop" ];
-      "x-scheme-handler/http" = [ "firefox.desktop" ];
-      "x-scheme-handler/https" = [ "firefox.desktop" ];
-    };
+    # Allow specifying which profile should be used for opening links
+    xdg.mimeApps.defaultApplications =
+      let
+        # Use the specified profile for links or fall back to the default firefox.desktop
+        browserDesktopEntry =
+          if cfg.defaultLinkProfile != null then
+            "firefox-${lib.toLower cfg.defaultLinkProfile}.desktop"
+          else
+            "firefox.desktop";
+      in
+      {
+        "text/html" = [ browserDesktopEntry ];
+        "text/xml" = [ browserDesktopEntry ];
+        "x-scheme-handler/http" = [ browserDesktopEntry ];
+        "x-scheme-handler/https" = [ browserDesktopEntry ];
+      };
 
     programs.firefox = {
       enable = true;
@@ -302,29 +307,16 @@ in
         "de"
       ];
       profiles =
-        let
-          # Reverse the list to find the last profile marked as default
-          reversedProfiles = lib.reverseList cfg.additionalProfiles;
-          # Find the last profile marked as default (if any)
-          lastDefaultProfile = lib.findFirst (p: p.isDefault or false) null reversedProfiles;
-          # Default profile should be default only if no other profile is explicitly marked as default
-          defaultIsDefault = lastDefaultProfile == null;
-
-          # Create a function to determine if a profile should be default
-          # Only the last profile marked as default should be default
-          shouldBeDefault =
-            profile: if lastDefaultProfile == null then false else profile.name == lastDefaultProfile.name;
-        in
         lib.foldl'
           (
             acc: profile:
             acc
             // {
-              "${lib.toLower profile.name}" = mkFirefoxProfile profile.name profile.id (shouldBeDefault profile);
+              "${lib.toLower profile.name}" = mkFirefoxProfile profile.name profile.id;
             }
           )
           {
-            default = mkFirefoxProfile "Default" 0 defaultIsDefault;
+            default = mkFirefoxProfile "Default" 0;
           }
           cfg.additionalProfiles;
     };
@@ -335,29 +327,26 @@ in
 
     xdg.desktopEntries = lib.foldl' (
       acc: profile:
-      if profile.createDesktopEntry then
-        acc
-        // {
-          "firefox-${lib.toLower profile.name}" = {
-            name = "Firefox - ${profile.name}";
-            genericName = "Web Browser - ${profile.name}";
-            exec = "firefox -P ${profile.name} %U";
-            terminal = false;
-            icon = "firefox";
-            startupNotify = true;
-            categories = [
-              "Application"
-              "Network"
-              "WebBrowser"
-            ];
-            mimeType = [
-              "text/html"
-              "text/xml"
-            ];
-          };
-        }
-      else
-        acc
+      acc
+      // {
+        "firefox-${lib.toLower profile.name}" = {
+          name = "Firefox - ${profile.name}";
+          genericName = "Web Browser - ${profile.name}";
+          exec = "firefox -P ${profile.name} %U";
+          terminal = false;
+          icon = "firefox";
+          startupNotify = true;
+          categories = [
+            "Application"
+            "Network"
+            "WebBrowser"
+          ];
+          mimeType = [
+            "text/html"
+            "text/xml"
+          ];
+        };
+      }
     ) { } cfg.additionalProfiles;
   };
 }

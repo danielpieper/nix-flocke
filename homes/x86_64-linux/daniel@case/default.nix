@@ -29,13 +29,15 @@
     };
   };
 
-  browsers.firefox.additionalProfiles = [
-    {
-      name = "ventx";
-      id = 1;
-      isDefault = true;
-    }
-  ];
+  browsers.firefox = {
+    additionalProfiles = [
+      {
+        name = "ventx";
+        id = 1;
+      }
+    ];
+    defaultLinkProfile = "ventx";
+  };
 
   flocke.user = {
     enable = true;
