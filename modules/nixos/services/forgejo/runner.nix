@@ -19,7 +19,7 @@ in
       instances.default = {
         enable = true;
         name = "hal";
-        url = "http://127.0.0.1:3083/";
+        url = "http://127.0.0.1:3083";
         # Obtaining the path to the runner token file may differ
         # tokenFile should be in format TOKEN=<secret>, since it's EnvironmentFile for systemd
         tokenFile = config.sops.secrets.forgejo-runner-token.path;

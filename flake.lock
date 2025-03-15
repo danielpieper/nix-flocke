@@ -147,11 +147,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1741914590,
-        "narHash": "sha256-R8Bxh/AMD6nvmQrC43DkUkuwDmTWlyvNAzJ0Riq5w5U=",
+        "lastModified": 1741985801,
+        "narHash": "sha256-EnjiCpEi8p1kFgNUCVPuDUYoOSYBlr7ByMEF8qMGZws=",
         "owner": "catppuccin",
         "repo": "nix",
-        "rev": "1e3fe44bc13809f62c2ef0aa864a304a6c8ebea4",
+        "rev": "f833a338ff6c091c84e041ee77ce88f8b242ca79",
         "type": "github"
       },
       "original": {
@@ -329,11 +329,11 @@
     "firefox-gnome-theme": {
       "flake": false,
       "locked": {
-        "lastModified": 1741875562,
-        "narHash": "sha256-ZVlI3ZzWaBcrYuq6u51/gGa+pOEOMZvgticmSQhnMDo=",
+        "lastModified": 1741986673,
+        "narHash": "sha256-36fDnQH9+UzSD0CavhcBP5qFqIoyUBw9MzDrAWyc6oY=",
         "owner": "rafaelmardojai",
         "repo": "firefox-gnome-theme",
-        "rev": "a44d3b0afd7d0cc4db95ccb4f4f34d4d81eacd9e",
+        "rev": "0bbfb2e27b67eee8b75ad17d36132f764792325e",
         "type": "github"
       },
       "original": {
@@ -966,11 +966,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1741914680,
-        "narHash": "sha256-Vu4DIZvgfWMzhUyxbHUrJaQb5232S5vuwxQ2sBcBVHk=",
+        "lastModified": 1741955947,
+        "narHash": "sha256-2lbURKclgKqBNm7hVRtWh0A7NrdsibD0EaWhahUVhhY=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "30cce6848a5aa41ceb5fb33185b84868cc3e9bef",
+        "rev": "4e12151c9e014e2449e0beca2c0e9534b96a26b4",
         "type": "github"
       },
       "original": {
@@ -1136,11 +1136,11 @@
     "lazyvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1741791950,
-        "narHash": "sha256-ORCnQk4vy7+A5T0/POIVb9MOz5/zsRpDODvmbg4aPXg=",
+        "lastModified": 1741942270,
+        "narHash": "sha256-LdIYOVTAQg1xZ1B4Q8JIxoc+broY7DmNEWF/XSNwh34=",
         "ref": "refs/heads/main",
-        "rev": "e5f6be3a00458116bd34c36bb1a351c9504702db",
-        "revCount": 176,
+        "rev": "0a9618cbf3a55a4ba389b2558aa1f362ecf4d2d2",
+        "revCount": 177,
         "type": "git",
         "url": "ssh://forgejo@forgejo.homelab.daniel-pieper.com/daniel/nvim.git"
       },
@@ -1544,11 +1544,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1741246872,
-        "narHash": "sha256-Q6pMP4a9ed636qilcYX8XUguvKl/0/LGXhHcRI91p0U=",
+        "lastModified": 1741851582,
+        "narHash": "sha256-cPfs8qMccim2RBgtKGF+x9IBCduRvd/N5F4nYpU0TVE=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "10069ef4cf863633f57238f179a0297de84bd8d3",
+        "rev": "6607cf789e541e7873d40d3a8f7815ea92204f32",
         "type": "github"
       },
       "original": {
@@ -1676,11 +1676,11 @@
         "treefmt-nix": "treefmt-nix_2"
       },
       "locked": {
-        "lastModified": 1741926946,
-        "narHash": "sha256-Xn16jiSntu7N0NUNnCOKE5Eu1tm437HUPP+KPrnvMFQ=",
+        "lastModified": 1742053504,
+        "narHash": "sha256-3cdNXi+o6syNwJ+ktZLXeuMTnwOOk4HSrNIJtfx0+3U=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "f95846104ae4d3178494fdccaff94796eb856e83",
+        "rev": "0b2a3fadd7505123e37158bd702f618a2c8f011b",
         "type": "github"
       },
       "original": {
@@ -1941,11 +1941,11 @@
         "tinted-zed": "tinted-zed"
       },
       "locked": {
-        "lastModified": 1741880767,
-        "narHash": "sha256-tXtop1zIJMyRt1LDERIWwMAMVKdfDtFp/g37YKy2Ke4=",
+        "lastModified": 1742040559,
+        "narHash": "sha256-Hb3aw00C1/5ORiTCASwMd8vcLAl/GNJfyjXZyl/EKpc=",
         "owner": "danth",
         "repo": "stylix",
-        "rev": "5053a63c87fea3508439b7e9c1a66fa6979a4694",
+        "rev": "bcc674f1994396137438bac9d905971453d33b12",
         "type": "github"
       },
       "original": {
@@ -2361,11 +2361,11 @@
         "oidc2aws": "oidc2aws"
       },
       "locked": {
-        "lastModified": 1741790461,
-        "narHash": "sha256-diBVDGSLxQPczvMP8rTtHcmQ9W9WMkSy3ovGZd+aGmc=",
+        "lastModified": 1741939199,
+        "narHash": "sha256-oM7R79aI6IyQyMZsLXpDqoV6/YQyF4qIm0sLW3dbSFg=",
         "ref": "refs/heads/main",
-        "rev": "d614c344d8fc2b68a023ecf279457ce780e14f9c",
-        "revCount": 1,
+        "rev": "b565e80bd977a23d85553b57b3ac98fc05aebc38",
+        "revCount": 2,
         "type": "git",
         "url": "ssh://git@git.ventx.org/daniel/nix.git"
       },

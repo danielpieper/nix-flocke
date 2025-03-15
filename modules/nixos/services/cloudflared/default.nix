@@ -18,23 +18,15 @@ in
     sops.secrets = {
       cloudflared = {
         sopsFile = ../secrets.yaml;
-        owner = "cloudflared";
       };
       cloudflared-cert = {
         sopsFile = ../secrets.yaml;
-        owner = "cloudflared";
       };
     };
 
     # https://github.com/quic-go/quic-go/wiki/UDP-Buffer-Sizes
     boot.kernel.sysctl."net.core.rmem_max" = 7500000;
     boot.kernel.sysctl."net.core.wmem_max" = 7500000;
-
-    environment.etc."cloudflared/cert.pem" = {
-      user = "cloudflared";
-      group = "cloudflared";
-      source = config.sops.secrets.cloudflared-cert.path;
-    };
 
     services = {
       cloudflared = {
@@ -44,6 +36,7 @@ in
         tunnels = {
           "4488062b-53ae-4932-ba43-db4804831f8a" = {
             credentialsFile = config.sops.secrets.cloudflared.path;
+            certificateFile = config.sops.secrets.cloudflared-cert.path;
             default = "http_status:404";
           };
         };

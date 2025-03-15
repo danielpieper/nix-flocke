@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib;
@@ -22,6 +23,7 @@ in
     services = {
       forgejo = {
         enable = true;
+        package = pkgs.forgejo;
         database = {
           type = "postgres";
           socket = "/run/postgresql";
