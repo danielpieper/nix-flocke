@@ -41,8 +41,7 @@ in
       procs
       tokei
       trash-cli
-      # FIXME: build failure
-      # tailspin
+      tailspin
       gtrash
       ripgrep
       sd
@@ -51,6 +50,7 @@ in
       viddy
 
       kaf
+      aichat
 
       # go
       arion
