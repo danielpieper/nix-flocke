@@ -16,34 +16,14 @@ in
     fonts = {
       enableDefaultPackages = true;
       fontDir.enable = true;
-      packages = with pkgs; [
-        nerd-fonts.symbols-only
-      ];
 
       fontconfig = {
+        enable = true;
         localConf = ''
-          <?xml version="1.0"?>
-          <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
-          <fontconfig>
-              <alias binding="weak">
-                  <family>monospace</family>
-                  <prefer>
-                      <family>emoji</family>
-                  </prefer>
-              </alias>
-              <alias binding="weak">
-                  <family>sans-serif</family>
-                  <prefer>
-                      <family>emoji</family>
-                  </prefer>
-              </alias>
-              <alias binding="weak">
-                  <family>serif</family>
-                  <prefer>
-                      <family>emoji</family>
-                  </prefer>
-              </alias>
-          </fontconfig>
+          <alias>
+            <family>monospace</family>
+            <prefer><family>Symbols Nerd Font</family></prefer>
+          </alias>
         '';
       };
     };
@@ -52,10 +32,10 @@ in
       enable = true;
       autoEnable = true;
       base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
-      # https://pltanton.dev/posts/2024/02/nix-based-dark-light-theme-switch/
       polarity = lib.mkDefault "dark";
       homeManagerIntegration.autoImport = false;
       homeManagerIntegration.followSystem = false;
+      targets.nixvim.enable = false;
 
       image = pkgs.flocke.wallpapers.earth;
 
@@ -67,7 +47,7 @@ in
 
       fonts = {
         sizes = {
-          terminal = 12;
+          terminal = 14;
           applications = 12;
           popups = 12;
         };

@@ -24,15 +24,27 @@ in
       nerd-fonts.jetbrains-mono
       inter
       open-sans
-      plemoljp
     ];
+
+    # TODO: Possible to use stylix instead?
+    catppuccin.flavor = "mocha";
+    catppuccin.fish.enable = true;
 
     stylix = {
       enable = true;
       autoEnable = true;
       base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
-      # https://pltanton.dev/posts/2024/02/nix-based-dark-light-theme-switch/
       polarity = lib.mkDefault "dark";
+      targets.nixvim.enable = false;
+
+      iconTheme = {
+        enable = true;
+        package = pkgs.catppuccin-papirus-folders.override {
+          flavor = "mocha";
+          accent = "lavender";
+        };
+        dark = "Papirus-Dark";
+      };
 
       image = pkgs.flocke.wallpapers.earth;
 
@@ -44,7 +56,7 @@ in
 
       fonts = {
         sizes = {
-          terminal = 12;
+          terminal = 14;
           applications = 12;
           popups = 12;
         };

@@ -22,6 +22,7 @@ in
       };
 
       iconTheme = {
+        enable = true;
         package = pkgs.catppuccin-papirus-folders.override {
           flavor = "mocha";
           accent = "lavender";
