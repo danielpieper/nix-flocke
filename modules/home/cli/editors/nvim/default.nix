@@ -59,6 +59,16 @@ in
         terraform-ls
         tflint
 
+        # Helm
+        kubernetes-helm
+        helm-ls
+
+        ansible
+
+        # Python
+        pyright
+        ruff
+
         markdownlint-cli2
         nodePackages.bash-language-server
         nodePackages.dockerfile-language-server-nodejs

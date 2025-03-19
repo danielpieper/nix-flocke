@@ -18,6 +18,7 @@ in
     home.packages = with pkgs; [
       tenv
       ansible
+      kubernetes-helm
     ];
   };
 }
