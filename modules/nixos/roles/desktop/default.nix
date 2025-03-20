@@ -32,16 +32,15 @@ in
       dygmaKeyboard.enable = true;
     };
 
-    security.flocke = {
-      ausweisapp.enable = true;
-    };
-
-    services.flocke = {
-      # systemd-resolved[810]: mDNS-IPv4: There appears to be another mDNS responder running, or previously systemd-resolved crashed with some outstanding transfers.
-      # avahi.enable = true;
-      restic.enable = true;
-      virtualisation.podman.enable = true;
-      tailscale.enable = true;
+    services = {
+      flocke = {
+        # systemd-resolved[810]: mDNS-IPv4: There appears to be another mDNS responder running, or previously systemd-resolved crashed with some outstanding transfers.
+        # avahi.enable = true;
+        restic.enable = true;
+        virtualisation.podman.enable = true;
+        tailscale.enable = true;
+      };
+      logind.powerKey = "suspend";
     };
 
     system = {

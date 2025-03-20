@@ -32,6 +32,10 @@
 
   networking.hostName = "tars";
 
+  security.flocke = {
+    ausweisapp.enable = true;
+  };
+
   topology.self = {
     hardware.info = "Lenovo Thinkpad X1 Carbon";
   };
