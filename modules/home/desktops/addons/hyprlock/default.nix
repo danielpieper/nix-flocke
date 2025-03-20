@@ -60,9 +60,9 @@ in
             color = "rgba(255, 255, 255, 1)";
             font_size = 14;
             font_family = "Inter ExtraBold";
-            position = "0, -130";
+            position = "0, -640";
             halign = "center";
-            valign = "center";
+            valign = "top";
           }
         ];
         input-field = {
