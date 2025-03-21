@@ -118,7 +118,7 @@ in
             };
           };
           backlight = {
-            format = "{icon}";
+            format = "{icon}{percent}%";
             format-icons = [
               "󱩎 "
               "󱩏 "
@@ -139,9 +139,10 @@ in
               warning = 30;
               critical = 15;
             };
-            format = "{power}W {icon}{capacity}%";
-            format-alt = "{power}W {icon}{time}";
-            format-charging = " {capacity}%";
+            format = "{icon}{capacity}% <small>{power}W</small>";
+            format-alt = "{icon}{time} <small>{power}W</small>";
+            format-charging = " {capacity}% <small>{timeTo}</small>";
+            format-plugged = " {capacity}%";
             format-icons = [
               "󰁻 "
               "󰁽 "
@@ -166,7 +167,7 @@ in
           };
           pulseaudio = {
             scroll-step = 2;
-            format = "{icon}";
+            format = "{icon}{volume}%";
             format-muted = "  ";
             format-icons = {
               headphone = "  ";
