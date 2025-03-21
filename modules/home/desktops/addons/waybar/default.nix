@@ -35,9 +35,7 @@ in
           ];
           modules-right = [
             "backlight"
-            "backlight/slider"
             "pulseaudio"
-            "pulseaudio/slider"
             "network"
             "battery"
           ];
@@ -134,11 +132,6 @@ in
               "󰛨 "
             ];
           };
-          "backlight/slider" = {
-            min = 0;
-            max = 100;
-            orientation = "horizontal";
-          };
           battery = {
             interval = 5;
             states = {
@@ -184,11 +177,6 @@ in
               ];
             };
             on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
-          };
-          "pulseaudio/slider" = {
-            min = 0;
-            max = 100;
-            orientation = "horizontal";
           };
           tray = {
             icon-size = 18;
