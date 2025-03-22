@@ -18,7 +18,7 @@ in
     ./radarr.nix
     ./readarr.nix
     ./sonarr.nix
-    ./bhdl.nix
+    ./premiumizarr.nix
   ];
 
   options.services.flocke.arr = {
@@ -70,7 +70,6 @@ in
       config = {
         imports = [
           inputs.sops-nix.nixosModules.sops
-          inputs.bhdl.nixosModules.default
         ];
 
         users.groups.media = { };

@@ -111,27 +111,6 @@
         "type": "github"
       }
     },
-    "bhdl": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "premiumizarr-nova": "premiumizarr-nova"
-      },
-      "locked": {
-        "lastModified": 1742130625,
-        "narHash": "sha256-gbl8sz+L2G6GzZU0KGOkWxqWMIQC4gj9nr6gTfDmMQk=",
-        "ref": "refs/heads/main",
-        "rev": "6cfa2595a2723dd59ea9ff41341064b3f3a4261f",
-        "revCount": 17,
-        "type": "git",
-        "url": "ssh://forgejo@forgejo.homelab.daniel-pieper.com/daniel/bhdl.git"
-      },
-      "original": {
-        "type": "git",
-        "url": "ssh://forgejo@forgejo.homelab.daniel-pieper.com/daniel/bhdl.git"
-      }
-    },
     "cachix": {
       "inputs": {
         "devenv": [
@@ -1824,26 +1803,9 @@
         "type": "github"
       }
     },
-    "premiumizarr-nova": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1741702931,
-        "narHash": "sha256-fG01lQi2rT0tCdaxXRxHUBSOrjrLUzy7z3IR4aMFdFQ=",
-        "owner": "ensingerphilipp",
-        "repo": "Premiumizearr-Nova",
-        "rev": "f815c8edb4eeda83d0f41d23326ec51b3d073f06",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ensingerphilipp",
-        "repo": "Premiumizearr-Nova",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "authentik-nix": "authentik-nix",
-        "bhdl": "bhdl",
         "catppuccin": "catppuccin",
         "catppuccin-obs": "catppuccin-obs",
         "comma": "comma",

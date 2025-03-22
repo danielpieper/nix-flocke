@@ -141,8 +141,8 @@ in
             };
             format = "{icon}{capacity}% <small>{power}W</small>";
             format-alt = "{icon}{time} <small>{power}W</small>";
-            format-charging = " {capacity}% <small>{timeTo}</small>";
             format-plugged = " {capacity}%";
+            format-charging = " {capacity}% <small>{timeTo}</small>";
             format-icons = [
               "󰁻 "
               "󰁽 "
