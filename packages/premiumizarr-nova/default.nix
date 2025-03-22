@@ -32,8 +32,8 @@ buildGoModule {
   src = pkgs.fetchFromGitHub {
     owner = "ensingerphilipp";
     repo = "Premiumizearr-Nova";
-    rev = "main";
-    sha256 = "sha256-fG01lQi2rT0tCdaxXRxHUBSOrjrLUzy7z3IR4aMFdFQ=";
+    rev = "v1.4.0";
+    sha256 = "sha256-E0TYNMSu3tz+N7wcODIaMhpHqpVQUqWXX5R7YO4RwZw=";
   };
 
   vendorHash = "sha256-AdjjZTVK75hR/ux/9POVWguoUE4Y9iv2jz17P/gKipM=";

@@ -47,6 +47,7 @@ in
             Group = "media";
           };
         };
+        environment.systemPackages = [ pkgs.wget ];
 
         users.users.premiumizarr = {
           group = "media";

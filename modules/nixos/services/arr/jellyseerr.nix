@@ -10,17 +10,19 @@ in
 {
   config = mkIf cfg.enable {
     systemd.tmpfiles.rules = [
-      "d /persist/var/lib/arr/jellyseer 0777 root root"
+      "d /persist/var/lib/arr/jellyseerr 0777 root root"
     ];
 
     containers.arr = {
       bindMounts = {
-        "/var/lib/jellyseer/" = {
-          hostPath = "/persist/var/lib/arr/jellyseer/";
+        "/var/lib/jellyseerr/" = {
+          hostPath = "/persist/var/lib/arr/jellyseerr/";
           isReadOnly = false;
         };
       };
       config = {
+        # issues with bind mount
+        systemd.services.jellyseerr.serviceConfig.DynamicUser = lib.mkForce false;
         services = {
           jellyseerr.enable = true;
           traefik.dynamicConfigOptions.http = {
