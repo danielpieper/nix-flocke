@@ -18,7 +18,6 @@ let
       onepassword-password-manager
       ublock-origin
       darkreader
-      vimium
       sponsorblock
     ];
 
