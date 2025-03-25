@@ -1,5 +1,6 @@
 {
   inputs,
+  pkgs,
   ...
 }:
 {
@@ -46,6 +47,7 @@
 
   home.packages = [
     inputs.ventx.packages.x86_64-linux.oidc2aws
+    pkgs.slack
   ];
 
   home.stateVersion = "23.11";
