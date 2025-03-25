@@ -49,6 +49,7 @@ in
         gomodifytags
         impl
         golangci-lint
+        golangci-lint-langserver
 
         # Nix
         nil
