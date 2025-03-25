@@ -35,7 +35,7 @@
       enable-runner = true;
       enable-dump = true;
     };
-    arr.enable = false;
+    arr.enable = true;
 
     satisfactory.enable = false;
     actual.enable = false;

@@ -1803,6 +1803,23 @@
         "type": "github"
       }
     },
+    "premiumizearr-nova": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1742656822,
+        "narHash": "sha256-fgVwXiym4wYXPsXBZ4p4Vc7zOCvtrA8f+6f/F4mszgQ=",
+        "ref": "fixes",
+        "rev": "51939370eb63df70e7a9cb975fcd260000354140",
+        "revCount": 156,
+        "type": "git",
+        "url": "ssh://forgejo@forgejo.homelab.daniel-pieper.com/daniel/premiumizearr-nova.git"
+      },
+      "original": {
+        "ref": "fixes",
+        "type": "git",
+        "url": "ssh://forgejo@forgejo.homelab.daniel-pieper.com/daniel/premiumizearr-nova.git"
+      }
+    },
     "root": {
       "inputs": {
         "authentik-nix": "authentik-nix",
@@ -1827,6 +1844,7 @@
         "nixpkgs": "nixpkgs_6",
         "nur": "nur",
         "poetry2nix": "poetry2nix",
+        "premiumizearr-nova": "premiumizearr-nova",
         "snowfall-lib": "snowfall-lib",
         "sops-nix": "sops-nix",
         "stylix": "stylix",

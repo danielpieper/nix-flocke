@@ -110,6 +110,11 @@
       url = "git+ssh://git@git.ventx.org/daniel/nix.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    premiumizearr-nova = {
+      url = "git+ssh://forgejo@forgejo.homelab.daniel-pieper.com/daniel/premiumizearr-nova.git?ref=fixes";
+      flake = false;
+    };
   };
 
   outputs =

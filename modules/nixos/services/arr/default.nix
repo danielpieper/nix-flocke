@@ -1,6 +1,8 @@
 {
+  inputs,
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib;
@@ -8,145 +10,162 @@ let
   cfg = config.services.flocke.arr;
 in
 {
+  imports = [
+    ./bazarr.nix
+    ./jellyseerr.nix
+    ./prowlarr.nix
+    ./radarr.nix
+    ./sonarr.nix
+    ./premiumizarr.nix
+  ];
+
   options.services.flocke.arr = {
     enable = mkEnableOption "Enable the arr";
   };
 
   config = mkIf cfg.enable {
-    users.groups.media = { };
+    environment.interactiveShellInit = ''
+      alias arr='sudo nixos-container root-login arr'
+    '';
 
-    services = {
-      bazarr = {
-        enable = true;
-        group = "media";
-      };
+    systemd.tmpfiles.rules = [
+      "d /persist/var/lib/arr/traefik 0777 root root"
+      "d /persist/var/lib/arr/tailscale 0777 root root"
+    ];
 
-      lidarr = {
-        enable = true;
-        group = "media";
-      };
-      readarr = {
-        enable = true;
-        group = "media";
-      };
-      radarr = {
-        enable = true;
-        group = "media";
-      };
+    networking.nat = {
+      enable = true;
+      internalInterfaces = [ "ve-arr" ];
+      externalInterface = "eno1";
+    };
 
-      prowlarr.enable = true;
-      sonarr = {
-        enable = true;
-        group = "media";
-      };
-
-      # flaresolverr = {
-      #   enable = true;
-      #   port = 8191;
-      #   openFirewall = true;
-      # };
-
-      jellyseerr.enable = true;
-
-      cloudflared = {
-        tunnels = {
-          "4488062b-53ae-4932-ba43-db4804831f8a" = {
-            ingress = {
-              "jellyseerr.daniel-pieper.com" = "http://localhost:5055";
-            };
-          };
+    containers.arr = {
+      ephemeral = true;
+      autoStart = true;
+      privateNetwork = true;
+      hostAddress = "192.168.100.10";
+      localAddress = "192.168.100.11";
+      enableTun = true;
+      bindMounts = {
+        "/persist/etc/ssh/" = {
+          hostPath = "/persist/etc/ssh/";
+          isReadOnly = true;
+        };
+        "/mnt/" = {
+          hostPath = "/mnt/";
+          isReadOnly = false;
+        };
+        "/var/lib/traefik/" = {
+          hostPath = "/persist/var/lib/arr/traefik/";
+          isReadOnly = false;
+        };
+        "/var/lib/tailscale/" = {
+          hostPath = "/persist/var/lib/arr/tailscale/";
+          isReadOnly = false;
         };
       };
 
-      traefik = {
-        dynamicConfigOptions = {
-          http = {
-            services = {
-              bazarr.loadBalancer.servers = [
-                {
-                  url = "http://localhost:6767";
-                }
-              ];
-              readarr.loadBalancer.servers = [
-                {
-                  url = "http://localhost:8787";
-                }
-              ];
-              lidarr.loadBalancer.servers = [
-                {
-                  url = "http://localhost:8686";
-                }
-              ];
-              radarr.loadBalancer.servers = [
-                {
-                  url = "http://localhost:7878";
-                }
-              ];
-              prowlarr.loadBalancer.servers = [
-                {
-                  url = "http://localhost:9696";
-                }
-              ];
-              sonarr.loadBalancer.servers = [
-                {
-                  url = "http://localhost:8989";
-                }
-              ];
-              jellyseerr.loadBalancer.servers = [
-                {
-                  url = "http://localhost:5055";
-                }
-              ];
-            };
+      config = {
+        imports = [
+          inputs.sops-nix.nixosModules.sops
+        ];
 
-            routers = {
-              bazarr = {
-                entryPoints = [ "websecure" ];
-                rule = "Host(`bazarr.homelab.daniel-pieper.com`)";
-                service = "bazarr";
-                tls.certResolver = "letsencrypt";
-                middlewares = [ "authentik" ];
+        users.groups.media = { };
+        environment.systemPackages = [ pkgs.ghostty.terminfo ];
+
+        networking = {
+          firewall = {
+            enable = true;
+            # https://github.com/tailscale/tailscale/issues/10319#issuecomment-1886730614
+            checkReversePath = "loose";
+          };
+          nameservers = [ "8.8.8.8" ];
+        };
+
+        systemd.services = {
+          traefik = {
+            environment.CF_API_EMAIL = "cloudflare@daniel-pieper.com";
+            serviceConfig.EnvironmentFile = [ config.sops.secrets.cloudflare_api_key.path ];
+          };
+        };
+
+        sops = {
+          age.sshKeyPaths = [ "/persist/etc/ssh/ssh_host_ed25519_key" ];
+          secrets.cloudflare_api_key.sopsFile = ../secrets.yaml;
+        };
+
+        services = {
+          tailscale = {
+            enable = true;
+            disableTaildrop = true;
+            permitCertUid = "traefik";
+            extraSetFlags = [
+              "--exit-node-allow-lan-access"
+            ];
+          };
+          traefik = {
+            enable = true;
+            staticConfigOptions = {
+              metrics.prometheus = { };
+              certificatesResolvers.letsencrypt.acme = {
+                email = "cloudflare@daniel-pieper.com";
+                storage = "/var/lib/traefik/cert.json";
+                dnsChallenge = {
+                  provider = "cloudflare";
+                  resolvers = [
+                    "1.1.1.1:53"
+                    "8.8.8.8:53"
+                  ];
+                  disablePropagationCheck = true;
+                  delayBeforeCheck = 60;
+                };
               };
-              readarr = {
-                entryPoints = [ "websecure" ];
-                rule = "Host(`readarr.homelab.daniel-pieper.com`)";
-                service = "readarr";
-                tls.certResolver = "letsencrypt";
-                middlewares = [ "authentik" ];
+              entryPoints = {
+                web = {
+                  address = "0.0.0.0:80";
+                  http.redirections.entryPoint = {
+                    to = "websecure";
+                    scheme = "https";
+                    permanent = true;
+                  };
+                };
+                websecure = {
+                  address = "0.0.0.0:443";
+                  http.tls = {
+                    certResolver = "letsencrypt";
+                    domains = [
+                      {
+                        main = "homelab.daniel-pieper.com";
+                        sans = [ "*.homelab.daniel-pieper.com" ];
+                      }
+                    ];
+                  };
+                };
               };
-              lidarr = {
-                entryPoints = [ "websecure" ];
-                rule = "Host(`lidarr.homelab.daniel-pieper.com`)";
-                service = "lidarr";
-                tls.certResolver = "letsencrypt";
-                middlewares = [ "authentik" ];
-              };
-              radarr = {
-                entryPoints = [ "websecure" ];
-                rule = "Host(`radarr.homelab.daniel-pieper.com`)";
-                service = "radarr";
-                tls.certResolver = "letsencrypt";
-                middlewares = [ "authentik" ];
-              };
-              prowlarr = {
-                entryPoints = [ "websecure" ];
-                rule = "Host(`prowlarr.homelab.daniel-pieper.com`)";
-                service = "prowlarr";
-                tls.certResolver = "letsencrypt";
-                middlewares = [ "authentik" ];
-              };
-              sonarr = {
-                entryPoints = [ "websecure" ];
-                rule = "Host(`sonarr.homelab.daniel-pieper.com`)";
-                service = "sonarr";
-                tls.certResolver = "letsencrypt";
-                middlewares = [ "authentik" ];
-              };
-              jellyseerr = {
-                entryPoints = [ "websecure" ];
-                rule = "Host(`jellyseerr.homelab.daniel-pieper.com`)";
-                service = "jellyseerr";
-                tls.certResolver = "letsencrypt";
+            };
+            dynamicConfigOptions = {
+              http = {
+                middlewares = {
+                  authentik = {
+                    forwardAuth = {
+                      address = "https://authentik.daniel-pieper.com/outpost.goauthentik.io/auth/traefik";
+                      trustForwardHeader = true;
+                      authResponseHeaders = [
+                        "X-authentik-username"
+                        "X-authentik-groups"
+                        "X-authentik-email"
+                        "X-authentik-name"
+                        "X-authentik-uid"
+                        "X-authentik-jwt"
+                        "X-authentik-meta-jwks"
+                        "X-authentik-meta-outpost"
+                        "X-authentik-meta-provider"
+                        "X-authentik-meta-app"
+                        "X-authentik-meta-version"
+                      ];
+                    };
+                  };
+                };
               };
             };
           };
