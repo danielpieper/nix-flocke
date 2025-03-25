@@ -31,17 +31,37 @@ in
           ];
         }
         {
-          profile.name = "docked";
+          profile.name = "docked-home-2";
           profile.outputs = [
             {
               criteria = "eDP-1";
               position = "0,0";
-              mode = "1920x1200@60Hz";
             }
             {
               criteria = "Samsung Electric Company U28E590 HTPH403281";
               position = "1920,0";
-              mode = "2560x1440@60Hz";
+              mode = "3840x2160@60Hz";
+              scale = 1.5;
+            }
+          ];
+        }
+        {
+          profile.name = "docked-home-3";
+          profile.outputs = [
+            {
+              criteria = "eDP-1";
+              position = "0,0";
+            }
+            {
+              criteria = "Samsung Electric Company U28E590 HTPH403281";
+              position = "1920,0";
+              mode = "3840x2160@60Hz";
+              scale = 1.5;
+            }
+            {
+              criteria = "LG Electronics 27GL850 007NTYT59834";
+              position = "4480,0";
+              mode = "2560x1440@59.95Hz";
             }
           ];
         }
