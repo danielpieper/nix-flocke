@@ -84,27 +84,27 @@ let
       privateDefault = "SearXNG";
       order = [
         "SearXNG"
-        "DuckDuckGo"
-        "Google"
+        "ddg"
+        "google"
         "NixOS Options"
         "Nix Packages"
         "Home Manager"
         "NixOS Wiki"
         "GitHub"
         "dict.cc"
-        "Youtube"
+        "youtube"
       ];
       # FIXME: Search engine icons are broken, see https://github.com/nix-community/home-manager/issues/6450
       engines = {
-        "eBay".metaData.hidden = true;
-        "LEO Eng-Deu".metaData.hidden = true;
-        "Amazon.com".metaData.hidden = true;
-        "Ecosia".metaData.hidden = true;
-        "Wikipedia (de)".metaData.alias = "@wp";
-        "Google".metaData.alias = "@g";
-        "DuckDuckGo".metaData.alias = "@ddg";
+        "ebay".metaData.hidden = true;
+        "leo_ende_de".metaData.hidden = true;
+        "amazondotcom-us".metaData.hidden = true;
+        "ecosia".metaData.hidden = true;
+        "wikipedia-de".metaData.alias = "@wp";
+        "google".metaData.alias = "@g";
+        "ddg".metaData.alias = "@ddg";
         "SearXNG" = {
-          iconUpdateURL = "https://search.homelab.daniel-pieper.com/favicon.ico";
+          icon = "https://search.homelab.daniel-pieper.com/favicon.ico";
           definedAliases = [ "@s" ];
           urls = [
             {
@@ -119,7 +119,7 @@ let
           ];
         };
         "dict.cc" = {
-          iconUpdateURL = "https://www.dict.cc/favicon.ico";
+          icon = "https://www.dict.cc/favicon.ico";
           definedAliases = [ "@d" ];
           urls = [
             {
@@ -133,8 +133,8 @@ let
             }
           ];
         };
-        "YouTube" = {
-          iconUpdateURL = "https://youtube.com/favicon.ico";
+        "youtube" = {
+          icon = "https://youtube.com/favicon.ico";
           definedAliases = [ "@yt" ];
           updateInterval = 24 * 60 * 60 * 1000;
           urls = [
@@ -150,7 +150,7 @@ let
           ];
         };
         "Nix Packages" = {
-          iconUpdateURL = "https://nixos.org/favicon.ico";
+          icon = "https://nixos.org/favicon.ico";
           definedAliases = [ "@np" ];
           urls = [
             {
@@ -173,7 +173,7 @@ let
           ];
         };
         "NixOS Options" = {
-          iconUpdateURL = "https://nixos.org/favicon.ico";
+          icon = "https://nixos.org/favicon.ico";
           definedAliases = [ "@no" ];
           urls = [
             {
@@ -192,7 +192,7 @@ let
           ];
         };
         "GitHub" = {
-          iconUpdateURL = "https://github.com/favicon.ico";
+          icon = "https://github.com/favicon.ico";
           definedAliases = [ "@gh" ];
           updateInterval = 24 * 60 * 60 * 1000;
           urls = [
@@ -208,7 +208,7 @@ let
           ];
         };
         "NixOS Wiki" = {
-          iconUpdateURL = "https://wiki.nixos.org/favicon.png";
+          icon = "https://wiki.nixos.org/favicon.png";
           definedAliases = [ "@nw" ];
           updateInterval = 24 * 60 * 60 * 1000; # every day
           urls = [
@@ -224,7 +224,7 @@ let
           ];
         };
         "Home Manager" = {
-          iconUpdateURL = "https://nixos.org/favicon.ico";
+          icon = "https://nixos.org/favicon.ico";
           definedAliases = [ "@hm" ];
           urls = [
             {
