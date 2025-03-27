@@ -77,6 +77,12 @@ let
       "toolkit.telemetry.unified" = false;
       "toolkit.telemetry.unifiedIsOptIn" = false;
       "toolkit.telemetry.updatePing.enabled" = false;
+
+      # Sidebar
+      "sidebar.revamp" = true;
+      "sidebar.verticalTabs" = true;
+      "sidebar.position_start" = true; # left side
+      "sidebar.main.tools" = "aichat";
     };
     search = {
       force = true;
@@ -94,7 +100,6 @@ let
         "dict.cc"
         "youtube"
       ];
-      # FIXME: Search engine icons are broken, see https://github.com/nix-community/home-manager/issues/6450
       engines = {
         "ebay".metaData.hidden = true;
         "leo_ende_de".metaData.hidden = true;
