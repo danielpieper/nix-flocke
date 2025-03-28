@@ -1,9 +1,9 @@
-{
-  pkgs,
-  lib,
-  config,
-  host,
-  ...
+{ pkgs
+, lib
+, config
+, host
+, inputs
+, ...
 }:
 with lib;
 with lib.flocke;
@@ -34,7 +34,7 @@ in
       interactiveShellInit = ''
         ${pkgs.nix-your-shell}/bin/nix-your-shell --nom fish | source
         set -x GOPATH $XDG_DATA_HOME/go
-        # set -x GOPRIVATE "git.ventx.org,forgejo.homelab.daniel-pieper.com"
+        # set -x GOPRIVATE "${inputs.nix-secrets.go.goprivate}"
         set -gx PATH /usr/local/bin /usr/bin ~/.local/bin $GOPATH/bin/ $PATH
         # fish_add_path --path --append $GOPATH/bin/
         # fish_add_path --path --append /usr/local/bin /usr/bin ~/.local/bin

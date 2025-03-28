@@ -1,7 +1,7 @@
-{
-  config,
-  lib,
-  ...
+{ config
+, lib
+, inputs
+, ...
 }:
 with lib;
 with lib.flocke;
@@ -24,7 +24,7 @@ in
       enable = true;
       listenAddress = "127.0.0.1";
       port = 4000;
-      virtualHost = "tesla.homelab.daniel-pieper.com";
+      virtualHost = "tesla.homelab.${inputs.nix-secrets.domain}";
       secretsFile = config.sops.secrets.teslamate.path;
 
       postgres.enable_server = true;
@@ -41,7 +41,7 @@ in
     services.grafana = {
       settings = {
         dashboards.default_home_dashboard_path = lib.mkForce null;
-        server.root_url = lib.mkForce "https://grafana.homelab.daniel-pieper.com";
+        server.root_url = lib.mkForce "https://grafana.homelab.${inputs.nix-secrets.domain}";
         # uncomment for first time setup
         # users.allow_sign_up = lib.mkForce true;
       };
@@ -87,13 +87,13 @@ in
           routers = {
             teslamate = {
               entryPoints = [ "websecure" ];
-              rule = "Host(`tesla.homelab.daniel-pieper.com`)";
+              rule = "Host(`tesla.homelab.${inputs.nix-secrets.domain}`)";
               service = "teslamate";
               tls.certResolver = "letsencrypt";
             };
             grafana = {
               entryPoints = [ "websecure" ];
-              rule = "Host(`grafana.homelab.daniel-pieper.com`)";
+              rule = "Host(`grafana.homelab.${inputs.nix-secrets.domain}`)";
               service = "grafana";
               tls.certResolver = "letsencrypt";
             };

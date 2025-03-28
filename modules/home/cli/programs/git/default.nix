@@ -1,34 +1,38 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
+{ config
+, pkgs
+, lib
+, inputs
+, ...
 }:
 with lib;
 with lib.flocke;
 let
   cfg = config.cli.programs.git;
 
-  rewriteURL = lib.mapAttrs' (key: value: {
-    name = "url.${key}";
-    value = {
-      insteadOf = value;
-    };
-  }) cfg.urlRewrites;
+  rewriteURL = lib.mapAttrs'
+    (key: value: {
+      name = "url.${key}";
+      value = {
+        insteadOf = value;
+      };
+    })
+    cfg.urlRewrites;
 in
 {
   options.cli.programs.git = with types; {
     enable = mkBoolOpt false "Whether or not to enable git.";
-    email = mkOpt (nullOr str) "daniel@daniel-pieper.com" "The email to use with git.";
+    email = mkOpt (nullOr str) inputs.nix-secrets.user.email "The email to use with git.";
     urlRewrites = mkOpt (attrsOf str) { } "url we need to rewrite i.e. ssh to http";
-    signingKey = mkOpt str "/home/daniel/.ssh/id_ed25519.pub" "The public key used for signing commits";
+    signingKey =
+      mkOpt str "/home/${inputs.nix-secrets.user.name}/.ssh/id_ed25519.pub"
+        "The public key used for signing commits";
     allowedSigners = mkOpt str "" "List of public keys to verify commit signatures locally";
   };
 
   config = mkIf cfg.enable {
     home = {
       file.".ssh/allowed_signers".text = ''
-        * /home/daniel/.ssh/id_ed25519.pub
+        * /home/${inputs.nix-secrets.user.name}/.ssh/id_ed25519.pub
         * ${cfg.allowedSigners}
       '';
       packages = with pkgs; [
@@ -39,7 +43,7 @@ in
 
     programs.git = {
       enable = true;
-      userName = "Daniel Pieper";
+      userName = inputs.nix-secrets.user.fullname;
       userEmail = cfg.email;
       signing = {
         signByDefault = true;

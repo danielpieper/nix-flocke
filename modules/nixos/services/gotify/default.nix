@@ -1,7 +1,7 @@
-{
-  config,
-  lib,
-  ...
+{ config
+, lib
+, inputs
+, ...
 }:
 with lib;
 with lib.flocke;
@@ -36,7 +36,7 @@ in
             routers = {
               notify = {
                 entryPoints = [ "websecure" ];
-                rule = "Host(`notify.homelab.daniel-pieper.com`)";
+                rule = "Host(`notify.homelab.${inputs.nix-secrets.domain}`)";
                 service = "notify";
                 tls.certResolver = "letsencrypt";
               };

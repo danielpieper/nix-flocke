@@ -1,7 +1,7 @@
-{
-  config,
-  lib,
-  ...
+{ config
+, lib
+, inputs
+, ...
 }:
 with lib;
 let
@@ -33,7 +33,7 @@ in
             ];
             routers.jellyseerr = {
               entryPoints = [ "websecure" ];
-              rule = "Host(`jellyseerr.homelab.daniel-pieper.com`)";
+              rule = "Host(`jellyseerr.homelab.${inputs.nix-secrets.domain}`)";
               service = "jellyseerr";
               tls.certResolver = "letsencrypt";
               middlewares = [ "authentik" ];

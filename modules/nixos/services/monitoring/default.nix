@@ -1,8 +1,8 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
+{ config
+, lib
+, pkgs
+, inputs
+, ...
 }:
 with lib;
 with lib.flocke;
@@ -50,19 +50,19 @@ in
             routers = {
               prometheus = {
                 entryPoints = [ "websecure" ];
-                rule = "Host(`prometheus.homelab.daniel-pieper.com`)";
+                rule = "Host(`prometheus.homelab.${inputs.nix-secrets.domain}`)";
                 service = "prometheus";
                 tls.certResolver = "letsencrypt";
               };
               grafana = {
                 entryPoints = [ "websecure" ];
-                rule = "Host(`grafana.homelab.daniel-pieper.com`)";
+                rule = "Host(`grafana.homelab.${inputs.nix-secrets.domain}`)";
                 service = "grafana";
                 tls.certResolver = "letsencrypt";
               };
               promtail = {
                 entryPoints = [ "websecure" ];
-                rule = "Host(`promtail.homelab.daniel-pieper.com`)";
+                rule = "Host(`promtail.homelab.${inputs.nix-secrets.domain}`)";
                 service = "promtail";
                 tls.certResolver = "letsencrypt";
               };
@@ -204,11 +204,11 @@ in
           server = {
             http_port = 3010;
             http_addr = "127.0.0.1";
-            root_url = "https://grafana.homelab.daniel-pieper.com";
+            root_url = "https://grafana.homelab.${inputs.nix-secrets.domain}";
           };
 
           "auth" = {
-            signout_redirect_url = "https://authentik.daniel-pieper.com/application/o/grafana/end-session/";
+            signout_redirect_url = "https://authentik.${inputs.nix-secrets.domain}/application/o/grafana/end-session/";
             oauth_auto_login = true;
           };
 
@@ -217,9 +217,9 @@ in
             client_id = "$__file{${config.sops.secrets.grafana_oauth2_client_id.path}}";
             client_secret = "$__file{${config.sops.secrets.grafana_oauth2_client_secret.path}}";
             scopes = "openid profile email";
-            auth_url = "https://authentik.daniel-pieper.com/application/o/authorize/";
-            token_url = "https://authentik.daniel-pieper.com/application/o/token/";
-            api_url = "https://authentik.daniel-pieper.com/application/o/userinfo/";
+            auth_url = "https://authentik.${inputs.nix-secrets.domain}/application/o/authorize/";
+            token_url = "https://authentik.${inputs.nix-secrets.domain}/application/o/token/";
+            api_url = "https://authentik.${inputs.nix-secrets.domain}/application/o/userinfo/";
             role_attribute_path = "contains(groups, 'Grafana Admins') && 'Admin' || contains(groups, 'Grafana Editors') && 'Editor' || 'Viewer'";
           };
           database = {
@@ -244,12 +244,13 @@ in
                 allowUiUpdates = true;
                 updateIntervalSeconds = 86400;
                 options.path =
-                  pkgs.fetchFromGitHub {
-                    owner = "rfmoz";
-                    repo = "grafana-dashboards";
-                    rev = "master";
-                    sha256 = "sha256-ZkVijMRCd87sLckqezPh1wHfuiibExVhatA1AqRiKHc=";
-                  }
+                  pkgs.fetchFromGitHub
+                    {
+                      owner = "rfmoz";
+                      repo = "grafana-dashboards";
+                      rev = "master";
+                      sha256 = "sha256-ZkVijMRCd87sLckqezPh1wHfuiibExVhatA1AqRiKHc=";
+                    }
                   + "/prometheus/node-exporter-full.json";
               }
             ];
@@ -281,7 +282,7 @@ in
                 orgId = 1;
                 receivers = [
                   {
-                    uid = "167ff3bf-5780-4f81-b811-3e9e5002f40b";
+                    uid = inputs.nix-secrets.gotify.uid;
                     type = "webhook";
                     settings = {
                       # TODO: provision gotify token and add here

@@ -1,10 +1,9 @@
-{
-  inputs,
-  lib,
-  host,
-  pkgs,
-  config,
-  ...
+{ inputs
+, lib
+, host
+, pkgs
+, config
+, ...
 }:
 with lib;
 let
@@ -109,11 +108,11 @@ let
         "google".metaData.alias = "@g";
         "ddg".metaData.alias = "@ddg";
         "SearXNG" = {
-          icon = "https://search.homelab.daniel-pieper.com/favicon.ico";
+          icon = "https://search.homelab.${inputs.nix-secrets.domain}/favicon.ico";
           definedAliases = [ "@s" ];
           urls = [
             {
-              template = "https://search.homelab.daniel-pieper.com/search";
+              template = "https://search.homelab.${inputs.nix-secrets.domain}/search";
               params = [
                 {
                   name = "q";
@@ -314,10 +313,10 @@ in
         lib.foldl'
           (
             acc: profile:
-            acc
-            // {
-              "${lib.toLower profile.name}" = mkFirefoxProfile profile.name profile.id;
-            }
+              acc
+              // {
+                "${lib.toLower profile.name}" = mkFirefoxProfile profile.name profile.id;
+              }
           )
           {
             default = mkFirefoxProfile "Default" 0;
@@ -329,28 +328,31 @@ in
       "default"
     ] ++ (map (profile: lib.toLower profile.name) cfg.additionalProfiles);
 
-    xdg.desktopEntries = lib.foldl' (
-      acc: profile:
-      acc
-      // {
-        "firefox-${lib.toLower profile.name}" = {
-          name = "Firefox - ${profile.name}";
-          genericName = "Web Browser - ${profile.name}";
-          exec = "firefox -P ${profile.name} %U";
-          terminal = false;
-          icon = "firefox";
-          startupNotify = true;
-          categories = [
-            "Application"
-            "Network"
-            "WebBrowser"
-          ];
-          mimeType = [
-            "text/html"
-            "text/xml"
-          ];
-        };
-      }
-    ) { } cfg.additionalProfiles;
+    xdg.desktopEntries = lib.foldl'
+      (
+        acc: profile:
+          acc
+          // {
+            "firefox-${lib.toLower profile.name}" = {
+              name = "Firefox - ${profile.name}";
+              genericName = "Web Browser - ${profile.name}";
+              exec = "firefox -P ${profile.name} %U";
+              terminal = false;
+              icon = "firefox";
+              startupNotify = true;
+              categories = [
+                "Application"
+                "Network"
+                "WebBrowser"
+              ];
+              mimeType = [
+                "text/html"
+                "text/xml"
+              ];
+            };
+          }
+      )
+      { }
+      cfg.additionalProfiles;
   };
 }

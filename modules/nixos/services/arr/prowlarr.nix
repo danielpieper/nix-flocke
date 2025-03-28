@@ -1,7 +1,7 @@
-{
-  config,
-  lib,
-  ...
+{ config
+, lib
+, inputs
+, ...
 }:
 with lib;
 let
@@ -32,7 +32,7 @@ in
             ];
             routers.prowlarr = {
               entryPoints = [ "websecure" ];
-              rule = "Host(`prowlarr.homelab.daniel-pieper.com`)";
+              rule = "Host(`prowlarr.homelab.${inputs.nix-secrets.domain}`)";
               service = "prowlarr";
               tls.certResolver = "letsencrypt";
               middlewares = [ "authentik" ];

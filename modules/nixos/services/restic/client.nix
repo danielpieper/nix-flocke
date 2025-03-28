@@ -1,8 +1,8 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
+{ pkgs
+, config
+, lib
+, inputs
+, ...
 }:
 with lib;
 with lib.flocke;
@@ -32,9 +32,9 @@ let
       set +a
 
       # Get last backup timestamp
-      RESTIC_PASSWORD_FILE=${config.sops.secrets.restic_repository_password.path} restic -r rest:https://restic.homelab.daniel-pieper.com snapshots latest --json | jq -r 'max_by(.time) | .time | sub("[.][0-9]+"; "") | sub("Z"; "+00:00") | def parseDate(date): date | capture("(?<no_tz>.*)(?<tz_sgn>[-+])(?<tz_hr>\\d{2}):(?<tz_min>\\d{2})$") | (.no_tz + "Z" | fromdateiso8601) - (.tz_sgn + "60" | tonumber) * ((.tz_hr | tonumber) * 60 + (.tz_min | tonumber)); parseDate(.) | "restic_last_snapshot_ts \(.)"' >> ''${TEMP_FILE}
+      RESTIC_PASSWORD_FILE=${config.sops.secrets.restic_repository_password.path} restic -r rest:https://restic.homelab.${inputs.nix-secrets.domain} snapshots latest --json | jq -r 'max_by(.time) | .time | sub("[.][0-9]+"; "") | sub("Z"; "+00:00") | def parseDate(date): date | capture("(?<no_tz>.*)(?<tz_sgn>[-+])(?<tz_hr>\\d{2}):(?<tz_min>\\d{2})$") | (.no_tz + "Z" | fromdateiso8601) - (.tz_sgn + "60" | tonumber) * ((.tz_hr | tonumber) * 60 + (.tz_min | tonumber)); parseDate(.) | "restic_last_snapshot_ts \(.)"' >> ''${TEMP_FILE}
       # Get last backup size in bytes and files count
-      RESTIC_PASSWORD_FILE=${config.sops.secrets.restic_repository_password.path} restic -r rest:https://restic.homelab.daniel-pieper.com stats latest --json | jq -r '"restic_stats_total_size_bytes \(.total_size)\nrestic_stats_total_file_count \(.total_file_count)"' >> ''${TEMP_FILE}
+      RESTIC_PASSWORD_FILE=${config.sops.secrets.restic_repository_password.path} restic -r rest:https://restic.homelab.${inputs.nix-secrets.domain} stats latest --json | jq -r '"restic_stats_total_size_bytes \(.total_size)\nrestic_stats_total_file_count \(.total_file_count)"' >> ''${TEMP_FILE}
 
       # Write out metrics to a temporary file.
       END="$(date +%s)"
@@ -57,7 +57,7 @@ in
   config = mkIf cfg.enable {
     services.restic.backups = {
       default = {
-        repository = "rest:https://restic.homelab.daniel-pieper.com";
+        repository = "rest:https://restic.homelab.${inputs.nix-secrets.domain}";
         initialize = true;
         passwordFile = config.sops.secrets.restic_repository_password.path;
         environmentFile = config.sops.secrets.restic_environment.path;

@@ -1,7 +1,7 @@
-{
-  config,
-  lib,
-  ...
+{ config
+, lib
+, inputs
+, ...
 }:
 with lib;
 let
@@ -33,7 +33,7 @@ in
             ];
             routers.radarr = {
               entryPoints = [ "websecure" ];
-              rule = "Host(`radarr.homelab.daniel-pieper.com`)";
+              rule = "Host(`radarr.homelab.${inputs.nix-secrets.domain}`)";
               service = "radarr";
               tls.certResolver = "letsencrypt";
               middlewares = [ "authentik" ];

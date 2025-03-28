@@ -1,7 +1,7 @@
-{
-  config,
-  lib,
-  ...
+{ config
+, lib
+, inputs
+, ...
 }:
 with lib;
 let
@@ -34,7 +34,7 @@ in
             ];
             routers.bazarr = {
               entryPoints = [ "websecure" ];
-              rule = "Host(`bazarr.homelab.daniel-pieper.com`)";
+              rule = "Host(`bazarr.homelab.${inputs.nix-secrets.domain}`)";
               service = "bazarr";
               tls.certResolver = "letsencrypt";
               middlewares = [ "authentik" ];

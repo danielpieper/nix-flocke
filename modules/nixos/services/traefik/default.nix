@@ -1,7 +1,7 @@
-{
-  config,
-  lib,
-  ...
+{ config
+, lib
+, inputs
+, ...
 }:
 with lib;
 let
@@ -24,7 +24,7 @@ in
       ];
 
       services.traefik = {
-        environment.CF_API_EMAIL = "cloudflare@daniel-pieper.com";
+        environment.CF_API_EMAIL = inputs.nix-secrets.cloudflare.email;
         serviceConfig.EnvironmentFile = [ config.sops.secrets.cloudflare_api_key.path ];
       };
     };
@@ -78,7 +78,7 @@ in
             tailscale.tailscale = { };
             letsencrypt = {
               acme = {
-                email = "cloudflare@daniel-pieper.com";
+                email = inputs.nix-secrets.cloudflare.email;
                 storage = "/var/lib/traefik/cert.json";
                 dnsChallenge = {
                   provider = "cloudflare";
@@ -106,12 +106,12 @@ in
               certResolver = "letsencrypt";
               domains = [
                 {
-                  main = "homelab.daniel-pieper.com";
-                  sans = [ "*.homelab.daniel-pieper.com" ];
+                  main = "homelab.${inputs.nix-secrets.domain}";
+                  sans = [ "*.homelab.${inputs.nix-secrets.domain}" ];
                 }
                 {
-                  main = "daniel-pieper.com";
-                  sans = [ "*.daniel-pieper.com" ];
+                  main = inputs.nix-secrets.domain;
+                  sans = [ "*.${inputs.nix-secrets.domain}" ];
                 }
               ];
             };

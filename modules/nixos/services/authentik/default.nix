@@ -1,7 +1,7 @@
-{
-  config,
-  lib,
-  ...
+{ config
+, lib
+, inputs
+, ...
 }:
 with lib;
 with lib.flocke;
@@ -22,12 +22,12 @@ in
         environmentFile = config.sops.secrets.authentik_env.path;
         settings = {
           email = {
-            host = "smtp.eu.mailgun.org";
-            port = 587;
-            username = "postmaster@mail.daniel-pieper.com";
+            host = inputs.nix-secrets.mailgun.host;
+            port = inputs.nix-secrets.mailgun.port;
+            username = inputs.nix-secrets.mailgun.username;
             use_tls = true;
             use_ssl = false;
-            from = "homelab@daniel-pieper.com";
+            from = inputs.nix-secrets.mailgun.fromEmail;
           };
           disable_startup_analytics = true;
           avatars = "initials";
@@ -36,9 +36,9 @@ in
 
       cloudflared = {
         tunnels = {
-          "4488062b-53ae-4932-ba43-db4804831f8a" = {
+          "${inputs.nix-secrets.cloudflare.tunnelID}" = {
             ingress = {
-              "authentik.daniel-pieper.com" = "http://localhost:9000";
+              "authentik.${inputs.nix-secrets.domain}" = "http://localhost:9000";
             };
           };
         };
@@ -81,7 +81,7 @@ in
             routers = {
               auth = {
                 entryPoints = [ "websecure" ];
-                rule = "Host(`authentik.daniel-pieper.com`) || HostRegexp(`{subdomain:[a-z0-9]+}.homelab.daniel-pieper.com`) && PathPrefix(`/outpost.goauthentik.io/`)";
+                rule = "Host(`authentik.${inputs.nix-secrets.domain}`) || HostRegexp(`{subdomain:[a-z0-9]+}.homelab.${inputs.nix-secrets.domain}`) && PathPrefix(`/outpost.goauthentik.io/`)";
                 service = "auth";
                 tls.certResolver = "letsencrypt";
               };

@@ -14,13 +14,14 @@ window#waybar {
   padding: 0 5px;
 }
 
-
 #workspaces button {
   border-radius: 10px;
   color: @base03;
   padding: 4px;
   margin: 6px 4px;
-  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  transition:
+    background-color 0.3s ease-in-out,
+    color 0.3s ease-in-out;
 }
 
 #workspaces button:hover {
@@ -89,7 +90,9 @@ window#waybar {
   padding: 0 8px;
   margin: 6px 10px;
   color: @base07;
-  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  transition:
+    background-color 0.3s ease-in-out,
+    color 0.3s ease-in-out;
 }
 
 #custom-notification:hover {
@@ -105,7 +108,9 @@ window#waybar {
   border-radius: 10px;
   padding: 0 8px;
   margin: 6px 10px;
-  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  transition:
+    background-color 0.3s ease-in-out,
+    color 0.3s ease-in-out;
 }
 
 #idle_inhibitor.deactivated {

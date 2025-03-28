@@ -1,8 +1,7 @@
-{
-  lib,
-  config,
-  inputs,
-  ...
+{ lib
+, config
+, inputs
+, ...
 }:
 with lib;
 with lib.flocke;

@@ -1,7 +1,7 @@
-{
-  config,
-  lib,
-  ...
+{ config
+, lib
+, inputs
+, ...
 }:
 with lib;
 let
@@ -27,36 +27,8 @@ in
       openDefaultPorts = true; # 21027/tcp & 22000
       settings = {
         gui.insecureSkipHostcheck = true; # required for traefik
-        devices = {
-          "oneplus8" = {
-            id = "QBX6XQ5-JDZZ2Q7-CRCEVWJ-Y5J57UW-HAJZ5XB-KZJEHWJ-CNHATJM-X47T6QC";
-          };
-          "zorg" = {
-            id = "DJAQ4CF-BHAFAXA-C5SGC6U-V63BVL3-SYOEQT3-OEJZNT5-3PC2MEJ-S3M2BQP";
-          };
-          "tars-old" = {
-            id = "GNK5RN7-2DGYLB6-ELP4TEF-Y54EQNF-RTTJPRH-4OTD4ZH-E7GQJPR-M7GNNQE";
-          };
-          "tars" = {
-            id = "NSBYQ3G-K2ERUPQ-UKLN2QF-Y6I6JCC-ZIWK6HP-U7YJ4NK-WFMSZDW-UHUWQAK";
-          };
-          "hal" = {
-            id = "3ULRQDX-V6MOMOM-PJKWDLI-TLAGBUZ-LJVB4G7-OZHUGD7-R4EAVYI-7VF2TQV";
-          };
-        };
-        folders = {
-          "Documents" = {
-            path = "~/Documents"; # Which folder to add to Syncthing
-            devices = [
-              "oneplus8"
-              "zorg"
-              "tars-old"
-              "tars"
-              "hal"
-            ]; # Which devices to share the folder with
-            # ignorePerms = false; # By default, Syncthing doesn't sync file permissions. This line enables it for this folder.
-          };
-        };
+        devices = inputs.nix-secrets.syncthing.devices;
+        folders = inputs.nix-secrets.syncthing.folders;
       };
     };
 
@@ -74,7 +46,7 @@ in
           routers = {
             syncthing = {
               entryPoints = [ "websecure" ];
-              rule = "Host(`syncthing-${hostname}.homelab.daniel-pieper.com`)";
+              rule = "Host(`syncthing-${hostname}.homelab.${inputs.nix-secrets.domain}`)";
               service = "syncthing";
               tls.certResolver = "letsencrypt";
               middlewares = [ "authentik" ];

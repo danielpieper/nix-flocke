@@ -1,8 +1,8 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
+{ config
+, lib
+, inputs
+, pkgs
+, ...
 }:
 with lib;
 let
@@ -34,9 +34,9 @@ in
         # lfs.enable = true;
         settings = {
           server = {
-            DOMAIN = "forgejo.homelab.daniel-pieper.com";
+            DOMAIN = "forgejo.homelab.${inputs.nix-secrets.domain}";
             # You need to specify this to remove the port from URLs in the web UI.
-            ROOT_URL = "https://forgejo.homelab.daniel-pieper.com/";
+            ROOT_URL = "https://forgejo.homelab.${inputs.nix-secrets.domain}/";
             HTTP_ADDR = "127.0.0.1";
             HTTP_PORT = 3083;
           };
@@ -53,10 +53,10 @@ in
           mailer = {
             ENABLED = true;
             PROTOCOL = "smtps+starttls";
-            SMTP_ADDR = "smtp.eu.mailgun.org";
-            SMTP_PORT = 587;
-            FROM = "homelab@daniel-pieper.com";
-            USER = "postmaster@mail.daniel-pieper.com";
+            SMTP_ADDR = inputs.nix-secrets.mailgun.host;
+            SMTP_PORT = inputs.nix-secrets.mailgun.port;
+            FROM = inputs.nix-secrets.mailgun.fromEmail;
+            USER = inputs.nix-secrets.mailgun.username;
           };
           log = {
             LEVEL = "Warn";
@@ -93,7 +93,7 @@ in
             routers = {
               forgejo = {
                 entryPoints = [ "websecure" ];
-                rule = "Host(`forgejo.homelab.daniel-pieper.com`)";
+                rule = "Host(`forgejo.homelab.${inputs.nix-secrets.domain}`)";
                 service = "forgejo";
                 tls.certResolver = "letsencrypt";
               };
@@ -107,10 +107,10 @@ in
       let
         adminCmd = "${lib.getExe config.services.forgejo.package} admin user";
         pwd = config.sops.secrets.forgejo-admin-password;
-        user = "daniel"; # Note, Forgejo doesn't allow creation of an account named "admin"
+        user = inputs.nix-secrets.forgejo.user; # Note, Forgejo doesn't allow creation of an account named "admin"
       in
       ''
-        ${adminCmd} create --admin --email "git@daniel-pieper.com" --username ${user} --password "$(tr -d '\n' < ${pwd.path})" || true
+        ${adminCmd} create --admin --email "${inputs.nix-secrets.forgejo.email}" --username ${user} --password "$(tr -d '\n' < ${pwd.path})" || true
         ## uncomment this line to change an admin user which was already created
         # ${adminCmd} change-password --username ${user} --password "$(tr -d '\n' < ${pwd.path})" || true
       '';

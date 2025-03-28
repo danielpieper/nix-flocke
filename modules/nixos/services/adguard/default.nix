@@ -1,7 +1,7 @@
-{
-  config,
-  lib,
-  ...
+{ config
+, lib
+, inputs
+, ...
 }:
 with lib;
 let
@@ -94,7 +94,7 @@ in
           routers = {
             adguardhome = {
               entryPoints = [ "websecure" ];
-              rule = "Host(`adguard.homelab.daniel-pieper.com`)";
+              rule = "Host(`adguard.homelab.${inputs.nix-secrets.domain}`)";
               service = "adguardhome";
               tls.certResolver = "letsencrypt";
             };

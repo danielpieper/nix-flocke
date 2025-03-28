@@ -1,7 +1,7 @@
-{
-  config,
-  lib,
-  ...
+{ config
+, lib
+, inputs
+, ...
 }:
 with lib;
 let
@@ -35,7 +35,7 @@ in
           routers = {
             actual = {
               entryPoints = [ "websecure" ];
-              rule = "Host(`actual.homelab.daniel-pieper.com`)";
+              rule = "Host(`actual.homelab.${inputs.nix-secrets.domain}`)";
               service = "actual";
               tls.certResolver = "letsencrypt";
             };

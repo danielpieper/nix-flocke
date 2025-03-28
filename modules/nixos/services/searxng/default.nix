@@ -1,7 +1,7 @@
-{
-  config,
-  lib,
-  ...
+{ config
+, lib
+, inputs
+, ...
 }:
 with lib;
 with lib.flocke;
@@ -51,7 +51,7 @@ in
           routers = {
             searxng = {
               entryPoints = [ "websecure" ];
-              rule = "Host(`search.homelab.daniel-pieper.com`)";
+              rule = "Host(`search.homelab.${inputs.nix-secrets.domain}`)";
               service = "searxng";
               tls.certResolver = "letsencrypt";
             };

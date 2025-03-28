@@ -15,4 +15,3 @@ m = hashlib.sha1()
 homedir = sys.argv[1]
 m.update(homedir.encode('utf-8'))
 print('d.' + base32_to_zbase32(base64.b32encode(m.digest()[0:15]).decode('utf-8')), end='')
-

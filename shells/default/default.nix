@@ -1,7 +1,6 @@
-{
-  pkgs,
-  inputs,
-  ...
+{ pkgs
+, inputs
+, ...
 }:
 pkgs.mkShell {
   NIX_CONFIG = "extra-experimental-features = nix-command flakes";
@@ -11,6 +10,7 @@ pkgs.mkShell {
     inputs.nixos-anywhere.packages.${pkgs.system}.nixos-anywhere
     python312Packages.mkdocs-material
     deploy-rs
+    pre-commit
 
     statix
     deadnix

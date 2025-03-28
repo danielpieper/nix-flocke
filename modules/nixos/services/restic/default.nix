@@ -1,7 +1,7 @@
-{
-  config,
-  lib,
-  ...
+{ config
+, lib
+, inputs
+, ...
 }:
 with lib;
 with lib.flocke;
@@ -24,7 +24,7 @@ in
         enable = true;
         listenAddress = "127.0.0.1:8012";
         prometheus = true;
-        dataDir = "/mnt/restic";
+        dataDir = inputs.nix-secrets.restic.dataDir;
         # TODO: check if restic settings should be enabled
         privateRepos = false;
         appendOnly = false;
@@ -44,7 +44,7 @@ in
             routers = {
               restic = {
                 entryPoints = [ "websecure" ];
-                rule = "Host(`restic.homelab.daniel-pieper.com`)";
+                rule = "Host(`restic.homelab.${inputs.nix-secrets.domain}`)";
                 service = "restic";
                 tls.certResolver = "letsencrypt";
               };
@@ -82,7 +82,7 @@ in
 
     fileSystems = {
       "/mnt/restic" = {
-        device = "//192.168.178.38/restic";
+        device = inputs.nix-secrets.restic.mountTarget;
         fsType = "cifs";
         options = [
           "credentials=${config.sops.secrets.restic_mount.path}"

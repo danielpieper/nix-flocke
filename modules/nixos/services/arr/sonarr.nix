@@ -1,7 +1,7 @@
-{
-  config,
-  lib,
-  ...
+{ config
+, lib
+, inputs
+, ...
 }:
 with lib;
 let
@@ -33,7 +33,7 @@ in
             ];
             routers.sonarr = {
               entryPoints = [ "websecure" ];
-              rule = "Host(`sonarr.homelab.daniel-pieper.com`)";
+              rule = "Host(`sonarr.homelab.${inputs.nix-secrets.domain}`)";
               service = "sonarr";
               tls.certResolver = "letsencrypt";
               middlewares = [ "authentik" ];

@@ -1,8 +1,10 @@
-{
-  inputs,
-  pkgs,
-  ...
+{ inputs
+, pkgs
+, ...
 }:
+let
+  publicKey = "/home/${inputs.nix-secrets.user.name}/.ssh/${inputs.nix-secrets.work.publicKeyFilename}";
+in
 {
   roles = {
     desktop.enable = true;
@@ -13,14 +15,14 @@
   cli = {
     programs = {
       git = {
-        email = "daniel@ventx.de";
-        signingKey = "/home/daniel/.ssh/id_ed25519_ventx.pub";
-        allowedSigners = "/home/daniel/.ssh/id_ed25519_ventx.pub";
+        email = inputs.nix-secrets.work.email;
+        signingKey = publicKey;
+        allowedSigners = publicKey;
       };
       ssh.extraHosts = {
-        "git.ventx.org" = {
-          hostname = "git.ventx.org";
-          identityFile = "/home/daniel/.ssh/id_ed25519_ventx.pub";
+        "${inputs.nix-secrets.work.sshExtraHost}" = {
+          hostname = inputs.nix-secrets.work.sshExtraHost;
+          identityFile = publicKey;
           identitiesOnly = true;
         };
       };
@@ -33,16 +35,16 @@
   browsers.firefox = {
     additionalProfiles = [
       {
-        name = "ventx";
+        name = inputs.nix-secrets.work.company;
         id = 1;
       }
     ];
-    defaultLinkProfile = "ventx";
+    defaultLinkProfile = inputs.nix-secrets.work.company;
   };
 
   flocke.user = {
     enable = true;
-    name = "daniel";
+    name = inputs.nix-secrets.user.name;
   };
 
   home.packages = [

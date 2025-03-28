@@ -1,8 +1,8 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
+{ config
+, lib
+, pkgs
+, inputs
+, ...
 }:
 with lib;
 let
@@ -63,7 +63,7 @@ in
           ];
           routers.premiumizarr = {
             entryPoints = [ "websecure" ];
-            rule = "Host(`premiumizarr.homelab.daniel-pieper.com`)";
+            rule = "Host(`premiumizarr.homelab.${inputs.nix-secrets.domain}`)";
             service = "premiumizarr";
             tls.certResolver = "letsencrypt";
             middlewares = [ "authentik" ];

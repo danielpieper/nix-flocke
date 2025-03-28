@@ -1,9 +1,8 @@
-{
-  inputs,
-  config,
-  lib,
-  pkgs,
-  ...
+{ inputs
+, config
+, lib
+, pkgs
+, ...
 }:
 with lib;
 let
@@ -84,7 +83,7 @@ in
 
         systemd.services = {
           traefik = {
-            environment.CF_API_EMAIL = "cloudflare@daniel-pieper.com";
+            environment.CF_API_EMAIL = inputs.nix-secrets.cloudflare.email;
             serviceConfig.EnvironmentFile = [ config.sops.secrets.cloudflare_api_key.path ];
           };
         };
@@ -110,7 +109,7 @@ in
             staticConfigOptions = {
               metrics.prometheus = { };
               certificatesResolvers.letsencrypt.acme = {
-                email = "cloudflare@daniel-pieper.com";
+                email = inputs.nix-secrets.cloudflare.email;
                 storage = "/var/lib/traefik/cert.json";
                 dnsChallenge = {
                   provider = "cloudflare";
@@ -137,8 +136,8 @@ in
                     certResolver = "letsencrypt";
                     domains = [
                       {
-                        main = "homelab.daniel-pieper.com";
-                        sans = [ "*.homelab.daniel-pieper.com" ];
+                        main = "homelab.${inputs.nix-secrets.domain}";
+                        sans = [ "*.homelab.${inputs.nix-secrets.domain}" ];
                       }
                     ];
                   };
@@ -150,7 +149,7 @@ in
                 middlewares = {
                   authentik = {
                     forwardAuth = {
-                      address = "https://authentik.daniel-pieper.com/outpost.goauthentik.io/auth/traefik";
+                      address = "https://authentik.${inputs.nix-secrets.domain}/outpost.goauthentik.io/auth/traefik";
                       trustForwardHeader = true;
                       authResponseHeaders = [
                         "X-authentik-username"

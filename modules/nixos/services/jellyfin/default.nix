@@ -1,8 +1,8 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
+{ config
+, lib
+, pkgs
+, inputs
+, ...
 }:
 with lib;
 let
@@ -49,7 +49,7 @@ in
             routers = {
               jellyfin = {
                 entryPoints = [ "websecure" ];
-                rule = "Host(`jellyfin.homelab.daniel-pieper.com`)";
+                rule = "Host(`jellyfin.homelab.${inputs.nix-secrets.domain}`)";
                 service = "jellyfin";
                 tls.certResolver = "letsencrypt";
               };

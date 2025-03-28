@@ -1,7 +1,7 @@
-{
-  config,
-  lib,
-  ...
+{ config
+, lib
+, inputs
+, ...
 }:
 with lib;
 with lib.flocke;
@@ -41,10 +41,10 @@ in
 
       cloudflared = {
         tunnels = {
-          "4488062b-53ae-4932-ba43-db4804831f8a" = {
+          "${inputs.nix-secrets.cloudflare.tunnelID}" = {
             ingress = {
-              "tandoor.daniel-pieper.com/media/" = "http://localhost:8100";
-              "tandoor.daniel-pieper.com" = "http://localhost:8099";
+              "tandoor.${inputs.nix-secrets.domain}/media/" = "http://localhost:8100";
+              "tandoor.${inputs.nix-secrets.domain}" = "http://localhost:8099";
             };
           };
         };

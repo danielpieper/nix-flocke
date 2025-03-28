@@ -1,7 +1,7 @@
-{
-  config,
-  lib,
-  ...
+{ config
+, lib
+, inputs
+, ...
 }:
 with lib;
 with lib.flocke;
@@ -10,7 +10,7 @@ let
 in
 {
   options.services.flocke.website = {
-    enable = mkEnableOption "Enable daniel-pieper.com hosting";
+    enable = mkEnableOption "Enable ${inputs.nix-secrets.domain} hosting";
   };
 
   config = mkIf cfg.enable {
@@ -25,14 +25,14 @@ in
           }
         ];
         virtualHosts = {
-          "daniel-pieper.com" = {
+          "${inputs.nix-secrets.domain}" = {
             forceSSL = false;
             enableACME = false;
             serverAliases = [
-              "www.daniel-pieper.com"
+              "www.${inputs.nix-secrets.domain}"
             ];
             locations."/" = {
-              root = "/var/lib/daniel-pieper.com";
+              root = "/var/lib/${inputs.nix-secrets.domain}";
             };
           };
         };
@@ -68,7 +68,7 @@ in
             routers = {
               nginx = {
                 entryPoints = [ "websecure" ];
-                rule = "Host(`daniel-pieper.com`) || Host(`www.daniel-pieper.com`)";
+                rule = "Host(`${inputs.nix-secrets.domain}`) || Host(`www.${inputs.nix-secrets.domain}`)";
                 middlewares = [ "redirect-www-to-root" ];
                 service = "nginx";
                 tls.certResolver = "letsencrypt";
