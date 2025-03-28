@@ -24,6 +24,8 @@ in
       gvfs
       loupe
 
+      libreoffice-fresh
+
       nautilus
       ffmpegthumbnailer # thumbnails
       nautilus-python # enable plugins
