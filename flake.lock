@@ -1289,6 +1289,28 @@
         "type": "github"
       }
     },
+    "nix-secrets": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1743102275,
+        "narHash": "sha256-sOcDVaXjfnVs1GMgXnhnqCMVAtS70duA/gI1bRv7gWc=",
+        "ref": "main",
+        "rev": "162c17a007b72729c0275982ee2698927c9b4005",
+        "shallow": true,
+        "type": "git",
+        "url": "ssh://git@github.com/danielpieper/nix-secrets.git"
+      },
+      "original": {
+        "ref": "main",
+        "shallow": true,
+        "type": "git",
+        "url": "ssh://git@github.com/danielpieper/nix-secrets.git"
+      }
+    },
     "nix-topology": {
       "inputs": {
         "devshell": "devshell",
@@ -1836,6 +1858,7 @@
         "lanzaboote": "lanzaboote",
         "lazyvim": "lazyvim",
         "nix-index-database": "nix-index-database",
+        "nix-secrets": "nix-secrets",
         "nix-topology": "nix-topology",
         "nixgl": "nixgl",
         "nixos-anywhere": "nixos-anywhere",

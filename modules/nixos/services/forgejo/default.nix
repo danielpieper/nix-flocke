@@ -116,14 +116,8 @@ in
       '';
 
     sops.secrets = {
-      forgejo-mailer-password = {
-        sopsFile = ../secrets.yaml;
-        owner = config.services.forgejo.user;
-      };
-      forgejo-admin-password = {
-        sopsFile = ../secrets.yaml;
-        owner = config.services.forgejo.user;
-      };
+      forgejo-mailer-password.owner = config.services.forgejo.user;
+      forgejo-admin-password.owner = config.services.forgejo.user;
     };
   };
 }

@@ -25,7 +25,6 @@ in
       };
       config = {
         sops.secrets.premiumizarr-config = {
-          sopsFile = ../secrets.yaml;
           path = "/var/lib/premiumizarr/config.yaml";
           owner = "premiumizarr";
         };

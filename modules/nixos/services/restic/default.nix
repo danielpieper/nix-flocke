@@ -71,12 +71,10 @@ in
 
     sops.secrets = {
       restic_mount = {
-        sopsFile = ../secrets.yaml;
         owner = config.users.users.restic.name;
         group = config.users.users.restic.group;
       };
       restic_user_password = {
-        sopsFile = ../secrets.yaml;
         owner = config.users.users.prometheus.name;
         group = config.users.users.prometheus.group;
       };

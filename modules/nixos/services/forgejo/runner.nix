@@ -39,11 +39,6 @@ in
 
     services.flocke.virtualisation.podman.enable = true;
 
-    sops.secrets = {
-      forgejo-runner-token = {
-        sopsFile = ../secrets.yaml;
-        owner = config.services.forgejo.user;
-      };
-    };
+    sops.secrets.forgejo-runner-token.owner = config.services.forgejo.user;
   };
 }

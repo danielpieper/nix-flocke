@@ -31,6 +31,10 @@
       url = "github:mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-secrets = {
+      url = "git+ssh://git@github.com/danielpieper/nix-secrets.git?ref=main&shallow=1";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     impermanence.url = "github:nix-community/impermanence";
     lanzaboote.url = "github:nix-community/lanzaboote";

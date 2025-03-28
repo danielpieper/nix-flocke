@@ -21,19 +21,8 @@ in
 
   config = mkIf cfg.enable {
     sops.secrets = {
-      #   home_assistant_token = {
-      #     sopsFile = ../secrets.yaml;
-      #   };
-      #
-      grafana_oauth2_client_id = {
-        sopsFile = ../secrets.yaml;
-        owner = "grafana";
-      };
-
-      grafana_oauth2_client_secret = {
-        sopsFile = ../secrets.yaml;
-        owner = "grafana";
-      };
+      grafana_oauth2_client_id.owner = "grafana";
+      grafana_oauth2_client_secret.owner = "grafana";
     };
 
     services = {

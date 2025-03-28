@@ -16,7 +16,6 @@ in
   config = mkIf cfg.enable {
 
     sops.secrets.teslamate = {
-      sopsFile = ../secrets.yaml;
       owner = config.users.users.teslamate.name;
       group = config.users.users.teslamate.group;
     };

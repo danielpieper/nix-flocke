@@ -14,9 +14,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    sops.secrets.authentik_env = {
-      sopsFile = ../secrets.yaml;
-    };
+    sops.secrets.authentik_env = { };
 
     services = {
       authentik = {

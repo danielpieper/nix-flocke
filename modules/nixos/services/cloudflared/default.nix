@@ -16,12 +16,8 @@ in
 
   config = mkIf cfg.enable {
     sops.secrets = {
-      cloudflared = {
-        sopsFile = ../secrets.yaml;
-      };
-      cloudflared-cert = {
-        sopsFile = ../secrets.yaml;
-      };
+      cloudflared = { };
+      cloudflared-cert = { };
     };
 
     # https://github.com/quic-go/quic-go/wiki/UDP-Buffer-Sizes

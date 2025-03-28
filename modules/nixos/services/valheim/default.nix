@@ -120,7 +120,6 @@ in
       };
 
     sops.secrets.valheim = {
-      sopsFile = ../secrets.yaml;
       owner = config.users.users.valheim.name;
       group = config.users.users.valheim.group;
     };

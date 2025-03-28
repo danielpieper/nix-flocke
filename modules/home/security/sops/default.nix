@@ -20,6 +20,8 @@ in
 
   config = mkIf cfg.enable {
     sops = {
+      defaultSopsFile = "${inputs.nix-secrets}/sops/home.yaml";
+      validateSopsFiles = false;
       age = {
         generateKey = true;
         keyFile = "/home/${config.flocke.user.name}/.config/sops/age/keys.txt";

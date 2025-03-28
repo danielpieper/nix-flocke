@@ -33,7 +33,6 @@ in
     };
 
     sops.secrets.searx = {
-      sopsFile = ../secrets.yaml;
       owner = config.users.users.searx.name;
       group = config.users.users.searx.group;
     };

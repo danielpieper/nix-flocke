@@ -90,11 +90,9 @@ in
     sops.secrets = {
       neovim-init = {
         path = "${config.xdg.configHome}/nvim/init.lua";
-        sopsFile = ../../../secrets.yaml;
       };
       intelephenseLicenceKey = {
         path = "${config.xdg.configHome}/intelephense/license.txt";
-        sopsFile = ../../../secrets.yaml;
       };
     };
 

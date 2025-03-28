@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  inputs,
   ...
 }:
 with lib;
@@ -25,24 +26,27 @@ in
       group = "users";
       hashedPasswordFile = config.sops.secrets.user-password.path;
       # TODO: set in modules
-      extraGroups = [
-        "wheel"
-        "audio"
-        "sound"
-        "video"
-        "input"
-        "tty"
-      ] ++ ifTheyExist [
-        "networkmanager"
-        "podman"
-        "git"
-        "libvirtd"
-        "kvm"
-      ] ++ cfg.extraGroups;
+      extraGroups =
+        [
+          "wheel"
+          "audio"
+          "sound"
+          "video"
+          "input"
+          "tty"
+        ]
+        ++ ifTheyExist [
+          "networkmanager"
+          "podman"
+          "git"
+          "libvirtd"
+          "kvm"
+        ]
+        ++ cfg.extraGroups;
     } // cfg.extraOptions;
 
     sops.secrets.user-password = {
-      sopsFile = ../secrets.yaml;
+      sopsFile = "${inputs.nix-secrets}/sops/nixos.yaml";
       neededForUsers = true;
     };
 

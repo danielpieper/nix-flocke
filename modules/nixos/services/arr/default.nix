@@ -91,7 +91,7 @@ in
 
         sops = {
           age.sshKeyPaths = [ "/persist/etc/ssh/ssh_host_ed25519_key" ];
-          secrets.cloudflare_api_key.sopsFile = ../secrets.yaml;
+          secrets.cloudflare_api_key = { };
         };
 
         services = {

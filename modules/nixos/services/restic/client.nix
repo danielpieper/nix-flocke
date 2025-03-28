@@ -112,12 +112,8 @@ in
     };
 
     sops.secrets = {
-      restic_repository_password = {
-        sopsFile = ../secrets.yaml;
-      };
-      restic_environment = {
-        sopsFile = ../secrets.yaml;
-      };
+      restic_repository_password = { };
+      restic_environment = { };
     };
 
   };

@@ -29,7 +29,7 @@ in
       };
     };
 
-    sops.secrets.cloudflare_api_key.sopsFile = ../secrets.yaml;
+    sops.secrets.cloudflare_api_key = { };
 
     services = {
       tailscale.permitCertUid = "traefik";

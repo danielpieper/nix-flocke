@@ -14,9 +14,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    sops.secrets.tandoor = {
-      sopsFile = ../secrets.yaml;
-    };
+    sops.secrets.tandoor = { };
 
     systemd.services.tandoor-recipes = {
       serviceConfig = {
