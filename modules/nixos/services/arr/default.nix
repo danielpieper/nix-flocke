@@ -90,6 +90,8 @@ in
         };
 
         sops = {
+          defaultSopsFile = "${inputs.nix-secrets}/sops/services.yaml";
+          validateSopsFiles = false;
           age.sshKeyPaths = [ "/persist/etc/ssh/ssh_host_ed25519_key" ];
           secrets.cloudflare_api_key = { };
         };
