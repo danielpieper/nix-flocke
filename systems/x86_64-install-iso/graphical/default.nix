@@ -1,4 +1,7 @@
-{ lib, ... }:
+{ lib
+, inputs
+, ...
+}:
 {
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -29,7 +32,7 @@
 
     # TODO: reuse existing openss config
     nixos.openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINQe6KSxEplb0f4Aw/UO0x5CLfDp9gvtJ6Bky/x0nGXB 1password"
+      inputs.nix-secrets.user.pubKey
     ];
   };
 

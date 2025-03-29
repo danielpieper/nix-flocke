@@ -78,7 +78,7 @@ in
             # https://github.com/tailscale/tailscale/issues/10319#issuecomment-1886730614
             checkReversePath = "loose";
           };
-          nameservers = [ "8.8.8.8" ];
+          nameservers = inputs.nix-secrets.networking.fallbackNameservers;
         };
 
         systemd.services = {

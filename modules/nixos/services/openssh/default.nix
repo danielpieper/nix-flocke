@@ -1,5 +1,6 @@
 { config
 , lib
+, inputs
 , ...
 }:
 with lib;
@@ -16,7 +17,7 @@ in
   config = mkIf cfg.enable {
     services.openssh = {
       enable = true;
-      ports = [ 22 ];
+      ports = [ inputs.nix-secrets.networking.ports.tcp.ssh ];
 
       settings = {
         PasswordAuthentication = false;
@@ -28,7 +29,7 @@ in
 
     users.users = {
       ${config.user.name}.openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINQe6KSxEplb0f4Aw/UO0x5CLfDp9gvtJ6Bky/x0nGXB 1password"
+        inputs.nix-secrets.user.pubKey
       ];
     };
 

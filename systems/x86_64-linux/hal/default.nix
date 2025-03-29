@@ -52,20 +52,5 @@
     resumeDevice = "/dev/disk/by-label/nixos";
   };
 
-  # teslamate is unable to connect to teslamotors.com
-  # if the tailscale mullvad exit node is enabled.
-  #
-  # sudo tailscale exit-node suggest
-  # sudo tailscale set --exit-node=<EXIT_NODE> --exit-node-allow-lan-access=true
-  # nslookup teslamotors.com
-  # sudo ip route add <IP_ADDRESS> via <ROUTER_IP_ADDRESS>
-  # networking.interfaces.eno1.ipv4.routes = [
-  #   {
-  #     address = "209.11.133.106";
-  #     prefixLength = 24;
-  #     via = "192.168.178.1";
-  #   }
-  # ];
-
   system.stateVersion = "23.11";
 }

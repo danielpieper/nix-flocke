@@ -1,6 +1,7 @@
 { pkgs
 , config
 , lib
+, inputs
 , ...
 }:
 with lib;
@@ -24,7 +25,7 @@ in
       enable = true;
       enableSshSupport = true;
       enableExtraSocket = true;
-      sshKeys = [ "D528D50F4E9F031AACB1F7A9833E49C848D6C90" ];
+      sshKeys = [ inputs.nix-secrets.user.gpgKeyID ];
       pinentryPackage = pkgs.pinentry-gnome3;
     };
 
@@ -37,7 +38,7 @@ in
 
     # systemd.user.sockets.gpg-agent = {
     #   listenStreams = let
-    #     user = "daniel";
+    #     user = inputs.nix-secrets.user.name;
     #     socketDir =
     #       pkgs.runCommand "gnupg-socketdir" {
     #         nativeBuildInputs = [pkgs.python3];
