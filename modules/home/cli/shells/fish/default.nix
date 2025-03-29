@@ -1,9 +1,10 @@
-{ pkgs
-, lib
-, config
-, host
-, inputs
-, ...
+{
+  pkgs,
+  lib,
+  config,
+  host,
+  inputs,
+  ...
 }:
 with lib;
 with lib.flocke;

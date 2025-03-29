@@ -1,8 +1,8 @@
-{ inputs
-, lib
-, buildGoModule
-, buildNpmPackage
-,
+{
+  inputs,
+  lib,
+  buildGoModule,
+  buildNpmPackage,
 }:
 
 let

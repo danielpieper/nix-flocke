@@ -1,7 +1,7 @@
-{ stdenv
-, fetchFromGitHub
-, go_1_22
-,
+{
+  stdenv,
+  fetchFromGitHub,
+  go_1_22,
 }:
 
 stdenv.mkDerivation {

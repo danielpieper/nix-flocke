@@ -1,8 +1,13 @@
-{ pkgs
-, inputs
-, ...
+{
+  pkgs,
+  inputs,
+  system,
+  ...
 }:
 pkgs.mkShell {
+  inherit (inputs.self.checks.${system}.pre-commit) shellHook;
+  buildInputs = inputs.self.checks.${system}.pre-commit.enabledPackages;
+
   NIX_CONFIG = "extra-experimental-features = nix-command flakes";
 
   packages = with pkgs; [
@@ -10,10 +15,7 @@ pkgs.mkShell {
     inputs.nixos-anywhere.packages.${pkgs.system}.nixos-anywhere
     python312Packages.mkdocs-material
     deploy-rs
-    pre-commit
 
-    statix
-    deadnix
     alejandra
     home-manager
     git

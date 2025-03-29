@@ -1,8 +1,9 @@
-{ config
-, lib
-, pkgs
-, inputs
-, ...
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
 }:
 with lib;
 with lib.flocke;
@@ -244,13 +245,12 @@ in
                 allowUiUpdates = true;
                 updateIntervalSeconds = 86400;
                 options.path =
-                  pkgs.fetchFromGitHub
-                    {
-                      owner = "rfmoz";
-                      repo = "grafana-dashboards";
-                      rev = "master";
-                      sha256 = "sha256-ZkVijMRCd87sLckqezPh1wHfuiibExVhatA1AqRiKHc=";
-                    }
+                  pkgs.fetchFromGitHub {
+                    owner = "rfmoz";
+                    repo = "grafana-dashboards";
+                    rev = "master";
+                    sha256 = "sha256-ZkVijMRCd87sLckqezPh1wHfuiibExVhatA1AqRiKHc=";
+                  }
                   + "/prometheus/node-exporter-full.json";
               }
             ];

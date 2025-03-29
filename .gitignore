@@ -2,3 +2,4 @@
 .env
 result
 node_modules
+/.pre-commit-config.yaml

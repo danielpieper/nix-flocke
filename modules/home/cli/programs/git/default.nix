@@ -1,22 +1,21 @@
-{ config
-, pkgs
-, lib
-, inputs
-, ...
+{
+  config,
+  pkgs,
+  lib,
+  inputs,
+  ...
 }:
 with lib;
 with lib.flocke;
 let
   cfg = config.cli.programs.git;
 
-  rewriteURL = lib.mapAttrs'
-    (key: value: {
-      name = "url.${key}";
-      value = {
-        insteadOf = value;
-      };
-    })
-    cfg.urlRewrites;
+  rewriteURL = lib.mapAttrs' (key: value: {
+    name = "url.${key}";
+    value = {
+      insteadOf = value;
+    };
+  }) cfg.urlRewrites;
 in
 {
   options.cli.programs.git = with types; {

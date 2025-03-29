@@ -1,6 +1,7 @@
-{ lib
-, inputs
-, ...
+{
+  lib,
+  inputs,
+  ...
 }:
 {
   boot.loader.systemd-boot.enable = true;

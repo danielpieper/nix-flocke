@@ -119,6 +119,11 @@
       url = "git+ssh://forgejo@forgejo.homelab.daniel-pieper.com/daniel/premiumizearr-nova.git?ref=fixes";
       flake = false;
     };
+
+    pre-commit-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -171,12 +176,6 @@
       ];
 
       deploy = lib.mkDeploy { inherit (inputs) self; };
-
-      checks = builtins.mapAttrs
-        (
-          system: deploy-lib: deploy-lib.deployChecks inputs.self.deploy
-        )
-        inputs.deploy-rs.lib;
 
       topology =
         with inputs;
