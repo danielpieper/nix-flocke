@@ -56,7 +56,7 @@ in
             PROTOCOL = "smtps+starttls";
             SMTP_ADDR = inputs.nix-secrets.mailgun.host;
             SMTP_PORT = inputs.nix-secrets.mailgun.port;
-            FROM = inputs.nix-secrets.mailgun.fromEmail;
+            FROM = inputs.nix-secrets.mailgun.from;
             USER = inputs.nix-secrets.mailgun.username;
           };
           log = {
@@ -108,7 +108,7 @@ in
       let
         adminCmd = "${lib.getExe config.services.forgejo.package} admin user";
         pwd = config.sops.secrets.forgejo-admin-password;
-        user = inputs.nix-secrets.forgejo.user; # Note, Forgejo doesn't allow creation of an account named "admin"
+        inherit (inputs.nix-secrets.forgejo) user; # Note, Forgejo doesn't allow creation of an account named "admin"
       in
       ''
         ${adminCmd} create --admin --email "${inputs.nix-secrets.forgejo.email}" --username ${user} --password "$(tr -d '\n' < ${pwd.path})" || true

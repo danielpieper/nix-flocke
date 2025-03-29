@@ -79,7 +79,7 @@ in
             tailscale.tailscale = { };
             letsencrypt = {
               acme = {
-                email = inputs.nix-secrets.cloudflare.email;
+                inherit (inputs.nix-secrets.cloudflare) email;
                 storage = "/var/lib/traefik/cert.json";
                 dnsChallenge = {
                   provider = "cloudflare";

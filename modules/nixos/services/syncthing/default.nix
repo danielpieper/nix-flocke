@@ -8,7 +8,7 @@ with lib;
 let
   cfg = config.services.flocke.syncthing;
   username = config.user.name;
-  group = config.users.users.${username}.group;
+  inherit (config.users.users.${username}) group;
   homedir = "/home/${username}";
   hostname = config.networking.hostName;
 in
@@ -21,15 +21,14 @@ in
     services.syncthing = {
       enable = true;
       user = username;
-      group = group;
+      inherit group;
       dataDir = homedir;
       overrideDevices = true; # overrides any devices added or deleted through the WebUI
       overrideFolders = true; # overrides any folders added or deleted through the WebUI
       openDefaultPorts = true; # 21027/tcp & 22000
       settings = {
+        inherit (inputs.nix-secrets.syncthing) devices folders;
         gui.insecureSkipHostcheck = true; # required for traefik
-        devices = inputs.nix-secrets.syncthing.devices;
-        folders = inputs.nix-secrets.syncthing.folders;
       };
     };
 

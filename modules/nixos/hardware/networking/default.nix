@@ -32,7 +32,7 @@ in
         ];
       };
       networkmanager.enable = true;
-      nameservers = inputs.nix-secrets.networking.nameservers;
+      inherit (inputs.nix-secrets.networking) nameservers;
     };
 
     services.resolved = {

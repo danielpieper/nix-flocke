@@ -282,7 +282,7 @@ in
                 orgId = 1;
                 receivers = [
                   {
-                    uid = inputs.nix-secrets.gotify.uid;
+                    inherit (inputs.nix-secrets.gotify) uid;
                     type = "webhook";
                     settings = {
                       # TODO: provision gotify token and add here

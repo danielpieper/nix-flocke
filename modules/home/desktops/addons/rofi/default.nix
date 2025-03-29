@@ -19,7 +19,7 @@ in
   config = mkIf cfg.enable {
     programs.rofi = {
       enable = true;
-      package = cfg.package;
+      inherit (cfg) package;
       terminal = "${pkgs.foot}/bin/foot";
       extraConfig = {
         modi = "run,drun,window";

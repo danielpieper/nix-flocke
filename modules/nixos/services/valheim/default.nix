@@ -90,7 +90,7 @@ in
             -savedir ${cfg.dataDir} \
             -name ${cfg.serverName} \
             -port ${toString cfg.port} \
-            ${lib.optionalString (cfg.world != "") "-world " + lib.escapeShellArg (cfg.world)} \
+            ${lib.optionalString (cfg.world != "") "-world " + lib.escapeShellArg cfg.world} \
             -password $SERVER_PASS \
             -public ${if cfg.public then "1" else "0"} \
             -backups ${if cfg.backups then "1" else "0"}
@@ -121,7 +121,7 @@ in
 
     sops.secrets.valheim = {
       owner = config.users.users.valheim.name;
-      group = config.users.users.valheim.group;
+      inherit (config.users.users.valheim) group;
     };
 
     users.users.valheim = {

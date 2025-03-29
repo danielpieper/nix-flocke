@@ -40,6 +40,8 @@ in
         marksman
         sqlfluff
         vtsls
+        hadolint
+
         # Golang:
         go-tools
         gotools
@@ -54,6 +56,8 @@ in
         # Nix
         nil
         nixfmt-rfc-style
+        deadnix
+        statix
 
         # Terraform
         terraform

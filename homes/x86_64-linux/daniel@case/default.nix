@@ -16,7 +16,7 @@ in
   cli = {
     programs = {
       git = {
-        email = inputs.nix-secrets.work.email;
+        inherit (inputs.nix-secrets.work) email;
         signingKey = publicKey;
         allowedSigners = publicKey;
       };
@@ -45,7 +45,7 @@ in
 
   flocke.user = {
     enable = true;
-    name = inputs.nix-secrets.user.name;
+    inherit (inputs.nix-secrets.user) name;
   };
 
   home.packages = [

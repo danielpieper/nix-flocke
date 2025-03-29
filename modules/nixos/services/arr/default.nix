@@ -110,7 +110,7 @@ in
             staticConfigOptions = {
               metrics.prometheus = { };
               certificatesResolvers.letsencrypt.acme = {
-                email = inputs.nix-secrets.cloudflare.email;
+                inherit (inputs.nix-secrets.cloudflare) email;
                 storage = "/var/lib/traefik/cert.json";
                 dnsChallenge = {
                   provider = "cloudflare";

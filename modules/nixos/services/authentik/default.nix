@@ -23,12 +23,14 @@ in
         environmentFile = config.sops.secrets.authentik_env.path;
         settings = {
           email = {
-            host = inputs.nix-secrets.mailgun.host;
-            port = inputs.nix-secrets.mailgun.port;
-            username = inputs.nix-secrets.mailgun.username;
+            inherit (inputs.nix-secrets.mailgun)
+              host
+              port
+              username
+              from
+              ;
             use_tls = true;
             use_ssl = false;
-            from = inputs.nix-secrets.mailgun.fromEmail;
           };
           disable_startup_analytics = true;
           avatars = "initials";

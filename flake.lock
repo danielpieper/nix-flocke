@@ -1173,11 +1173,11 @@
     "lazyvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1742897779,
-        "narHash": "sha256-GkASfgjDyqn0XMM0bwua8j7xej4PPj10P1+DTWa2bHk=",
+        "lastModified": 1743240645,
+        "narHash": "sha256-rNRKDsT1m1EAa1GUOFpc79A+iofSNgxkfGItiD2XEbs=",
         "ref": "refs/heads/main",
-        "rev": "eeca58afe9f4977f3485a1139e8b60f7a7f269d6",
-        "revCount": 182,
+        "rev": "5bff5bdf2142382a9688d30259c10aff2b9da50f",
+        "revCount": 183,
         "type": "git",
         "url": "ssh://forgejo@forgejo.homelab.daniel-pieper.com/daniel/nvim.git"
       },
@@ -1333,10 +1333,10 @@
         ]
       },
       "locked": {
-        "lastModified": 1743231873,
-        "narHash": "sha256-WgFXJXRqrY2ldOUJChc/ZXROI+hRwk9EyNZZ7NpXEVQ=",
+        "lastModified": 1743241210,
+        "narHash": "sha256-uHMzvMoB4fqIGDIacqL+rq9ADVkm+PPr1SeeYx8s488=",
         "ref": "main",
-        "rev": "932129c666577622a09049558f9374485d44fd8f",
+        "rev": "351da6647e0a16ec6962d221fee2e6ca1f93ed45",
         "shallow": true,
         "type": "git",
         "url": "ssh://git@github.com/danielpieper/nix-secrets.git"

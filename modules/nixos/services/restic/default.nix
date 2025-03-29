@@ -25,7 +25,7 @@ in
         enable = true;
         listenAddress = "127.0.0.1:8012";
         prometheus = true;
-        dataDir = inputs.nix-secrets.restic.dataDir;
+        inherit (inputs.nix-secrets.restic) dataDir;
         # TODO: check if restic settings should be enabled
         privateRepos = false;
         appendOnly = false;
@@ -73,11 +73,11 @@ in
     sops.secrets = {
       restic_mount = {
         owner = config.users.users.restic.name;
-        group = config.users.users.restic.group;
+        inherit (config.users.users.restic) group;
       };
       restic_user_password = {
         owner = config.users.users.prometheus.name;
-        group = config.users.users.prometheus.group;
+        inherit (config.users.users.prometheus) group;
       };
     };
 

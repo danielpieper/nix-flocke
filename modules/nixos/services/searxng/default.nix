@@ -35,7 +35,7 @@ in
 
     sops.secrets.searx = {
       owner = config.users.users.searx.name;
-      group = config.users.users.searx.group;
+      inherit (config.users.users.searx) group;
     };
 
     services.traefik = {
