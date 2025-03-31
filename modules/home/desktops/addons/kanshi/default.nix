@@ -40,8 +40,10 @@ in
             {
               criteria = "Samsung Electric Company U28E590 HTPH403281";
               position = "1920,0";
-              mode = "3840x2160@60Hz";
-              scale = 1.5;
+              mode = "2560x1440@59.95Hz";
+              scale = 1.0;
+              # mode = "3840x2160@60Hz";
+              # scale = 1.5;
             }
           ];
         }
@@ -55,8 +57,10 @@ in
             {
               criteria = "Samsung Electric Company U28E590 HTPH403281";
               position = "1920,0";
-              mode = "3840x2160@60Hz";
-              scale = 1.5;
+              mode = "2560x1440@59.95Hz";
+              scale = 1.0;
+              # mode = "3840x2160@60Hz";
+              # scale = 1.5;
             }
             {
               criteria = "LG Electronics 27GL850 007NTYT59834";
