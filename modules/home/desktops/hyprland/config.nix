@@ -62,6 +62,10 @@ in
           rounding = 5;
         };
 
+        dwindle = {
+          preserve_split = true;
+        };
+
         misc =
           let
             FULLSCREEN_ONLY = 2;
