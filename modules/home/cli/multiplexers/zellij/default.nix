@@ -50,6 +50,8 @@ in
       pkgs.tmate
     ];
     programs.zoxide.enable = true;
+
+    # https://haseebmajid.dev/posts/2024-07-26-how-i-configured-zellij-status-bar/
     programs.zellij = {
       enable = true;
       enableFishIntegration = lib.mkForce false;
@@ -63,48 +65,111 @@ in
         default_shell "fish"
         copy_on_select true
         session_serialization false
+        show_startup_tips false
 
         plugins {
-            status-bar { path "status-bar"; }
-            session-manager { path "session-manager"; }
+          session-manager { path "session-manager"; }
         }
 
         keybinds {
-            normal clear-defaults=true {
-                // tmux
-                bind "Ctrl b" { SwitchToMode "Tmux"; }
-                // general stuff
-                bind "Alt Left" { NewPane "Left"; }
-                bind "Alt Right" { NewPane "Right"; }
-                bind "Alt Up" { NewPane "Up"; }
-                bind "Alt Down" { NewPane "Up"; }
-                bind "Alt x" { CloseFocus; SwitchToMode "Normal"; }
-                bind "Alt w" { ToggleFloatingPanes;}
-                bind "Alt t" { NewTab;}
-                bind "Alt h" { MoveFocusOrTab "Left"; }
-                bind "Alt l" { MoveFocusOrTab "Right"; }
-                bind "Alt j" { MoveFocus "Down"; }
-                bind "Alt k" { MoveFocus "Up"; }
-                bind "Alt =" { Resize "Increase"; }
-                bind "Alt -" { Resize "Decrease"; }
-                bind "Alt [" { PreviousSwapLayout; }
-                bind "Alt ]" { NextSwapLayout; }
-                bind "Alt i" { MoveTab "Left"; }
-                bind "Alt o" { MoveTab "Right"; }
-            }
+          normal clear-defaults=true {
+            // tmux
+            bind "Ctrl b" { SwitchToMode "Tmux"; }
+            // general stuff
+            bind "Alt Left" { NewPane "Left"; }
+            bind "Alt Right" { NewPane "Right"; }
+            bind "Alt Up" { NewPane "Up"; }
+            bind "Alt Down" { NewPane "Up"; }
+            bind "Alt x" { CloseFocus; SwitchToMode "Normal"; }
+            bind "Alt w" { ToggleFloatingPanes;}
+            bind "Alt t" { NewTab;}
+            bind "Alt h" { MoveFocusOrTab "Left"; }
+            bind "Alt l" { MoveFocusOrTab "Right"; }
+            bind "Alt j" { MoveFocus "Down"; }
+            bind "Alt k" { MoveFocus "Up"; }
+            bind "Alt =" { Resize "Increase"; }
+            bind "Alt -" { Resize "Decrease"; }
+            bind "Alt [" { PreviousSwapLayout; }
+            bind "Alt ]" { NextSwapLayout; }
+            bind "Alt i" { MoveTab "Left"; }
+            bind "Alt o" { MoveTab "Right"; }
+          }
 
-            tmux clear-defaults=true {
-                bind "Ctrl f" { Write 2; SwitchToMode "Normal"; }
-                bind "Esc" { SwitchToMode "Normal"; }
-                bind "g" { SwitchToMode "Locked"; }
-                bind "p" { SwitchToMode "Pane"; }
-                bind "t" { SwitchToMode "Tab"; }
-                bind "n" { SwitchToMode "Resize"; }
-                bind "h" { SwitchToMode "Move"; }
-                bind "s" { SwitchToMode "Scroll"; }
-                bind "o" { SwitchToMode "Session"; }
-                bind "q" { Quit; }
+          tmux clear-defaults=true {
+            bind "Ctrl f" { Write 2; SwitchToMode "Normal"; }
+            bind "Esc" { SwitchToMode "Normal"; }
+            bind "g" { SwitchToMode "Locked"; }
+            bind "p" { SwitchToMode "Pane"; }
+            bind "t" { SwitchToMode "Tab"; }
+            bind "n" { SwitchToMode "Resize"; }
+            bind "h" { SwitchToMode "Move"; }
+            bind "s" { SwitchToMode "Scroll"; }
+            bind "o" { SwitchToMode "Session"; }
+            bind "q" { Quit; }
+            bind "?" {
+              SwitchToMode "Normal";
+              LaunchOrFocusPlugin "https://github.com/karimould/zellij-forgot/releases/download/0.4.2/zellij_forgot.wasm" {
+                "lock"                  "ctrl + b + g"
+                "unlock"                "ctrl + g"
+                "new pane left"         "alt + left"
+                "new pane right"        "alt + right"
+                "new pane up"           "alt + up"
+                "new pane down"         "alt + down"
+                "close tab"             "alt + x"
+                "toggle floating pane"  "alt + w"
+                "new tab"               "alt + t"
+                "move left"             "alt + h"
+                "move right"            "alt + l"
+                "move up"               "alt + j"
+                "move down"             "alt + k"
+                "resize increase"       "alt + ="
+                "resize decrease"       "alt + -"
+                "next layout"           "alt + ]"
+                "previous layout"       "alt + ["
+                "move tab left"         "alt + i"
+                "move tab right"        "alt + o"
+                "change focus of pane"  "ctrl + b + p + arrow key"
+                "close pane"            "ctrl + b + p + x"
+                "rename pane"           "ctrl + b + p + c"
+                "toggle fullscreen"     "ctrl + b + p + f"
+                "toggle floating pane"  "ctrl + b + p + w"
+                "toggle embed pane"     "ctrl + b + p + e"
+                "choose right pane"     "ctrl + b + p + l"
+                "choose left pane"      "ctrl + b + p + r"
+                "choose upper pane"     "ctrl + b + p + k"
+                "choose lower pane"     "ctrl + b + p + j"
+                "new tab"               "ctrl + b + t + n"
+                "close tab"             "ctrl + b + t + x"
+                "change focus of tab"   "ctrl + b + t + arrow key"
+                "rename tab"            "ctrl + b + t + r"
+                "sync tab"              "ctrl + b + t + s"
+                "brake pane to new tab" "ctrl + b + t + b"
+                "brake pane left"       "ctrl + b + t + ["
+                "brake pane right"      "ctrl + b + t + ]"
+                "toggle tab"            "ctrl + b + t + tab"
+                "increase pane size"    "ctrl + b + n + +"
+                "decrease pane size"    "ctrl + b + n + -"
+                "increase pane top"     "ctrl + b + n + k"
+                "increase pane right"   "ctrl + b + n + l"
+                "increase pane bottom"  "ctrl + b + n + j"
+                "increase pane left"    "ctrl + b + n + h"
+                "decrease pane top"     "ctrl + b + n + K"
+                "decrease pane right"   "ctrl + b + n + L"
+                "decrease pane bottom"  "ctrl + b + n + J"
+                "decrease pane left"    "ctrl + b + n + H"
+                "move pane to top"      "ctrl + b + h + k"
+                "move pane to right"    "ctrl + b + h + l"
+                "move pane to bottom"   "ctrl + b + h + j"
+                "move pane to left"     "ctrl + b + h + h"
+                "search"                "ctrl + b + s + s"
+                "go into edit mode"     "ctrl + b + s + e"
+                "detach session"        "ctrl + b + o + w"
+                "open session manager"  "ctrl + b + o + w"
+                "quit zellij"           "ctrl + b + q"
+                floating true
+              }
             }
+          }
         }
       '';
       "zellij/layouts/default.kdl".text = ''
@@ -204,8 +269,8 @@ in
                 pane size=1 borderless=true {
                     plugin location="file://${pkgs.zjstatus}/bin/zjstatus.wasm" {
                         format_left   "{mode}#[bg=#${colors.base00}] {tabs}"
-                        format_center ""
-                        format_right  "#[bg=#${colors.base00},fg=#${colors.base0D}]#[bg=#${colors.base0D},fg=#${colors.base01},bold] #[bg=#${colors.base02},fg=#${colors.base05},bold] {session} #[bg=#${colors.base03},fg=#${colors.base05},bold]"
+                        format_center "{notifications}"
+                        format_right  "#[bg=#${colors.base00},fg=#${colors.base0D}]#[bg=#${colors.base0D},fg=#${colors.base01},bold] #[bg=#${colors.base02},fg=#${colors.base05},bold] {swap_layout} {session} #[bg=#${colors.base03},fg=#${colors.base05},bold]"
                         format_space  ""
                         format_hide_on_overlength "true"
                         format_precedence "crl"
@@ -259,9 +324,6 @@ in
                     }
                 }
                 children
-                pane size=2 borderless=true {
-                    plugin location="zellij:status-bar"
-                }
             }
         }
       '';
