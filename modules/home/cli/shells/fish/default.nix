@@ -121,7 +121,7 @@ in
         dig = "dog";
         cat = "bat";
         curl = "curlie";
-        rm = "trash";
+        rm = "gomi";
         ping = "gping";
         ls = "eza";
         sl = "eza";

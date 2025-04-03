@@ -40,9 +40,8 @@ in
       silver-searcher
       procs
       tokei
-      trash-cli
+      gomi
       tailspin
-      gtrash
       ripgrep
       sd
       xcp
