@@ -4,13 +4,16 @@
   host,
   pkgs,
   config,
+  system,
   ...
 }:
 with lib;
 let
-  cfg = config.browsers.firefox;
+  cfg = config.browsers.zen;
+  zenPackage = inputs.zen-browser.packages."${system}".default;
+  zenBinary = "${zenPackage}/bin/${zenPackage.meta.mainProgram}";
 
-  mkFirefoxProfile = profileName: profileId: {
+  mkZenProfile = profileName: profileId: {
     name = profileName;
     id = profileId;
 
@@ -22,11 +25,6 @@ let
     ];
 
     settings = {
-      "gnomeTheme.hideSingleTab" = false;
-      "gnomeTheme.activeTabContrast" = true;
-      "gnomeTheme.hideWebrtcIndicator" = true;
-      "gnomeTheme.systemIcons" = true;
-      "gnomeTheme.bookmarksOnFullscreen" = true;
       "layers.acceleration.force-enabled" = true;
       "identity.fxaccounts.account.device.name" = "${config.flocke.user.name}@${host}";
       "extensions.pocket.enabled" = false;
@@ -77,12 +75,6 @@ let
       "toolkit.telemetry.unified" = false;
       "toolkit.telemetry.unifiedIsOptIn" = false;
       "toolkit.telemetry.updatePing.enabled" = false;
-
-      # Sidebar
-      "sidebar.revamp" = true;
-      "sidebar.verticalTabs" = true;
-      "sidebar.position_start" = true; # left side
-      "sidebar.main.tools" = "aichat";
     };
     search = {
       force = true;
@@ -249,16 +241,12 @@ let
         };
       };
     };
-
-    userChrome = builtins.readFile "${inputs.firefox-gnome-theme}/userChrome.css";
-    userContent = builtins.readFile "${inputs.firefox-gnome-theme}/userContent.css";
-    extraConfig = builtins.readFile "${inputs.firefox-gnome-theme}/configuration/user.js";
   };
 in
 {
-  options.browsers.firefox = {
-    enable = mkEnableOption "Enable firefox browser";
-    default = mkEnableOption "Set firefox browser as default link handler";
+  options.browsers.zen = {
+    enable = mkEnableOption "Enable zen browser";
+    default = mkEnableOption "Set zen browser as default link handler";
     defaultLinkProfile = mkOption {
       description = "Name of the profile to use for opening links (must match one of the additionalProfiles names)";
       type = types.nullOr types.str;
@@ -266,18 +254,18 @@ in
       example = "Work";
     };
     additionalProfiles = mkOption {
-      description = "Additional Firefox profiles to create using the standard configuration";
+      description = "Additional zen profiles to create using the standard configuration";
       type = types.listOf (
         types.submodule {
           options = {
             name = mkOption {
               type = types.str;
-              description = "Name of the Firefox profile";
+              description = "Name of the zen profile";
               example = "Work";
             };
             id = mkOption {
               type = types.int;
-              description = "ID of the Firefox profile (sequential from 1)";
+              description = "ID of the zen profile (sequential from 1)";
               example = 1;
             };
           };
@@ -288,15 +276,19 @@ in
   };
 
   config = mkIf cfg.enable {
+    # TODO: if zen browser is here to stay, configure it properly
+    # see https://github.com/0xc000022070/zen-browser-flake/blob/main/hm-module.nix
+    # and https://github.com/nix-community/home-manager/blob/master/modules/programs/firefox/mkFirefoxModule.nix
+
     # Allow specifying which profile should be used for opening links
     xdg.mimeApps.defaultApplications =
       let
-        # Use the specified profile for links or fall back to the default firefox.desktop
+        # Use the specified profile for links or fall back to the default zen.desktop
         browserDesktopEntry =
           if cfg.defaultLinkProfile != null then
-            "firefox-${lib.toLower cfg.defaultLinkProfile}.desktop"
+            "zen-beta-${lib.toLower cfg.defaultLinkProfile}.desktop"
           else
-            "firefox.desktop";
+            "zen-beta.desktop";
       in
       mkIf cfg.default {
         "text/html" = [ browserDesktopEntry ];
@@ -305,7 +297,7 @@ in
         "x-scheme-handler/https" = [ browserDesktopEntry ];
       };
 
-    programs.firefox = {
+    programs.zen-browser = {
       enable = true;
       languagePacks = [
         "en-US"
@@ -317,29 +309,25 @@ in
             acc: profile:
             acc
             // {
-              "${lib.toLower profile.name}" = mkFirefoxProfile profile.name profile.id;
+              "${lib.toLower profile.name}" = mkZenProfile profile.name profile.id;
             }
           )
           {
-            default = mkFirefoxProfile "Default" 0;
+            default = mkZenProfile "Default" 0;
           }
           cfg.additionalProfiles;
     };
-
-    stylix.targets.firefox.profileNames = [
-      "default"
-    ] ++ (map (profile: lib.toLower profile.name) cfg.additionalProfiles);
 
     xdg.desktopEntries = lib.foldl' (
       acc: profile:
       acc
       // {
-        "firefox-${lib.toLower profile.name}" = {
-          name = "Firefox - ${profile.name}";
+        "zen-beta-${lib.toLower profile.name}" = {
+          name = "Zen Browser - ${profile.name}";
           genericName = "Web Browser - ${profile.name}";
-          exec = "firefox -P ${profile.name} %U";
+          exec = "${zenBinary} -P ${profile.name} %U";
           terminal = false;
-          icon = "firefox";
+          icon = "zen-beta";
           startupNotify = true;
           categories = [
             "Application"

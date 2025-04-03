@@ -1,5 +1,4 @@
 {
-  pkgs,
   config,
   lib,
   ...
@@ -17,13 +16,25 @@ in
   };
 
   config = mkIf cfg.enable {
-    programs._1password-gui = {
-      enable = true;
-      polkitPolicyOwners = [ username ];
+    programs = {
+      _1password.enable = true;
+      _1password-gui = {
+        enable = true;
+        polkitPolicyOwners = [ username ];
+      };
     };
 
     programs.ssh.extraConfig = ''
       IdentityAgent ${onePassPath}
     '';
+
+    environment.etc = {
+      "1password/custom_allowed_browsers" = {
+        text = ''
+          zen
+        '';
+        mode = "0755";
+      };
+    };
   };
 }

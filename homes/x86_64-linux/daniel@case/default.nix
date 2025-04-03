@@ -40,6 +40,16 @@ in
         id = 1;
       }
     ];
+    # defaultLinkProfile = inputs.nix-secrets.work.company;
+  };
+
+  browsers.zen = {
+    additionalProfiles = [
+      {
+        name = inputs.nix-secrets.work.company;
+        id = 1;
+      }
+    ];
     defaultLinkProfile = inputs.nix-secrets.work.company;
   };
 
