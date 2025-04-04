@@ -31,8 +31,10 @@ in
     stylix = {
       enable = true;
       autoEnable = true;
-      base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
-      polarity = lib.mkDefault "dark";
+      base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-latte.yaml";
+      polarity = lib.mkDefault "light";
+      # base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+      # polarity = lib.mkDefault "dark";
       homeManagerIntegration.autoImport = false;
       homeManagerIntegration.followSystem = false;
       targets.nixvim.enable = false;
