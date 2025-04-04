@@ -12,4 +12,7 @@ pkgs.cloudflared.overrideAttrs (oldAttrs: {
     export PATH=$GOROOT/bin:$PATH
     ${oldAttrs.buildPhase or ""}
   '';
+  meta = oldAttrs.meta // {
+    broken = false;
+  };
 })
