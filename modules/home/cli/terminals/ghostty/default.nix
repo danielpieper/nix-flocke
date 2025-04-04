@@ -18,7 +18,6 @@ in
       enable = true;
 
       settings = {
-        theme = "catppuccin-mocha";
         font-family = "${config.stylix.fonts.monospace.name}";
         command = "fish";
         gtk-titlebar = false;

@@ -6,10 +6,17 @@
 }:
 let
   cfg = config.styles.stylix;
+  flavor = if cfg.dark then "mocha" else "latte";
+  polarity = if cfg.dark then "dark" else "light";
 in
 {
   options.styles.stylix = {
     enable = lib.mkEnableOption "Enable stylix";
+    dark = lib.mkOption {
+      type = lib.types.bool;
+      description = "Use dark polarity";
+      default = true;
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -31,8 +38,8 @@ in
     stylix = {
       enable = true;
       autoEnable = true;
-      base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
-      polarity = lib.mkDefault "dark";
+      base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-${flavor}.yaml";
+      polarity = lib.mkDefault polarity;
       homeManagerIntegration.autoImport = false;
       homeManagerIntegration.followSystem = false;
       targets.nixvim.enable = false;
