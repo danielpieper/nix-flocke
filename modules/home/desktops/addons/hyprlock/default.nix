@@ -18,7 +18,7 @@ in
       enable = true;
       settings = {
         general = {
-          grace = 2;
+          grace = 4;
           hide_cursor = true;
           ignore_empty_input = true;
           text_trim = true;
