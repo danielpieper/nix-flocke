@@ -35,6 +35,7 @@
       enable-dump = true;
     };
     arr.enable = true;
+    miniflux.enable = true;
 
     satisfactory.enable = false;
     actual.enable = false;
