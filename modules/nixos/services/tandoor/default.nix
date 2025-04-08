@@ -40,17 +40,6 @@ in
         };
       };
 
-      cloudflared = {
-        tunnels = {
-          "${inputs.nix-secrets.cloudflare.tunnelID}" = {
-            ingress = {
-              "tandoor.${inputs.nix-secrets.domain}/media/" = "http://localhost:8100";
-              "tandoor.${inputs.nix-secrets.domain}" = "http://localhost:8099";
-            };
-          };
-        };
-      };
-
       postgresql = {
         ensureDatabases = [ "tandoor_recipes" ];
         ensureUsers = [
@@ -64,7 +53,7 @@ in
       nginx = {
         enable = true;
         virtualHosts = {
-          "recipes-media" = {
+          "tandoor-media" = {
             listen = [
               {
                 addr = "localhost";
@@ -74,6 +63,40 @@ in
             locations = {
               "/media/" = {
                 alias = "/var/lib/tandoor-recipes/";
+              };
+            };
+          };
+        };
+      };
+
+      traefik = {
+        dynamicConfigOptions = {
+          http = {
+            services = {
+              tandoor.loadBalancer.servers = [
+                {
+                  url = "http://localhost:8099";
+                }
+              ];
+              tandoor-media.loadBalancer.servers = [
+                {
+                  url = "http://localhost:8100";
+                }
+              ];
+            };
+
+            routers = {
+              tandoor = {
+                entryPoints = [ "websecure" ];
+                rule = "Host(`tandoor.homelab.${inputs.nix-secrets.domain}`)";
+                service = "tandorr";
+                tls.certResolver = "letsencrypt";
+              };
+              tandorr-media = {
+                entryPoints = [ "websecure" ];
+                rule = "Host(`tandoor.homelab.${inputs.nix-secrets.domain}` && PathPrefix(`/media/)";
+                service = "tandoor-media";
+                tls.certResolver = "letsencrypt";
               };
             };
           };

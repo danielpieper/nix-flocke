@@ -18,6 +18,7 @@ in
     sops.secrets.authentik_env = { };
 
     services = {
+      # See https://github.com/brokenscripts/authentik_traefik/tree/traefik3?tab=readme-ov-file
       authentik = {
         enable = true;
         environmentFile = config.sops.secrets.authentik_env.path;
@@ -37,24 +38,13 @@ in
         };
       };
 
-      cloudflared = {
-        tunnels = {
-          "${inputs.nix-secrets.cloudflare.tunnelID}" = {
-            ingress = {
-              "authentik.${inputs.nix-secrets.domain}" = "http://localhost:9000";
-            };
-          };
-        };
-      };
-
       traefik = {
         dynamicConfigOptions = {
           http = {
             middlewares = {
               authentik = {
                 forwardAuth = {
-                  tls.insecureSkipVerify = true;
-                  address = "https://localhost:9443/outpost.goauthentik.io/auth/traefik";
+                  address = "http://localhost:9000/outpost.goauthentik.io/auth/traefik";
                   trustForwardHeader = true;
                   authResponseHeaders = [
                     "X-authentik-username"
@@ -84,7 +74,7 @@ in
             routers = {
               auth = {
                 entryPoints = [ "websecure" ];
-                rule = "Host(`authentik.${inputs.nix-secrets.domain}`) || HostRegexp(`{subdomain:[a-z0-9]+}.homelab.${inputs.nix-secrets.domain}`) && PathPrefix(`/outpost.goauthentik.io/`)";
+                rule = "Host(`authentik.homelab.${inputs.nix-secrets.domain}`)";
                 service = "auth";
                 tls.certResolver = "letsencrypt";
               };

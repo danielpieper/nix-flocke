@@ -73,7 +73,7 @@ in
           };
           api = {
             dashboard = true;
-            insecure = true;
+            # insecure = true;
           };
           certificatesResolvers = {
             tailscale.tailscale = { };

@@ -16,7 +16,6 @@
   };
 
   services.flocke = {
-    cloudflared.enable = true;
     traefik.enable = true;
     authentik.enable = true;
     nfs.enable = true;
@@ -40,7 +39,7 @@
     satisfactory.enable = false;
     actual.enable = false;
     valheim.enable = false;
-    tandoor.enable = false;
+    tandoor.enable = true;
   };
 
   topology.self = {

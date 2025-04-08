@@ -150,7 +150,7 @@ in
                 middlewares = {
                   authentik = {
                     forwardAuth = {
-                      address = "https://authentik.${inputs.nix-secrets.domain}/outpost.goauthentik.io/auth/traefik";
+                      address = "https://authentik.homelab.${inputs.nix-secrets.domain}/outpost.goauthentik.io/auth/traefik";
                       trustForwardHeader = true;
                       authResponseHeaders = [
                         "X-authentik-username"
