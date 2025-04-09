@@ -35,8 +35,9 @@ in
           POSTGRES_HOST = "/run/postgresql";
           POSTGRES_USER = "tandoor_recipes";
           POSTGRES_DB = "tandoor_recipes";
-          SOCIAL_DEFAULT_GROUP = "user";
-          SOCIAL_PROVIDERS = "allauth.socialaccount.providers.openid_connect";
+          # TODO: https://github.com/TandoorRecipes/recipes/issues/3596
+          # SOCIAL_DEFAULT_GROUP = "user";
+          # SOCIAL_PROVIDERS = "allauth.socialaccount.providers.openid_connect";
         };
       };
 
@@ -89,10 +90,10 @@ in
               tandoor = {
                 entryPoints = [ "websecure" ];
                 rule = "Host(`tandoor.homelab.${inputs.nix-secrets.domain}`)";
-                service = "tandorr";
+                service = "tandoor";
                 tls.certResolver = "letsencrypt";
               };
-              tandorr-media = {
+              tandoor-media = {
                 entryPoints = [ "websecure" ];
                 rule = "Host(`tandoor.homelab.${inputs.nix-secrets.domain}` && PathPrefix(`/media/)";
                 service = "tandoor-media";
