@@ -1908,11 +1908,11 @@
     "premiumizearr-nova": {
       "flake": false,
       "locked": {
-        "lastModified": 1742656822,
-        "narHash": "sha256-fgVwXiym4wYXPsXBZ4p4Vc7zOCvtrA8f+6f/F4mszgQ=",
+        "lastModified": 1744215709,
+        "narHash": "sha256-OLHb/NWBd9eRzMpwkmgnGdS4ttTtPHVoRbeup/d4J/8=",
         "ref": "fixes",
-        "rev": "51939370eb63df70e7a9cb975fcd260000354140",
-        "revCount": 156,
+        "rev": "cb9f6b3ca17b73a338901279014870a38bda76e6",
+        "revCount": 191,
         "type": "git",
         "url": "ssh://forgejo@forgejo.homelab.daniel-pieper.com/daniel/premiumizearr-nova.git"
       },

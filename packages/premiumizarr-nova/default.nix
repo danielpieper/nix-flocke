@@ -8,11 +8,11 @@
 let
   frontend = buildNpmPackage {
     pname = "premiumizearr-nova-frontend";
-    version = "1.4.0";
+    version = "1.4.5";
 
     src = inputs.premiumizearr-nova;
     sourceRoot = "source/web";
-    npmDepsHash = "sha256-chl4TT4/C08QQVmm3qf+ktWKTI8lyhzbnmKr4JBgnQ0=";
+    npmDepsHash = "sha256-b4hdjg1MwC7JP2WH2MdRYGwgMf3tOOpuyvjD5iPlhrY=";
     postInstall = ''
       rm -rf $out/lib
       cp -r dist/* $out/
@@ -22,10 +22,10 @@ in
 
 buildGoModule {
   pname = "premiumizarr-nova";
-  version = "1.4.0";
+  version = "1.4.5";
 
   src = inputs.premiumizearr-nova;
-  vendorHash = "sha256-AdjjZTVK75hR/ux/9POVWguoUE4Y9iv2jz17P/gKipM=";
+  vendorHash = "sha256-1Ka6FxsUlqqD3rksXCO57KdJ2Ryzc78XBlRf/nSfDfA=";
 
   env.CGO_ENABLED = 0;
   ldflags = [
