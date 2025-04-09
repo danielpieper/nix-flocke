@@ -10,13 +10,15 @@ in
 {
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {
-      windowrulev2 = [
+      windowrule = [
         "workspace 2 silent,class:^(firefox|google-chrome)$"
         "workspace 4 silent,class:^(steam|lutris|com.moonlight_stream.Moonlight)$"
         "workspace 5 silent,class:^(Signal|signal|discord|Slack|goofcord)$"
 
+        "float,class:^(Signal|signal|1Password)$"
+        "workspace special,class:^(Signal|signal|1Password)$"
+
         "idleinhibit fullscreen, class:^(firefox|google-chrome)$"
-        "stayfocused,class:^(1Password)$,title:^(Quick Access)"
 
         "suppressevent fullscreen,class:^(firefox)$,title:^(Picture-in-Picture|Firefox)$"
         "float,class:^(firefox)$,title:^(Picture-in-Picture|Firefox)$"
