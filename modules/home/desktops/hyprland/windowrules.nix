@@ -10,15 +10,28 @@ in
 {
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {
+      workspace = [
+        # Smart Gaps
+        "w[tv1]s[false], gapsout:0, gapsin:0" # w = window count, t = tiled-only, v = visible only, 1 = one visible, tiled window, ignore special workspace
+        "f[1]s[false], gapsout:0, gapsin:0" # f = fullscreen, 1 = maximised
+      ];
       windowrule = [
-        "workspace 2 silent,class:^(firefox|google-chrome)$"
-        "workspace 4 silent,class:^(steam|lutris|com.moonlight_stream.Moonlight)$"
-        "workspace 5 silent,class:^(Signal|signal|discord|Slack|goofcord)$"
+        # Smart Gaps
+        "bordersize 0, floating:0, onworkspace:w[tv1]s[false]"
+        "rounding 0, floating:0, onworkspace:w[tv1]s[false]"
+        "bordersize 0, floating:0, onworkspace:f[1]s[false]"
+        "rounding 0, floating:0, onworkspace:f[1]s[false]"
 
+        "workspace 2 silent,class:^(firefox|google-chrome|zen)$"
+        "workspace 4 silent,class:^(steam|lutris|com.moonlight_stream.Moonlight)$"
+        "workspace 5 silent,class:^(discord|Slack|goofcord)$"
+
+        # TODO: Does not work to float all windows on the special workspace:
+        # "float, workspace:special"
         "float,class:^(Signal|signal|1Password)$"
         "workspace special,class:^(Signal|signal|1Password)$"
 
-        "idleinhibit fullscreen, class:^(firefox|google-chrome)$"
+        "idleinhibit fullscreen, class:^(firefox|google-chrome|zen)$"
 
         "suppressevent fullscreen,class:^(firefox)$,title:^(Picture-in-Picture|Firefox)$"
         "float,class:^(firefox)$,title:^(Picture-in-Picture|Firefox)$"
