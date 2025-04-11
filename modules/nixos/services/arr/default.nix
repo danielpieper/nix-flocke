@@ -67,6 +67,7 @@ in
 
       config = {
         imports = [
+          inputs.nix-topology.nixosModules.default
           inputs.sops-nix.nixosModules.sops
         ];
 

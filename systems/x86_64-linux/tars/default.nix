@@ -36,10 +36,6 @@
     ausweisapp.enable = true;
   };
 
-  topology.self = {
-    hardware.info = "Lenovo Thinkpad X1 Carbon";
-  };
-
   boot = {
     supportedFilesystems = lib.mkForce [ "btrfs" ];
     kernelPackages = pkgs.linuxPackages_latest;

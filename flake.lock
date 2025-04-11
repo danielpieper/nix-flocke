@@ -1354,10 +1354,10 @@
         ]
       },
       "locked": {
-        "lastModified": 1744190372,
-        "narHash": "sha256-MGoc5L48Qt1mG4HxAZBqKWdAdImIcDn8v0C/qTiYxD0=",
+        "lastModified": 1744405099,
+        "narHash": "sha256-iH+iKrEi/i7w8Yv/nerPDT2aqmj3SsMRoCqlSCyKxnQ=",
         "ref": "main",
-        "rev": "28b0ae8ee77dbb7b3df2b3d6affe208722349b88",
+        "rev": "673ed134eedcbe1e9abfc9cdba2e47b5fc742973",
         "shallow": true,
         "type": "git",
         "url": "ssh://git@github.com/danielpieper/nix-secrets.git"

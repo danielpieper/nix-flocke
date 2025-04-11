@@ -29,10 +29,6 @@
 
   networking.hostName = "case";
 
-  topology.self = {
-    hardware.info = "Lenovo Thinkpad T14 Gen 1";
-  };
-
   boot = {
     supportedFilesystems = lib.mkForce [ "btrfs" ];
     kernelPackages = pkgs.linuxPackages_latest;

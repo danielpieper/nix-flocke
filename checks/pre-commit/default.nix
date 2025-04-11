@@ -9,7 +9,7 @@ inputs.pre-commit-hooks.lib.${system}.run {
   hooks = {
     nixfmt-rfc-style.enable = true;
     statix.enable = true;
-    # deadnix.enable = true;
+    deadnix.enable = true;
     check-added-large-files.enable = true;
     check-case-conflicts.enable = true;
     check-executables-have-shebangs.enable = true;
