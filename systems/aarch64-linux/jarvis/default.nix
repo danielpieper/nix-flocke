@@ -27,10 +27,6 @@
     };
   };
 
-  topology.self = {
-    hardware.info = "Hetzner VPS";
-  };
-
   boot = {
     supportedFilesystems = lib.mkForce [ "btrfs" ];
     kernelPackages = pkgs.linuxPackages_latest;

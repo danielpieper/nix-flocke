@@ -191,7 +191,7 @@
         import nix-topology {
           inherit (host) pkgs; # Only this package set must include nix-topology.overlays.default
           modules = [
-            (import ./topology {
+            (import "${inputs.nix-secrets}/topology" {
               inherit (host) config;
             })
             { inherit (self) nixosConfigurations; }

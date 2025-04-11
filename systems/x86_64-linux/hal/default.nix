@@ -43,10 +43,6 @@
     tandoor.enable = true;
   };
 
-  topology.self = {
-    hardware.info = "Dell Optiplex 9020";
-  };
-
   boot = {
     supportedFilesystems = lib.mkForce [ "btrfs" ];
     kernelPackages = pkgs.linuxPackages_latest;
