@@ -25,3 +25,7 @@ apply:
 topology:
 	nix build .#topology.config.output
 	# xdg-open  {{justfile_directory()}}/result/main.svg
+
+dns:
+	nix build .#octodns
+	HETZNER_DNS_API=$(op read "op://Private/Hetzner/octodns api token") octodns-sync --config-file=./result

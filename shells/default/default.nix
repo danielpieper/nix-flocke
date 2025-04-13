@@ -17,6 +17,15 @@ pkgs.mkShell {
     deploy-rs
     just
 
+    octodns
+    octodns-providers.bind
+    octodns-providers.hetzner
+    # TODO: https://github.com/NixOS/nixpkgs/issues/398191
+    # (octodns.withProviders (ps: [
+    #   octodns-providers.bind
+    #   octodns-providers.hetzner
+    # ]))
+
     alejandra
     home-manager
     git

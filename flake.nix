@@ -32,7 +32,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-secrets = {
-      url = "git+ssh://git@github.com/danielpieper/nix-secrets.git?ref=main&shallow=1";
+      url = "/home/daniel/Projects/nix-secrets";
+      # url = "git+ssh://git@github.com/danielpieper/nix-secrets.git?ref=main&shallow=1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -129,6 +130,11 @@
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixos-dns = {
+      url = "github:Janik-Haag/nixos-dns";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -147,6 +153,10 @@
           };
         };
       };
+      dnsConfig = {
+        inherit (inputs.self) nixosConfigurations;
+        extraConfig = import "${inputs.nix-secrets}/dns";
+      };
     in
     lib.mkFlake {
       channels-config = {
@@ -163,6 +173,7 @@
         nix-topology.nixosModules.default
         authentik-nix.nixosModules.default
         teslamate.nixosModules.default
+        nixos-dns.nixosModules.dns
       ];
 
       systems.hosts = {
@@ -182,6 +193,12 @@
       ];
 
       deploy = lib.mkDeploy { inherit (inputs) self; };
+
+      # nix eval .#dnsDebugHost
+      dnsDebugHost = inputs.nixos-dns.utils.debug.host inputs.self.nixosConfigurations.hal;
+
+      # nix eval .#dnsDebugConfig
+      dnsDebugConfig = inputs.nixos-dns.utils.debug.config dnsConfig;
 
       topology =
         with inputs;
