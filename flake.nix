@@ -32,8 +32,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-secrets = {
-      url = "/home/daniel/Projects/nix-secrets";
-      # url = "git+ssh://git@github.com/danielpieper/nix-secrets.git?ref=main&shallow=1";
+      url = "git+ssh://git@github.com/danielpieper/nix-secrets.git?ref=main&shallow=1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

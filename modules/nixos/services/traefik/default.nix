@@ -25,12 +25,11 @@ in
       ];
 
       services.traefik = {
-        environment.CF_API_EMAIL = inputs.nix-secrets.cloudflare.email;
-        serviceConfig.EnvironmentFile = [ config.sops.secrets.cloudflare_api_key.path ];
+        serviceConfig.EnvironmentFile = [ config.sops.secrets.traefik_env.path ];
       };
     };
 
-    sops.secrets.cloudflare_api_key = { };
+    sops.secrets.traefik_env = { };
 
     services = {
       tailscale.permitCertUid = "traefik";
@@ -79,10 +78,10 @@ in
             tailscale.tailscale = { };
             letsencrypt = {
               acme = {
-                inherit (inputs.nix-secrets.cloudflare) email;
+                inherit (inputs.nix-secrets.traefik) acmeEmail;
                 storage = "/var/lib/traefik/cert.json";
                 dnsChallenge = {
-                  provider = "cloudflare";
+                  provider = "hetzner";
                   resolvers = [
                     "1.1.1.1:53"
                     "8.8.8.8:53"

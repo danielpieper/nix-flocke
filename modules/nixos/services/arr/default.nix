@@ -85,8 +85,7 @@ in
 
         systemd.services = {
           traefik = {
-            environment.CF_API_EMAIL = inputs.nix-secrets.cloudflare.email;
-            serviceConfig.EnvironmentFile = [ config.sops.secrets.cloudflare_api_key.path ];
+            serviceConfig.EnvironmentFile = [ config.sops.secrets.traefik_env.path ];
           };
         };
 
@@ -94,7 +93,7 @@ in
           defaultSopsFile = "${inputs.nix-secrets}/sops/services.yaml";
           validateSopsFiles = false;
           age.sshKeyPaths = [ "/persist/etc/ssh/ssh_host_ed25519_key" ];
-          secrets.cloudflare_api_key = { };
+          secrets.traefik_env = { };
         };
 
         services = {
@@ -111,10 +110,10 @@ in
             staticConfigOptions = {
               metrics.prometheus = { };
               certificatesResolvers.letsencrypt.acme = {
-                inherit (inputs.nix-secrets.cloudflare) email;
+                inherit (inputs.nix-secrets.traefik) acmeEmail;
                 storage = "/var/lib/traefik/cert.json";
                 dnsChallenge = {
-                  provider = "cloudflare";
+                  provider = "hetzner";
                   resolvers = [
                     "1.1.1.1:53"
                     "8.8.8.8:53"

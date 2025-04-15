@@ -1370,14 +1370,19 @@
         ]
       },
       "locked": {
-        "lastModified": 1744568294,
-        "narHash": "sha256-wTCFreItMW0/OrysqRKx3mtNgNWK+9IfVmRKwvVC4xQ=",
-        "path": "/home/daniel/Projects/nix-secrets",
-        "type": "path"
+        "lastModified": 1744737541,
+        "narHash": "sha256-c4nvy5wKGpNnqKZFRJUKh97+IALKg9ZCUHPustex5V8=",
+        "ref": "main",
+        "rev": "2c76fc991daf09c49499d346bc0a03b6a7b6c3bf",
+        "shallow": true,
+        "type": "git",
+        "url": "ssh://git@github.com/danielpieper/nix-secrets.git"
       },
       "original": {
-        "path": "/home/daniel/Projects/nix-secrets",
-        "type": "path"
+        "ref": "main",
+        "shallow": true,
+        "type": "git",
+        "url": "ssh://git@github.com/danielpieper/nix-secrets.git"
       }
     },
     "nix-topology": {
