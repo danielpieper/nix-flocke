@@ -91,13 +91,11 @@ in
                 entryPoints = [ "websecure" ];
                 rule = "Host(`tesla.homelab.${inputs.nix-secrets.domain}`)";
                 service = "teslamate";
-                tls.certResolver = "letsencrypt";
               };
               grafana = {
                 entryPoints = [ "websecure" ];
                 rule = "Host(`grafana.homelab.${inputs.nix-secrets.domain}`)";
                 service = "grafana";
-                tls.certResolver = "letsencrypt";
               };
             };
           };

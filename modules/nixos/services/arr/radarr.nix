@@ -36,7 +36,6 @@ in
               entryPoints = [ "websecure" ];
               rule = "Host(`radarr.homelab.${inputs.nix-secrets.domain}`)";
               service = "radarr";
-              tls.certResolver = "letsencrypt";
               middlewares = [ "authentik" ];
             };
           };

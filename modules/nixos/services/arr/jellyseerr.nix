@@ -36,7 +36,6 @@ in
               entryPoints = [ "websecure" ];
               rule = "Host(`jellyseerr.homelab.${inputs.nix-secrets.domain}`)";
               service = "jellyseerr";
-              tls.certResolver = "letsencrypt";
               middlewares = [ "authentik" ];
             };
           };

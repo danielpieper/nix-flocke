@@ -36,7 +36,6 @@ in
               entryPoints = [ "websecure" ];
               rule = "Host(`sonarr.homelab.${inputs.nix-secrets.domain}`)";
               service = "sonarr";
-              tls.certResolver = "letsencrypt";
               middlewares = [ "authentik" ];
             };
           };

@@ -76,7 +76,6 @@ in
                 entryPoints = [ "websecure" ];
                 rule = "Host(`authentik.homelab.${inputs.nix-secrets.domain}`)";
                 service = "auth";
-                tls.certResolver = "letsencrypt";
               };
             };
           };

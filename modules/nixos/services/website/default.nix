@@ -72,7 +72,6 @@ in
                 rule = "Host(`${inputs.nix-secrets.domain}`) || Host(`www.${inputs.nix-secrets.domain}`)";
                 middlewares = [ "redirect-www-to-root" ];
                 service = "nginx";
-                tls.certResolver = "letsencrypt";
               };
             };
           };

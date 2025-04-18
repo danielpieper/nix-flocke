@@ -38,7 +38,6 @@ in
               entryPoints = [ "websecure" ];
               rule = "Host(`actual.homelab.${inputs.nix-secrets.domain}`)";
               service = "actual";
-              tls.certResolver = "letsencrypt";
             };
           };
         };

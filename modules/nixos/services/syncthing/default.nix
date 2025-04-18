@@ -48,7 +48,6 @@ in
               entryPoints = [ "websecure" ];
               rule = "Host(`syncthing-${hostname}.homelab.${inputs.nix-secrets.domain}`)";
               service = "syncthing";
-              tls.certResolver = "letsencrypt";
               middlewares = [ "authentik" ];
             };
           };

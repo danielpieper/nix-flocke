@@ -35,7 +35,6 @@ in
               entryPoints = [ "websecure" ];
               rule = "Host(`prowlarr.homelab.${inputs.nix-secrets.domain}`)";
               service = "prowlarr";
-              tls.certResolver = "letsencrypt";
               middlewares = [ "authentik" ];
             };
           };

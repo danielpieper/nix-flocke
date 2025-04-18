@@ -47,7 +47,6 @@ in
                 entryPoints = [ "websecure" ];
                 rule = "Host(`restic.homelab.${inputs.nix-secrets.domain}`)";
                 service = "restic";
-                tls.certResolver = "letsencrypt";
               };
             };
           };

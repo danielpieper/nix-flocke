@@ -54,7 +54,6 @@ in
               entryPoints = [ "websecure" ];
               rule = "Host(`search.homelab.${inputs.nix-secrets.domain}`)";
               service = "searxng";
-              tls.certResolver = "letsencrypt";
             };
           };
         };

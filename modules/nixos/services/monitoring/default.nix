@@ -53,19 +53,16 @@ in
                 entryPoints = [ "websecure" ];
                 rule = "Host(`prometheus.homelab.${inputs.nix-secrets.domain}`)";
                 service = "prometheus";
-                tls.certResolver = "letsencrypt";
               };
               grafana = {
                 entryPoints = [ "websecure" ];
                 rule = "Host(`grafana.homelab.${inputs.nix-secrets.domain}`)";
                 service = "grafana";
-                tls.certResolver = "letsencrypt";
               };
               promtail = {
                 entryPoints = [ "websecure" ];
                 rule = "Host(`promtail.homelab.${inputs.nix-secrets.domain}`)";
                 service = "promtail";
-                tls.certResolver = "letsencrypt";
               };
             };
           };

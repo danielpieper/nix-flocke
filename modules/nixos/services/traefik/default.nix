@@ -51,8 +51,6 @@ in
             prometheus = { };
           };
 
-          # tracing = {};
-
           accessLog = {
             addInternals = true;
             filePath = "/var/log/traefik/access.log";
@@ -78,7 +76,7 @@ in
             tailscale.tailscale = { };
             letsencrypt = {
               acme = {
-                inherit (inputs.nix-secrets.traefik) acmeEmail;
+                email = inputs.nix-secrets.traefik.acmeEmail;
                 storage = "/var/lib/traefik/cert.json";
                 dnsChallenge = {
                   provider = "hetzner";
@@ -86,7 +84,6 @@ in
                     "1.1.1.1:53"
                     "8.8.8.8:53"
                   ];
-                  disablePropagationCheck = true;
                   delayBeforeCheck = 60;
                 };
               };
@@ -106,12 +103,11 @@ in
               certResolver = "letsencrypt";
               domains = [
                 {
-                  main = "homelab.${inputs.nix-secrets.domain}";
-                  sans = [ "*.homelab.${inputs.nix-secrets.domain}" ];
-                }
-                {
                   main = inputs.nix-secrets.domain;
-                  sans = [ "*.${inputs.nix-secrets.domain}" ];
+                  sans = [
+                    "*.${inputs.nix-secrets.domain}"
+                    "*.homelab.${inputs.nix-secrets.domain}"
+                  ];
                 }
               ];
             };

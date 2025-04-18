@@ -46,7 +46,6 @@ in
                 entryPoints = [ "websecure" ];
                 rule = "Host(`miniflux.homelab.${inputs.nix-secrets.domain}`)";
                 service = "miniflux";
-                tls.certResolver = "letsencrypt";
               };
             };
           };

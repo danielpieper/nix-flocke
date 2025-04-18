@@ -108,9 +108,10 @@ in
           traefik = {
             enable = true;
             staticConfigOptions = {
+              log.level = "INFO";
               metrics.prometheus = { };
               certificatesResolvers.letsencrypt.acme = {
-                inherit (inputs.nix-secrets.traefik) acmeEmail;
+                email = inputs.nix-secrets.traefik.acmeEmail;
                 storage = "/var/lib/traefik/cert.json";
                 dnsChallenge = {
                   provider = "hetzner";
@@ -118,8 +119,8 @@ in
                     "1.1.1.1:53"
                     "8.8.8.8:53"
                   ];
-                  disablePropagationCheck = true;
                   delayBeforeCheck = 60;
+                  disablePropagationCheck = true;
                 };
               };
               entryPoints = {
@@ -137,8 +138,11 @@ in
                     certResolver = "letsencrypt";
                     domains = [
                       {
-                        main = "homelab.${inputs.nix-secrets.domain}";
-                        sans = [ "*.homelab.${inputs.nix-secrets.domain}" ];
+                        main = inputs.nix-secrets.domain;
+                        sans = [
+                          "*.${inputs.nix-secrets.domain}"
+                          "*.homelab.${inputs.nix-secrets.domain}"
+                        ];
                       }
                     ];
                   };

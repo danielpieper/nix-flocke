@@ -37,7 +37,6 @@ in
               entryPoints = [ "websecure" ];
               rule = "Host(`bazarr.homelab.${inputs.nix-secrets.domain}`)";
               service = "bazarr";
-              tls.certResolver = "letsencrypt";
               middlewares = [ "authentik" ];
             };
           };

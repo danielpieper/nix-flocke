@@ -91,13 +91,11 @@ in
                 entryPoints = [ "websecure" ];
                 rule = "Host(`tandoor.homelab.${inputs.nix-secrets.domain}`)";
                 service = "tandoor";
-                tls.certResolver = "letsencrypt";
               };
               tandoor-media = {
                 entryPoints = [ "websecure" ];
-                rule = "Host(`tandoor.homelab.${inputs.nix-secrets.domain}` && PathPrefix(`/media/)";
+                rule = "Host(`tandoor.homelab.${inputs.nix-secrets.domain}`) && PathPrefix(`/media/`)";
                 service = "tandoor-media";
-                tls.certResolver = "letsencrypt";
               };
             };
           };

@@ -52,7 +52,6 @@ in
                 entryPoints = [ "websecure" ];
                 rule = "Host(`jellyfin.homelab.${inputs.nix-secrets.domain}`)";
                 service = "jellyfin";
-                tls.certResolver = "letsencrypt";
               };
             };
           };

@@ -66,7 +66,6 @@ in
             entryPoints = [ "websecure" ];
             rule = "Host(`premiumizarr.homelab.${inputs.nix-secrets.domain}`)";
             service = "premiumizarr";
-            tls.certResolver = "letsencrypt";
             middlewares = [ "authentik" ];
           };
         };

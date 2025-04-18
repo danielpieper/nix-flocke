@@ -96,7 +96,6 @@ in
                 entryPoints = [ "websecure" ];
                 rule = "Host(`forgejo.homelab.${inputs.nix-secrets.domain}`)";
                 service = "forgejo";
-                tls.certResolver = "letsencrypt";
               };
             };
           };

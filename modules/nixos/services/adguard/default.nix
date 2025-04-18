@@ -72,7 +72,6 @@ in
               entryPoints = [ "websecure" ];
               rule = "Host(`adguard.homelab.${inputs.nix-secrets.domain}`)";
               service = "adguardhome";
-              tls.certResolver = "letsencrypt";
             };
           };
         };
