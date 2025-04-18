@@ -85,6 +85,7 @@ in
 
         systemd.services = {
           traefik = {
+            after = [ "tailscaled.service" ];
             serviceConfig.EnvironmentFile = [ config.sops.secrets.traefik_env.path ];
           };
         };

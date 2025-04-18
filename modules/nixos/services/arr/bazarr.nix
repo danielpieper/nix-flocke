@@ -22,6 +22,7 @@ in
         };
       };
       config = {
+        systemd.services.bazarr.after = [ "tailscaled.service" ];
         services = {
           bazarr = {
             enable = true;

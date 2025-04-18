@@ -21,8 +21,11 @@ in
         };
       };
       config = {
-        # issues with bind mount
-        systemd.services.prowlarr.serviceConfig.DynamicUser = lib.mkForce false;
+        systemd.services.prowlarr = {
+          after = [ "tailscaled.service" ];
+          # issues with bind mount
+          serviceConfig.DynamicUser = lib.mkForce false;
+        };
         services = {
           prowlarr.enable = true;
           traefik.dynamicConfigOptions.http = {

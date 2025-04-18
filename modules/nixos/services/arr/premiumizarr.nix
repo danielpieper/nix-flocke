@@ -33,7 +33,7 @@ in
         systemd.services.premiumizearrd = {
           description = "DownloadManger for *Arr clients";
           wantedBy = [ "multi-user.target" ];
-          after = [ "network.target" ];
+          after = [ "tailscaled.service" ];
           environment = {
             PREMIUMIZEARR_LOG_LEVEL = "trace";
             PREMIUMIZEARR_CONFIG_DIR_PATH = "/var/lib/premiumizarr";

@@ -21,6 +21,7 @@ in
         };
       };
       config = {
+        systemd.services.radarr.after = [ "tailscaled.service" ];
         services = {
           radarr = {
             enable = true;

@@ -22,8 +22,11 @@ in
         };
       };
       config = {
-        # issues with bind mount
-        systemd.services.jellyseerr.serviceConfig.DynamicUser = lib.mkForce false;
+        systemd.services.jellyseerr = {
+          after = [ "tailscaled.service" ];
+          # issues with bind mount
+          serviceConfig.DynamicUser = lib.mkForce false;
+        };
         services = {
           jellyseerr.enable = true;
           traefik.dynamicConfigOptions.http = {

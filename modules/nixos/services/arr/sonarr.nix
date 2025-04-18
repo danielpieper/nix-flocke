@@ -21,6 +21,7 @@ in
         };
       };
       config = {
+        systemd.services.sonarr.after = [ "tailscaled.service" ];
         services = {
           sonarr = {
             enable = true;
