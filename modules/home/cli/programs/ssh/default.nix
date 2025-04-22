@@ -48,7 +48,14 @@ in
   config = mkIf cfg.enable {
     programs.ssh = {
       enable = true;
-      matchBlocks = cfg.extraHosts;
+      matchBlocks = {
+        hal = {
+          user = "nixos";
+        };
+        jarvis = {
+          user = "nixos";
+        };
+      } // cfg.extraHosts;
     };
   };
 }
