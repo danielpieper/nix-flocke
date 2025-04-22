@@ -27,7 +27,10 @@
       enable_mullvad = false;
     };
     gotify.enable = true;
-    restic.enable_server = true;
+    restic = {
+      enable = true;
+      enable_server = true;
+    };
     syncthing.enable = true;
     forgejo = {
       enable = true;
@@ -40,7 +43,7 @@
     satisfactory.enable = false;
     actual.enable = false;
     valheim.enable = false;
-    tandoor.enable = true;
+    tandoor.enable = false;
   };
 
   boot = {
