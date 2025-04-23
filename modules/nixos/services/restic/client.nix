@@ -64,16 +64,24 @@ in
         environmentFile = config.sops.secrets.restic_environment.path;
         paths = [
           "/persist"
+          "/home"
         ];
         extraBackupArgs = [
           "--no-scan"
           "--exclude-caches"
+          # /home excludes:
+          "--exclude=.local/share/containers"
           "--exclude=steamapps"
-          "--exclude=valheim_server_data"
+          "--exclude=games"
+          # /persist excludes:
+          "--exclude=valheim_server_Data"
           "--exclude=satisfactory/FactoryGame"
           "--exclude=satisfactory/Engine"
           "--exclude=var/lib/docker"
-          "--exclude=games"
+          "--exclude=var/lib/containers"
+          "--exclude=var/lib/arr"
+          "--exclude=var/lib/loki"
+          "--exclude=jellyfin/metadata"
         ];
         pruneOpts = [
           "--keep-daily 7"
