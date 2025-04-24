@@ -1,5 +1,6 @@
 {
   config,
+  pkgs,
   lib,
   inputs,
   ...
@@ -15,6 +16,27 @@ in
   };
 
   config = mkIf cfg.enable {
+    sops.secrets = {
+      restic_repository_password = {
+        owner = inputs.nix-secrets.user.name;
+      };
+      restic_repository = {
+        owner = inputs.nix-secrets.user.name;
+      };
+      restic_environment = { };
+    };
+
+    environment = {
+      sessionVariables = {
+        RESTIC_REPOSITORY_FILE = config.sops.secrets.restic_repository.path;
+        RESTIC_PASSWORD_FILE = config.sops.secrets.restic_repository_password.path;
+      };
+      systemPackages = with pkgs; [
+        restic
+        redu
+      ];
+    };
+
     services.restic.backups.default = {
       repository = "rest:https://restic.homelab.${inputs.nix-secrets.domain}";
       initialize = true;
@@ -63,11 +85,6 @@ in
         StartLimitIntervalSec = 3600;
         StartLimitBurst = 15;
       };
-    };
-
-    sops.secrets = {
-      restic_repository_password = { };
-      restic_environment = { };
     };
   };
 }
