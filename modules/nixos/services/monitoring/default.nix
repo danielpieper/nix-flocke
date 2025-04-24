@@ -101,7 +101,10 @@ in
       loki = {
         enable = true;
         configuration = {
-          server.http_listen_port = 3030;
+          server = {
+            http_listen_port = 3030;
+            log_level = "warn";
+          };
           auth_enabled = false;
           ingester = {
             lifecycler = {
@@ -149,6 +152,7 @@ in
         };
       };
 
+      # TODO: replace with grafana alloy https://github.com/grafana/alloy
       promtail = {
         enable = true;
         configuration = {
@@ -238,8 +242,8 @@ in
                 folder = "Node";
                 folderUid = "Nr0ofiDZk";
                 type = "file";
-                disableDeletion = false;
-                allowUiUpdates = true;
+                disableDeletion = true;
+                allowUiUpdates = false;
                 updateIntervalSeconds = 86400;
                 options.path =
                   pkgs.fetchFromGitHub {
@@ -249,6 +253,24 @@ in
                     sha256 = "sha256-ZkVijMRCd87sLckqezPh1wHfuiibExVhatA1AqRiKHc=";
                   }
                   + "/prometheus/node-exporter-full.json";
+              }
+              {
+                name = "restic";
+                orgId = 1;
+                folder = "Restic";
+                folderUid = "cejvfx2zfaqkgd";
+                type = "file";
+                disableDeletion = true;
+                allowUiUpdates = false;
+                updateIntervalSeconds = 86400;
+                options.path =
+                  pkgs.fetchFromGitHub {
+                    owner = "ngosang";
+                    repo = "restic-exporter";
+                    rev = "main";
+                    sha256 = "sha256-y4bVamL+xnofM/XkBEf5oiX1Ji7rO1M6yoxZ1FJVeuE=";
+                  }
+                  + "/grafana/grafana_dashboard.json";
               }
             ];
           };
@@ -275,7 +297,7 @@ in
           alerting = {
             contactPoints.settings.contactPoints = [
               {
-                name = "Gotify template without token";
+                name = "Gotify";
                 orgId = 1;
                 receivers = [
                   {
