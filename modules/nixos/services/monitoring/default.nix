@@ -264,13 +264,39 @@ in
                 allowUiUpdates = false;
                 updateIntervalSeconds = 86400;
                 options.path =
-                  pkgs.fetchFromGitHub {
-                    owner = "ngosang";
-                    repo = "restic-exporter";
-                    rev = "main";
-                    sha256 = "sha256-y4bVamL+xnofM/XkBEf5oiX1Ji7rO1M6yoxZ1FJVeuE=";
-                  }
-                  + "/grafana/grafana_dashboard.json";
+                  let
+                    originalDashboard =
+                      pkgs.fetchFromGitHub {
+                        owner = "ngosang";
+                        repo = "restic-exporter";
+                        rev = "main";
+                        sha256 = "sha256-y4bVamL+xnofM/XkBEf5oiX1Ji7rO1M6yoxZ1FJVeuE=";
+                      }
+                      + "/grafana/grafana_dashboard.json";
+                    modifiedDashboard =
+                      pkgs.runCommand "modified-restic-dashboard.json"
+                        {
+                          buildInputs = [ pkgs.jq ];
+                        }
+                        ''
+                          jq '.templating.list = [
+                            {
+                              "current": {
+                                "text": "Prometheus",
+                                "value": "PBFA97CFB590B2093"
+                              },
+                              "label": "Prometheus",
+                              "name": "DS_PROMETHEUS",
+                              "options": [],
+                              "query": "prometheus",
+                              "refresh": 1,
+                              "regex": "",
+                              "type": "datasource"
+                            }
+                          ]' ${originalDashboard} > $out
+                        '';
+                  in
+                  modifiedDashboard;
               }
             ];
           };

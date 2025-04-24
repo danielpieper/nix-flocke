@@ -24,7 +24,6 @@ in
       restic.server = {
         enable = true;
         listenAddress = "127.0.0.1:8012";
-        prometheus = true;
         inherit (inputs.nix-secrets.restic) dataDir;
         # TODO: check if restic settings should be enabled
         privateRepos = false;
@@ -54,30 +53,45 @@ in
       };
 
       prometheus = {
+        exporters.restic = {
+          enable = true;
+          repository = "rest:http://127.0.0.1:8012";
+          passwordFile = config.sops.secrets.restic_repository_password.path;
+          environmentFile = config.sops.secrets.restic_environment.path;
+          listenAddress = "127.0.0.1";
+          port = 9753;
+          refreshInterval = 86400; # every day
+        };
         scrapeConfigs = [
           {
-            job_name = "restic";
-            basic_auth = {
-              username = "restic";
-              password_file = config.sops.secrets.restic_user_password.path;
-            };
+            job_name = "restic-exporter";
             static_configs = [
-              { targets = [ config.services.restic.server.listenAddress ]; }
+              {
+                targets = [
+                  "${config.services.prometheus.exporters.restic.listenAddress}:${toString config.services.prometheus.exporters.restic.port}"
+                ];
+              }
             ];
           }
         ];
       };
     };
 
+    users.users.restic-exporter = {
+      description = "restic exporter service user";
+      createHome = false;
+      isSystemUser = true;
+      group = "restic-exporter";
+    };
+    users.groups.restic-exporter = { };
+
     sops.secrets = {
       restic_mount = {
         owner = config.users.users.restic.name;
         inherit (config.users.users.restic) group;
       };
-      restic_user_password = {
-        owner = config.users.users.prometheus.name;
-        inherit (config.users.users.prometheus) group;
-      };
+      restic_repository_password = { };
+      restic_environment = { };
     };
 
     fileSystems = {

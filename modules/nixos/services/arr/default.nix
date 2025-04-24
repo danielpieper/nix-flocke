@@ -70,6 +70,7 @@ in
           inputs.nix-topology.nixosModules.default
           inputs.sops-nix.nixosModules.sops
         ];
+        system.stateVersion = "23.11";
 
         users.groups.media = { };
         environment.systemPackages = [ pkgs.ghostty.terminfo ];
