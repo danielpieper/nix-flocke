@@ -1,4 +1,5 @@
 {
+  inputs,
   config,
   lib,
   ...
@@ -48,14 +49,7 @@ in
   config = mkIf cfg.enable {
     programs.ssh = {
       enable = true;
-      matchBlocks = {
-        hal = {
-          user = "nixos";
-        };
-        jarvis = {
-          user = "nixos";
-        };
-      } // cfg.extraHosts;
+      matchBlocks = inputs.nix-secrets.ssh.matchBlocks // cfg.extraHosts;
     };
   };
 }
