@@ -321,27 +321,33 @@ in
             };
           };
           alerting = {
-            contactPoints.settings.contactPoints = [
-              {
-                name = "Gotify";
-                orgId = 1;
-                receivers = [
-                  {
-                    inherit (inputs.nix-secrets.gotify) uid;
-                    type = "webhook";
-                    settings = {
-                      # TODO: provision gotify token and add here
-                      url =
-                        with config.services.gotify;
-                        "http://localhost:${environment.GOTIFY_SERVER_PORT}/message?token=";
-                      httpMethod = "POST";
-                    };
-                  }
-                ];
-              }
-            ];
+            # contactPoints.settings.contactPoints = [
+            #   {
+            #     name = "Gotify";
+            #     orgId = 1;
+            #     receivers = [
+            #       {
+            #         inherit (inputs.nix-secrets.gotify) uid;
+            #         type = "webhook";
+            #         settings = {
+            #           # TODO: provision gotify token and add here
+            #           url =
+            #             with config.services.gotify;
+            #             "http://localhost:${environment.GOTIFY_SERVER_PORT}/message?token=";
+            #           httpMethod = "POST";
+            #         };
+            #       }
+            #     ];
+            #   }
+            # ];
             # https://gist.github.com/krisek/62a98e2645af5dce169a7b506e999cd8
             rules.path = ./alerts.yaml;
+            # contactPoints.settings.deleteContactPoints = [
+            #   {
+            #     orgId = 1;
+            #     uid = "";
+            #   }
+            # ];
             # rules.settings.deleteRules = [
             #   {
             #     orgId = 1;

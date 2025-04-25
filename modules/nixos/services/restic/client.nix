@@ -18,10 +18,10 @@ in
   config = mkIf cfg.enable {
     sops.secrets = {
       restic_repository_password = {
-        owner = inputs.nix-secrets.user.name;
+        group = "users";
       };
       restic_repository = {
-        owner = inputs.nix-secrets.user.name;
+        group = "users";
       };
       restic_environment = { };
     };
@@ -51,6 +51,8 @@ in
         "--exclude-caches"
         # /home excludes:
         "--exclude=.local/share/containers"
+        "--exclude=.local/share/go"
+        "--exclude=.local/share/Trash"
         "--exclude=steamapps"
         "--exclude=games"
         # /persist excludes:
