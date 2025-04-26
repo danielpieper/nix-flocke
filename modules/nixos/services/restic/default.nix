@@ -94,6 +94,10 @@ in
       restic_environment = { };
     };
 
+    systemd.services.restic-rest-server.unitConfig = {
+      RequiresMountsFor = "/mnt/restic";
+    };
+
     fileSystems = {
       "/mnt/restic" = {
         device = inputs.nix-secrets.restic.mountTarget;

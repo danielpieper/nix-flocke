@@ -21,5 +21,8 @@ in
       };
       flocke.nfs.enable = true;
     };
+    systemd.services.forgejo.unitConfig = {
+      RequiresMountsFor = "/mnt/nas/5.5tb";
+    };
   };
 }
