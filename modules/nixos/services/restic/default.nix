@@ -60,7 +60,8 @@ in
           environmentFile = config.sops.secrets.restic_environment.path;
           listenAddress = "127.0.0.1";
           port = 9753;
-          refreshInterval = 86400; # every day
+          # refreshInterval = 86400; # every day
+          refreshInterval = 10800; # every 3 hours
         };
         scrapeConfigs = [
           {
