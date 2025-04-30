@@ -16,11 +16,15 @@ in
         "f[1]s[false], gapsout:0, gapsin:0" # f = fullscreen, 1 = maximised
       ];
       windowrule = [
+        # https://wiki.hyprland.org/Configuring/Window-Rules/
+
         # Smart Gaps
         "bordersize 0, floating:0, onworkspace:w[tv1]s[false]"
         "rounding 0, floating:0, onworkspace:w[tv1]s[false]"
         "bordersize 0, floating:0, onworkspace:f[1]s[false]"
         "rounding 0, floating:0, onworkspace:f[1]s[false]"
+
+        "fullscreen, class:^(com.gabm.satty)$"
 
         "workspace 2 silent,class:^(firefox|google-chrome|zen)$"
         "workspace 4 silent,class:^(steam|lutris|com.moonlight_stream.Moonlight)$"

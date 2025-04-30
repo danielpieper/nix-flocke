@@ -65,13 +65,9 @@ in
         "CTRL_SUPER,backspace, exec,wlogout --column-spacing 50 --row-spacing 50"
 
         # Screenshot
-        ",Print, exec,grimblast --notify copysave area"
-        "SHIFT, Print, exec,grimblast --notify copy active"
-        "CONTROL,Print, exec,grimblast --notify copy screen"
-        "SUPER,Print, exec,grimblast --notify copy window"
-        "ALT,Print, exec,grimblast --notify copy area"
-        "SUPER,bracketleft, exec,grimblast --notify --cursor copysave area ~/Pictures/$(date \" + %Y-%m-%d \"T\"%H:%M:%S_no_watermark \").png"
-        "SUPER,bracketright, exec, grimblast --notify --cursor copy area"
+        ",Print, exec,${pkgs.grimblast}/bin/grimblast save area - | ${pkgs.satty}/bin/satty -f - -o ~/Pictures/Screenshots/%Y-%m-%d_%H:%M:%S.png"
+        "SHIFT, Print, exec,${pkgs.grimblast}/bin/grimblast save active - | ${pkgs.satty}/bin/satty -f - -o ~/Pictures/Screenshots/%Y-%m-%d_%H:%M:%S.png"
+        "CONTROL,Print, exec,${pkgs.grimblast}/bin/grimblast save screen - | ${pkgs.satty}/bin/satty -f - -o ~/Pictures/Screenshots/%Y-%m-%d_%H:%M:%S.png"
 
         # Focus
         "SUPER,h, movefocus,l"
