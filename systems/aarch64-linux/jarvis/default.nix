@@ -24,6 +24,7 @@
       searxng.enable = true;
       postgresql.enable = true;
       website.enable = true;
+      openwebui.enable = true;
     };
   };
 
