@@ -24,7 +24,8 @@
       searxng.enable = true;
       postgresql.enable = true;
       website.enable = true;
-      openwebui.enable = true;
+      # TODO: error: Package ‘python3.12-chromadb-0.5.20’ is marked as broken, refusing to evaluate.
+      openwebui.enable = false;
     };
   };
 
