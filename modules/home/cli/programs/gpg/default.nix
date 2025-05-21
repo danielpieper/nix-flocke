@@ -27,7 +27,7 @@ in
       enableSshSupport = true;
       enableExtraSocket = true;
       sshKeys = [ inputs.nix-secrets.user.gpgKeyID ];
-      pinentryPackage = pkgs.pinentry-gnome3;
+      pinentry.package = pkgs.pinentry-gnome3;
     };
 
     programs = {

@@ -9,9 +9,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nur = {
-      url = "github:nix-community/NUR";
-    };
+    nur.url = "github:nix-community/NUR";
 
     snowfall-lib = {
       url = "github:snowfallorg/lib";
@@ -23,9 +21,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixos-hardware = {
-      url = "github:nixos/nixos-hardware";
-    };
+    nixos-hardware.url = "github:nixos/nixos-hardware/master";
 
     sops-nix = {
       url = "github:mic92/sops-nix";
@@ -40,7 +36,7 @@
     lanzaboote.url = "github:nix-community/lanzaboote";
 
     nixgl.url = "github:nix-community/nixGL";
-    stylix.url = "github:danth/stylix";
+    stylix.url = "github:nix-community/stylix";
     catppuccin.url = "github:catppuccin/nix";
     nix-index-database.url = "github:nix-community/nix-index-database";
 
@@ -51,8 +47,10 @@
 
     nixos-anywhere = {
       url = "github:numtide/nixos-anywhere";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.disko.follows = "disko";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        disko.follows = "disko";
+      };
     };
 
     nixos-generators = {
@@ -80,9 +78,7 @@
       flake = false;
     };
 
-    zjstatus = {
-      url = "github:dj95/zjstatus";
-    };
+    zjstatus.url = "github:dj95/zjstatus";
 
     nix-topology = {
       url = "github:oddlama/nix-topology";
@@ -90,10 +86,7 @@
     };
 
     poetry2nix.url = "github:nix-community/poetry2nix";
-    authentik-nix = {
-      url = "github:nix-community/authentik-nix";
-    };
-    authentik-nix.inputs.poetry2nix.follows = "poetry2nix";
+    authentik-nix.url = "github:nix-community/authentik-nix";
 
     catppuccin-obs = {
       url = "github:catppuccin/obs";
