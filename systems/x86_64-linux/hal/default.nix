@@ -22,10 +22,7 @@
     jellyfin.enable = true;
     teslamate.enable = true;
     postgresql.enable = true;
-    monitoring = {
-      enable = true;
-      enable_mullvad = false;
-    };
+    monitoring.enable = true;
     gotify.enable = true;
     restic = {
       enable = true;
@@ -38,12 +35,6 @@
       enable-dump = true;
     };
     arr.enable = true;
-    miniflux.enable = true;
-
-    satisfactory.enable = false;
-    actual.enable = false;
-    valheim.enable = false;
-    tandoor.enable = false;
   };
 
   boot = {
