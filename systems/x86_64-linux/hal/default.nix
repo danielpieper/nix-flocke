@@ -35,6 +35,7 @@
       enable-dump = true;
     };
     arr.enable = true;
+    home-assistant.enable = true;
   };
 
   boot = {
