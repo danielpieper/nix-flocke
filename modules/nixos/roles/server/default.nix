@@ -21,7 +21,6 @@ in
 
     services = {
       flocke = {
-        #   avahi.enable = true;
         tailscale.enable = true;
       };
 

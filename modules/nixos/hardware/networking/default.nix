@@ -41,6 +41,10 @@ in
       domains = [ "~." ];
       fallbackDns = inputs.nix-secrets.networking.fallbackNameservers;
       dnsovertls = "true";
+      extraConfig = ''
+        MulticastDNS=no
+        LLMNR=no
+      '';
     };
   };
 
