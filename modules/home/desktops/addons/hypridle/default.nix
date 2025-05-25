@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib;
@@ -18,23 +19,27 @@ in
       enable = true;
       settings = {
         general = {
-          before_sleep_cmd = "loginctl lock-session";
-          after_sleep_cmd = "hyprctl dispatch dpms on";
-          lock_cmd = "pidof hyprlock || hyprlock ";
+          before_sleep_cmd = "${pkgs.playerctl}/bin/playerctl pause -i kdeconnect; loginctl lock-session";
+          # after_sleep_cmd = "hyprctl dispatch dpms on";
+          lock_cmd = "pidof hyprlock || ${pkgs.hyprlock}/bin/hyprlock ";
         };
 
         listener = [
           {
-            timeout = 300;
-            on-timeout = "loginctl lock-session";
+            timeout = 45;
+            on-timeout = "pgrep hyprlock && systemctl suspend";
           }
           {
-            timeout = 330;
-            on-timeout = "hyprctl dispatch dpms off";
-            on-resume = "hyprctl dispatch dpms on";
+            timeout = 435;
+            on-timeout = "${pkgs.flocke.dim}/bin/dim --alpha 0.7 && loginctl lock-session";
           }
+          # {
+          #   timeout = 330;
+          #   on-timeout = "hyprctl dispatch dpms off";
+          #   on-resume = "hyprctl dispatch dpms on";
+          # }
           {
-            timeout = 1800;
+            timeout = 480;
             on-timeout = "systemctl suspend";
           }
         ];
