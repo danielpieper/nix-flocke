@@ -13,7 +13,7 @@
 
 # https://github.com/marcelohdez/dim/
 # https://github.com/marcelohdez/dim/tree/master/example
-rustPlatform.buildRustPackage rec {
+rustPlatform.buildRustPackage {
   pname = "dim";
   version = "0-unstable-2023-10-15";
 
@@ -43,17 +43,6 @@ rustPlatform.buildRustPackage rec {
 
   # Run tests unless they require hardware access or are flaky
   doCheck = true;
-
-  # Add any necessary patches
-  # patches = [
-  #   ./fix-build.patch
-  # ];
-
-  # If the binary needs runtime dependencies, add them here
-  # postInstall = ''
-  #   wrapProgram $out/bin/dim \
-  #     --prefix PATH : ${lib.makeBinPath [ /* runtime deps */ ]}
-  # '';
 
   meta = with lib; {
     description = "A fast and simple brightness control utility";

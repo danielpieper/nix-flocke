@@ -20,26 +20,20 @@ in
       settings = {
         general = {
           before_sleep_cmd = "${pkgs.playerctl}/bin/playerctl pause -i kdeconnect; loginctl lock-session";
-          # after_sleep_cmd = "hyprctl dispatch dpms on";
           lock_cmd = "pidof hyprlock || ${pkgs.hyprlock}/bin/hyprlock ";
         };
 
         listener = [
           {
-            timeout = 45;
+            timeout = 60;
             on-timeout = "pgrep hyprlock && systemctl suspend";
           }
           {
-            timeout = 435;
-            on-timeout = "${pkgs.flocke.dim}/bin/dim --alpha 0.7 && loginctl lock-session";
+            timeout = 5 * 60;
+            on-timeout = "${pkgs.flocke.dim}/bin/dim --alpha 0.6 --duration 120 && loginctl lock-session";
           }
-          # {
-          #   timeout = 330;
-          #   on-timeout = "hyprctl dispatch dpms off";
-          #   on-resume = "hyprctl dispatch dpms on";
-          # }
           {
-            timeout = 480;
+            timeout = 8 * 60;
             on-timeout = "systemctl suspend";
           }
         ];
