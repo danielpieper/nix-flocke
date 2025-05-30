@@ -1,10 +1,9 @@
 {
   inputs,
-  pkgs,
   ...
 }:
 let
-  publicKey = "/home/${inputs.nix-secrets.user.name}/.ssh/${inputs.nix-secrets.work.publicKeyFilename}";
+  publicKeyWork = "/home/${inputs.nix-secrets.user.name}/.ssh/${inputs.nix-secrets.work.publicKeyFilename}";
 in
 {
   roles = {
@@ -13,23 +12,29 @@ in
   };
   desktops.hyprland.enable = true;
 
+  programs.git.includes = [
+    {
+      condition = "gitdir:~/Projects/${inputs.nix-secrets.work.company}/**";
+      contents.user = {
+        inherit (inputs.nix-secrets.work) email;
+        signingKey = publicKeyWork;
+      };
+    }
+  ];
+
   cli = {
     programs = {
-      git = {
-        inherit (inputs.nix-secrets.work) email;
-        signingKey = publicKey;
-        allowedSigners = publicKey;
-      };
+      git.allowedSigners = publicKeyWork;
       ssh.extraHosts = {
         "${inputs.nix-secrets.work.sshExtraHost}" = {
           hostname = inputs.nix-secrets.work.sshExtraHost;
-          identityFile = publicKey;
+          identityFile = publicKeyWork;
           identitiesOnly = true;
         };
       };
     };
     shells.fish.extraAbbrs = {
-      wl = "nvim ~/Documents/worklog.txt";
+      wl = "nvim ~/Documents/${inputs.nix-secrets.work.company}/worklog.txt";
     };
   };
 
@@ -40,7 +45,7 @@ in
         id = 1;
       }
     ];
-    defaultLinkProfile = inputs.nix-secrets.work.company;
+    # defaultLinkProfile = inputs.nix-secrets.work.company;
   };
 
   flocke.user = {
@@ -50,7 +55,6 @@ in
 
   home.packages = [
     inputs.ventx.packages.x86_64-linux.oidc2aws
-    pkgs.slack
   ];
 
   home.stateVersion = "23.11";
