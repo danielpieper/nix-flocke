@@ -141,8 +141,7 @@ in
               warning = 30;
               critical = 15;
             };
-            format = "{icon}{capacity}% <small>{power}W</small>";
-            format-alt = "{icon}{time} <small>{power}W</small>";
+            format-discharging = "{icon}{capacity}% <small>{time} {power}W</small>";
             format-plugged = " {capacity}%";
             format-charging = " {capacity}% <small>{timeTo}</small>";
             format-icons = [
