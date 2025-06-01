@@ -20,9 +20,15 @@
     };
   };
 
+  environment.systemPackages = [ pkgs.moonlight-qt ];
+  security.flocke = {
+    ausweisapp.enable = true;
+  };
+
   services = {
     flocke = {
       tlp.enable = true;
+      syncthing.enable = true;
     };
     fprintd.enable = true;
   };
