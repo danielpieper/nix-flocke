@@ -11,6 +11,8 @@
 
   system.impermanence.enable = true;
 
+  hardware.xone.enable = true;
+
   roles = {
     desktop = {
       enable = true;
