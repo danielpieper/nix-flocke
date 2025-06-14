@@ -22,7 +22,10 @@
     };
   };
 
-  environment.systemPackages = [ pkgs.moonlight-qt ];
+  environment.systemPackages = [
+    pkgs.moonlight-qt
+    pkgs.vlc
+  ];
   security.flocke = {
     ausweisapp.enable = true;
   };
