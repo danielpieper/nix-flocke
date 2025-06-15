@@ -34,6 +34,7 @@
     flocke = {
       tlp.enable = true;
       syncthing.enable = true;
+      nfs.enable = true;
     };
     fprintd.enable = true;
   };
