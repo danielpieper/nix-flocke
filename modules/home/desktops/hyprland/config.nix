@@ -82,8 +82,6 @@ in
         source = [ "${config.home.homeDirectory}/.config/hypr/monitors.conf" ];
 
         exec-once = [
-          "dbus-update-activation-environment --systemd --all"
-          "systemctl --user import-environment QT_QPA_PLATFORMTHEME"
           "${pkgs.kanshi}/bin/kanshi"
           "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
           "${pkgs.clipse}/bin/clipse -listen"
@@ -92,7 +90,8 @@ in
           "${pkgs._1password-gui}/bin/1password --silent"
           "${pkgs.networkmanagerapplet}/bin/nm-applet"
           "${pkgs.blueman}/bin/blueman-applet"
-        ] ++ cfg.execOnceExtras;
+        ]
+        ++ cfg.execOnceExtras;
       };
     };
   };
