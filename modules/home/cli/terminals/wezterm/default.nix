@@ -13,6 +13,7 @@ in
   };
 
   config = mkIf cfg.enable {
+    # stylix.targets.wezterm.enable = false;
     programs.wezterm = {
       enable = true;
       extraConfig = builtins.readFile ./config.lua;
