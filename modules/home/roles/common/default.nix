@@ -34,6 +34,7 @@ in
       terminals = {
         foot.enable = true;
         ghostty.enable = true;
+        wezterm.enable = true;
       };
       shells.fish.enable = true;
     };

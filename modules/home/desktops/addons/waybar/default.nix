@@ -58,7 +58,7 @@ in
               "class<(zen|firefox|google-chrome)> title<.*\\bForgejo\\b.*>" = " ";
               "class<(zen|firefox|google-chrome)> title<.*\\bGitLab\\b.*>" = " ";
 
-              "class<com.mitchellh.ghostty>" = " ";
+              "class<com.mitchellh.ghostty|org.wezfurlong.wezterm>" = " ";
               "class<com.mitchellh.ghostty> title<Zellij\\b.*>" = " ";
 
               "class<(steam|lutris|com.moonlight_stream.Moonlight)>" = " ";

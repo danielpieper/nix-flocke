@@ -31,24 +31,24 @@ in
       # };
     };
 
-    environment =
-      {
-        systemPackages = with pkgs; [
-          nfs-utils
-          dnsutils
-          ghostty.terminfo
-          alacritty.terminfo
-          kitty.terminfo
-          foot.terminfo
-        ];
-        # Print the URL instead on servers
-        variables.BROWSER = "echo";
-      }
-      // lib.optionalAttrs (lib.versionAtLeast (lib.versions.majorMinor lib.version) "24.05") {
-        # Don't install the /lib/ld-linux.so.2 and /lib64/ld-linux-x86-64.so.2
-        # stubs. Server users should know what they are doing.
-        stub-ld.enable = lib.mkDefault false;
-      };
+    environment = {
+      systemPackages = with pkgs; [
+        nfs-utils
+        dnsutils
+        ghostty.terminfo
+        alacritty.terminfo
+        kitty.terminfo
+        foot.terminfo
+        wezterm # for multiplexing
+      ];
+      # Print the URL instead on servers
+      variables.BROWSER = "echo";
+    }
+    // lib.optionalAttrs (lib.versionAtLeast (lib.versions.majorMinor lib.version) "24.05") {
+      # Don't install the /lib/ld-linux.so.2 and /lib64/ld-linux-x86-64.so.2
+      # stubs. Server users should know what they are doing.
+      stub-ld.enable = lib.mkDefault false;
+    };
 
     security = {
       sudo = {

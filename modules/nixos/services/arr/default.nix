@@ -73,7 +73,10 @@ in
         system.stateVersion = "23.11";
 
         users.groups.media = { };
-        environment.systemPackages = [ pkgs.ghostty.terminfo ];
+        environment.systemPackages = [
+          pkgs.ghostty.terminfo
+          pkgs.wezterm.terminfo
+        ];
 
         networking = {
           firewall = {
