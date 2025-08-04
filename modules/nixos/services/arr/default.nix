@@ -16,6 +16,8 @@ in
     ./prowlarr.nix
     ./radarr.nix
     ./sonarr.nix
+    ./lidarr.nix
+    ./sabnzbd.nix
     ./premiumizarr.nix
   ];
 
