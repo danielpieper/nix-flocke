@@ -1,0 +1,48 @@
+{
+  config,
+  lib,
+  inputs,
+  ...
+}:
+with lib;
+let
+  cfg = config.services.flocke.navidrome;
+in
+{
+  options.services.flocke.navidrome = {
+    enable = mkEnableOption "Enable the navidrome service";
+  };
+
+  config = mkIf cfg.enable {
+    services = {
+      navidrome = {
+        enable = true;
+        settings = {
+          MusicFolder = "/mnt/nas/11tb/media/music";
+          BaseUrl = "https://navidrome.homelab.${inputs.nix-secrets.domain}";
+          # ReverseProxyUserHeader = "X-Authentik-Name";
+          # ReverseProxyWhitelist = "0.0.0.0/0";
+        };
+      };
+
+      traefik = {
+        dynamicConfigOptions = {
+          http = {
+            services = {
+              navidrome.loadBalancer.servers = [ { url = "http://localhost:4533"; } ];
+            };
+
+            routers = {
+              navidrome = {
+                entryPoints = [ "websecure" ];
+                rule = "Host(`navidrome.homelab.${inputs.nix-secrets.domain}`)";
+                service = "navidrome";
+                # middlewares = [ "authentik" ];
+              };
+            };
+          };
+        };
+      };
+    };
+  };
+}

@@ -60,11 +60,7 @@ in
       dynamicConfigOptions = {
         http = {
           services = {
-            adguardhome.loadBalancer.servers = [
-              {
-                url = "http://localhost:3000";
-              }
-            ];
+            adguardhome.loadBalancer.servers = [ { url = "http://localhost:3000"; } ];
           };
 
           routers = {

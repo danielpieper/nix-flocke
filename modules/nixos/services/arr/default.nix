@@ -16,7 +16,9 @@ in
     ./prowlarr.nix
     ./radarr.nix
     ./sonarr.nix
-    ./lidarr.nix
+    # replaced by headphones
+    # ./lidarr.nix
+    ./headphones.nix
     ./sabnzbd.nix
     ./premiumizarr.nix
   ];

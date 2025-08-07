@@ -20,6 +20,7 @@
     authentik.enable = true;
     nfs.enable = true;
     jellyfin.enable = true;
+    navidrome.enable = true;
     teslamate.enable = true;
     postgresql.enable = true;
     monitoring.enable = true;

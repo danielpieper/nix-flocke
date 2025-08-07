@@ -47,6 +47,7 @@ in
             };
           };
         };
+        systemd.services.sabnzbd.serviceConfig.UMask = "0002";
       };
     };
   };
