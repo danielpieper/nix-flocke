@@ -24,7 +24,13 @@ in
 
   cli = {
     programs = {
-      git.allowedSigners = publicKeyWork;
+      git = {
+        allowedSigners = publicKeyWork;
+        urlRewrites = {
+          "ssh://forgejo@forgejo.homelab.${inputs.nix-secrets.domain}" =
+            "https://forgejo.homelab.${inputs.nix-secrets.domain}";
+        };
+      };
       ssh.extraHosts = {
         "${inputs.nix-secrets.work.sshExtraHost}" = {
           hostname = inputs.nix-secrets.work.sshExtraHost;
@@ -53,9 +59,13 @@ in
     inherit (inputs.nix-secrets.user) name;
   };
 
-  home.packages = [
-    inputs.ventx.packages.x86_64-linux.oidc2aws
-  ];
-
-  home.stateVersion = "23.11";
+  home = {
+    sessionVariables = {
+      GOPRIVATE = "forgejo.homelab.${inputs.nix-secrets.domain}";
+    };
+    packages = [
+      inputs.ventx.packages.x86_64-linux.oidc2aws
+    ];
+    stateVersion = "23.11";
+  };
 }
