@@ -171,6 +171,7 @@
       systems.hosts = {
         tars.modules = with inputs; [ nixos-hardware.nixosModules.lenovo-thinkpad-x1-9th-gen ];
         case.modules = with inputs; [ nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen1 ];
+        ava.modules = with inputs; [ nixos-hardware.nixosModules.lenovo-thinkpad-x250 ];
       };
 
       homes.modules = with inputs; [
