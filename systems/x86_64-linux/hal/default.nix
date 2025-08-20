@@ -9,6 +9,10 @@
     ./disks.nix
   ];
 
+  environment.systemPackages = with pkgs; [
+    beets
+  ];
+
   system.impermanence.enable = true;
 
   roles = {

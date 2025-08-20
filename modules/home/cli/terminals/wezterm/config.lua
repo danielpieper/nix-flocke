@@ -23,18 +23,19 @@ config.default_prog = { "fish", "-l" }
 config.front_end = "WebGpu"
 
 -- Appearance
-config.font_size = 14
+config.font_size = 13
 -- defined by stylix
 -- config.color_scheme = "Catppuccin Mocha"
 config.use_fancy_tab_bar = true
 config.tab_bar_at_bottom = true
 config.hide_tab_bar_if_only_one_tab = false
 config.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
+config.command_palette_font_size = 16
 
 -- see https://wezterm.org/config/appearance.html#native-fancy-tab-bar-appearance
 config.window_frame = {
 	font = wezterm.font({ family = "Inter", weight = "Bold" }),
-	font_size = 14,
+	font_size = 13,
 	active_titlebar_bg = "#1e1e2e",
 	inactive_titlebar_bg = "#1e1e2e",
 }
