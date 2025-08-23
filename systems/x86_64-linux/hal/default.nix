@@ -11,6 +11,7 @@
 
   environment.systemPackages = with pkgs; [
     beets
+    ffmpeg
   ];
 
   system.impermanence.enable = true;

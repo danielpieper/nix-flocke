@@ -66,7 +66,7 @@ in
             services = {
               auth.loadBalancer.servers = [
                 {
-                  url = "http://localhost:9000";
+                  url = "http://localhost:9000/outpost.goauthentik.io";
                 }
               ];
             };

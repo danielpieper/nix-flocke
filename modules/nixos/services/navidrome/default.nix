@@ -18,10 +18,11 @@ in
       navidrome = {
         enable = true;
         settings = {
-          MusicFolder = "/mnt/nas/11tb/media/music";
+          MusicFolder = "/mnt/nas/11tb/media/music/library";
           BaseUrl = "https://navidrome.homelab.${inputs.nix-secrets.domain}";
-          # ReverseProxyUserHeader = "X-Authentik-Name";
-          # ReverseProxyWhitelist = "0.0.0.0/0";
+          PlaylistsPath = "playlists";
+          ReverseProxyUserHeader = "X-Authentik-Name";
+          ReverseProxyWhitelist = "0.0.0.0/0";
         };
       };
 
@@ -35,9 +36,16 @@ in
             routers = {
               navidrome = {
                 entryPoints = [ "websecure" ];
-                rule = "Host(`navidrome.homelab.${inputs.nix-secrets.domain}`)";
+                rule = "Host(`navidrome.homelab.${inputs.nix-secrets.domain}`) && !PathPrefix(`/rest/`)";
+                priority = 1;
                 service = "navidrome";
-                # middlewares = [ "authentik" ];
+                middlewares = [ "authentik" ];
+              };
+              navidrome-api = {
+                entryPoints = [ "websecure" ];
+                rule = "Host(`navidrome.homelab.${inputs.nix-secrets.domain}`) && PathPrefix(`/rest/`)";
+                priority = 99;
+                service = "navidrome";
               };
             };
           };
