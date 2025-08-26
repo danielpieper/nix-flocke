@@ -50,13 +50,13 @@ in
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {
       bind = [
-        "SUPER, Return, exec, wezterm"
+        "SUPER, Return, exec, uwsm app -- wezterm start --always-new-process"
         "SUPER, Q, killactive,"
         "SUPER, F, Fullscreen,0"
         "SUPER, S, togglesplit"
         "SUPER, B, togglefloating,"
         "SUPER, R, exec, ${resize}/bin/resize"
-        "SUPER, Space, exec, ${config.desktops.addons.rofi.package}/bin/rofi -show drun -mode drun"
+        "SUPER, Space, exec, ${config.desktops.addons.rofi.package}/bin/rofi -show drun -mode drun -run-command \"uwsm app -- {cmd}\""
 
         # Lock Screen
         ",XF86Launch5, exec,${pkgs.hyprlock}/bin/hyprlock"
