@@ -10,7 +10,7 @@ let
 in
 {
   options.desktops.addons.kanshi = {
-    enable = mkEnableOption "Enable kanshi display addon";
+    enable = mkEnableOption "Enable kanshi display addon (similar to autorandr)";
   };
 
   config = mkIf cfg.enable {
