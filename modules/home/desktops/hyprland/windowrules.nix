@@ -32,8 +32,8 @@ in
 
         # TODO: Does not work to float all windows on the special workspace:
         # "float, workspace:special"
-        "float,class:^(Signal|signal|1Password)$"
-        "workspace special,class:^(Signal|signal|1Password)$"
+        "float,class:^(Signal|signal|1Password|.blueman-manager-wrapped|org.pulseaudio.pavucontrol)$"
+        "workspace special,class:^(Signal|signal|1Password|.blueman-manager-wrapped|org.pulseaudio.pavucontrol)$"
 
         "idleinhibit fullscreen, class:^(firefox|google-chrome|zen)$"
 
