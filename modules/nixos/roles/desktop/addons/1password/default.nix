@@ -7,8 +7,8 @@ with lib;
 with lib.flocke;
 let
   cfg = config.roles.desktop.addons._1password;
-  onePassPath = "~/.1password/agent.sock";
   username = config.user.name;
+  onePassPath = "/home/${username}/.1password/agent.sock";
 in
 {
   options.roles.desktop.addons._1password = {
@@ -22,18 +22,21 @@ in
         enable = true;
         polkitPolicyOwners = [ username ];
       };
+      ssh.extraConfig = ''
+        Host *
+           IdentityAgent ${onePassPath}
+      '';
     };
 
-    programs.ssh.extraConfig = ''
-      IdentityAgent ${onePassPath}
-    '';
-
-    environment.etc = {
-      "1password/custom_allowed_browsers" = {
-        text = ''
-          zen
-        '';
-        mode = "0755";
+    environment = {
+      variables.SSH_AUTH_SOCK = onePassPath;
+      etc = {
+        "1password/custom_allowed_browsers" = {
+          text = ''
+            zen
+          '';
+          mode = "0755";
+        };
       };
     };
   };

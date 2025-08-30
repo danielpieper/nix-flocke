@@ -26,7 +26,7 @@ in
         eza.enable = true;
         fzf.enable = true;
         git.enable = true;
-        gpg.enable = true;
+        gpg.enable = false;
         btop.enable = true;
         k8s.enable = true;
         iac.enable = true;

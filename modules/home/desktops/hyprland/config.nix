@@ -81,7 +81,7 @@ in
 
         source = [ "${config.home.homeDirectory}/.config/hypr/monitors.conf" ];
 
-        exec-once = [
+        execr-once = [
           "${pkgs.kanshi}/bin/kanshi"
           "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
           "${pkgs.clipse}/bin/clipse -listen"
