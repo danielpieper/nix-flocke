@@ -34,6 +34,7 @@ in
             "idle_inhibitor"
           ];
           modules-right = [
+            "cpu"
             "backlight"
             "pulseaudio"
             "network"
@@ -187,6 +188,20 @@ in
           systemd-failed-units = {
             hide-on-ok = true;
             format = "{nr_failed} 󰚌 ";
+          };
+          cpu = {
+            interval = 2;
+            format = "{icon0}{icon1}{icon2}{icon3}{icon4}{icon5}{icon6}{icon7}";
+            format-icons = with config.lib.stylix.colors.withHashtag; [
+              "<span color='${base03}'>▁</span>" # white
+              "<span color='${base04}'>▂</span>" # white
+              "<span color='${base0D}'>▃</span>" # blue
+              "<span color='${base0B}'>▄</span>" # green
+              "<span color='${base0A}'>▅</span>" # yellow
+              "<span color='${base0A}'>▆</span>" # yellow
+              "<span color='${base09}'>▇</span>" # orange
+              "<span color='${base08}'>█</span>" # red
+            ];
           };
         }
       ];
