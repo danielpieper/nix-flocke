@@ -20,6 +20,7 @@ in
       podman-compose
       podman-tui
       amazon-ecr-credential-helper
+      iptables
     ];
   };
 }

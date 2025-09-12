@@ -40,7 +40,7 @@ in
         virtualisation.podman.enable = true;
         tailscale.enable = true;
       };
-      logind.powerKey = "suspend";
+      logind.settings.Login.HandlePowerKey = "suspend";
     };
 
     system = {

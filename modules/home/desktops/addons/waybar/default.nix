@@ -144,7 +144,7 @@ in
             };
             format-discharging = "{icon}{capacity}% <small>{time} {power}W</small>";
             format-plugged = " {capacity}%";
-            format-charging = " {capacity}% <small>{timeTo}</small>";
+            format-charging = " {capacity}% <small>{time} {power}W</small>";
             format-icons = [
               "󰁻 "
               "󰁽 "

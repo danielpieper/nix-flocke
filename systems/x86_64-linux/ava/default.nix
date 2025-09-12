@@ -21,7 +21,7 @@
       restic.enable = true;
       monitoring.enable_exporter = true;
     };
-    logind.lidSwitchExternalPower = "ignore";
+    logind.settings.Login.HandleLidSwitchExternalPower = "ignore";
   };
 
   boot = {
