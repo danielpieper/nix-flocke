@@ -75,8 +75,8 @@ in
         ruff
 
         markdownlint-cli2
+        dockerfile-language-server
         nodePackages.bash-language-server
-        nodePackages.dockerfile-language-server-nodejs
         nodePackages.vscode-langservers-extracted
         nodePackages.vscode-json-languageserver
         nodePackages.typescript-language-server

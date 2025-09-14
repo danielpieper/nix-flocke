@@ -49,6 +49,9 @@ in
 {
   config = mkIf cfg.enable {
     wayland.windowManager.hyprland.settings = {
+      gesture = [
+        "3, horizontal, workspace"
+      ];
       bind = [
         "SUPER, Return, exec, uwsm app -- wezterm start --always-new-process"
         "SUPER, Q, killactive,"

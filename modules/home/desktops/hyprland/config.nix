@@ -57,7 +57,6 @@ in
           border_size = 3;
         };
 
-        gestures.workspace_swipe = true;
         decoration = {
           rounding = 5;
         };
