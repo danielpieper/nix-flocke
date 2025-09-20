@@ -21,7 +21,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    tuxedo-rs
     moonlight-qt
     vlc
   ];
@@ -31,7 +30,6 @@
       tlp.enable = true;
       syncthing.enable = true;
     };
-    fprintd.enable = true;
   };
 
   networking.hostName = "tars";
@@ -44,6 +42,11 @@
     supportedFilesystems = lib.mkForce [ "btrfs" ];
     kernelPackages = pkgs.linuxPackages_latest;
     resumeDevice = "/dev/disk/by-label/nixos";
+  };
+
+  hardware.tuxedo-rs = {
+    enable = true;
+    tailor-gui.enable = true;
   };
 
   system.stateVersion = "23.11";

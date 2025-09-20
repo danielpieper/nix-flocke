@@ -48,6 +48,8 @@ in
           touchpad = {
             disable_while_typing = false;
             natural_scroll = true;
+            clickfinger_behavior = true;
+            tap-to-click = false;
           };
         };
 
