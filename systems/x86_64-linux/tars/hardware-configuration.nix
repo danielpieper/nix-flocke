@@ -2,7 +2,6 @@
 # and may be overwritten by future invocations.  Please make changes
 # to /etc/nixos/configuration.nix instead.
 {
-  config,
   lib,
   modulesPath,
   ...
@@ -14,15 +13,19 @@
 
   boot = {
     initrd.availableKernelModules = [
+      "nvme"
       "xhci_pci"
       "thunderbolt"
-      "nvme"
       "usb_storage"
       "sd_mod"
+      "sdhci_pci"
     ];
     initrd.kernelModules = [ ];
-    kernelModules = [ "kvm-intel" ];
-    extraModulePackages = [ ];
+    kernelModules = [ "kvm-amd" ];
+    kernelParams = [
+      "acpi.ec_no_wakeup=1" # Fixes ACPI wakeup issues
+      "amdgpu.dcdebugmask=0x10" # Fixes Wayland slowdowns/freezes
+    ];
   };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
@@ -35,5 +38,4 @@
   # networking.interfaces.wlp1s0.useDHCP = lib.mkDefault true;
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

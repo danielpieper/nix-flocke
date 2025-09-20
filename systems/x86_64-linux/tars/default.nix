@@ -20,7 +20,11 @@
     };
   };
 
-  environment.systemPackages = [ pkgs.moonlight-qt ];
+  environment.systemPackages = with pkgs; [
+    tuxedo-rs
+    moonlight-qt
+    vlc
+  ];
 
   services = {
     flocke = {

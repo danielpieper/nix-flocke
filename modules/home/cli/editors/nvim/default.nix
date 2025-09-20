@@ -26,68 +26,79 @@ in
       # ensure init.lua is not written by home manager:
       plugins = lib.mkForce [ ];
       extraPackages = with pkgs; [
-        # Avante/ Treesitter
+        # for mason:
         gcc
         gnumake
-
-        lazygit
-        stylua
-        fd
-        rust-analyzer
-        tree-sitter
+        rustc
+        cargo
         nodejs
-        pgformatter
-        marksman
-        sqlfluff
-        vtsls
-        hadolint
-
-        # Golang:
-        go-tools
-        gotools
-        gopls
-        gofumpt
-        delve # debugger
-        gomodifytags
-        impl
-        golangci-lint
-        golangci-lint-langserver
 
         # Nix
-        nil
         nixfmt-rfc-style
         deadnix
         statix
 
+        # marksman
+
+        # previous config without mason:
+        # lazygit
+        # stylua
+        # fd
+        # rust-analyzer
+        # tree-sitter
+        # nodejs
+        # pgformatter
+        # marksman
+        # sqlfluff
+        # vtsls
+        # hadolint
+
+        # Golang:
+        # go-tools
+        # gotools
+        # gopls
+        # gofumpt
+        # delve # debugger
+        # gomodifytags
+        # impl
+        # golangci-lint
+        # golangci-lint-langserver
+
+        # Nix
+        # nil
+        # nixfmt-rfc-style
+        # deadnix
+        # statix
+
         # Terraform
-        terraform
-        terraform-ls
-        tflint
+        # terraform
+        # terraform-ls
+        # tflint
 
         # Helm
-        kubernetes-helm
-        helm-ls
+        # kubernetes-helm
+        # helm-ls
 
-        ansible
+        # ansible
 
         # Python
-        pyright
-        ruff
+        # pyright
+        # ruff
 
-        markdownlint-cli2
-        dockerfile-language-server
-        nodePackages.bash-language-server
-        nodePackages.vscode-langservers-extracted
-        nodePackages.vscode-json-languageserver
-        nodePackages.typescript-language-server
-        nodePackages.typescript
-        nodePackages.yaml-language-server
-        nodePackages.vim-language-server
+        # markdownlint-cli2
+        # dockerfile-language-server
+        # nodePackages.bash-language-server
+        # nodePackages.vscode-langservers-extracted
+        # nodePackages.vscode-json-languageserver
+        # nodePackages.typescript-language-server
+        # nodePackages.typescript
+        # nodePackages.yaml-language-server
+        # nodePackages.vim-language-server
         # nodePackages.vue-language-server
-        nodePackages.intelephense
-        nodePackages."@tailwindcss/language-server"
-        nodePackages.tailwindcss
-        sumneko-lua-language-server
+        # nodePackages.intelephense
+        # nodePackages."@tailwindcss/language-server"
+        # nodePackages.tailwindcss
+        # sumneko-lua-language-server
       ];
     };
 

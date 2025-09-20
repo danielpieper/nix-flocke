@@ -1,7 +1,14 @@
-{ lib, ... }:
+{ lib, config, ... }:
 {
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
+
+    # Add Motorcomm YT6801 Driver if available
+    extraModulePackages =
+      with config.boot;
+      lib.lists.optional (kernelPackages ? yt6801) kernelPackages.yt6801;
+  };
 
   networking.wireless.enable = lib.mkForce false;
   networking.networkmanager.enable = true;

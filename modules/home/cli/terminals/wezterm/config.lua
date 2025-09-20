@@ -23,7 +23,7 @@ config.default_prog = { "fish", "-l" }
 config.front_end = "WebGpu"
 
 -- Appearance
-config.font_size = 13
+config.font_size = 16
 -- defined by stylix
 -- config.color_scheme = "Catppuccin Mocha"
 config.use_fancy_tab_bar = true
