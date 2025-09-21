@@ -26,10 +26,10 @@
   ];
 
   services = {
-    flocke = {
-      tlp.enable = true;
-      syncthing.enable = true;
-    };
+    flocke.syncthing.enable = true;
+
+    # Let TUXEDO Control Center handle CPU frequencies
+    power-profiles-daemon.enable = false;
   };
 
   networking.hostName = "tars";
@@ -44,10 +44,12 @@
     resumeDevice = "/dev/disk/by-label/nixos";
   };
 
-  hardware.tuxedo-rs = {
-    enable = true;
-    tailor-gui.enable = true;
-  };
+  # https://fnune.com/hardware/2025/07/20/nixos-on-a-tuxedo-infinitybook-pro-14-gen9-amd/
+  hardware.tuxedo-control-center.enable = true;
+  # hardware.tuxedo-rs = {
+  #   enable = true;
+  #   tailor-gui.enable = true;
+  # };
 
   system.stateVersion = "23.11";
 }

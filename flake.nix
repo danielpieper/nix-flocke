@@ -132,6 +132,8 @@
       url = "git+ssh://forgejo@forgejo.homelab.daniel-pieper.com/daniel/projecty.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    tuxedo-nixos.url = "github:danielpieper/tuxedo-nixos";
   };
 
   outputs =
@@ -171,6 +173,7 @@
         authentik-nix.nixosModules.default
         teslamate.nixosModules.default
         nixos-dns.nixosModules.dns
+        tuxedo-nixos.nixosModules.default
       ];
 
       systems.hosts = {
