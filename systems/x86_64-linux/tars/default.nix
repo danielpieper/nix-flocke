@@ -18,6 +18,7 @@
         hyprland.enable = true;
       };
     };
+    gaming.enable = true;
   };
 
   environment.systemPackages = with pkgs; [

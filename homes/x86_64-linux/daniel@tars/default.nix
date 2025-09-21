@@ -9,6 +9,7 @@ in
   roles = {
     desktop.enable = true;
     social.enable = true;
+    gaming.enable = true;
   };
   desktops.hyprland.enable = true;
 
