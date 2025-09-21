@@ -37,7 +37,9 @@ in
 
     services.resolved = {
       enable = true;
-      dnssec = "true";
+      # At the time of September 2023, systemd upstream advise to disable DNSSEC by default as the current code is not robust enough
+      # to deal with “in the wild” non-compliant servers, which will usually give you a broken bad experience in addition of insecure.
+      dnssec = "false";
       domains = [ "~." ];
       fallbackDns = inputs.nix-secrets.networking.fallbackNameservers;
       dnsovertls = "true";
