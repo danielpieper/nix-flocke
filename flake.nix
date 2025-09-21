@@ -127,6 +127,11 @@
       url = "github:Janik-Haag/nixos-dns";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    projecty = {
+      url = "git+ssh://forgejo@forgejo.homelab.daniel-pieper.com/daniel/projecty.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

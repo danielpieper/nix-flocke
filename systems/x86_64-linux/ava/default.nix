@@ -20,7 +20,7 @@
       traefik.enable = true;
       restic.enable = true;
       monitoring.enable_exporter = true;
-      postgresql.enable = true;
+      projecty.enable = true;
     };
     logind.settings.Login.HandleLidSwitchExternalPower = "ignore";
   };

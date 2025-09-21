@@ -25,6 +25,10 @@
     kernelParams = [
       "acpi.ec_no_wakeup=1" # Fixes ACPI wakeup issues
       "amdgpu.dcdebugmask=0x10" # Fixes Wayland slowdowns/freezes
+      "i8042.reset" # Fixes Keyboard issues: https://www.tuxedocomputers.com/en/Infos/Help-Support/Help-for-my-device/TUXEDO-Book-XC-series/TUXEDO-Book-XC17-Gen11/Keyboard-not-working-properly.tuxedo
+      "i8042.nomux"
+      "i8042.nopnp"
+      "i8042.noloop"
     ];
   };
 

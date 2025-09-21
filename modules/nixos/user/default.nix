@@ -51,6 +51,8 @@ in
       neededForUsers = true;
     };
 
+    services.getty.autologinUser = cfg.name;
+
     # security = {
     #   sudo = {
     #     wheelNeedsPassword = false;
