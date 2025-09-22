@@ -2017,11 +2017,11 @@
         "pre-commit-hooks": "pre-commit-hooks_3"
       },
       "locked": {
-        "lastModified": 1758443125,
-        "narHash": "sha256-b6iAz/1f6qPdMmIBG1XepGdTFHortw5sC487GhYpeLw=",
+        "lastModified": 1758486205,
+        "narHash": "sha256-s7fSGi+gm9dwJ1E4kB7KhZgShLtCgepEpBtSPQ/2dhM=",
         "ref": "refs/heads/main",
-        "rev": "00d33b2e873874c14b4a034e12771d60d60823d7",
-        "revCount": 22,
+        "rev": "b32569b9fc216440a3b660c44228917141c790cd",
+        "revCount": 23,
         "type": "git",
         "url": "ssh://forgejo@forgejo.homelab.daniel-pieper.com/daniel/projecty.git"
       },

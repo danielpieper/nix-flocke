@@ -19,8 +19,8 @@ in
       enable = true;
       enableSessionWide = true;
       settings = {
-        cpu_load_change = true;
-        # preset = 2;
+        # cpu_load_change = true;
+        preset = 2;
       };
     };
 
