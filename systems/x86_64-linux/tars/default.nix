@@ -31,6 +31,7 @@
 
     # Let TUXEDO Control Center handle CPU frequencies
     power-profiles-daemon.enable = false;
+    upower.enable = true;
   };
 
   networking.hostName = "tars";
