@@ -23,8 +23,8 @@ in
       user = username;
       inherit group;
       dataDir = homedir;
-      overrideDevices = true; # overrides any devices added or deleted through the WebUI
-      overrideFolders = true; # overrides any folders added or deleted through the WebUI
+      overrideDevices = false; # overrides any devices added or deleted through the WebUI
+      overrideFolders = false; # overrides any folders added or deleted through the WebUI
       openDefaultPorts = true; # 21027/tcp & 22000
       settings = {
         inherit (inputs.nix-secrets.syncthing) devices folders;

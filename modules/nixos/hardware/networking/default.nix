@@ -18,6 +18,7 @@ in
     networking = {
       firewall = {
         enable = true;
+        # TODO: check the reason for this:
         allowedTCPPortRanges = [
           {
             from = 1714;
@@ -31,10 +32,15 @@ in
           }
         ];
       };
-      networkmanager.enable = true;
+      networkmanager = {
+        enable = true;
+        # dns = "none";
+      };
+      useDHCP = false;
+      dhcpcd.enable = false;
+      resolvconf.enable = false;
       inherit (inputs.nix-secrets.networking) nameservers;
     };
-
     services.resolved = {
       enable = true;
       # At the time of September 2023, systemd upstream advise to disable DNSSEC by default as the current code is not robust enough
@@ -49,5 +55,4 @@ in
       '';
     };
   };
-
 }

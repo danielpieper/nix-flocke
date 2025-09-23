@@ -32,5 +32,7 @@
     kernelParams = [ "consoleblank=300" ];
   };
 
+  networking.networkmanager.wifi.powersave = true;
+
   system.stateVersion = "23.11";
 }
