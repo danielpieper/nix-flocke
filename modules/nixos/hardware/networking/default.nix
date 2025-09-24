@@ -48,11 +48,12 @@ in
       dnssec = "false";
       domains = [ "~." ];
       fallbackDns = inputs.nix-secrets.networking.fallbackNameservers;
-      dnsovertls = "true";
+      dnsovertls = "opportunistic";
       extraConfig = ''
         MulticastDNS=no
         LLMNR=no
       '';
     };
+    # systemd.services.systemd-resolved.environment.SYSTEMD_LOG_LEVEL = "debug";
   };
 }
