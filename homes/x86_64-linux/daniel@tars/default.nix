@@ -1,5 +1,6 @@
 {
   inputs,
+  config,
   ...
 }:
 let
@@ -60,9 +61,11 @@ in
     inherit (inputs.nix-secrets.user) name;
   };
 
+  sops.secrets.opServiceAccountToken = { };
   home = {
     sessionVariables = {
       GOPRIVATE = "forgejo.homelab.${inputs.nix-secrets.domain}";
+      OP_SERVICE_ACCOUNT_TOKEN = "$(cat ${config.sops.secrets.opServiceAccountToken.path})";
     };
     packages = [
       inputs.ventx.packages.x86_64-linux.oidc2aws
