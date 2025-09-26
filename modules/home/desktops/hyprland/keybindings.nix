@@ -77,10 +77,10 @@ in
         "SUPER,l, movefocus,r"
         "SUPER,k, movefocus,u"
         "SUPER,j, movefocus,d"
-        "SUPERCONTROL,h, focusmonitor,l"
-        "SUPERCONTROL,l, focusmonitor,r"
-        "SUPERCONTROL,k, focusmonitor,u"
-        "SUPERCONTROL,j, focusmonitor,d"
+        # "SUPERCONTROL,h, focusmonitor,l"
+        # "SUPERCONTROL,l, focusmonitor,r"
+        # "SUPERCONTROL,k, focusmonitor,u"
+        # "SUPERCONTROL,j, focusmonitor,d"
 
         # Change Workspace
         "SUPER,1, workspace,01"
@@ -109,10 +109,10 @@ in
         "SUPERALT,l, movecurrentworkspacetomonitor,r"
         "SUPERALT,k, movecurrentworkspacetomonitor,u"
         "SUPERALT,j, movecurrentworkspacetomonitor,d"
-        "ALTCTRL,L, movewindow,r"
-        "ALTCTRL,H, movewindow,l"
-        "ALTCTRL,K, movewindow,u"
-        "ALTCTRL,J, movewindow,d"
+        # "ALTCTRL,L, movewindow,r"
+        # "ALTCTRL,H, movewindow,l"
+        # "ALTCTRL,K, movewindow,u"
+        # "ALTCTRL,J, movewindow,d"
 
         # Swap windows
         "SUPERSHIFT,h, swapwindow,l"

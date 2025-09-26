@@ -32,6 +32,7 @@ in
           }
         ];
       };
+      # Configure networkmanager connections to only use DHCP without DNS settings
       networkmanager = {
         enable = true;
         # dns = "none";
