@@ -10,7 +10,7 @@
 }
 
 window#waybar {
-  background-color: @base00;
+  background-color: #11111b; /* Mocha Crust: https://catppuccin.com/palette/ */
   padding: 0 5px;
 }
 

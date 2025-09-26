@@ -28,5 +28,5 @@ topology:
 
 dns:
 	nix build .#octodns
-	HETZNER_DNS_API=$(op read "op://Private/Hetzner/octodns api token") octodns-sync --config-file=./result
-	@read -p "apply? (y/N): " answer && [ "$answer" = "y" ] && HETZNER_DNS_API=$(op read "op://Private/Hetzner/octodns api token") octodns-sync --config-file=./result --doit || echo "Skipped applying changes"
+	OP_SERVICE_ACCOUNT_TOKEN="" HETZNER_DNS_API=$(op read "op://Private/Hetzner/octodns api token") octodns-sync --config-file=./result
+	@read -p "apply? (y/N): " answer && [ "$answer" = "y" ] && OP_SERVICE_ACCOUNT_TOKEN="" HETZNER_DNS_API=$(op read "op://Private/Hetzner/octodns api token") octodns-sync --config-file=./result --doit || echo "Skipped applying changes"

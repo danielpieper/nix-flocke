@@ -35,11 +35,19 @@ in
           ];
           modules-right = [
             "cpu"
+            "temperature"
             "backlight"
             "pulseaudio"
             "network"
             "battery"
           ];
+          temperature = {
+            # "thermal-zone": 2,
+            # "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+            # "critical-threshold": 80,
+            # "format-critical": "{temperatureC}°C ",
+            format = " {temperatureC}°C";
+          };
           "hyprland/workspaces" = {
             active-only = false;
             all-outputs = true;
@@ -142,9 +150,9 @@ in
               warning = 30;
               critical = 15;
             };
-            format-discharging = "{icon}{capacity}% <small>{time} {power}W</small>";
+            format-discharging = "{icon}{capacity}% <small>{time} {power:.0f}W</small>";
             format-plugged = " {capacity}%";
-            format-charging = " {capacity}% <small>{time} {power}W</small>";
+            format-charging = " {capacity}% <small>{time} {power:.0f}W</small>";
             format-icons = [
               "󰁻 "
               "󰁽 "

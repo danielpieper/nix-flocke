@@ -21,6 +21,7 @@
       restic.enable = true;
       monitoring.enable_exporter = true;
       projecty.enable = true;
+      n8n.enable = true;
     };
     logind.settings.Login.HandleLidSwitchExternalPower = "ignore";
   };
