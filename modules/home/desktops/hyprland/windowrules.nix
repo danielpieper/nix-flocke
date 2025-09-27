@@ -27,7 +27,7 @@ in
         "fullscreen, class:^(com.gabm.satty)$"
 
         "workspace 2 silent,class:^(firefox|google-chrome|zen)$"
-        "workspace 4 silent,class:^(steam|lutris|com.moonlight_stream.Moonlight)$"
+        "workspace 4 silent,class:^(steam|lutris|com.moonlight_stream.Moonlight|chiaki)$"
         "workspace 5 silent,class:^(discord|Slack|goofcord)$"
 
         # TODO: Does not work to float all windows on the special workspace:
@@ -35,7 +35,7 @@ in
         "float,class:^(Signal|signal|1Password|.blueman-manager-wrapped|org.pulseaudio.pavucontrol)$"
         "workspace special,class:^(Signal|signal|1Password|.blueman-manager-wrapped|org.pulseaudio.pavucontrol)$"
 
-        "idleinhibit fullscreen, class:^(firefox|google-chrome|zen)$"
+        "idleinhibit fullscreen, class:^(firefox|google-chrome|zen|chiaki)$"
 
         "suppressevent fullscreen,class:^(firefox)$,title:^(Picture-in-Picture|Firefox)$"
         "float,class:^(firefox)$,title:^(Picture-in-Picture|Firefox)$"

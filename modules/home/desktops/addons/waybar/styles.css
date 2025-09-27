@@ -6,7 +6,8 @@
   padding: 0;
   font-family: "Inter Variable", "Symbols Nerd Font";
   font-feature-settings: '"calt"'; /* see https://rsms.me/inter/#features */
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: 600;
 }
 
 window#waybar {
@@ -17,7 +18,7 @@ window#waybar {
 #workspaces button {
   border-radius: 10px;
   color: @base03;
-  padding: 4px;
+  padding: 2px;
   margin: 6px 4px;
   transition:
     background-color 0.3s ease-in-out,
@@ -69,6 +70,7 @@ window#waybar {
 
 #workspaces,
 #clock,
+#temperature,
 #battery,
 #network,
 #tray,
@@ -178,6 +180,10 @@ window#waybar {
   to {
     color: @base08;
   }
+}
+
+#temperature {
+  color: @base07;
 }
 
 #network {

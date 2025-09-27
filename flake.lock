@@ -2627,11 +2627,11 @@
         "nixpkgs": "nixpkgs_14"
       },
       "locked": {
-        "lastModified": 1758457690,
-        "narHash": "sha256-xyG40fpLBqO+0e/OQUI9jBV10HUV+io/8EcbK79BIWA=",
+        "lastModified": 1758951969,
+        "narHash": "sha256-3R1mMoRmqKzVDUuRg82L3pn1O/7wdFddiewme3KhG6E=",
         "owner": "danielpieper",
         "repo": "tuxedo-nixos",
-        "rev": "389add2bea32c8c33a80305661b8028ac9a3b08d",
+        "rev": "f1d4bc95619309f4220587be3df2a6289091d333",
         "type": "github"
       },
       "original": {

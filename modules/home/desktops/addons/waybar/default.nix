@@ -165,7 +165,8 @@ in
             interval = 1;
             format-wifi = " {essid}";
             format-ethernet = " 󰈀 ";
-            format-disconnected = " 󱚵  ";
+            format-disconnected = " 󱚵 ";
+            max-length = 12;
             tooltip-format = ''
               {ifname}
               {ipaddr}/{cidr}
