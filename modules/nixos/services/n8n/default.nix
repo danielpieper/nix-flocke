@@ -9,6 +9,10 @@ let
   cfg = config.services.flocke.n8n;
 in
 {
+  imports = [
+    ./webhook.nix
+  ];
+
   options.services.flocke.n8n = {
     enable = mkEnableOption "Enable n8n";
   };
@@ -17,8 +21,8 @@ in
     services = {
       n8n = {
         enable = true;
-        openFirewall = true;
-        webhookUrl = "https://n8n.homelab.${inputs.nix-secrets.domain}";
+        openFirewall = true; # TODO: is this needed behind reverse proxy?
+        webhookUrl = "https://n8nhook.${inputs.nix-secrets.domain}";
       };
       traefik = {
         dynamicConfigOptions = {

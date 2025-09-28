@@ -9,6 +9,8 @@
     ./disks.nix
   ];
 
+  # nmcli device modify enp1s0 ipv4.method auto
+
   system.impermanence.enable = true;
 
   roles = {
@@ -27,6 +29,7 @@
       miniflux.enable = true;
       # TODO: error: Package ‘python3.12-chromadb-0.5.20’ is marked as broken, refusing to evaluate.
       openwebui.enable = false;
+      n8n.enableWebhook = true;
     };
   };
 
