@@ -27,6 +27,8 @@ in
           profile.outputs = [
             {
               criteria = "eDP-1";
+              position = "0,0";
+              mode = "1920x1200@300.00000";
             }
           ];
         }
@@ -41,6 +43,7 @@ in
             {
               criteria = "eDP-1";
               position = "2560,0";
+              mode = "1920x1200@300.00000";
             }
           ];
         }
@@ -61,6 +64,7 @@ in
             {
               criteria = "eDP-1";
               position = "5120,0";
+              mode = "1920x1200@300.00000";
             }
           ];
         }
@@ -69,9 +73,8 @@ in
           profile.outputs = [
             {
               criteria = "eDP-1";
-              # criteria = "Lenovo Group Limited 0x40A9";
-              mode = "1920x1080@60Hz";
               position = "0,991";
+              mode = "1920x1200@300.00000";
             }
             {
               # criteria = "DP-1";

@@ -6,17 +6,23 @@ local act = wezterm.action
 
 -- Session
 local sessionizer_schema = {
-	sessionizer.DefaultWorkspace({ label_overwrite = "🏠 Default" }),
-	sessionizer.AllActiveWorkspaces({}),
-	sessionizer.FdSearch({
-		wezterm.home_dir .. "/Projects",
-		max_depth = 32,
-		include_submodules = true,
-	}),
-	-- Make paths more readable by replacing home directory with ~
-	processing = sessionizer.for_each_entry(function(entry)
-		entry.label = entry.label:gsub(wezterm.home_dir .. "/Projects/", "")
-	end),
+	sessionizer.DefaultWorkspace({ label_overwrite = "  Default" }),
+	{
+		sessionizer.AllActiveWorkspaces({}),
+		processing = sessionizer.for_each_entry(function(entry)
+			entry.label = " " .. entry.label:gsub(wezterm.home_dir .. "/Projects/", "")
+		end),
+	},
+	{
+		sessionizer.FdSearch({
+			wezterm.home_dir .. "/Projects",
+			max_depth = 32,
+			include_submodules = true,
+		}),
+		processing = sessionizer.for_each_entry(function(entry)
+			entry.label = " " .. entry.label:gsub(wezterm.home_dir .. "/Projects/", "")
+		end),
+	},
 }
 
 config.default_prog = { "fish", "-l" }
@@ -28,9 +34,10 @@ config.font_size = 13
 -- config.color_scheme = "Catppuccin Mocha"
 config.use_fancy_tab_bar = true
 config.tab_bar_at_bottom = true
-config.hide_tab_bar_if_only_one_tab = false
+config.show_tab_index_in_tab_bar = false
+config.tab_max_width = 25
 config.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
-config.command_palette_font_size = 16
+-- config.command_palette_font_size = 16
 
 -- see https://wezterm.org/config/appearance.html#native-fancy-tab-bar-appearance
 config.window_frame = {

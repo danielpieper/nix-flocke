@@ -49,7 +49,7 @@ in
             disable_while_typing = false;
             natural_scroll = true;
             clickfinger_behavior = true;
-            tap-to-click = false;
+            tap-to-click = true;
           };
         };
 
