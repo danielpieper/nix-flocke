@@ -2,6 +2,7 @@
   config,
   lib,
   inputs,
+  pkgs,
   ...
 }:
 with lib;
@@ -45,9 +46,14 @@ in
         };
       };
     };
-    systemd.services.n8n.environment = {
-      # TODO: https://docs.n8n.io/user-management/best-practices/#all-platforms
-      N8N_PROXY_HOPS = "1";
+    systemd.services.n8n = {
+      environment = {
+        # TODO: https://docs.n8n.io/user-management/best-practices/#all-platforms
+        N8N_PROXY_HOPS = "1";
+      };
+      serviceConfig = {
+        ExecStart = lib.mkForce "${pkgs.flocke.n8n}/bin/n8n";
+      };
     };
   };
 }

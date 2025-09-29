@@ -30,7 +30,7 @@ in
           routers = {
             n8nwebhook = {
               entryPoints = [ "websecure" ];
-              rule = "Host(`n8nhook.${inputs.nix-secrets.domain}`) && PathPrefix(`/webhook`)";
+              rule = "Host(`n8nhook.${inputs.nix-secrets.domain}`) && (PathPrefix(`/webhook`) || PathPrefix(`/rest/oauth2`) )";
               service = "n8nwebhook";
             };
           };

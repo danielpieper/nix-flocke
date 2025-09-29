@@ -82,7 +82,10 @@ let
       "sidebar.revamp" = true;
       "sidebar.verticalTabs" = true;
       "sidebar.position_start" = true; # left side
-      "sidebar.main.tools" = "aichat";
+      # "sidebar.main.tools" = "aichat";
+      "sidebar.animation.enabled" = true;
+      "sidebar.animation.duration-ms" = 50;
+      "sidebar.animation.expand-on-hover.duration-ms" = 50;
     };
     search = {
       force = true;
@@ -328,7 +331,8 @@ in
 
     stylix.targets.firefox.profileNames = [
       "default"
-    ] ++ (map (profile: lib.toLower profile.name) cfg.additionalProfiles);
+    ]
+    ++ (map (profile: lib.toLower profile.name) cfg.additionalProfiles);
 
     xdg.desktopEntries = lib.foldl' (
       acc: profile:
