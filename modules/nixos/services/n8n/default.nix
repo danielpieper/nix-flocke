@@ -22,7 +22,7 @@ in
     services = {
       n8n = {
         enable = true;
-        openFirewall = true; # TODO: is this needed behind reverse proxy?
+        # openFirewall = true; # TODO: is this needed behind reverse proxy?
         webhookUrl = "https://n8nhook.${inputs.nix-secrets.domain}";
       };
       traefik = {
