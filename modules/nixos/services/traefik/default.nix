@@ -99,6 +99,7 @@ in
           };
           entryPoints.websecure = {
             address = "0.0.0.0:443";
+            forwardedHeaders.trustedIPs = [ inputs.nix-secrets.networking.tailscale.cidr ];
             http.tls = {
               certResolver = "letsencrypt";
               domains = [
