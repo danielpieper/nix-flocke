@@ -74,7 +74,7 @@ config.keys = {
 	{ key = "-", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
 	{ key = "n", mods = "LEADER", action = act.SpawnWindow },
 	{ key = "w", mods = "LEADER", action = act.CloseCurrentTab({ confirm = true }) },
-	{ key = "f", mods = "LEADER", action = act.Search("CurrentSelectionOrEmptyString") },
+	{ key = "/", mods = "LEADER", action = act.Search("CurrentSelectionOrEmptyString") },
 	-- https://wezterm.org/config/lua/keyassignment/CharSelect.html
 	{
 		key = "u",
