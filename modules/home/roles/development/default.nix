@@ -13,6 +13,7 @@ in
   };
 
   config = mkIf cfg.enable {
+    programs.zed-edit.enable = true;
     cli = {
       editors.nvim.enable = true;
       multiplexers.zellij.enable = true;
