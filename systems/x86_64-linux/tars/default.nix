@@ -27,7 +27,11 @@
   ];
 
   services = {
-    flocke.syncthing.enable = true;
+    flocke = {
+      syncthing.enable = true;
+      # ollama.enable = true;
+      llama-cpp.enable = true;
+    };
 
     # Let TUXEDO Control Center handle CPU frequencies
     power-profiles-daemon.enable = false;
@@ -43,6 +47,10 @@
     supportedFilesystems = lib.mkForce [ "btrfs" ];
     kernelPackages = pkgs.linuxPackages_latest;
     resumeDevice = "/dev/disk/by-label/nixos";
+    kernelParams = [
+      "ttm.pages_limit=13107200"
+      "ttm.page_pool_size=13107200"
+    ]; # 50gb
   };
 
   # https://fnune.com/hardware/2025/07/20/nixos-on-a-tuxedo-infinitybook-pro-14-gen9-amd/
