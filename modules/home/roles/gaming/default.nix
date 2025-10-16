@@ -15,13 +15,16 @@ in
   };
 
   config = mkIf cfg.enable {
-    programs.mangohud = {
-      enable = true;
-      enableSessionWide = true;
-      settings = {
-        # cpu_load_change = true;
-        preset = 2;
+    programs = {
+      mangohud = {
+        enable = true;
+        enableSessionWide = true;
+        settings = {
+          # cpu_load_change = true;
+          preset = 2;
+        };
       };
+      geforcenow.enable = true;
     };
 
     home.packages = with pkgs; [

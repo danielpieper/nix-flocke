@@ -40,7 +40,8 @@ in
             {
               criteria = "LG Electronics 27GL850 007NTYT59834";
               position = "0,0";
-              mode = "2560x1440@59.95Hz";
+              # mode = "2560x1440@59.95Hz";
+              mode = "2560x1440@120.00Hz";
             }
             {
               criteria = "eDP-1";
