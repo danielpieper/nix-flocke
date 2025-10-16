@@ -117,4 +117,7 @@ smart_splits.apply_to_config(config, {
 	log_level = "warn",
 })
 
+-- wezterm crashes with fractional scaling
+-- config.enable_wayland = false
+
 return config

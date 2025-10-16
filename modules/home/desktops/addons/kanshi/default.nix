@@ -29,6 +29,8 @@ in
               criteria = "eDP-1";
               position = "0,0";
               mode = "1920x1200@300.00000";
+              # mode = "2560x1600@240.00Hz";
+              # scale = 1.25;
             }
           ];
         }
@@ -44,6 +46,8 @@ in
               criteria = "eDP-1";
               position = "2560,0";
               mode = "1920x1200@300.00000";
+              # mode = "2560x1600@240.00Hz";
+              # scale = 1.25;
             }
           ];
         }
@@ -65,6 +69,8 @@ in
               criteria = "eDP-1";
               position = "5120,0";
               mode = "1920x1200@300.00000";
+              # mode = "2560x1600@240.00Hz";
+              # scale = 1.25;
             }
           ];
         }
