@@ -188,7 +188,7 @@ in
                 "  "
               ];
             };
-            on-click = "${pkgs.pavucontrol}/bin/pavucontrol";
+            on-click = "pgrep pavucontrol && hyprctl dispatch togglespecialworkspace || ${pkgs.pavucontrol}/bin/pavucontrol";
           };
           tray = {
             icon-size = 18;
