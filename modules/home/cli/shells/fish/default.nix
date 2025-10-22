@@ -195,7 +195,8 @@ in
         grbc = "git rebase --continue";
 
         gst = "git status";
-      } // cfg.extraAbbrs;
+      }
+      // cfg.extraAbbrs;
 
       functions = {
         fish_greeting = '''';

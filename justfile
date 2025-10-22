@@ -15,7 +15,8 @@ iso version="minimal":
 
 # Deploy my to remote server i.e. Home Lab (using SSH)
 deploy server:
-  deploy .#{{server}} --hostname {{server}} --ssh-user nixos --skip-checks --remote-build
+  deploy .#{{server}} --hostname {{server}} --ssh-user nixos --remote-build
+  # deploy .#{{server}} --hostname {{server}} --ssh-user nixos --debug-logs --skip-checks --remote-build
 
 # Apply host config
 apply:

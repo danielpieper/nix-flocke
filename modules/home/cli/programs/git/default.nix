@@ -128,7 +128,8 @@ in
           autoStash = true;
           autoSquash = true;
         };
-      } // rewriteURL;
+      }
+      // rewriteURL;
     };
   };
 }
