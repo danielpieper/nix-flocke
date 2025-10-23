@@ -45,6 +45,8 @@
     resumeDevice = "/dev/disk/by-label/nixos";
   };
 
+  hardware.xone.enable = true;
+
   # https://fnune.com/hardware/2025/07/20/nixos-on-a-tuxedo-infinitybook-pro-14-gen9-amd/
   hardware.tuxedo-control-center.enable = true;
   # hardware.tuxedo-rs = {
