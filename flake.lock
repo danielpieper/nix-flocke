@@ -112,6 +112,22 @@
         "type": "github"
       }
     },
+    "bore-scheduler-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1761136759,
+        "narHash": "sha256-HF0/rvJ18rMt9c9NgeQlaa+OH+bKo6EDbOpirduvalg=",
+        "owner": "firelzrd",
+        "repo": "bore-scheduler",
+        "rev": "3252ef1de7c7fefe228f0119a2131d22924be1ed",
+        "type": "github"
+      },
+      "original": {
+        "owner": "firelzrd",
+        "repo": "bore-scheduler",
+        "type": "github"
+      }
+    },
     "cachix": {
       "inputs": {
         "devenv": [
@@ -2084,6 +2100,7 @@
     "root": {
       "inputs": {
         "authentik-nix": "authentik-nix",
+        "bore-scheduler-src": "bore-scheduler-src",
         "catppuccin": "catppuccin",
         "catppuccin-obs": "catppuccin-obs",
         "comma": "comma",

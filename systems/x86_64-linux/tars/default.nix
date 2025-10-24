@@ -1,4 +1,6 @@
 {
+  config,
+  inputs,
   pkgs,
   lib,
   ...
@@ -42,6 +44,15 @@
   boot = {
     supportedFilesystems = lib.mkForce [ "btrfs" ];
     kernelPackages = pkgs.linuxPackages_latest;
+    # bore scheduler: https://github.com/NixOS/nixpkgs/issues/324859#issuecomment-3263952213
+    kernelPatches =
+      let
+        patchesDir = "${inputs.bore-scheduler-src}/patches/stable/linux-${lib.versions.majorMinor config.boot.kernelPackages.kernel.version}-bore";
+      in
+      lib.mapAttrsToList (name: _: {
+        name = "bore-${name}";
+        patch = "${patchesDir}/${name}";
+      }) (builtins.readDir patchesDir);
     resumeDevice = "/dev/disk/by-label/nixos";
   };
 

@@ -134,6 +134,11 @@
     };
 
     tuxedo-nixos.url = "github:danielpieper/tuxedo-nixos";
+
+    bore-scheduler-src = {
+      url = "github:firelzrd/bore-scheduler";
+      flake = false;
+    };
   };
 
   outputs =
