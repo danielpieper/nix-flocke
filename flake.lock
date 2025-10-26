@@ -115,11 +115,11 @@
     "bore-scheduler-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1761136759,
-        "narHash": "sha256-HF0/rvJ18rMt9c9NgeQlaa+OH+bKo6EDbOpirduvalg=",
+        "lastModified": 1761322668,
+        "narHash": "sha256-q47kTjdpoWRMu83nhMBFcWCqDlZ93A0MFJYcaxZzwF0=",
         "owner": "firelzrd",
         "repo": "bore-scheduler",
-        "rev": "3252ef1de7c7fefe228f0119a2131d22924be1ed",
+        "rev": "f7b47ce5d0f556b8d6d0952ba114033a83597824",
         "type": "github"
       },
       "original": {
@@ -1025,11 +1025,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1761191301,
-        "narHash": "sha256-xsRL2Oyb4YRZZ1Tu4WzR2uFg1n931bH+PfLdFcqtLg8=",
+        "lastModified": 1761446278,
+        "narHash": "sha256-RHABglEx32ruvQ+4OqPibeZC/reBfDEBaqKJF0pe4YE=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "4958aafe7b237dc1e857fb0c916efff72075048f",
+        "rev": "64020f453bdf3634bf88a6bbce7f3e56183c8b2b",
         "type": "github"
       },
       "original": {
@@ -1195,11 +1195,11 @@
     "lazyvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1760721629,
-        "narHash": "sha256-Smm8Nq9Blg7MDoP0kVBrEaO7Q0/MKqXssJnBO/HBk2o=",
+        "lastModified": 1761472158,
+        "narHash": "sha256-INE+4qj16GCB79mN4i47JnW8UisfFgEBRJ1rlSylSFc=",
         "ref": "refs/heads/main",
-        "rev": "e0765341951ab302e07451a8c00c15e506fac5be",
-        "revCount": 201,
+        "rev": "3990137f81172e1726cc3de31d4ff9b25e9ca4ad",
+        "revCount": 202,
         "type": "git",
         "url": "ssh://forgejo@forgejo.homelab.daniel-pieper.com/daniel/nvim.git"
       },
@@ -1336,11 +1336,11 @@
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1760846226,
-        "narHash": "sha256-xmU8kAsRprJiTGBTaGrwmjBP3AMA9ltlrxHKFuy5JWc=",
+        "lastModified": 1761451000,
+        "narHash": "sha256-qBJL6xEIjqYq9zOcG2vf2nPTeVBppNJzvO0LuQWMwMo=",
         "owner": "nix-community",
         "repo": "nix-index-database",
-        "rev": "5024e1901239a76b7bf94a4cd27f3507e639d49e",
+        "rev": "ed6b293161b378a7368cda38659eb8d3d9a0dac4",
         "type": "github"
       },
       "original": {
@@ -1739,11 +1739,11 @@
     },
     "nixpkgs_4": {
       "locked": {
-        "lastModified": 1760524057,
-        "narHash": "sha256-EVAqOteLBFmd7pKkb0+FIUyzTF61VKi7YmvP1tw4nEw=",
+        "lastModified": 1761114652,
+        "narHash": "sha256-f/QCJM/YhrV/lavyCVz8iU3rlZun6d+dAiC3H+CDle4=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "544961dfcce86422ba200ed9a0b00dd4b1486ec5",
+        "rev": "01f116e4df6a15f4ccdffb1bcd41096869fb385c",
         "type": "github"
       },
       "original": {
@@ -1838,11 +1838,11 @@
         "nixpkgs": "nixpkgs_7"
       },
       "locked": {
-        "lastModified": 1761225141,
-        "narHash": "sha256-Pr9cgaYpQBIKKmrSW1GePE51EdnTyj+MyxHcDYEWGVA=",
+        "lastModified": 1761458858,
+        "narHash": "sha256-RMVNMH5av8Bgbfp3G5LK0B5qArg4OFnlt5dmOASLnvI=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "509fef37a8f865d85526fe6691722c42de2a380d",
+        "rev": "48b850a865c81f937d7c599926be5d9fd6133e66",
         "type": "github"
       },
       "original": {
@@ -1996,11 +1996,11 @@
         "nixpkgs": "nixpkgs_9"
       },
       "locked": {
-        "lastModified": 1759523803,
-        "narHash": "sha256-PTod9NG+i3XbbnBKMl/e5uHDBYpwIWivQ3gOWSEuIEM=",
+        "lastModified": 1760663237,
+        "narHash": "sha256-BflA6U4AM1bzuRMR8QqzPXqh8sWVCNDzOdsxXEguJIc=",
         "owner": "cachix",
         "repo": "git-hooks.nix",
-        "rev": "cfc9f7bb163ad8542029d303e599c0f7eee09835",
+        "rev": "ca5b894d3e3e151ffc1db040b6ce4dcc75d31c37",
         "type": "github"
       },
       "original": {
@@ -2034,11 +2034,11 @@
         "pre-commit-hooks": "pre-commit-hooks_3"
       },
       "locked": {
-        "lastModified": 1761171605,
-        "narHash": "sha256-4Txxyj+IHPduhDebz01E2X0pXJ1WFe+2FqvgjOvxdJo=",
+        "lastModified": 1761374876,
+        "narHash": "sha256-bfGpGZJIFSxsc8o9nJsPW9mL8age8fSwgEKcuZNtDr8=",
         "ref": "refs/heads/main",
-        "rev": "7ff7101bf4cef00476adea508677c80963e67f17",
-        "revCount": 27,
+        "rev": "c2c32def24bb2ca17a749b63a673622ccb7c9fcc",
+        "revCount": 36,
         "type": "git",
         "url": "ssh://forgejo@forgejo.homelab.daniel-pieper.com/daniel/projecty.git"
       },
@@ -2748,11 +2748,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1761180075,
-        "narHash": "sha256-V4WLeUQ4gCGZiVihlXWBOZ/1FNcL0jM4zgTY1haJLvY=",
+        "lastModified": 1761448226,
+        "narHash": "sha256-WGhAhTRY5pKmP0vx8mURN2OcYKwJXQacX6m6Ouf+XEw=",
         "owner": "0xc000022070",
         "repo": "zen-browser-flake",
-        "rev": "771a2604606905d8c0ffe3b818dc2cc5bd1405d8",
+        "rev": "f2579d18a51c900cd6273a02532b33a288f81c2c",
         "type": "github"
       },
       "original": {
