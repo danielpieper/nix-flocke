@@ -49,6 +49,7 @@ in
   config = mkIf cfg.enable {
     programs.ssh = {
       enable = true;
+      enableDefaultConfig = false;
       matchBlocks = inputs.nix-secrets.ssh.matchBlocks // cfg.extraHosts;
     };
   };

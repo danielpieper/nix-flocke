@@ -42,8 +42,6 @@ in
 
     programs.git = {
       enable = true;
-      userName = inputs.nix-secrets.user.fullname;
-      userEmail = cfg.email;
       signing = {
         signByDefault = true;
         format = "ssh";
@@ -69,7 +67,11 @@ in
         ".direnv"
       ];
 
-      extraConfig = {
+      settings = {
+        user = {
+          name = inputs.nix-secrets.user.fullname;
+          inherit (cfg) email;
+        };
         gpg.ssh.allowedSignersFile = "~/.ssh/allowed_signers";
 
         core = {
