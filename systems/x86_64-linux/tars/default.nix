@@ -26,6 +26,7 @@
   environment.systemPackages = with pkgs; [
     moonlight-qt
     vlc
+    claude-code
   ];
 
   services = {
