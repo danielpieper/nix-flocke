@@ -26,7 +26,7 @@ in
 
         "fullscreen, class:^(com.gabm.satty)$"
 
-        "workspace 2 silent,class:^(firefox|google-chrome|zen)$"
+        "workspace 2 silent,class:^(firefox|google-chrome)$"
         "workspace 4 silent,class:^(steam|lutris|com.moonlight_stream.Moonlight|chiaki)$"
         "workspace 5 silent,class:^(discord|Slack|goofcord)$"
 
@@ -35,7 +35,7 @@ in
         "float,class:^(Signal|signal|1Password|.blueman-manager-wrapped|org.pulseaudio.pavucontrol)$"
         "workspace special,class:^(Signal|signal|1Password|.blueman-manager-wrapped|org.pulseaudio.pavucontrol)$"
 
-        "idleinhibit fullscreen, class:^(firefox|google-chrome|zen|chiaki)$"
+        "idleinhibit fullscreen, class:^(firefox|google-chrome|chiaki)$"
 
         "suppressevent fullscreen,class:^(firefox)$,title:^(Picture-in-Picture|Firefox)$"
         "float,class:^(firefox)$,title:^(Picture-in-Picture|Firefox)$"

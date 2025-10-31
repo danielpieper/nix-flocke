@@ -28,16 +28,6 @@ in
       '';
     };
 
-    environment = {
-      variables.SSH_AUTH_SOCK = onePassPath;
-      etc = {
-        "1password/custom_allowed_browsers" = {
-          text = ''
-            zen
-          '';
-          mode = "0755";
-        };
-      };
-    };
+    environment.variables.SSH_AUTH_SOCK = onePassPath;
   };
 }

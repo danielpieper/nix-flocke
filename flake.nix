@@ -118,11 +118,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nixos-dns = {
       url = "github:Janik-Haag/nixos-dns";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -185,10 +180,9 @@
         ava.modules = with inputs; [ nixos-hardware.nixosModules.lenovo-thinkpad-x250 ];
       };
 
-      homes.modules = with inputs; [
-        zen-browser.homeModules.default
-        #   impermanence.nixosModules.home-manager.impermanence
-      ];
+      # homes.modules = with inputs; [
+      #   impermanence.nixosModules.home-manager.impermanence
+      # ];
 
       overlays = with inputs; [
         nixgl.overlay

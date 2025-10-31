@@ -57,15 +57,14 @@ in
             window-rewrite = {
               "class<google-chrome>" = " ";
               "class<firefox>" = " ";
-              "class<zen>" = " ";
               "class<Tor Browser>" = " ";
-              "class<(zen|firefox|google-chrome)> title<.*\\bSlack\\b.*>" = " ";
-              "class<(zen|firefox|google-chrome)> title<Spotify\\b.*>" = " ";
-              "class<(zen|firefox|google-chrome)> title<YouTube\\b.*>" = " ";
-              "class<(zen|firefox|google-chrome)> title<.*\\bMail\\b.*>" = "󰊫 ";
-              "class<(zen|firefox|google-chrome)> title<.*\\bCalendar\\b.*>" = "󰃰 ";
-              "class<(zen|firefox|google-chrome)> title<.*\\bForgejo\\b.*>" = " ";
-              "class<(zen|firefox|google-chrome)> title<.*\\bGitLab\\b.*>" = " ";
+              "class<(firefox|google-chrome)> title<.*\\bSlack\\b.*>" = " ";
+              "class<(firefox|google-chrome)> title<Spotify\\b.*>" = " ";
+              "class<(firefox|google-chrome)> title<YouTube\\b.*>" = " ";
+              "class<(firefox|google-chrome)> title<.*\\bMail\\b.*>" = "󰊫 ";
+              "class<(firefox|google-chrome)> title<.*\\bCalendar\\b.*>" = "󰃰 ";
+              "class<(firefox|google-chrome)> title<.*\\bForgejo\\b.*>" = " ";
+              "class<(firefox|google-chrome)> title<.*\\bGitLab\\b.*>" = " ";
 
               "class<com.mitchellh.ghostty|org.wezfurlong.wezterm>" = " ";
               "class<com.mitchellh.ghostty> title<Zellij\\b.*>" = " ";

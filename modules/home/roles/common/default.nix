@@ -14,15 +14,11 @@ in
 
   config = lib.mkIf cfg.enable {
     browsers = {
-      zen = {
-        enable = false;
-        default = false;
-      };
       firefox = {
         enable = true;
         default = true;
       };
-      google-chrome.enable = true;
+      google-chrome.enable = false;
       tor.enable = true;
     };
 
