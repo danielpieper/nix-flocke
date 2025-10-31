@@ -80,11 +80,6 @@
 
     zjstatus.url = "github:dj95/zjstatus";
 
-    nix-topology = {
-      url = "github:oddlama/nix-topology";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     poetry2nix.url = "github:nix-community/poetry2nix";
     authentik-nix.url = "github:nix-community/authentik-nix";
 
@@ -164,7 +159,6 @@
         lanzaboote.nixosModules.lanzaboote
         impermanence.nixosModules.impermanence
         sops-nix.nixosModules.sops
-        nix-topology.nixosModules.default
         authentik-nix.nixosModules.default
         teslamate.nixosModules.default
         nixos-dns.nixosModules.dns
@@ -187,7 +181,6 @@
       overlays = with inputs; [
         nixgl.overlay
         nur.overlays.default
-        nix-topology.overlays.default
       ];
 
       deploy = lib.mkDeploy { inherit (inputs) self; };
@@ -197,20 +190,5 @@
 
       # nix eval .#dnsDebugConfig
       dnsDebugConfig = inputs.nixos-dns.utils.debug.config dnsConfig;
-
-      topology =
-        with inputs;
-        let
-          host = self.nixosConfigurations.${builtins.head (builtins.attrNames self.nixosConfigurations)};
-        in
-        import nix-topology {
-          inherit (host) pkgs; # Only this package set must include nix-topology.overlays.default
-          modules = [
-            (import "${inputs.nix-secrets}/topology" {
-              inherit (host) config;
-            })
-            { inherit (self) nixosConfigurations; }
-          ];
-        };
     };
 }

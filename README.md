@@ -52,9 +52,6 @@ nix build .#install-isoConfigurations.minimal
 
 # Deploy my to remote server i.e. Home Lab (using SSH)
 deploy .#hal --hostname hal --ssh-user nixos --skip-checks
-
-# Build Home Lab diagram using nix-topology
-nix build .#topology.config.output
 ```
 
 ## 🚀 Features

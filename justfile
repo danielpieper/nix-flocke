@@ -26,11 +26,6 @@ deployboot server:
 apply:
   nh os switch
 
-# Build Home Lab diagram using nix-topology
-topology:
-	nix build .#topology.config.output
-	# xdg-open  {{justfile_directory()}}/result/main.svg
-
 dns:
 	nix build .#octodns
 	OP_SERVICE_ACCOUNT_TOKEN="" HETZNER_DNS_API=$(op read "op://Private/Hetzner/octodns api token") octodns-sync --config-file=./result
