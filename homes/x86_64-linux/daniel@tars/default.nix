@@ -12,7 +12,10 @@ in
     social.enable = true;
     gaming.enable = true;
   };
-  desktops.hyprland.enable = true;
+  desktops = {
+    hyprland.enable = true;
+    niri.enable = true;
+  };
 
   programs.git.includes = [
     {

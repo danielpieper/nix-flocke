@@ -58,6 +58,7 @@ in
         "_ide_helper_models.php"
         ".phpstorm.meta.php"
         ".vscode"
+        ".zed"
         ".projections.json"
         ".php_cs.cache"
         ".jira.d"

@@ -25,6 +25,7 @@ in
           margin = "0 0 0 0";
           modules-left = [
             "hyprland/workspaces"
+            "niri/workspaces"
             "tray"
           ];
           modules-center = [

@@ -28,6 +28,10 @@ in
         screenshots = true;
         clock = true;
 
+        # Clock formatting like hyprlock
+        timestr = "%H:%M";
+        datestr = "%A %d %B";
+
         indicator = true;
         indicator-radius = 350;
         indicator-thickness = 5;
@@ -37,33 +41,66 @@ in
         fade-in = 0.2;
 
         font = "Inter Variable";
+        font-size = 120;
       };
     };
 
-    services.swayidle = {
-      enable = true;
-      systemdTarget = "hyprland-session.target";
-      events = [
-        {
-          event = "before-sleep";
-          command = "${cfg.binary} -fF";
-        }
-        {
-          event = "lock";
-          command = "${cfg.binary} -fF";
-        }
-      ];
-      timeouts = [
-        {
+    services.swayidle =
+      let
+        # Detect which compositor is active
+        isHyprland = config.wayland.windowManager.hyprland.enable or false;
+        isNiri = config.programs.niri.enable or false;
+
+        # Set systemd target based on compositor
+        systemdTarget =
+          if isHyprland then
+            "hyprland-session.target"
+          else if isNiri then
+            "niri.service"
+          else
+            "graphical-session.target";
+
+        # DPMS commands vary by compositor
+        dpmsOffCmd =
+          if isHyprland then
+            "${config.wayland.windowManager.hyprland.package}/bin/hyprctl dispatch dpms off"
+          else if isNiri then
+            "${pkgs.wlopm}/bin/wlopm --off \\*"
+          else
+            "";
+
+        dpmsOnCmd =
+          if isHyprland then
+            "${config.wayland.windowManager.hyprland.package}/bin/hyprctl dispatch dpms on"
+          else if isNiri then
+            "${pkgs.wlopm}/bin/wlopm --on \\*"
+          else
+            "";
+      in
+      {
+        enable = true;
+        inherit systemdTarget;
+        events = [
+          {
+            event = "before-sleep";
+            command = "${cfg.binary} -fF";
+          }
+          {
+            event = "lock";
+            command = "${cfg.binary} -fF";
+          }
+        ];
+        timeouts = [
+          {
+            timeout = 610;
+            command = "${pkgs.systemd}/bin/loginctl lock-session";
+          }
+        ]
+        ++ lib.optional (dpmsOffCmd != "") {
           timeout = 600;
-          command = "${config.wayland.windowManager.hyprland.package}/bin/hyprctl dispatch dpms off";
-          resumeCommand = "${config.wayland.windowManager.hyprland.package}/bin/hyprctl dispatch dpms on";
-        }
-        {
-          timeout = 610;
-          command = "${pkgs.systemd}/bin/loginctl lock-session";
-        }
-      ];
-    };
+          command = dpmsOffCmd;
+          resumeCommand = dpmsOnCmd;
+        };
+      };
   };
 }

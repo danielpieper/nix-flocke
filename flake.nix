@@ -73,6 +73,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     firefox-gnome-theme = {
       url = "github:rafaelmardojai/firefox-gnome-theme";
       flake = false;
@@ -163,6 +168,7 @@
         teslamate.nixosModules.default
         nixos-dns.nixosModules.dns
         tuxedo-nixos.nixosModules.default
+        niri.nixosModules.niri
       ];
 
       systems.hosts = {

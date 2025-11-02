@@ -16,6 +16,7 @@
       enable = true;
       addons = {
         hyprland.enable = true;
+        niri.enable = true;
       };
     };
     gaming.enable = true;
