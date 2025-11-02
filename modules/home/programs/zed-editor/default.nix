@@ -8,6 +8,7 @@ with lib;
 with lib.flocke;
 let
   cfg = config.programs.zed-edit;
+  themeConfig = import ./theme.nix;
 in
 {
   options.programs.zed-edit = with types; {
@@ -35,7 +36,7 @@ in
         "catppuccin"
       ];
       # userKeymaps = { };
-      userSettings = {
+      userSettings = themeConfig // {
         drag_and_drop_selection = {
           enabled = false;
         };
@@ -75,11 +76,6 @@ in
         telemetry = {
           metrics = false;
         };
-        theme = {
-          mode = "system";
-          light = "Catppuccin Latte";
-          dark = "Catppuccin Mocha";
-        };
         toolbar = {
           breadcrumbs = false;
           quick_actions = false;
@@ -95,122 +91,6 @@ in
           copy_on_select = true;
           shell = {
             program = "fish";
-          };
-        };
-        "theme_overrides" = {
-          "Catppuccin Mocha" = {
-            syntax = {
-              comment = {
-                color = "#516785";
-                font_style = "italic";
-                font_weight = null;
-              };
-              attribute = {
-                color = "#E5C07B";
-                font_style = null;
-                font_weight = null;
-              };
-              constant = {
-                color = "#E5C07B";
-                font_style = null;
-                font_weight = null;
-              };
-              constructor = {
-                color = "#e56674";
-                font_style = null;
-                font_weight = null;
-              };
-              embedded = {
-                color = "#a8b5d0";
-                font_style = null;
-                font_weight = null;
-              };
-              function = {
-                color = "#74b3fb";
-                font_style = null;
-                font_weight = null;
-              };
-              keyword = {
-                color = "#d49ff4";
-                font_style = null;
-                font_weight = null;
-              };
-              number = {
-                color = "#E5C07B";
-                font_style = null;
-                font_weight = null;
-              };
-              operator = {
-                color = "#59f2f7";
-                font_style = null;
-                font_weight = null;
-              };
-              property = {
-                color = "#59f2f7";
-                font_style = null;
-                font_weight = null;
-              };
-              string = {
-                color = "#70F49C";
-                font_style = null;
-                font_weight = null;
-              };
-              "string.escape" = {
-                color = "#59f2f7";
-                font_style = null;
-                font_weight = null;
-              };
-              "string.regex" = {
-                color = "#70F49C";
-                font_style = null;
-                font_weight = null;
-              };
-              "string.special" = {
-                color = "#59f2f7";
-                font_style = null;
-                font_weight = null;
-              };
-              "string.special.symbol" = {
-                color = "#59f2f7";
-                font_style = null;
-                font_weight = null;
-              };
-              tag = {
-                color = "#e56674";
-                font_style = null;
-                font_weight = null;
-              };
-              "text.literal" = {
-                color = "#70F49C";
-                font_style = null;
-                font_weight = null;
-              };
-              type = {
-                color = "#E5C07B";
-                font_style = null;
-                font_weight = null;
-              };
-              variable = {
-                color = "#e56674";
-                font_style = null;
-                font_weight = null;
-              };
-              "variable.special" = {
-                color = "#E5C07B";
-                font_style = null;
-                font_weight = null;
-              };
-              boolean = {
-                color = "#E5C07B";
-                font_style = null;
-                font_weight = null;
-              };
-              variant = {
-                color = null;
-                font_style = null;
-                font_weight = null;
-              };
-            };
           };
         };
       };
