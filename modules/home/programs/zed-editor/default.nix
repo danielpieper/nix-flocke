@@ -9,6 +9,7 @@ with lib.flocke;
 let
   cfg = config.programs.zed-edit;
   themeConfig = import ./theme.nix;
+  keyMapConfig = import ./keymap.nix;
 in
 {
   options.programs.zed-edit = with types; {
@@ -35,8 +36,8 @@ in
         "toml"
         "catppuccin"
       ];
-      # userKeymaps = { };
-      userSettings = themeConfig // {
+      userKeymaps = keyMapConfig;
+      userSettings = {
         drag_and_drop_selection = {
           enabled = false;
         };
@@ -93,7 +94,8 @@ in
             program = "fish";
           };
         };
-      };
+      }
+      // themeConfig;
       # userTasks = { };
     };
   };
