@@ -25,7 +25,6 @@ in
         enable = true;
         listenAddress = "127.0.0.1:8012";
         inherit (inputs.nix-secrets.restic) dataDir;
-        # TODO: check if restic settings should be enabled
         privateRepos = false;
         appendOnly = false;
       };
@@ -87,32 +86,12 @@ in
     users.groups.restic-exporter = { };
 
     sops.secrets = {
-      restic_mount = {
-        owner = config.users.users.restic.name;
-        inherit (config.users.users.restic) group;
-      };
       restic_repository_password = { };
       restic_environment = { };
     };
 
     systemd.services.restic-rest-server.unitConfig = {
-      RequiresMountsFor = "/mnt/restic";
-    };
-
-    fileSystems = {
-      "/mnt/restic" = {
-        device = inputs.nix-secrets.restic.mountTarget;
-        fsType = "cifs";
-        options = [
-          "credentials=${config.sops.secrets.restic_mount.path}"
-          "uid=${toString config.users.users.restic.uid}"
-          "gid=${toString config.users.groups.restic.gid}"
-          "x-systemd.automount"
-          "noauto"
-          "x-systemd.idle-timeout=60"
-          "x-systemd.mount-timeout=5s"
-        ];
-      };
+      RequiresMountsFor = "/mnt/nas/11tb";
     };
   };
 }

@@ -14,6 +14,9 @@ in
   };
 
   config = mkIf cfg.enable {
+    systemd.services.navidrome.unitConfig = {
+      RequiresMountsFor = "/mnt/nas/11tb";
+    };
     services = {
       navidrome = {
         enable = true;

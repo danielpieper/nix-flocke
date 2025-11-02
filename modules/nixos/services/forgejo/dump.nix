@@ -16,13 +16,13 @@ in
     services = {
       forgejo.dump = {
         enable = true;
-        backupDir = "/mnt/nas/5.5tb/forgejo";
+        backupDir = "/mnt/nas/11tb/forgejo";
         file = "forgejo-dump";
       };
       flocke.nfs.enable = true;
     };
     systemd.services.forgejo.unitConfig = {
-      RequiresMountsFor = "/mnt/nas/5.5tb";
+      RequiresMountsFor = "/mnt/nas/11tb";
     };
   };
 }

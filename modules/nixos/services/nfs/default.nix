@@ -34,20 +34,6 @@ in
           "x-systemd.mount-timeout=5s"
         ];
       };
-
-      "/mnt/nas/5.5tb" = {
-        device = "//192.168.178.38/5.5tb";
-        fsType = "cifs";
-        options = [
-          "file_mode=0777"
-          "dir_mode=0777"
-          "nounix"
-          "noauto"
-          "x-systemd.automount"
-          "x-systemd.idle-timeout=60"
-          "x-systemd.mount-timeout=5s"
-        ];
-      };
     };
   };
 }
