@@ -61,8 +61,11 @@ in
       "Mod+F1".action = show-hotkey-overlay;
       "Mod+Q".action = close-window;
       "Mod+F".action = maximize-column;
+      # "Mod+F".action = maximize-window-to-edges;
       "Mod+Shift+F".action = fullscreen-window;
+      "Mod+R".action = switch-preset-column-width;
       "Mod+B".action = toggle-window-floating;
+
       "Mod+Space".action.spawn = [
         "${config.desktops.addons.rofi.package}/bin/rofi"
         "-show"
@@ -155,6 +158,11 @@ in
       "Mod+Alt+L".action.set-column-width = "+10%";
       "Mod+Alt+K".action.set-window-height = "-10%";
       "Mod+Alt+J".action.set-window-height = "+10%";
+
+      "Mod+WheelScrollDown".action = focus-column-right;
+      "Mod+WheelScrollUp".action = focus-column-left;
+      "Mod+Shift+WheelScrollDown".action = focus-window-down;
+      "Mod+Shift+WheelScrollUp".action = focus-window-up;
 
       # Scratchpad - Not supported in niri
       # "Mod+U".action = toggle-scratchpad;

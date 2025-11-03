@@ -12,11 +12,16 @@ in
   config = mkIf cfg.enable {
     programs.niri = {
       settings = {
+        # https://github.com/sodiboo/niri-flake/blob/main/docs.md
         xwayland-satellite = {
           enable = true;
           path = lib.getExe pkgs.xwayland-satellite;
         };
         input = {
+          focus-follows-mouse = {
+            enable = true;
+            max-scroll-amount = "10%";
+          };
           keyboard = {
             xkb = {
               layout = "de(us)";
@@ -46,7 +51,7 @@ in
         };
 
         layout = {
-          gaps = 5;
+          gaps = 1;
           center-focused-column = "never";
           preset-column-widths = [
             { proportion = 0.33333; }
@@ -57,8 +62,11 @@ in
             proportion = 0.5;
           };
           border = {
+            enable = false;
+          };
+          focus-ring = {
             enable = true;
-            width = 3;
+            width = 1;
           };
         };
 
