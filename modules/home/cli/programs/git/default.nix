@@ -66,6 +66,7 @@ in
         ".vim"
         "phpstan.neon"
         ".direnv"
+        ".claude"
       ];
 
       settings = {

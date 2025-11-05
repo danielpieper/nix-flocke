@@ -142,10 +142,10 @@ in
       "Mod+Shift+0".action.move-column-to-workspace = 10;
 
       # Move workspace to monitor
-      # "Mod+Alt+H".action = move-workspace-to-monitor-left;
-      # "Mod+Alt+L".action = move-workspace-to-monitor-right;
-      # "Mod+Alt+K".action = move-workspace-to-monitor-up;
-      # "Mod+Alt+J".action = move-workspace-to-monitor-down;
+      "Mod+Ctrl+H".action = move-workspace-to-monitor-left;
+      "Mod+Ctrl+L".action = move-workspace-to-monitor-right;
+      "Mod+Ctrl+K".action = move-workspace-to-monitor-up;
+      "Mod+Ctrl+J".action = move-workspace-to-monitor-down;
 
       # Swap windows
       "Mod+Shift+H".action = move-column-left;
@@ -159,14 +159,16 @@ in
       "Mod+Alt+K".action.set-window-height = "-10%";
       "Mod+Alt+J".action.set-window-height = "+10%";
 
-      "Mod+WheelScrollDown".action = focus-column-right;
-      "Mod+WheelScrollUp".action = focus-column-left;
-      "Mod+Shift+WheelScrollDown".action = focus-window-down;
-      "Mod+Shift+WheelScrollUp".action = focus-window-up;
-
-      # Scratchpad - Not supported in niri
-      # "Mod+U".action = toggle-scratchpad;
-      # "Mod+Shift+U".action = move-window-to-scratchpad;
+      "Mod+WheelScrollDown" = {
+        cooldown-ms = 150;
+        action = focus-workspace-down;
+      };
+      "Mod+WheelScrollUp" = {
+        cooldown-ms = 150;
+        action = focus-workspace-up;
+      };
+      "Mod+WheelScrollRight".action = focus-column-right;
+      "Mod+WheelScrollLeft".action = focus-column-left;
 
       # Media keys
       "XF86MonBrightnessUp".action.spawn = [
