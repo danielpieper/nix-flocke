@@ -56,5 +56,8 @@ in
       '';
     };
     # systemd.services.systemd-resolved.environment.SYSTEMD_LOG_LEVEL = "debug";
+
+    # devenv wants to add host entries
+    environment.etc.hosts.mode = "0644";
   };
 }

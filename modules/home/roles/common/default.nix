@@ -50,7 +50,7 @@ in
 
       src-cli
 
-      (hiPrio parallel)
+      (lib.hiPrio parallel)
       moreutils
       nvtopPackages.amd
       unzip

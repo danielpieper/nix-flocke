@@ -26,7 +26,10 @@
     nfs.enable = true;
     jellyfin.enable = true;
     navidrome.enable = true;
-    teslamate.enable = true;
+    teslamate = {
+      enable = true;
+      runMigrations = false;
+    };
     postgresql.enable = true;
     monitoring.enable = true;
     gotify.enable = true;

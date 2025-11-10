@@ -89,8 +89,11 @@ let
     };
     search = {
       force = true;
-      default = "SearXNG";
-      privateDefault = "SearXNG";
+      # TODO: update as soon as searxng is usable
+      default = "google";
+      privateDefault = "google";
+      # default = "SearXNG";
+      # privateDefault = "SearXNG";
       order = [
         "SearXNG"
         "ddg"

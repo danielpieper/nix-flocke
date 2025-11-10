@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 with lib;
@@ -17,7 +16,6 @@ in
     services = {
       postgresql = {
         enable = true;
-        package = lib.mkForce pkgs.postgresql_18;
       };
       postgresqlBackup = {
         # TODO: postgres backup

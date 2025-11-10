@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }:
 with lib;
@@ -13,6 +14,7 @@ in
   };
 
   config = mkIf cfg.enable {
+    home.packages = [ pkgs.devenv ];
     programs.zed-edit.enable = true;
     cli = {
       editors.nvim.enable = true;
