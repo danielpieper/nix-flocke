@@ -1,7 +1,7 @@
 {
   inputs,
-  system,
+  stdenv,
   ...
 }:
 
-inputs.deploy-rs.lib.${system}.deployChecks inputs.self.deploy
+inputs.deploy-rs.lib.${stdenv.hostPlatform.system}.deployChecks inputs.self.deploy

@@ -7,10 +7,10 @@
 with lib;
 with lib.flocke;
 let
-  cfg = config.programs.discord;
+  cfg = config.programs.flocke.discord;
 in
 {
-  options.programs.discord = with types; {
+  options.programs.flocke.discord = with types; {
     enable = mkBoolOpt false "Whether or not to manage discord";
   };
 

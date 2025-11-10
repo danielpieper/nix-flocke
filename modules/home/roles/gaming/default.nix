@@ -24,7 +24,7 @@ in
           preset = 2;
         };
       };
-      geforcenow.enable = true;
+      flocke.geforcenow.enable = true;
     };
 
     home.packages = with pkgs; [

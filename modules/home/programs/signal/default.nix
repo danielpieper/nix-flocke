@@ -7,10 +7,10 @@
 with lib;
 with lib.flocke;
 let
-  cfg = config.programs.signal;
+  cfg = config.programs.flocke.signal;
 in
 {
-  options.programs.signal = with types; {
+  options.programs.flocke.signal = with types; {
     enable = mkBoolOpt false "Enable Signal - Private, simple, and secure messenger";
   };
 

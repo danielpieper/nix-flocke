@@ -7,12 +7,12 @@
 with lib;
 with lib.flocke;
 let
-  cfg = config.programs.zed-edit;
+  cfg = config.programs.flocke.zed-edit;
   themeConfig = import ./theme.nix;
   keyMapConfig = import ./keymap.nix;
 in
 {
-  options.programs.zed-edit = with types; {
+  options.programs.flocke.zed-edit = with types; {
     enable = mkBoolOpt false "Enable Zed Editor";
   };
 

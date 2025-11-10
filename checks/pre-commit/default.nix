@@ -1,10 +1,10 @@
 {
   inputs,
-  system,
+  stdenv,
   ...
 }:
 
-inputs.pre-commit-hooks.lib.${system}.run {
+inputs.pre-commit-hooks.lib.${stdenv.hostPlatform.system}.run {
   src = ../..;
   hooks = {
     nixfmt-rfc-style.enable = true;

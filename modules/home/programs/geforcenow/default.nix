@@ -6,7 +6,7 @@
 }:
 with lib;
 let
-  cfg = config.programs.geforcenow;
+  cfg = config.programs.flocke.geforcenow;
   geforceNowBin = pkgs.writeScriptBin "geforcenow" ''
     #!/usr/bin/env bash
 
@@ -77,7 +77,7 @@ let
   '';
 in
 {
-  options.programs.geforcenow = {
+  options.programs.flocke.geforcenow = {
     enable = mkEnableOption "Enable NVIDIA GeForce NOW cloud gaming service";
   };
 

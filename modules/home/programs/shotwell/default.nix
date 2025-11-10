@@ -6,10 +6,10 @@
 }:
 with lib;
 let
-  cfg = config.programs.shotwell;
+  cfg = config.programs.flocke.shotwell;
 in
 {
-  options.programs.shotwell = {
+  options.programs.flocke.shotwell = {
     enable = mkEnableOption "Enable shotwell program";
   };
 

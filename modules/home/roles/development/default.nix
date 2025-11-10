@@ -15,7 +15,7 @@ in
 
   config = mkIf cfg.enable {
     home.packages = [ pkgs.devenv ];
-    programs.zed-edit.enable = true;
+    programs.flocke.zed-edit.enable = true;
     cli = {
       editors.nvim.enable = true;
       multiplexers.zellij.enable = true;

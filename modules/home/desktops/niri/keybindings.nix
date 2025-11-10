@@ -77,9 +77,9 @@ in
       ];
 
       # Lock Screen
-      "XF86Launch5".action.spawn = [ "${pkgs.swaylock-effects}/bin/swaylock" ];
-      "XF86Launch4".action.spawn = [ "${pkgs.swaylock-effects}/bin/swaylock" ];
-      "Mod+BackSpace".action.spawn = [ "${pkgs.swaylock-effects}/bin/swaylock" ];
+      "XF86Launch5".action.spawn = [ "${pkgs.hyprlock}/bin/hyprlock" ];
+      "XF86Launch4".action.spawn = [ "${pkgs.hyprlock}/bin/hyprlock" ];
+      "Mod+BackSpace".action.spawn = [ "${pkgs.hyprlock}/bin/hyprlock" ];
       "Mod+Ctrl+BackSpace".action.spawn = [
         "wlogout"
         "--column-spacing"

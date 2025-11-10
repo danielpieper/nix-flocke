@@ -6,10 +6,10 @@
 }:
 with lib;
 let
-  cfg = config.programs.tuis;
+  cfg = config.programs.flocke.tuis;
 in
 {
-  options.programs.tuis = {
+  options.programs.flocke.tuis = {
     enable = mkEnableOption "Enable TUI applications";
   };
 

@@ -23,10 +23,12 @@ in
       kanshi.enable = true;
       rofi.enable = true;
       swaync.enable = true;
-      swaylock.enable = true;
+      # swaylock.enable = true;
       waybar.enable = true;
       wlogout.enable = true;
       wlsunset.enable = true;
+      hyprlock.enable = true;
+      hypridle.enable = true;
     };
 
     home.packages = with pkgs; [

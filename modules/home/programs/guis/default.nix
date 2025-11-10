@@ -6,10 +6,10 @@
 }:
 with lib;
 let
-  cfg = config.programs.guis;
+  cfg = config.programs.flocke.guis;
 in
 {
-  options.programs.guis = {
+  options.programs.flocke.guis = {
     enable = mkEnableOption "Enable gnome adwaita GUI applications";
   };
 

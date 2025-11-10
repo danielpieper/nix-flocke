@@ -34,7 +34,7 @@ in
       };
       shells.fish.enable = true;
     };
-    programs = {
+    programs.flocke = {
       guis.enable = true;
       tuis.enable = true;
     };

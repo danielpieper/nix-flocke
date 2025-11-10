@@ -13,7 +13,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    programs = {
+    programs.flocke = {
       discord.enable = true;
       signal.enable = true;
       shotwell.enable = false;
