@@ -41,7 +41,7 @@ in
 
     # TODO: move this to somewhere
     home.packages = with pkgs; [
-      mplayer
+      # mplayer
       mtpfs
       jmtpfs
       brightnessctl
