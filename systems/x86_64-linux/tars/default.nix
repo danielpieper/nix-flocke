@@ -26,10 +26,14 @@
     moonlight-qt
     vlc
     claude-code
+    picard
   ];
 
   services = {
-    flocke.syncthing.enable = true;
+    flocke = {
+      syncthing.enable = true;
+      nfs.enable = true;
+    };
 
     # Let TUXEDO Control Center handle CPU frequencies
     power-profiles-daemon.enable = false;

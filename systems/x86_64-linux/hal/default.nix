@@ -9,10 +9,7 @@
     ./disks.nix
   ];
 
-  environment.systemPackages = with pkgs; [
-    beets
-    ffmpeg
-  ];
+  environment.systemPackages = with pkgs; [ ffmpeg ];
 
   system.impermanence.enable = true;
 
@@ -40,7 +37,7 @@
     syncthing.enable = true;
     forgejo = {
       enable = true;
-      enable-runner = true;
+      enable-runner = false;
       enable-dump = true;
     };
     arr.enable = true;
