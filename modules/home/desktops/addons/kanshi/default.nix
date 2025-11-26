@@ -40,8 +40,8 @@ in
             {
               criteria = "LG Electronics 27GL850 007NTYT59834";
               position = "0,0";
-              # mode = "2560x1440@59.95Hz";
-              mode = "2560x1440@120.00Hz";
+              mode = "2560x1440@99.95Hz";
+              # mode = "2560x1440@120.00Hz";
             }
             {
               criteria = "eDP-1";
@@ -56,19 +56,20 @@ in
           profile.name = "docked-home-3";
           profile.outputs = [
             {
-              criteria = "Samsung Electric Company U28E590 HTPH403281";
+              criteria = "LG Electronics LG HDR WQHD+ 201NTHMLG281";
               position = "0,0";
-              mode = "2560x1440@59.95Hz";
-              scale = 1.0;
+              mode = "3840x1600@75Hz";
+              # scale = 1.0;
             }
             {
               criteria = "LG Electronics 27GL850 007NTYT59834";
-              position = "2560,0";
-              mode = "2560x1440@59.95Hz";
+              position = "3840,0";
+              mode = "2560x1440@99.95Hz";
+              # mode = "2560x1440@59.95Hz";
             }
             {
               criteria = "eDP-1";
-              position = "5120,0";
+              position = "6400,0";
               mode = "1920x1200@300.00000";
               # mode = "2560x1600@240.00Hz";
               # scale = 1.25;
