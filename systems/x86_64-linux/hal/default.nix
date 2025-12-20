@@ -41,7 +41,6 @@
       enable-dump = true;
     };
     arr.enable = true;
-    # home-assistant.enable = true;
     avahi.enable = true;
   };
 
