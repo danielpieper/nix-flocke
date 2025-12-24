@@ -2,6 +2,7 @@
   config,
   lib,
   inputs,
+  pkgs,
   ...
 }:
 with lib;
@@ -14,28 +15,108 @@ in
   };
 
   config = mkIf cfg.enable {
-    virtualisation.oci-containers = {
-      backend = "podman";
-      containers = {
-        # https://www.home-assistant.io/installation/linux#install-home-assistant-container
-        homeassistant = {
-          pull = "newer";
-          privileged = true;
-          volumes = [ "home-assistant:/config" ];
-          environment.TZ = "Europe/Berlin";
-          image = "ghcr.io/home-assistant/home-assistant:stable";
-          extraOptions = [
-            "--network=host"
-            # "--cap-add=NET_ADMIN"
-            # "--cap-add=NET_RAW"
-            # "--cap-add=CAP_NET_BIND_SERVICE"
-            # "--device=/dev/ttyACM0:/dev/ttyACM0"
-          ];
-        };
-      };
-    };
-
     services = {
+      home-assistant = {
+        enable = true;
+        package = pkgs.home-assistant.override { extraPackages = ps: [ ps.psycopg2 ]; };
+        extraPackages =
+          python3Packages: with python3Packages; [
+            pychromecast
+          ];
+        configWritable = true;
+
+        extraComponents = [
+          "pushover"
+          "roborock"
+          "otbr"
+          "matter"
+          "thread"
+          "google_translate"
+          "alexa_devices"
+          "android_ip_webcam"
+        ];
+        config =
+          # let
+          #   hiddenEntities = [
+          #     "sensor.last_boot"
+          #     "sensor.date"
+          #   ];
+          # in
+          {
+            # icloud = { };
+            frontend = { };
+            http = {
+              use_x_forwarded_for = true;
+              trusted_proxies = [
+                "127.0.0.1"
+                "::1"
+              ];
+            };
+            # history.exclude = {
+            #   # entities = hiddenEntities;
+            #   domains = [
+            #     "automation"
+            #     "updater"
+            #   ];
+            # };
+            "map" = { };
+            shopping_list = { };
+            backup = { };
+            # logbook.exclude.entities = hiddenEntities;
+            logger.default = "info";
+            sun = { };
+            prometheus.filter.include_domains = [ "persistent_notification" ];
+            # device_tracker = [
+            #   {
+            #     platform = "luci";
+            #     host = "rauter.r";
+            #     username = "!secret openwrt_user";
+            #     password = "!secret openwrt_password";
+            #   }
+            # ];
+            config = { };
+            mobile_app = { };
+
+            #icloud = {
+            #  username = "!secret icloud_email";
+            #  password = "!secret icloud_password";
+            #  with_family = true;
+            #};
+            cloud = { };
+            network = { };
+            zeroconf = { };
+            system_health = { };
+            default_config = { };
+            system_log = { };
+            automation = "!include automations.yaml";
+            # sensor = [
+            #   {
+            #     platform = "template";
+            #     sensors.shannan_joerg_distance.value_template = ''{{ distance('person.jorg_thalheim', 'person.shannan_lekwati') | round(2) }}'';
+            #     sensors.joerg_last_updated = {
+            #       friendly_name = "Jörg's last location update";
+            #       value_template = ''{{ states.person.jorg_thalheim.last_updated.strftime('%Y-%m-%dT%H:%M:%S') }}Z'';
+            #       device_class = "timestamp";
+            #     };
+            #     sensors.shannan_last_updated = {
+            #       friendly_name = "Shannan's last location update";
+            #       value_template = ''{{ states.person.shannan_lekwati.last_updated.strftime('%Y-%m-%dT%H:%M:%S') }}Z'';
+            #       device_class = "timestamp";
+            #     };
+            #   }
+            # ];
+            recorder.db_url = "postgresql://@/hass";
+          };
+      };
+      postgresql = {
+        ensureDatabases = [ "hass" ];
+        ensureUsers = [
+          {
+            name = "hass";
+            ensureDBOwnership = true;
+          }
+        ];
+      };
       matter-server = {
         enable = true;
         # logLevel = "debug";

@@ -22,6 +22,8 @@
       monitoring.enable_exporter = true;
       projecty.enable = true;
       n8n.enable = true;
+      home-assistant.enable = true;
+      avahi.enable = true;
     };
     logind.settings.Login.HandleLidSwitchExternalPower = "ignore";
   };
@@ -33,6 +35,7 @@
     kernelParams = [ "consoleblank=300" ];
   };
 
+  hardware.bluetooth.enable = true;
   networking.networkmanager.wifi.powersave = true;
 
   system.stateVersion = "23.11";
