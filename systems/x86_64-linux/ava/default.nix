@@ -24,6 +24,12 @@
       n8n.enable = true;
       home-assistant.enable = true;
       avahi.enable = true;
+      openthread-border-router = {
+        enable = true;
+        radioDevice = "/dev/serial/by-id/usb-Nabu_Casa_ZBT-2_9C139EAC09F0-if00";
+        backboneInterface = "enp0s25";
+        webInterface = true;
+      };
     };
     logind.settings.Login.HandleLidSwitchExternalPower = "ignore";
   };

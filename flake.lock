@@ -1509,6 +1509,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-otbr": {
+      "locked": {
+        "lastModified": 1765777107,
+        "narHash": "sha256-LFjxyaipGov3CIkgE5JgOVxNVrNPVsydFkH1imgB4CQ=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "6350e7f595486bae9c008b6f228094ca2e56d5d6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "pull/332296/head",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1765838191,
@@ -1959,6 +1975,7 @@
         "nixos-generators": "nixos-generators",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_6",
+        "nixpkgs-otbr": "nixpkgs-otbr",
         "nur": "nur",
         "poetry2nix": "poetry2nix",
         "pre-commit-hooks": "pre-commit-hooks",

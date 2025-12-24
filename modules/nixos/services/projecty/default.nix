@@ -21,7 +21,9 @@ in
         enable = true;
         # TODO: add secrets here:
         # environmentFile = config.sops.secrets.projecty.path;
-        inherit (inputs.nix-secrets.projecty) environment;
+        environment = inputs.nix-secrets.projecty.environment // {
+          PROJECTY_HTTP_ADDR = ":8083"; # Changed from default :8080 to avoid conflict with OTBR (runs on 8081)
+        };
       };
       # use peer auth for example:
       # sudo -u postgres psql
@@ -45,7 +47,7 @@ in
         dynamicConfigOptions = {
           http = {
             services = {
-              projecty.loadBalancer.servers = [ { url = "http://localhost:8081"; } ];
+              projecty.loadBalancer.servers = [ { url = "http://localhost:8083"; } ];
             };
 
             routers = {
