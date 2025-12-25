@@ -47,33 +47,43 @@ in
         message = "services.flocke.openthread-border-router.radioDevice must be set to your Thread radio device path";
       }
     ];
+    services = {
+      openthread-border-router = {
+        enable = true;
+        package = pkgs.openthread-border-router;
 
-    services.openthread-border-router = {
-      enable = true;
-      package = pkgs.openthread-border-router;
+        radio = {
+          device = cfg.radioDevice;
+          baudRate = 460800; # ZBT-2 specific
+          flowControl = true; # Required for ZBT-2
+        };
 
-      radio = {
-        device = cfg.radioDevice;
-        baudRate = 460800; # ZBT-2 specific
-        flowControl = true; # Required for ZBT-2
+        inherit (cfg) backboneInterface;
+
+        rest = {
+          listenAddress = "127.0.0.1";
+          listenPort = 8081;
+        };
+
+        web = {
+          enable = cfg.webInterface;
+          listenAddress = "127.0.0.1";
+          listenPort = 8082;
+        };
       };
 
-      inherit (cfg) backboneInterface;
+      # Ensure Avahi is enabled for mDNS/DNS-SD
+      # (Already enabled on ava, but enforce the dependency)
+      avahi.enable = true;
 
-      rest = {
-        listenAddress = "127.0.0.1";
-        listenPort = 8081;
-      };
-
-      web = {
-        enable = cfg.webInterface;
-        listenAddress = "127.0.0.1";
-        listenPort = 8082;
-      };
+      # Disable USB autosuspend for ZBT-2 to prevent HDLC frame parsing errors
+      # Without this, the device goes into autosuspend causing serial communication errors
+      # which leads to Thread network instability and Matter subscription timeouts
+      # See: https://github.com/home-assistant/core/issues/158954
+      udev.extraRules = ''
+        # Nabu Casa ZBT-2 Thread Border Router - disable USB autosuspend
+        ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="303a", ATTR{idProduct}=="831a", ATTR{power/control}="on"
+      '';
     };
-
-    # Ensure Avahi is enabled for mDNS/DNS-SD
-    # (Already enabled on ava, but enforce the dependency)
-    services.avahi.enable = true;
   };
 }
