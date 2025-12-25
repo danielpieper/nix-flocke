@@ -20,7 +20,7 @@ in
       nssmdns4 = true;
       nssmdns6 = true;
       openFirewall = true;
-      reflector = true;
+      reflector = false;
       domainName = "local";
       publish = {
         enable = true;
