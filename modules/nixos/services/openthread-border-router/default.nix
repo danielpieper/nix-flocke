@@ -75,14 +75,33 @@ in
       # Ensure Avahi is enabled for mDNS/DNS-SD
       # (Already enabled on ava, but enforce the dependency)
       avahi.enable = true;
+    };
 
-      # Disable USB autosuspend for ZBT-2 to prevent HDLC frame parsing errors
-      # Without this, the device goes into autosuspend causing serial communication errors
-      # which leads to Thread network instability and Matter subscription timeouts
-      # See: https://github.com/home-assistant/core/issues/158954
-      udev.extraRules = ''
-        # Nabu Casa ZBT-2 Thread Border Router - disable USB autosuspend
-        ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="303a", ATTR{idProduct}=="831a", ATTR{power/control}="on"
+    # Allow Thread devices to access infrastructure network for Matter/CHIP
+    # OTBR firewall blocks Thread devices from reaching local network by default
+    # This adds infrastructure ULA prefix to the allow list
+    # Also disables NAT64 to prevent harmless warning messages
+    systemd.services.otbr-allow-infrastructure = {
+      description = "Allow Thread devices to access infrastructure network";
+      after = [ "otbr-agent.service" ];
+      requires = [ "otbr-agent.service" ];
+      wantedBy = [ "multi-user.target" ];
+
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+      };
+
+      script = ''
+        # Wait for otbr-agent to create ipsets and initialize
+        sleep 3
+
+        # Add infrastructure ULA prefix to allow list
+        ${pkgs.ipset}/bin/ipset add otbr-ingress-allow-dst fd00::/64 || true
+
+        # Disable NAT64 to prevent infrastructure discovery warnings
+        # NAT64 is not needed when infrastructure network has IPv4 connectivity
+        /run/current-system/sw/bin/ot-ctl nat64 disable || true
       '';
     };
   };
