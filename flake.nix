@@ -131,7 +131,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    tuxedo-nixos.url = "github:danielpieper/tuxedo-nixos";
+    tuxedo-nixos.url = "github:sund3RRR/tuxedo-nixos";
 
     nixpkgs-otbr = {
       url = "github:NixOS/nixpkgs/pull/332296/head";

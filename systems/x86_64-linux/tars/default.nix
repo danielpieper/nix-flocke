@@ -27,6 +27,7 @@
     vlc
     claude-code
     picard
+    obsidian
   ];
 
   services = {
