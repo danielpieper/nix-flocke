@@ -42,6 +42,7 @@
     };
     arr.enable = true;
     avahi.enable = true;
+    evitts.enable = true;
   };
 
   boot = {

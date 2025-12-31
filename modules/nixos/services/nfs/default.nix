@@ -25,6 +25,9 @@ in
         device = "//192.168.178.38/11tb";
         fsType = "cifs";
         options = [
+          "guest"
+          "rw"
+          "noperm"
           "file_mode=0777"
           "dir_mode=0777"
           "nounix"

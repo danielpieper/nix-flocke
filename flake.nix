@@ -131,6 +131,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    evitts = {
+      url = "git+ssh://forgejo@forgejo.homelab.daniel-pieper.com/daniel/evitts.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     tuxedo-nixos.url = "github:sund3RRR/tuxedo-nixos";
 
     nixpkgs-otbr = {
