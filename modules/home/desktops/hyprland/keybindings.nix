@@ -97,14 +97,14 @@ in
         "SUPER, S, togglesplit"
         "SUPER, B, togglefloating,"
         "SUPER, R, exec, ${resize}/bin/resize"
-        "SUPER, Space, exec, ${config.desktops.addons.rofi.package}/bin/rofi -show drun -mode drun -run-command \"uwsm app -- {cmd}\""
+        "SUPER, Space, exec, noctalia-shell ipc call launcher toggle"
         ",XF86TouchpadToggle, exec, ${toggleTouchpad}/bin/toggleTouchpad"
 
         # Lock Screen
-        ",XF86Launch5, exec,${pkgs.hyprlock}/bin/hyprlock"
-        ",XF86Launch4, exec,${pkgs.hyprlock}/bin/hyprlock"
-        "SUPER,backspace, exec,${pkgs.hyprlock}/bin/hyprlock"
-        "CTRL_SUPER,backspace, exec,wlogout --column-spacing 50 --row-spacing 50"
+        ",XF86Launch5, exec, noctalia-shell ipc call lockScreen lock"
+        ",XF86Launch4, exec, noctalia-shell ipc call lockScreen lock"
+        "SUPER,backspace, exec, noctalia-shell ipc call lockScreen lock"
+        "CTRL_SUPER,backspace, exec, noctalia-shell ipc call sessionMenu toggle"
 
         # Screenshot
         ",Print, exec,${pkgs.grimblast}/bin/grimblast save area - | ${pkgs.satty}/bin/satty -f - -o ~/Pictures/Screenshots/%Y-%m-%d_%H:%M:%S.png"
@@ -164,16 +164,16 @@ in
         "SUPERSHIFT,u, movetoworkspace,special"
       ];
       bindi = [
-        ",XF86MonBrightnessUp, exec, ${pkgs.brightnessctl}/bin/brightnessctl -q s +10%"
-        ",XF86MonBrightnessDown, exec, ${pkgs.brightnessctl}/bin/brightnessctl -q s 10%-"
-        ",XF86AudioRaiseVolume, exec, ${pkgs.pamixer}/bin/pamixer -i 5"
-        ",XF86AudioLowerVolume, exec, ${pkgs.pamixer}/bin/pamixer -d 5"
-        ",XF86AudioMute, exec, ${pkgs.pamixer}/bin/pamixer --toggle-mute"
-        ",XF86AudioMicMute, exec, ${pkgs.pamixer}/bin/pamixer --default-source --toggle-mute"
-        ",XF86AudioNext, exec,playerctl next"
-        ",XF86AudioPrev, exec,playerctl previous"
-        ",XF86AudioPlay, exec,playerctl play-pause"
-        ",XF86AudioStop, exec,playerctl stop"
+        ",XF86MonBrightnessUp, exec, noctalia-shell ipc call brightness increase"
+        ",XF86MonBrightnessDown, exec, noctalia-shell ipc call brightness decrease"
+        ",XF86AudioRaiseVolume, exec, noctalia-shell ipc call volume increase"
+        ",XF86AudioLowerVolume, exec, noctalia-shell ipc call volume decrease"
+        ",XF86AudioMute, exec, noctalia-shell ipc call volume muteOutput"
+        ",XF86AudioMicMute, exec, noctalia-shell ipc call volume muteInput"
+        ",XF86AudioNext, exec, noctalia-shell ipc call media next"
+        ",XF86AudioPrev, exec, noctalia-shell ipc call media previous"
+        ",XF86AudioPlay, exec, noctalia-shell ipc call media playPause"
+        ",XF86AudioStop, exec, noctalia-shell ipc call media pause"
       ];
       binde = [
         "SUPERALT, h, resizeactive, -20 0"

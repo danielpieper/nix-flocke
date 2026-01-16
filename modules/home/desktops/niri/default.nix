@@ -21,20 +21,21 @@ in
   config = mkIf cfg.enable {
     desktops.addons = {
       kanshi.enable = true;
-      rofi.enable = true;
-      swaync.enable = true;
+      # rofi.enable = true;
+      # swaync.enable = true;
       # swaylock.enable = true;
-      waybar.enable = true;
-      wlogout.enable = true;
+      # waybar.enable = true;
+      noctalia.enable = true;
+      # wlogout.enable = true;
       wlsunset.enable = true;
-      hyprlock.enable = true;
+      # hyprlock.enable = true;
       hypridle.enable = true;
     };
 
     home.packages = with pkgs; [
       nwg-displays
-      blueman
-      networkmanagerapplet
+      # blueman
+      # networkmanagerapplet
       wlopm # For DPMS control with swayidle
     ];
   };

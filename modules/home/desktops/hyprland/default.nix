@@ -26,22 +26,23 @@ in
 
     desktops.addons = {
       kanshi.enable = true;
-      rofi.enable = true;
-      swaync.enable = true;
-      waybar.enable = true;
+      # rofi.enable = true;
+      # swaync.enable = true;
+      # waybar.enable = true;
       # hyprpanel.enable = true;
-      wlogout.enable = true;
+      noctalia.enable = true;
+      # wlogout.enable = true;
       wlsunset.enable = true;
-      hyprpaper.enable = true;
-      hyprlock.enable = true;
+      # hyprpaper.enable = true;
+      # hyprlock.enable = true;
       hypridle.enable = true;
     };
 
     home.packages = with pkgs; [
       hyprland-qtutils
       nwg-displays
-      blueman
-      networkmanagerapplet
+      # blueman
+      # networkmanagerapplet
     ];
   };
 }

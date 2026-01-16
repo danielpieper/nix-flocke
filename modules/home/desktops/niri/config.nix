@@ -95,8 +95,8 @@ in
               "--silent"
             ];
           }
-          { command = [ "${pkgs.networkmanagerapplet}/bin/nm-applet" ]; }
-          { command = [ "${pkgs.blueman}/bin/blueman-applet" ]; }
+          # { command = [ "${pkgs.networkmanagerapplet}/bin/nm-applet" ]; }
+          # { command = [ "${pkgs.blueman}/bin/blueman-applet" ]; }
         ]
         ++ (map (cmd: {
           command = [
@@ -109,6 +109,27 @@ in
         # Animations
         animations = {
           enable = true;
+        };
+
+        # noctalia settings
+        # https://docs.noctalia.dev/getting-started/compositor-settings/niri/
+        # window-rules = [
+        #   {
+        #     # Rounded corners for a modern look.
+        #     geometry-corner-radius = {
+        #       bottom-left = 20.0;
+        #       bottom-right = 20.0;
+        #       top-left = 20.0;
+        #       top-right = 20.0;
+        #     };
+        #
+        #     # Clips window contents to the rounded corner boundaries.
+        #     clip-to-geometry = true;
+        #   }
+        # ];
+
+        debug = {
+          honor-xdg-activation-with-invalid-serial = [ ];
         };
       };
     };

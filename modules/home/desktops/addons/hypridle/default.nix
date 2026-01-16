@@ -19,14 +19,15 @@ in
       enable = true;
       settings = {
         general = {
-          before_sleep_cmd = "${pkgs.playerctl}/bin/playerctl pause -i kdeconnect; loginctl lock-session";
-          lock_cmd = "pidof hyprlock || ${pkgs.hyprlock}/bin/hyprlock ";
+          before_sleep_cmd = "noctalia-shell ipc call media pause";
+          lock_cmd = "noctalia-shell ipc call lockScreen lock";
         };
 
         listener = [
           {
             timeout = 60;
-            on-timeout = "pgrep hyprlock && systemctl suspend";
+            # jq -e, das mit Exit-Code 1 beendet wenn der Wert false ist, und Exit-Code 0 bei true.
+            on-timeout = ''noctalia-shell ipc call state all | jq -e '.state.lockScreenActive' > /dev/null && systemctl suspend'';
           }
           {
             timeout = 5 * 60;
