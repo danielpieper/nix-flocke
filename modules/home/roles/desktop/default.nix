@@ -41,8 +41,9 @@ in
 
     # TODO: move this to somewhere
     home.packages = with pkgs; [
-      # mplayer
-      mtpfs
+      mplayer
+      # TODO: check if it builds
+      # mtpfs
       jmtpfs
       brightnessctl
       xdg-utils

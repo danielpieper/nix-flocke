@@ -27,7 +27,7 @@ in
           {
             timeout = 60;
             # jq -e, das mit Exit-Code 1 beendet wenn der Wert false ist, und Exit-Code 0 bei true.
-            on-timeout = ''noctalia-shell ipc call state all | jq -e '.state.lockScreenActive' > /dev/null && systemctl suspend'';
+            on-timeout = "noctalia-shell ipc call state all | jq -e '.state.lockScreenActive' > /dev/null && systemctl suspend";
           }
           {
             timeout = 5 * 60;

@@ -7,7 +7,7 @@
 inputs.pre-commit-hooks.lib.${stdenv.hostPlatform.system}.run {
   src = ../..;
   hooks = {
-    nixfmt-rfc-style.enable = true;
+    nixfmt.enable = true;
     statix.enable = true;
     deadnix.enable = true;
     check-added-large-files.enable = true;

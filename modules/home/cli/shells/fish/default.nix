@@ -199,7 +199,7 @@ in
       // cfg.extraAbbrs;
 
       functions = {
-        fish_greeting = '''';
+        fish_greeting = "";
 
         envsource = ''
           for line in (cat $argv | grep -v '^#')

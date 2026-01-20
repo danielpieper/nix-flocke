@@ -37,7 +37,7 @@ in
         enable = true;
         # dns = "none";
       };
-      useDHCP = false;
+      useDHCP = lib.mkDefault false;
       dhcpcd.enable = false;
       resolvconf.enable = false;
       inherit (inputs.nix-secrets.networking) nameservers;
@@ -46,14 +46,14 @@ in
       enable = true;
       # At the time of September 2023, systemd upstream advise to disable DNSSEC by default as the current code is not robust enough
       # to deal with “in the wild” non-compliant servers, which will usually give you a broken bad experience in addition of insecure.
-      dnssec = "false";
-      domains = [ "~." ];
-      fallbackDns = inputs.nix-secrets.networking.fallbackNameservers;
-      dnsovertls = "opportunistic";
-      extraConfig = ''
-        MulticastDNS=no
-        LLMNR=no
-      '';
+      settings.Resolve = {
+        MulticastDNS = false;
+        LLMNR = false;
+        Domains = [ "~." ];
+        FallbackDNS = inputs.nix-secrets.networking.fallbackNameservers;
+        DNSSEC = "false";
+        DNSOverTLS = "opportunistic";
+      };
     };
     # systemd.services.systemd-resolved.environment.SYSTEMD_LOG_LEVEL = "debug";
 

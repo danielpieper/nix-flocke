@@ -44,7 +44,7 @@ in
       polarity = lib.mkDefault polarity;
       targets.nixvim.enable = false;
 
-      iconTheme = {
+      icons = {
         enable = true;
         package = pkgs.catppuccin-papirus-folders.override {
           flavor = "mocha";

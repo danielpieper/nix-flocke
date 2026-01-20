@@ -20,7 +20,8 @@ in
     # ./lidarr.nix
     ./headphones.nix
     ./sabnzbd.nix
-    ./premiumizarr.nix
+    # does not build
+    # ./premiumizarr.nix
   ];
 
   options.services.flocke.arr = {

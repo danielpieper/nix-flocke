@@ -34,7 +34,7 @@ in
         nodejs
 
         # Nix
-        nixfmt-rfc-style
+        nixfmt
         deadnix
         statix
 
@@ -66,7 +66,7 @@ in
 
         # Nix
         # nil
-        # nixfmt-rfc-style
+        # nixfmt
         # deadnix
         # statix
 

@@ -251,7 +251,7 @@ in
                     owner = "rfmoz";
                     repo = "grafana-dashboards";
                     rev = "master";
-                    sha256 = "sha256-ZkVijMRCd87sLckqezPh1wHfuiibExVhatA1AqRiKHc=";
+                    sha256 = "sha256-FIOeom1pAuBjD/o3ScEe/QZn/Z8R7eADYXTDZIqlmnM=";
                   }
                   + "/prometheus/node-exporter-full.json";
               }
@@ -271,7 +271,7 @@ in
                         owner = "ngosang";
                         repo = "restic-exporter";
                         rev = "main";
-                        sha256 = "sha256-y4bVamL+xnofM/XkBEf5oiX1Ji7rO1M6yoxZ1FJVeuE=";
+                        sha256 = "sha256-TwHIEh3XVNVGaiXIio77BAPbW4N+iXteV2UhccgJCG8=";
                       }
                       + "/grafana/grafana_dashboard.json";
                     modifiedDashboard =

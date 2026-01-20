@@ -25,7 +25,7 @@ buildGoModule {
   version = "1.4.5";
 
   src = inputs.premiumizearr-nova;
-  vendorHash = "sha256-1Ka6FxsUlqqD3rksXCO57KdJ2Ryzc78XBlRf/nSfDfA=";
+  vendorHash = "sha256-CsD+Xv1k6GImfdzhRNE9/75XQ5fec2uNJJGLBaUqnBo=";
 
   env.CGO_ENABLED = 0;
   ldflags = [

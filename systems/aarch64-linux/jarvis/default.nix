@@ -9,7 +9,22 @@
     ./disks.nix
   ];
 
-  # nmcli device modify enp1s0 ipv4.method auto
+  # Define NetworkManager connection with both IPv4 DHCP and static IPv6
+  networking.networkmanager.ensureProfiles.profiles.enp1s0 = {
+    connection = {
+      id = "enp1s0";
+      type = "ethernet";
+      interface-name = "enp1s0";
+    };
+    ipv4 = {
+      method = "auto";
+    };
+    ipv6 = {
+      method = "manual";
+      address1 = "2a01:4f8:c013:869a::/64";
+      gateway = "fe80::1";
+    };
+  };
 
   system.impermanence.enable = true;
 
