@@ -17,6 +17,8 @@ in
   };
 
   config = mkIf cfg.enable {
+    # for nixd
+    nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
     programs.neovim = {
       enable = true;
       viAlias = true;
@@ -37,6 +39,7 @@ in
         nixfmt
         deadnix
         statix
+        nixd
 
         # marksman
 
