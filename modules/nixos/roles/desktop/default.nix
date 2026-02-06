@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }:
@@ -39,6 +40,15 @@ in
         restic.enable = true;
         virtualisation.podman.enable = true;
         tailscale.enable = true;
+      };
+      greetd = mkIf (!config.roles.desktop.addons.gnome.enable) {
+        enable = true;
+        settings = {
+          default_session = {
+            command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --remember-session --sessions ${config.services.displayManager.sessionData.desktops}/share/wayland-sessions";
+            user = "greeter";
+          };
+        };
       };
       upower.enable = true;
       logind.settings.Login.HandlePowerKey = "suspend";

@@ -76,8 +76,6 @@ in
             disable_hyprland_logo = true;
             disable_splash_rendering = true;
             force_default_wallpaper = 0;
-            # Unfullscreen when opening something
-            new_window_takes_over_fullscreen = 2;
           };
 
         source = [ "${config.home.homeDirectory}/.config/hypr/monitors.conf" ];

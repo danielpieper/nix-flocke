@@ -65,6 +65,23 @@ in
   };
 
   sops.secrets.opServiceAccountToken = { };
+
+  xdg.desktopEntries = {
+    "vlc-schweinerei" = {
+      type = "Application";
+      name = "Schweinerei";
+      exec = "vlc --fullscreen rtsp://cam.gate-typhon.ts.net:8080/h264.sdp";
+      comment = "Guinea pig camera stream";
+      icon = "vlc";
+      categories = [
+        "AudioVideo"
+        "Video"
+        "Player"
+      ];
+      terminal = false;
+    };
+  };
+
   home = {
     sessionVariables = {
       GOPRIVATE = "forgejo.homelab.${inputs.nix-secrets.domain}";

@@ -18,24 +18,8 @@ in
     programs.hyprland = {
       enable = true;
       xwayland.enable = true;
-      withUWSM = true;
+      withUWSM = true; # Auto-registers with UWSM
     };
-
-    programs.uwsm = {
-      enable = true;
-      waylandCompositors = {
-        hyprland = {
-          prettyName = "Hyprland";
-          comment = "Hyprland compositor managed by UWSM";
-          binPath = "/run/current-system/sw/bin/Hyprland";
-        };
-      };
-    };
-    environment.loginShellInit = ''
-      if uwsm check may-start && uwsm select; then
-      	exec uwsm start default
-      fi
-    '';
 
     roles.desktop.addons.xdg-portal.enable = true;
   };
