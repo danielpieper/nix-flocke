@@ -1151,11 +1151,11 @@
     "lazyvim": {
       "flake": false,
       "locked": {
-        "lastModified": 1769548742,
-        "narHash": "sha256-4BM52FVYk539ZoZHjrnibokRpakoNy+piyRFjc1K68g=",
+        "lastModified": 1769675424,
+        "narHash": "sha256-/GO42CffH/1W9+WBob4eI+qTrGIR77a4e+iY+17XlLk=",
         "ref": "refs/heads/main",
-        "rev": "5b73ac65bc74e7c50fcb6f84dd487b13289bf585",
-        "revCount": 210,
+        "rev": "c3d561a1fbb38321d9b632e77b7e69dfc54d4ade",
+        "revCount": 211,
         "type": "git",
         "url": "ssh://forgejo@forgejo.homelab.daniel-pieper.com/daniel/nvim.git"
       },
