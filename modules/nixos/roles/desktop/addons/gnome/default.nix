@@ -18,15 +18,13 @@ in
     roles.desktop.addons.nautilus.enable = true;
 
     services = {
-      xserver = {
+      xserver.enable = true;
+      displayManager.gdm.enable = true;
+      desktopManager.gnome = {
         enable = true;
-        displayManager.gdm.enable = true;
-        desktopManager.gnome = {
-          enable = true;
-          extraGSettingsOverridePackages = [
-            pkgs.nautilus-open-any-terminal
-          ];
-        };
+        extraGSettingsOverridePackages = [
+          pkgs.nautilus-open-any-terminal
+        ];
       };
     };
 
