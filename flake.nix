@@ -2,9 +2,7 @@
   description = "Daniel's Nix/NixOS Config";
 
   inputs = {
-    # nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # until https://github.com/NixOS/nixpkgs/pull/479580 appears on unstable
-    nixpkgs.url = "github:NixOS/nixpkgs/edb78a8b13d5fb2cdb45e54649cee9676e250f08";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager";
