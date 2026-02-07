@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**nix-flocke** is a personal NixOS configuration repository managing multiple machines using Nix Flakes and Snowfall Lib. It configures both personal workstations (tars, case, ava) and home lab servers (hal, jarvis).
+**nix-flocke** is a personal NixOS configuration repository managing multiple machines using Nix Flakes and Snowfall Lib. It configures both personal workstations (tars, ava) and home lab servers (hal, jarvis).
 
 Key technologies: Nix Flakes, Snowfall Lib, Home Manager, sops-nix, Impermanence, Stylix/Catppuccin theming.
 
@@ -40,13 +40,12 @@ Snowfall Lib auto-discovers modules, packages, and systems based on directory st
 
 ### Hosts
 
-| Host | Arch | Role | Notes |
-|------|------|------|-------|
-| tars | x86_64 | Desktop | Tuxedo laptop, Hyprland/Niri |
-| case | x86_64 | Desktop | ThinkPad T14, Niri |
-| ava | x86_64 | Desktop | ThinkPad X250 |
-| hal | x86_64 | Server | Main homelab (Traefik, Home Assistant, Jellyfin, etc.) |
-| jarvis | aarch64 | Server | ARM server |
+| Host   | Arch    | Role    | Notes                                                  |
+| ------ | ------- | ------- | ------------------------------------------------------ |
+| tars   | x86_64  | Desktop | Tuxedo laptop, Hyprland/Niri                           |
+| ava    | x86_64  | Desktop | ThinkPad X250                                          |
+| hal    | x86_64  | Server  | Main homelab (Traefik, Home Assistant, Jellyfin, etc.) |
+| jarvis | aarch64 | Server  | ARM server                                             |
 
 ## Critical: Git Tracking Requirement
 

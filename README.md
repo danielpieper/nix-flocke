@@ -22,7 +22,7 @@ nix develop
 
 nix-shell -p ssh-to-age --run 'cat /etc/ssh/ssh_host_ed25519_key.pub | ssh-to-age'
 
-nixos-anywhere --flake '.#case' nixos@192.168.X.X -i ~/.ssh/id_ed25519
+nixos-anywhere --flake '.#tars' nixos@192.168.X.X -i ~/.ssh/id_ed25519
 ```
 
 After building it you can copy the ISO from the `result` folder to your USB.
