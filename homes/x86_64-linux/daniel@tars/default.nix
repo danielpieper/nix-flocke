@@ -13,7 +13,7 @@ in
     gaming.enable = true;
   };
   desktops = {
-    hyprland.enable = true;
+    hyprland.enable = false;
     niri.enable = true;
   };
 
