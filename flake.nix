@@ -196,7 +196,6 @@
           nixos-hardware.nixosModules.tuxedo-infinitybook-pro14-gen9-amd
           nixos-hardware.nixosModules.common-gpu-amd
         ];
-        ava.modules = with inputs; [ nixos-hardware.nixosModules.lenovo-thinkpad-x250 ];
       };
 
       # homes.modules = with inputs; [

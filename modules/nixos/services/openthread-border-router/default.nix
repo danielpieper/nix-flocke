@@ -73,7 +73,7 @@ in
       };
 
       # Ensure Avahi is enabled for mDNS/DNS-SD
-      # (Already enabled on ava, but enforce the dependency)
+      # Enforce avahi dependency for mDNS/DNS-SD
       avahi.enable = true;
     };
 
