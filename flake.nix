@@ -129,6 +129,11 @@
 
     tuxedo-nixos.url = "github:sund3RRR/tuxedo-nixos";
 
+    llm-agents = {
+      url = "github:numtide/llm-agents.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixpkgs-otbr = {
       url = "github:NixOS/nixpkgs/pull/332296/head";
     };
@@ -195,6 +200,7 @@
       overlays = with inputs; [
         nixgl.overlay
         nur.overlays.default
+        llm-agents.overlays.default
       ];
 
       deploy = lib.mkDeploy { inherit (inputs) self; };

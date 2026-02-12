@@ -64,6 +64,7 @@ in
         "--exclude=var/lib/arr"
         "--exclude=var/lib/loki"
         "--exclude=jellyfin/metadata"
+        "--exclude=var/lib/private/ollama"
       ];
       pruneOpts = [
         "--keep-daily 7"

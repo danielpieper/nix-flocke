@@ -25,7 +25,7 @@
   environment.systemPackages = with pkgs; [
     moonlight-qt
     vlc
-    claude-code
+    pkgs.llm-agents.claude-code
     picard
     obsidian
   ];
@@ -34,6 +34,14 @@
     flocke = {
       syncthing.enable = true;
       nfs.enable = true;
+      ollama = {
+        enable = true;
+        acceleration = "rocm";
+        loadModels = [
+          "devstral-small-2"
+          "qwen3-coder-next"
+        ];
+      };
     };
 
     # Let TUXEDO Control Center handle CPU frequencies

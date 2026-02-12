@@ -12,6 +12,8 @@ in
     social.enable = true;
     gaming.enable = true;
   };
+
+  programs.flocke.opencode.enable = true;
   desktops = {
     niri.enable = true;
   };
