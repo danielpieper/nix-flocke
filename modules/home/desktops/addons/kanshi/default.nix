@@ -53,6 +53,24 @@ in
           ];
         }
         {
+          profile.name = "docked-home-2-wide";
+          profile.outputs = [
+            {
+              criteria = "LG Electronics LG HDR WQHD+ 201NTHMLG281";
+              position = "0,0";
+              mode = "3840x1600@75Hz";
+              # scale = 1.0;
+            }
+            {
+              criteria = "eDP-1";
+              position = "3840,0";
+              mode = "1920x1200@300.00000";
+              # mode = "2560x1600@240.00Hz";
+              # scale = 1.25;
+            }
+          ];
+        }
+        {
           profile.name = "docked-home-3";
           profile.outputs = [
             {
