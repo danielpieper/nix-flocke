@@ -26,7 +26,11 @@ deployboot server:
 apply:
   nh os switch
 
+# dns:
+# 	nix build .#octodns
+# 	OP_SERVICE_ACCOUNT_TOKEN="" HETZNER_DNS_API=$(op read "op://Private/Hetzner/octodns api token") octodns-sync --config-file=./result
+# 	@read -p "apply? (y/N): " answer && [ "$answer" = "y" ] && OP_SERVICE_ACCOUNT_TOKEN="" HETZNER_DNS_API=$(op read "op://Private/Hetzner/octodns api token") octodns-sync --config-file=./result --doit || echo "Skipped applying changes"
+
 dns:
 	nix build .#octodns
-	OP_SERVICE_ACCOUNT_TOKEN="" HETZNER_DNS_API=$(op read "op://Private/Hetzner/octodns api token") octodns-sync --config-file=./result
-	@read -p "apply? (y/N): " answer && [ "$answer" = "y" ] && OP_SERVICE_ACCOUNT_TOKEN="" HETZNER_DNS_API=$(op read "op://Private/Hetzner/octodns api token") octodns-sync --config-file=./result --doit || echo "Skipped applying changes"
+	OP_SERVICE_ACCOUNT_TOKEN="" HCLOUD_DNS_TOKEN=$(op read "op://Private/Hetzner/OctoDNS HCloud API Token") octodns-sync --config-file=./result

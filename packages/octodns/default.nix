@@ -18,7 +18,8 @@ generate.octodnsConfig {
     providers = {
       hetzner = {
         class = "octodns_hetzner.HetznerProvider";
-        token = "env/HETZNER_DNS_API";
+        token = "env/HCLOUD_DNS_TOKEN";
+        backend = "hcloud";
       };
     };
   };
