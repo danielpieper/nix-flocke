@@ -28,7 +28,7 @@ in
 
     services = {
       traefik = {
-        dynamicConfigOptions = {
+        dynamic.files."monitoring".settings = {
           http = {
             services = {
               prometheus.loadBalancer.servers = [

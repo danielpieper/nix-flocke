@@ -57,7 +57,7 @@ in
     };
 
     services.traefik = {
-      dynamicConfigOptions = {
+      dynamic.files."adguard".settings = {
         http = {
           services = {
             adguardhome.loadBalancer.servers = [ { url = "http://localhost:3000"; } ];

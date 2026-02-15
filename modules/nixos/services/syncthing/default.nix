@@ -33,7 +33,7 @@ in
     };
 
     services.traefik = {
-      dynamicConfigOptions = {
+      dynamic.files."syncthing".settings = {
         http = {
           services = {
             syncthing.loadBalancer.servers = [

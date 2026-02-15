@@ -25,7 +25,7 @@ in
         environment.WEBHOOK_URL = "https://n8nhook.${inputs.nix-secrets.domain}";
       };
       traefik = {
-        dynamicConfigOptions = {
+        dynamic.files."n8n".settings = {
           http = {
             services = {
               n8n.loadBalancer.servers = [

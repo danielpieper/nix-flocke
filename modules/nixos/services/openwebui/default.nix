@@ -24,7 +24,7 @@ in
         enable = true;
       };
       traefik = {
-        dynamicConfigOptions = {
+        dynamic.files."openwebui".settings = {
           http = {
             services = {
               openwebui.loadBalancer.servers = [

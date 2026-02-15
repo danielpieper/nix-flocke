@@ -72,7 +72,7 @@ in
       };
 
       traefik = {
-        dynamicConfigOptions = {
+        dynamic.files."teslamate".settings = {
           http = {
             services = {
               teslamate.loadBalancer.servers = [

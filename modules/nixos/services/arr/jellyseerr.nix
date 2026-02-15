@@ -29,7 +29,7 @@ in
         };
         services = {
           jellyseerr.enable = true;
-          traefik.dynamicConfigOptions.http = {
+          traefik.dynamic.files."jellyseerr".settings.http = {
             services.jellyseerr.loadBalancer.servers = [
               {
                 url = "http://localhost:5055";

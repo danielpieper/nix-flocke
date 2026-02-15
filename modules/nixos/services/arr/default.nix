@@ -116,7 +116,8 @@ in
           };
           traefik = {
             enable = true;
-            staticConfigOptions = {
+            dynamic.dir = "/var/lib/traefik/dynamic";
+            static.settings = {
               log.level = "INFO";
               metrics.prometheus = { };
               certificatesResolvers.letsencrypt.acme = {
@@ -158,7 +159,7 @@ in
                 };
               };
             };
-            dynamicConfigOptions = {
+            dynamic.files."arr".settings = {
               http = {
                 middlewares = {
                   authentik = {

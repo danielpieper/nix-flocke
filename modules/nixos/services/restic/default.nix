@@ -30,7 +30,7 @@ in
       };
 
       traefik = {
-        dynamicConfigOptions = {
+        dynamic.files."restic".settings = {
           http = {
             services = {
               restic.loadBalancer.servers = [

@@ -33,7 +33,7 @@ in
             group = "media";
             configFile = "/var/lib/sabnzbd/config.ini";
           };
-          traefik.dynamicConfigOptions.http = {
+          traefik.dynamic.files."sabnzbd".settings.http = {
             services.sabnzbd.loadBalancer.servers = [
               {
                 url = "http://localhost:8090";

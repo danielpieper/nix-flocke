@@ -27,7 +27,7 @@ in
             enable = true;
             group = "media";
           };
-          traefik.dynamicConfigOptions.http = {
+          traefik.dynamic.files."sonarr".settings.http = {
             services.sonarr.loadBalancer.servers = [
               {
                 url = "http://localhost:8989";

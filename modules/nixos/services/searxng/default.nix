@@ -39,7 +39,7 @@ in
     };
 
     services.traefik = {
-      dynamicConfigOptions = {
+      dynamic.files."searxng".settings = {
         http = {
           services = {
             searxng.loadBalancer.servers = [

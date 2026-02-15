@@ -24,7 +24,7 @@ in
       };
 
       traefik = {
-        dynamicConfigOptions = {
+        dynamic.files."gotify".settings = {
           http = {
             services = {
               notify.loadBalancer.servers = [

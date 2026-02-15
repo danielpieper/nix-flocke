@@ -27,7 +27,7 @@ in
             enable = true;
             group = "media";
           };
-          traefik.dynamicConfigOptions.http = {
+          traefik.dynamic.files."lidarr".settings.http = {
             services.lidarr.loadBalancer.servers = [
               {
                 url = "http://localhost:8686";

@@ -123,7 +123,7 @@ in
         port = 5580;
       };
       traefik = {
-        dynamicConfigOptions = {
+        dynamic.files."home-assistant".settings = {
           http = {
             services = {
               home-assistant.loadBalancer.servers = [

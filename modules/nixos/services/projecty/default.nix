@@ -44,7 +44,7 @@ in
         ];
       };
       traefik = {
-        dynamicConfigOptions = {
+        dynamic.files."projecty".settings = {
           http = {
             services = {
               projecty.loadBalancer.servers = [ { url = "http://localhost:8083"; } ];

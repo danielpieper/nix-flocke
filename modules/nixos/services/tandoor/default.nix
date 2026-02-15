@@ -71,7 +71,7 @@ in
       };
 
       traefik = {
-        dynamicConfigOptions = {
+        dynamic.files."tandoor".settings = {
           http = {
             services = {
               tandoor.loadBalancer.servers = [

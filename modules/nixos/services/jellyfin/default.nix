@@ -36,7 +36,7 @@ in
       };
 
       traefik = {
-        dynamicConfigOptions = {
+        dynamic.files."jellyfin".settings = {
           http = {
             services = {
               jellyfin.loadBalancer.servers = [

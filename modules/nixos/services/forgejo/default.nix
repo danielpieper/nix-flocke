@@ -81,7 +81,7 @@ in
       };
 
       traefik = {
-        dynamicConfigOptions = {
+        dynamic.files."forgejo".settings = {
           http = {
             services = {
               forgejo.loadBalancer.servers = [
