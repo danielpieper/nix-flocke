@@ -19,7 +19,7 @@ in
       enable = true;
       settings = {
         general = {
-          before_sleep_cmd = "noctalia-shell ipc call media pause";
+          before_sleep_cmd = "loginctl lock-session; noctalia-shell ipc call media pause";
           lock_cmd = "noctalia-shell ipc call lockScreen lock";
         };
 
