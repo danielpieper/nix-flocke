@@ -66,16 +66,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hypr-contrib = {
-      url = "github:hyprwm/contrib";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    hyprcursor = {
-      url = "github:hyprwm/Hyprcursor";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     niri = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";

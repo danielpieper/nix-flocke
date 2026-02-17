@@ -24,7 +24,6 @@ in
       # rofi.enable = true;
       # swaync.enable = true;
       # swaylock.enable = true;
-      # waybar.enable = true;
       noctalia.enable = true;
       # wlogout.enable = true;
       wlsunset.enable = true;
