@@ -40,7 +40,7 @@
       enable-runner = false;
       enable-dump = true;
     };
-    arr.enable = true;
+    arr.enable = false;
     avahi.enable = true;
     evitts.enable = false;
   };
