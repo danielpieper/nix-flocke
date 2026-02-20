@@ -64,9 +64,7 @@ in
           "uwsm"
           "app"
           "--"
-          "wezterm"
-          "start"
-          "--always-new-process"
+          "ghostty"
         ];
         "Mod+Up".action = toggle-overview;
         "Mod+Down".action = toggle-overview;

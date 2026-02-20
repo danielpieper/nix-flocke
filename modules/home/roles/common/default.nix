@@ -30,7 +30,7 @@ in
       terminals = {
         foot.enable = true;
         ghostty.enable = true;
-        wezterm.enable = true;
+        wezterm.enable = false;
       };
       shells.fish.enable = true;
     };

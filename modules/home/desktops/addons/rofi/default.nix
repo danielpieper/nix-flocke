@@ -20,7 +20,7 @@ in
     programs.rofi = {
       enable = true;
       inherit (cfg) package;
-      terminal = "${pkgs.foot}/bin/foot";
+      terminal = "${pkgs.ghostty}/bin/ghostty";
       extraConfig = {
         modi = "run,drun,window";
         show-icons = true;

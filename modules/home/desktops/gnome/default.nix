@@ -43,7 +43,7 @@ in
 
     dconf.settings = {
       "org/gnome/desktop/applications/terminal" = {
-        exec = "${pkgs.wezterm}/bin/wezterm start --always-new-process";
+        exec = "${pkgs.ghostty}/bin/ghostty";
       };
 
       "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {

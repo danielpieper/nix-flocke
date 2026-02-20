@@ -69,6 +69,11 @@ in
 
         plugins {
           session-manager { path "session-manager"; }
+          zjstatus-hints location="https://github.com/b0o/zjstatus-hints/releases/download/v0.1.4/zjstatus-hints.wasm" { max_length 0; }
+        }
+
+        load_plugins {
+            zjstatus-hints
         }
 
         keybinds {
@@ -106,69 +111,6 @@ in
             bind "s" { SwitchToMode "Scroll"; }
             bind "o" { SwitchToMode "Session"; }
             bind "q" { Quit; }
-            bind "?" {
-              SwitchToMode "Normal";
-              LaunchOrFocusPlugin "https://github.com/karimould/zellij-forgot/releases/download/0.4.2/zellij_forgot.wasm" {
-                "lock"                  "ctrl + b + g"
-                "unlock"                "ctrl + g"
-                "new pane left"         "alt + left"
-                "new pane right"        "alt + right"
-                "new pane up"           "alt + up"
-                "new pane down"         "alt + down"
-                "close tab"             "alt + x"
-                "toggle floating pane"  "alt + w"
-                "new tab"               "alt + t"
-                "move left"             "alt + h"
-                "move right"            "alt + l"
-                "move up"               "alt + j"
-                "move down"             "alt + k"
-                "resize increase"       "alt + ="
-                "resize decrease"       "alt + -"
-                "next layout"           "alt + ]"
-                "previous layout"       "alt + ["
-                "move tab left"         "alt + i"
-                "move tab right"        "alt + o"
-                "change focus of pane"  "ctrl + b + p + arrow key"
-                "close pane"            "ctrl + b + p + x"
-                "rename pane"           "ctrl + b + p + c"
-                "toggle fullscreen"     "ctrl + b + p + f"
-                "toggle floating pane"  "ctrl + b + p + w"
-                "toggle embed pane"     "ctrl + b + p + e"
-                "choose right pane"     "ctrl + b + p + l"
-                "choose left pane"      "ctrl + b + p + r"
-                "choose upper pane"     "ctrl + b + p + k"
-                "choose lower pane"     "ctrl + b + p + j"
-                "new tab"               "ctrl + b + t + n"
-                "close tab"             "ctrl + b + t + x"
-                "change focus of tab"   "ctrl + b + t + arrow key"
-                "rename tab"            "ctrl + b + t + r"
-                "sync tab"              "ctrl + b + t + s"
-                "brake pane to new tab" "ctrl + b + t + b"
-                "brake pane left"       "ctrl + b + t + ["
-                "brake pane right"      "ctrl + b + t + ]"
-                "toggle tab"            "ctrl + b + t + tab"
-                "increase pane size"    "ctrl + b + n + +"
-                "decrease pane size"    "ctrl + b + n + -"
-                "increase pane top"     "ctrl + b + n + k"
-                "increase pane right"   "ctrl + b + n + l"
-                "increase pane bottom"  "ctrl + b + n + j"
-                "increase pane left"    "ctrl + b + n + h"
-                "decrease pane top"     "ctrl + b + n + K"
-                "decrease pane right"   "ctrl + b + n + L"
-                "decrease pane bottom"  "ctrl + b + n + J"
-                "decrease pane left"    "ctrl + b + n + H"
-                "move pane to top"      "ctrl + b + h + k"
-                "move pane to right"    "ctrl + b + h + l"
-                "move pane to bottom"   "ctrl + b + h + j"
-                "move pane to left"     "ctrl + b + h + h"
-                "search"                "ctrl + b + s + s"
-                "go into edit mode"     "ctrl + b + s + e"
-                "detach session"        "ctrl + b + o + w"
-                "open session manager"  "ctrl + b + o + w"
-                "quit zellij"           "ctrl + b + q"
-                floating true
-              }
-            }
           }
         }
       '';
@@ -269,7 +211,7 @@ in
                 pane size=1 borderless=true {
                     plugin location="file://${pkgs.zjstatus}/bin/zjstatus.wasm" {
                         format_left   "{mode}#[bg=#${colors.base00}] {tabs}"
-                        format_center "{notifications}"
+                        format_center "{pipe_zjstatus_hints} {notifications}"
                         format_right  "#[bg=#${colors.base00},fg=#${colors.base0D}]#[bg=#${colors.base0D},fg=#${colors.base01},bold] #[bg=#${colors.base02},fg=#${colors.base05},bold] {swap_layout} {session} #[bg=#${colors.base03},fg=#${colors.base05},bold]"
                         format_space  ""
                         format_hide_on_overlength "true"
@@ -321,6 +263,8 @@ in
                         datetime        "#[fg=#6C7086,bold] {format} "
                         datetime_format "%A, %d %b %Y %H:%M"
                         datetime_timezone "Europe/Berlin"
+
+                        pipe_zjstatus_hints_format "{output}"
                     }
                 }
                 children

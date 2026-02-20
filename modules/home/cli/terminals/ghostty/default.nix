@@ -22,7 +22,7 @@ in
         command = "fish";
         gtk-titlebar = false;
         gtk-single-instance = true;
-        font-size = 12;
+        font-size = 13;
         confirm-close-surface = false;
         copy-on-select = true;
       };

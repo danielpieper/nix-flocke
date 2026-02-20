@@ -39,7 +39,7 @@ in
           showCategories = true;
           showIconBackground = false;
           sortByMostUsed = true;
-          terminalCommand = "xterm -e";
+          terminalCommand = "ghostty -e";
           useApp2Unit = false;
           viewMode = "list";
         };
