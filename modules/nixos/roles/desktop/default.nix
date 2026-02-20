@@ -1,6 +1,5 @@
 {
   lib,
-  pkgs,
   config,
   ...
 }:
@@ -33,6 +32,8 @@ in
       dygmaKeyboard.enable = true;
     };
 
+    programs.regreet.enable = true;
+
     services = {
       flocke = {
         # systemd-resolved[810]: mDNS-IPv4: There appears to be another mDNS responder running, or previously systemd-resolved crashed with some outstanding transfers.
@@ -40,15 +41,6 @@ in
         restic.enable = true;
         virtualisation.podman.enable = true;
         tailscale.enable = true;
-      };
-      greetd = mkIf (!config.roles.desktop.addons.gnome.enable) {
-        enable = true;
-        settings = {
-          default_session = {
-            command = "${pkgs.tuigreet}/bin/tuigreet --time --remember --remember-session --sessions ${config.services.displayManager.sessionData.desktops}/share/wayland-sessions";
-            user = "greeter";
-          };
-        };
       };
       upower.enable = true;
       logind.settings.Login.HandlePowerKey = "suspend";
