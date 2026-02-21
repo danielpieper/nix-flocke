@@ -28,7 +28,6 @@ in
     };
 
     services = {
-      flocke.kdeconnect.enable = true;
       trayscale.enable = true;
     };
     desktops.addons.xdg.enable = true;
