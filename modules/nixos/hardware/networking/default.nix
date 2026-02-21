@@ -18,19 +18,6 @@ in
     networking = {
       firewall = {
         enable = true;
-        # TODO: check the reason for this:
-        allowedTCPPortRanges = [
-          {
-            from = 1714;
-            to = 1764;
-          }
-        ];
-        allowedUDPPortRanges = [
-          {
-            from = 1714;
-            to = 1764;
-          }
-        ];
       };
       # Configure networkmanager connections to only use DHCP without DNS settings
       networkmanager = {

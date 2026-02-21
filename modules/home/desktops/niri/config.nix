@@ -72,6 +72,8 @@ in
 
         prefer-no-csd = true;
 
+        hotkey-overlay.skip-at-startup = true;
+
         spawn-at-startup = [
           { command = [ "${pkgs.kanshi}/bin/kanshi" ]; }
           { command = [ "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1" ]; }
