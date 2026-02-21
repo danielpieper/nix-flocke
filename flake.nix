@@ -134,10 +134,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixpkgs-otbr = {
-      url = "github:NixOS/nixpkgs/pull/332296/head";
-    };
-
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -182,7 +178,6 @@
         nixos-dns.nixosModules.dns
         tuxedo-nixos.nixosModules.default
         niri.nixosModules.niri
-        "${nixpkgs-otbr}/nixos/modules/services/home-automation/openthread-border-router.nix"
         inputs.noctalia.nixosModules.default
       ];
 
