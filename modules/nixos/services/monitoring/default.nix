@@ -24,11 +24,12 @@ in
     sops.secrets = {
       grafana_oauth2_client_id.owner = "grafana";
       grafana_oauth2_client_secret.owner = "grafana";
+      grafana_secret_key.owner = "grafana";
     };
 
     services = {
       traefik = {
-        dynamic.files."monitoring".settings = {
+        dynamicConfigOptions = {
           http = {
             services = {
               prometheus.loadBalancer.servers = [
@@ -229,6 +230,9 @@ in
             user = "grafana";
             name = "grafana";
             type = "postgres";
+          };
+          security = {
+            secret_key = "$__file{${config.sops.secrets.grafana_secret_key.path}}";
           };
         };
 

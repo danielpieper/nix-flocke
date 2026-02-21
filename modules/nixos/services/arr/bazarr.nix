@@ -28,7 +28,7 @@ in
             enable = true;
             group = "media";
           };
-          traefik.dynamic.files."bazarr".settings.http = {
+          traefik.dynamicConfigOptions.http = {
             services.bazarr.loadBalancer.servers = [
               {
                 url = "http://localhost:6767";

@@ -45,7 +45,7 @@ in
       };
 
       traefik = {
-        dynamic.files."website".settings = {
+        dynamicConfigOptions = {
           http = {
             # Define middleware for redirecting www to non-www
             middlewares = {

@@ -15,7 +15,7 @@ in
 
   config = mkIf cfg.enableWebhook {
     services.traefik = {
-      dynamic.files."n8n-webhook".settings = {
+      dynamicConfigOptions = {
         http = {
           services = {
             n8nwebhook.loadBalancer = {

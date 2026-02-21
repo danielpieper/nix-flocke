@@ -23,7 +23,7 @@ in
     };
 
     services.traefik = {
-      dynamic.files."actual".settings = {
+      dynamicConfigOptions = {
         http = {
           services = {
             actual.loadBalancer.servers = [

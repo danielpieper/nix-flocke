@@ -39,7 +39,7 @@ in
       };
 
       traefik = {
-        dynamic.files."authentik".settings = {
+        dynamicConfigOptions = {
           http = {
             middlewares = {
               authentik = {

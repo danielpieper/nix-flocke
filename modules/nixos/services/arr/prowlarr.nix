@@ -28,7 +28,7 @@ in
         };
         services = {
           prowlarr.enable = true;
-          traefik.dynamic.files."prowlarr".settings.http = {
+          traefik.dynamicConfigOptions.http = {
             services.prowlarr.loadBalancer.servers = [
               {
                 url = "http://localhost:9696";

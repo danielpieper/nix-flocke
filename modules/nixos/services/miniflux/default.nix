@@ -31,7 +31,7 @@ in
         };
       };
       traefik = {
-        dynamic.files."miniflux".settings = {
+        dynamicConfigOptions = {
           http = {
             services = {
               miniflux.loadBalancer.servers = [

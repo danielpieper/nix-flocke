@@ -30,7 +30,7 @@ in
       };
 
       traefik = {
-        dynamic.files."navidrome".settings = {
+        dynamicConfigOptions = {
           http = {
             services = {
               navidrome.loadBalancer.servers = [ { url = "http://localhost:4533"; } ];

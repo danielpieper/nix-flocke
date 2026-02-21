@@ -56,7 +56,7 @@ in
           isSystemUser = true;
         };
 
-        services.traefik.dynamic.files."premiumizarr".settings.http = {
+        services.traefik.dynamicConfigOptions.http = {
           services.premiumizarr.loadBalancer.servers = [
             {
               url = "http://127.0.0.1:8182";

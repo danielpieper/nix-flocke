@@ -37,9 +37,7 @@ in
       traefik = {
         enable = true;
 
-        dynamic.dir = "/var/lib/traefik/dynamic";
-
-        static.settings = {
+        staticConfigOptions = {
           log = {
             level = "INFO";
             filePath = "/var/log/traefik/traefik.log";

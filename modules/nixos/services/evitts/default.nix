@@ -38,7 +38,7 @@ in
         environmentFile = config.sops.secrets.evitts_env.path;
       };
       traefik = {
-        dynamic.files."evitts".settings = {
+        dynamicConfigOptions = {
           http = {
             services = {
               evitts.loadBalancer.servers = [ { url = "http://localhost:8093"; } ];

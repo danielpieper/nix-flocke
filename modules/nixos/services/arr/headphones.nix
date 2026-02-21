@@ -27,7 +27,7 @@ in
             enable = true;
             group = "media";
           };
-          traefik.dynamic.files."headphones".settings.http = {
+          traefik.dynamicConfigOptions.http = {
             services.headphones.loadBalancer.servers = [
               {
                 url = "http://localhost:8181";
