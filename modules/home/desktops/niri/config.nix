@@ -88,6 +88,7 @@ in
               "hide"
             ];
           }
+          { command = [ "${pkgs.kdePackages.kdeconnect-kde}/bin/kdeconnect-indicator" ]; }
           {
             command = [
               "${pkgs._1password-gui}/bin/1password"

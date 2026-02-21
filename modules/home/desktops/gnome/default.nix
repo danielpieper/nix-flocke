@@ -17,6 +17,7 @@ in
 
   config = mkIf cfg.enable {
     services = {
+      flocke.kdeconnect.enable = lib.mkForce false;
       trayscale.enable = true;
     };
 
