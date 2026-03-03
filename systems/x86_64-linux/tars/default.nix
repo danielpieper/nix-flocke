@@ -37,8 +37,8 @@
         enable = true;
         acceleration = "rocm";
         loadModels = [
-          "devstral-small-2"
           "qwen3-coder-next"
+          # "qwen3.5:35b-a3b"
         ];
       };
     };

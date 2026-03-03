@@ -23,6 +23,13 @@ in
             Experimental = true;
           };
         };
+        # Prevent BlueZ from putting HID connections into sniff mode,
+        # which adds noticeable input latency for keyboards and mice.
+        input = {
+          General = {
+            IdleTimeout = 0;
+          };
+        };
       };
     };
   };

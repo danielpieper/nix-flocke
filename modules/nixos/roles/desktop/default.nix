@@ -27,7 +27,7 @@ in
 
     hardware = {
       audio.enable = true;
-      bluetooth.enable = true;
+      bluetoothctl.enable = true;
       logitechMouse.enable = true;
       dygmaKeyboard.enable = true;
     };
