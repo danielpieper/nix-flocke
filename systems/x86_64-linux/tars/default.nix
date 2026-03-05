@@ -38,7 +38,7 @@
         acceleration = "rocm";
         loadModels = [
           "qwen3-coder-next"
-          # "qwen3.5:35b-a3b"
+          "qwen3.5:35b-a3b"
         ];
       };
     };
@@ -60,7 +60,7 @@
   };
 
   hardware = {
-    # xone.enable = true;
+    xone.enable = true;
 
     # https://fnune.com/hardware/2025/07/20/nixos-on-a-tuxedo-infinitybook-pro-14-gen9-amd/
     tuxedo-control-center.enable = true;
