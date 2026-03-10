@@ -1421,10 +1421,10 @@
         ]
       },
       "locked": {
-        "lastModified": 1771656997,
-        "narHash": "sha256-DUq+0mcXsrIry2JiB8uA8GuQRpAxogdua9sjOO94uoc=",
+        "lastModified": 1773087136,
+        "narHash": "sha256-3b/5d6lmoZyEsU/ZbcLmys7NKD71orzgJpzJO20zI9o=",
         "ref": "main",
-        "rev": "d5fcd25c18be3bf4722bb13b1910fcb8e092470d",
+        "rev": "41a93d0610f6d09c38e41021f760b94685260519",
         "shallow": true,
         "type": "git",
         "url": "ssh://git@github.com/danielpieper/nix-secrets.git"
@@ -2549,17 +2549,17 @@
         "treefmt-nix": "treefmt-nix_6"
       },
       "locked": {
-        "lastModified": 1772867730,
-        "narHash": "sha256-fQg/gawZcm8s7DqOyHrMqvVDM/MtFBQQDXHhS+NuT7E=",
+        "lastModified": 1772295609,
+        "narHash": "sha256-ITkTDiUWQ0jy1JvojI+KZ2IY+gkU/ZawQyTZm/XdPbQ=",
         "owner": "teslamate-org",
         "repo": "teslamate",
-        "rev": "43d69085641eaa267b45f247de4bec68e1e0e00e",
+        "rev": "0d962c4df0cff9a1b81b17e472790b20848b0f0c",
         "type": "github"
       },
       "original": {
         "owner": "teslamate-org",
-        "ref": "main",
         "repo": "teslamate",
+        "rev": "0d962c4df0cff9a1b81b17e472790b20848b0f0c",
         "type": "github"
       }
     },
