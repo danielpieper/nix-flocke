@@ -36,10 +36,7 @@
       ollama = {
         enable = true;
         acceleration = "rocm";
-        loadModels = [
-          "qwen3-coder-next"
-          "qwen3.5:35b-a3b"
-        ];
+        loadModels = [ ];
       };
     };
 
