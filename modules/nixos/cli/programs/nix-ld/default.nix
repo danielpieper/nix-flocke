@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib;
@@ -15,5 +16,22 @@ in
 
   config = mkIf cfg.enable {
     programs.nix-ld.enable = true;
+    programs.nix-ld.libraries = with pkgs; [
+      xorg.libX11
+      xorg.libXcursor
+      xorg.libXrandr
+      xorg.libXi
+      xorg.libXext
+      xorg.libXfixes
+      xorg.libxcb
+      wayland
+      libxkbcommon
+      vulkan-loader
+      libGL
+      SDL2
+      gtk3
+      glib
+      sqlite
+    ];
   };
 }
