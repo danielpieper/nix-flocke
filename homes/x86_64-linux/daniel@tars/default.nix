@@ -13,20 +13,24 @@ in
     gaming.enable = true;
   };
 
-  programs.flocke.opencode.enable = true;
+  programs = {
+    flocke = {
+      opencode.enable = true;
+      claude-code.enable = true;
+    };
+    git.includes = [
+      {
+        condition = "gitdir:~/Projects/${inputs.nix-secrets.work.company}/**";
+        contents.user = {
+          inherit (inputs.nix-secrets.work) email;
+          signingKey = publicKeyWork;
+        };
+      }
+    ];
+  };
   desktops = {
     niri.enable = true;
   };
-
-  programs.git.includes = [
-    {
-      condition = "gitdir:~/Projects/${inputs.nix-secrets.work.company}/**";
-      contents.user = {
-        inherit (inputs.nix-secrets.work) email;
-        signingKey = publicKeyWork;
-      };
-    }
-  ];
 
   cli = {
     programs = {

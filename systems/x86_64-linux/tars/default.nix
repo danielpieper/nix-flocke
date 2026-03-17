@@ -24,7 +24,6 @@
   environment.systemPackages = with pkgs; [
     moonlight-qt
     vlc
-    pkgs.llm-agents.claude-code
     picard
     obsidian
   ];
