@@ -26,9 +26,9 @@ in
       # swaylock.enable = true;
       noctalia.enable = true;
       # wlogout.enable = true;
-      wlsunset.enable = true;
+      # wlsunset.enable = true;
       # hyprlock.enable = true;
-      hypridle.enable = true;
+      # hypridle.enable = true;
     };
 
     home.packages = with pkgs; [
