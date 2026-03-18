@@ -7,6 +7,7 @@
 with lib;
 let
   cfg = config.desktops.niri;
+  inherit (config.lib.stylix) colors;
 in
 {
   config = mkIf cfg.enable {
@@ -66,7 +67,23 @@ in
           };
           focus-ring = {
             enable = true;
-            width = 1;
+            width = 2;
+            active = {
+              gradient = {
+                from = "#${colors.base0D}";
+                to = "#${colors.base0E}";
+                angle = 45;
+                relative-to = "workspace-view";
+              };
+            };
+            inactive = {
+              gradient = {
+                from = "#${colors.base02}";
+                to = "#${colors.base03}";
+                angle = 45;
+                relative-to = "workspace-view";
+              };
+            };
           };
         };
 

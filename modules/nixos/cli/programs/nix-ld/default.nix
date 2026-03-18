@@ -17,13 +17,13 @@ in
   config = mkIf cfg.enable {
     programs.nix-ld.enable = true;
     programs.nix-ld.libraries = with pkgs; [
-      xorg.libX11
-      xorg.libXcursor
-      xorg.libXrandr
-      xorg.libXi
-      xorg.libXext
-      xorg.libXfixes
-      xorg.libxcb
+      libx11
+      libxcursor
+      libxrandr
+      libxi
+      libxext
+      libxfixes
+      libxcb
       wayland
       libxkbcommon
       vulkan-loader
