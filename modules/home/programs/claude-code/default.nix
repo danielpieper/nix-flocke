@@ -38,6 +38,13 @@ in
           python3
           yq
           openssh # only to deploy to rpi4
+          go_1_26
+          golangci-lint
+          just
+          tailwindcss_4
+          postgresql_18
+          ungoogled-chromium
+          podman
         ];
         stateDirs = [ "$HOME/.claude" ];
         stateFiles = [

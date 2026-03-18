@@ -127,6 +127,8 @@ in
         };
         "Mod+WheelScrollRight".action = focus-column-right;
         "Mod+WheelScrollLeft".action = focus-column-left;
+        "Mod+Shift+WheelScrollDown".action = focus-column-right;
+        "Mod+Shift+WheelScrollUp".action = focus-column-left;
 
         # Media keys
         "XF86MonBrightnessUp".action.spawn = noctalia "brightness increase";
