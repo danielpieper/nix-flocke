@@ -52,7 +52,7 @@ in
         };
 
         layout = {
-          gaps = 1;
+          gaps = 4;
           center-focused-column = "never";
           preset-column-widths = [
             { proportion = 0.33333; }
@@ -130,22 +130,18 @@ in
           enable = true;
         };
 
-        # noctalia settings
-        # https://docs.noctalia.dev/getting-started/compositor-settings/niri/
-        # window-rules = [
-        #   {
-        #     # Rounded corners for a modern look.
-        #     geometry-corner-radius = {
-        #       bottom-left = 20.0;
-        #       bottom-right = 20.0;
-        #       top-left = 20.0;
-        #       top-right = 20.0;
-        #     };
-        #
-        #     # Clips window contents to the rounded corner boundaries.
-        #     clip-to-geometry = true;
-        #   }
-        # ];
+        window-rules = [
+          {
+            geometry-corner-radius = {
+              bottom-left = 12.0;
+              bottom-right = 12.0;
+              top-left = 12.0;
+              top-right = 12.0;
+            };
+            clip-to-geometry = true;
+            shadow.enable = false;
+          }
+        ];
 
         debug = {
           honor-xdg-activation-with-invalid-serial = [ ];

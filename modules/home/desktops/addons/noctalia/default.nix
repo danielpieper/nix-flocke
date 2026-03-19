@@ -74,7 +74,7 @@ in
           widgetSpacing = 6;
           contentPadding = 2;
           fontScale = 1;
-          enableExclusionZoneInset = true;
+          enableExclusionZoneInset = false;
           useSeparateOpacity = false;
           floating = false;
           marginVertical = 4;
@@ -607,7 +607,7 @@ in
           overviewBlur = 0.4;
           overviewTint = 0.6;
           useWallhaven = true;
-          wallhavenQuery = "matrix";
+          wallhavenQuery = "nix";
           wallhavenSorting = "relevance";
           wallhavenOrder = "desc";
           wallhavenCategories = "111";
