@@ -40,7 +40,7 @@ in
             {
               criteria = "LG Electronics 27GL850 007NTYT59834";
               position = "0,0";
-              mode = "2560x1440@99.95Hz";
+              mode = "2560x1440@144Hz";
               # mode = "2560x1440@120.00Hz";
             }
             {
@@ -82,7 +82,7 @@ in
             {
               criteria = "LG Electronics 27GL850 007NTYT59834";
               position = "3840,0";
-              mode = "2560x1440@99.95Hz";
+              mode = "2560x1440@144Hz";
               # mode = "2560x1440@59.95Hz";
             }
             {
