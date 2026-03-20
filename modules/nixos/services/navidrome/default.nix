@@ -22,7 +22,7 @@ in
         enable = true;
         settings = {
           MusicFolder = "/mnt/nas/11tb/media/music/library";
-          BaseUrl = "https://navidrome.homelab.${inputs.nix-secrets.domain}";
+          BaseUrl = "";
           PlaylistsPath = "playlists";
           ReverseProxyUserHeader = "X-Authentik-Name";
           ReverseProxyWhitelist = "0.0.0.0/0";

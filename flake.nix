@@ -87,8 +87,7 @@
     };
 
     teslamate = {
-      # TODO: pinned due to broken nix build (ex_cldr lock mismatch) — unpin when fixed upstream
-      url = "github:teslamate-org/teslamate/0d962c4df0cff9a1b81b17e472790b20848b0f0c";
+      url = "github:teslamate-org/teslamate";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
