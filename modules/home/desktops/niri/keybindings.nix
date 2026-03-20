@@ -50,24 +50,9 @@ in
         "Mod+Ctrl+BackSpace".action.spawn = noctalia "sessionMenu toggle";
 
         # Screenshots
-        "Print".action.spawn = [
-          "${pkgs.grimblast}/bin/grimblast"
-          "save"
-          "area"
-          "-"
-        ];
-        "Shift+Print".action.spawn = [
-          "${pkgs.grimblast}/bin/grimblast"
-          "save"
-          "active"
-          "-"
-        ];
-        "Ctrl+Print".action.spawn = [
-          "${pkgs.grimblast}/bin/grimblast"
-          "save"
-          "screen"
-          "-"
-        ];
+        "Print".action.screenshot = [ ];
+        "Shift+Print".action.screenshot-window = [ ];
+        "Ctrl+Print".action.screenshot-screen = [ ];
 
         # Focus movement
         "Mod+H".action = focus-column-left;

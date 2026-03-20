@@ -48,20 +48,19 @@ in
       viddy
 
       kaf
-      aichat
 
       # go
-      arion
-      go
-      golangci-lint
-      air
-      templ
-      sqlc
-      golines
-      gotools
-      go-task
-      go-mockery
-      gotestsum
+      # arion
+      # go
+      # golangci-lint
+      # air
+      # templ
+      # sqlc
+      # golines
+      # gotools
+      # go-task
+      # go-mockery
+      # gotestsum
     ];
   };
 }

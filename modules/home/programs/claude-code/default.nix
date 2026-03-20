@@ -47,6 +47,8 @@ in
             postgresql_18
             ungoogled-chromium
             podman
+            nixos-rebuild
+            gcc
           ];
           stateDirs = [ "$HOME/.claude" ];
           stateFiles = [
