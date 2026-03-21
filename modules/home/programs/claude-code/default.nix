@@ -61,7 +61,7 @@ in
           #   "github.com"
           # ];
           extraEnv = {
-            ANTHROPIC_API_KEY = "$ANTHROPIC_API_KEY";
+            # ANTHROPIC_API_KEY = "$ANTHROPIC_API_KEY";
             GIT_AUTHOR_NAME = gitCfg.settings.user.name;
             GIT_AUTHOR_EMAIL = gitCfg.settings.user.email;
             GIT_COMMITTER_NAME = gitCfg.settings.user.name;
