@@ -42,6 +42,10 @@ in
       enable = true;
       package = ollamaPackage;
       inherit (cfg) loadModels;
+      environmentVariables = {
+        OLLAMA_KV_CACHE_TYPE = "q8_0";
+        HSA_ENABLE_SDMA = "0";
+      };
     };
 
     environment.systemPackages = [ ollamaPackage ];
