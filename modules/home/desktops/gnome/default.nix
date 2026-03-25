@@ -16,10 +16,7 @@ in
   };
 
   config = mkIf cfg.enable {
-    services = {
-      flocke.kdeconnect.enable = lib.mkForce false;
-      trayscale.enable = true;
-    };
+    services.flocke.kdeconnect.enable = lib.mkForce false;
 
     home.packages = with pkgs; [
       gnome-tweaks

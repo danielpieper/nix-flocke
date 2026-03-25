@@ -274,7 +274,7 @@ in
                         owner = "ngosang";
                         repo = "restic-exporter";
                         rev = "main";
-                        sha256 = "sha256-TwHIEh3XVNVGaiXIio77BAPbW4N+iXteV2UhccgJCG8=";
+                        sha256 = "sha256-F0lNjAjtcOihSIJLux6Gyig7UU9Tl+PcZ0xQ/KryCpQ=";
                       }
                       + "/grafana/grafana_dashboard.json";
                     modifiedDashboard =
