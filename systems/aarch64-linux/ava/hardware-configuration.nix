@@ -31,7 +31,7 @@
 
   networking = {
     useDHCP = lib.mkDefault true;
-    hostName = "jarvis";
+    hostName = "ava";
     interfaces.enp1s0 = {
       useDHCP = lib.mkDefault true;
       ipv6.addresses = [

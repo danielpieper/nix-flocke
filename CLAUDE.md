@@ -13,7 +13,7 @@ Key technologies: Nix Flakes, Snowfall Lib, Home Manager, sops-nix, Impermanence
 ```bash
 just check                  # Run nix flake check (linting, formatting, evaluation)
 just apply                  # Apply configuration to local host (uses nh os switch)
-just deploy <hostname>      # Deploy to remote host via deploy-rs (hal, jarvis)
+just deploy <hostname>      # Deploy to remote host via deploy-rs (hal, ava)
 just deployboot <hostname>  # Deploy on next boot via deploy-rs
 just dns                    # Sync DNS records via octodns
 just iso [minimal|graphical] # Build installation ISO
@@ -41,11 +41,11 @@ Snowfall Lib auto-discovers modules, packages, and systems based on directory st
 
 ### Hosts
 
-| Host   | Arch    | Role    | Notes                                                  |
-| ------ | ------- | ------- | ------------------------------------------------------ |
-| tars   | x86_64  | Desktop | Tuxedo laptop, Niri                                    |
-| hal    | x86_64  | Server  | Main homelab (Traefik, Home Assistant, Jellyfin, etc.) |
-| jarvis | aarch64 | Server  | ARM server                                             |
+| Host | Arch    | Role    | Notes                                                  |
+| ---- | ------- | ------- | ------------------------------------------------------ |
+| tars | x86_64  | Desktop | Tuxedo laptop, Niri                                    |
+| hal  | x86_64  | Server  | Main homelab (Traefik, Home Assistant, Jellyfin, etc.) |
+| ava  | aarch64 | Server  | Hetzner ARM VPS, public webserver                      |
 
 ## Critical: Git Tracking Requirement
 
