@@ -29,6 +29,16 @@ in
     };
 
     services = {
+      grafana-to-ntfy = {
+        enable = true;
+        settings = {
+          ntfyUrl = "http://localhost:2586/alerts";
+          bauthPass = builtins.toFile "grafana-to-ntfy-pass" inputs.nix-secrets.grafanaToNtfy.password;
+          # Workaround: nixpkgs module has type bug (path with null default)
+          ntfyBAuthPass = builtins.toFile "empty" "";
+        };
+      };
+
       traefik = {
         dynamicConfigOptions = {
           http = {
@@ -234,40 +244,31 @@ in
             };
           };
           alerting = {
-            # contactPoints.settings.contactPoints = [
-            #   {
-            #     name = "Gotify";
-            #     orgId = 1;
-            #     receivers = [
-            #       {
-            #         inherit (inputs.nix-secrets.gotify) uid;
-            #         type = "webhook";
-            #         settings = {
-            #           # TODO: provision gotify token and add here
-            #           url =
-            #             with config.services.gotify;
-            #             "http://localhost:${environment.GOTIFY_SERVER_PORT}/message?token=";
-            #           httpMethod = "POST";
-            #         };
-            #       }
-            #     ];
-            #   }
-            # ];
-            # https://gist.github.com/krisek/62a98e2645af5dce169a7b506e999cd8
-            # TODO: re-enable after configuring Gotify contact point
-            # rules.path = ./alerts.yaml;
-            # contactPoints.settings.deleteContactPoints = [
-            #   {
-            #     orgId = 1;
-            #     uid = "";
-            #   }
-            # ];
-            # rules.settings.deleteRules = [
-            #   {
-            #     orgId = 1;
-            #     uid = "";
-            #   }
-            # ];
+            contactPoints.settings.contactPoints = [
+              {
+                name = "ntfy";
+                orgId = 1;
+                receivers = [
+                  {
+                    uid = "ntfy-webhook";
+                    type = "webhook";
+                    settings = {
+                      url = "http://localhost:8000";
+                      httpMethod = "POST";
+                      username = "admin";
+                      inherit (inputs.nix-secrets.grafanaToNtfy) password;
+                    };
+                  }
+                ];
+              }
+            ];
+            policies.settings.policies = [
+              {
+                orgId = 1;
+                receiver = "ntfy";
+              }
+            ];
+            rules.path = ./alerts.yaml;
           };
         };
       };

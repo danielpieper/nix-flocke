@@ -65,7 +65,7 @@ groups:
           summary: Node {{ $labels.instance }} is down
         isPaused: false
         notification_settings:
-          receiver: Gotify
+          receiver: ntfy
       - uid: ce3v43xcyyku8b
         title: HostOutOfMemory (copy)
         condition: B
@@ -126,7 +126,7 @@ groups:
           summary: Host out of memory (instance {{ $labels.instance }})
         isPaused: false
         notification_settings:
-          receiver: Gotify
+          receiver: ntfy
       - uid: ee3v4asm8mneoe
         title: HostUnusualNetworkThroughputIn (copy)
         condition: B
@@ -183,7 +183,7 @@ groups:
           summary: Host unusual network throughput in (instance {{ $labels.instance }})
         isPaused: false
         notification_settings:
-          receiver: Gotify
+          receiver: ntfy
       - uid: ee3v4cvnkbl6oe
         title: HostUnusualNetworkThroughputOut (copy)
         condition: B
@@ -240,7 +240,7 @@ groups:
           summary: Host unusual network throughput out (instance {{ $labels.instance }})
         isPaused: false
         notification_settings:
-          receiver: Gotify
+          receiver: ntfy
       - uid: fe3v4f11v26f4a
         title: HostUnusualDiskReadRate (copy)
         condition: B
@@ -297,7 +297,7 @@ groups:
           summary: Host unusual disk read rate (instance {{ $labels.instance }})
         isPaused: false
         notification_settings:
-          receiver: Gotify
+          receiver: ntfy
       - uid: ce3v0mmm7eeioc
         title: HostUnusualDiskWriteRate
         condition: B
@@ -353,7 +353,7 @@ groups:
           summary: Host unusual disk write rate (instance {{ $labels.instance }})
         isPaused: false
         notification_settings:
-          receiver: Gotify
+          receiver: ntfy
       - uid: ee3v5wvi539j4d
         title: HostHighCpuLoad
         condition: B
@@ -411,7 +411,7 @@ groups:
           summary: Host high CPU load (instance {{ $labels.instance }})
         isPaused: false
         notification_settings:
-          receiver: Gotify
+          receiver: ntfy
       - uid: ae3v63szxzhfka
         title: HostSwapIsFillingUp
         condition: C
@@ -467,7 +467,7 @@ groups:
           summary: Host swap is filling up (instance {{ $labels.instance }})
         isPaused: false
         notification_settings:
-          receiver: Gotify
+          receiver: ntfy
       - uid: ce3v6agltujnka
         title: HostSystemdServiceCrashed
         condition: C
@@ -523,7 +523,7 @@ groups:
           summary: Host SystemD service crashed (instance {{ $labels.instance }})
         isPaused: false
         notification_settings:
-          receiver: Gotify
+          receiver: ntfy
       - uid: de3v6j2ny44xsc
         title: HostPhysicalComponentTooHot
         condition: C
@@ -579,7 +579,7 @@ groups:
           summary: Host physical component too hot (instance {{ $labels.instance }})
         isPaused: false
         notification_settings:
-          receiver: Gotify
+          receiver: ntfy
       - uid: de3v6oz7l2w3ka
         title: HostNodeOvertemperatureAlarm
         condition: C
@@ -635,7 +635,7 @@ groups:
           summary: Host node overtemperature alarm (instance {{ $labels.instance }})
         isPaused: false
         notification_settings:
-          receiver: Gotify
+          receiver: ntfy
       - uid: ce3v6y9034740c
         title: HostKernelVersionDeviations
         condition: C
@@ -691,7 +691,7 @@ groups:
           summary: Host kernel version deviations (instance {{ $labels.instance }})
         isPaused: false
         notification_settings:
-          receiver: Gotify
+          receiver: ntfy
       - uid: de3v7d1d92arkc
         title: HostOomKillDetected
         condition: C
@@ -747,7 +747,7 @@ groups:
           summary: Host Network Receive Errors (instance {{ $labels.instance }}:{{ $labels.device }})
         isPaused: false
         notification_settings:
-          receiver: Gotify
+          receiver: ntfy
       - uid: ce3v7olf4pzi8e
         title: HostNetworkTransmitErrors
         condition: C
@@ -803,7 +803,7 @@ groups:
           summary: Host Network Transmit Errors (instance {{ $labels.instance }}:{{ $labels.device }})
         isPaused: false
         notification_settings:
-          receiver: Gotify
+          receiver: ntfy
       - uid: fe3v7ymrffx1ca
         title: HostConntrackLimit
         condition: C
@@ -859,4 +859,4 @@ groups:
           summary: Host conntrack limit (instance {{ $labels.instance }})
         isPaused: false
         notification_settings:
-          receiver: Gotify
+          receiver: ntfy
