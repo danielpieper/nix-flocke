@@ -4,19 +4,20 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**nix-flocke** is a personal NixOS configuration repository managing multiple machines using Nix Flakes and Snowfall Lib. It configures both personal workstations (tars, ava) and home lab servers (hal, jarvis).
+**nix-flocke** is a personal NixOS configuration repository managing multiple machines using Nix Flakes and Snowfall Lib. It configures a personal workstation (tars) and home lab servers (hal, jarvis).
 
 Key technologies: Nix Flakes, Snowfall Lib, Home Manager, sops-nix, Impermanence, Stylix/Catppuccin theming.
 
 ## Common Commands
 
 ```bash
-just check              # Run nix flake check (linting, formatting, evaluation)
-just apply              # Apply configuration to local host (uses nh os switch)
-just deploy <hostname>  # Deploy to remote host (hal, jarvis, ava)
-just iso [graphical]    # Build installation ISO
-nix fmt                 # Format Nix files
-nix flake update        # Update all dependencies
+just check                  # Run nix flake check (linting, formatting, evaluation)
+just apply                  # Apply configuration to local host (uses nh os switch)
+just deploy <hostname>      # Deploy to remote host via deploy-rs (hal, jarvis)
+just deployboot <hostname>  # Deploy on next boot via deploy-rs
+just dns                    # Sync DNS records via octodns
+just iso [minimal|graphical] # Build installation ISO
+nix flake update            # Update all dependencies
 ```
 
 ## Architecture
@@ -42,8 +43,7 @@ Snowfall Lib auto-discovers modules, packages, and systems based on directory st
 
 | Host   | Arch    | Role    | Notes                                                  |
 | ------ | ------- | ------- | ------------------------------------------------------ |
-| tars   | x86_64  | Desktop | Tuxedo laptop, Hyprland/Niri                           |
-| ava    | x86_64  | Desktop | ThinkPad X250                                          |
+| tars   | x86_64  | Desktop | Tuxedo laptop, Niri                                    |
 | hal    | x86_64  | Server  | Main homelab (Traefik, Home Assistant, Jellyfin, etc.) |
 | jarvis | aarch64 | Server  | ARM server                                             |
 
@@ -114,6 +114,7 @@ Secrets are encrypted with age keys derived from SSH host keys:
 ## Conventions
 
 - All modules are opt-in via `enable` options
-- Format with `nix fmt` (nixpkgs-fmt), 2-space indentation
+- Format with nixfmt (enforced via pre-commit hooks in flake), 2-space indentation
 - Use Catppuccin Mocha theme via Stylix
 - Never change `stateVersion` on existing systems
+- Prefer native NixOS modules over Podman/OCI containers; only use containers for services with poor or missing NixOS support (e.g. Immich)

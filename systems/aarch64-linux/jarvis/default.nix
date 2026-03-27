@@ -38,13 +38,9 @@
       restic.enable = true;
       monitoring.enable_exporter = true;
       traefik.enable = true;
-      searxng.enable = true;
       postgresql.enable = true;
       website.enable = true;
       miniflux.enable = true;
-      # TODO: error: Package ‘python3.12-chromadb-0.5.20’ is marked as broken, refusing to evaluate.
-      openwebui.enable = false;
-      n8n.enableWebhook = true;
     };
   };
 

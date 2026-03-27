@@ -78,7 +78,6 @@
 
     zjstatus.url = "github:dj95/zjstatus";
 
-    poetry2nix.url = "github:nix-community/poetry2nix";
     authentik-nix.url = "github:nix-community/authentik-nix";
 
     catppuccin-obs = {
@@ -99,12 +98,6 @@
     ventx = {
       url = "git+ssh://git@git.ventx.org/daniel/nix.git";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    premiumizearr-nova = {
-      # url = "git+ssh://forgejo@forgejo.homelab.daniel-pieper.com/daniel/premiumizearr-nova.git?ref=fixes";
-      url = "github:ensingerphilipp/Premiumizearr-Nova";
-      flake = false;
     };
 
     pre-commit-hooks = {
