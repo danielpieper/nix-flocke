@@ -25,5 +25,8 @@ generate.octodnsConfig {
   };
   zones = {
     "${inputs.nix-secrets.domain}." = inputs.nixos-dns.utils.octodns.generateZoneAttrs [ "hetzner" ];
+    "${inputs.nix-secrets.homelabDomain}." = inputs.nixos-dns.utils.octodns.generateZoneAttrs [
+      "hetzner"
+    ];
   };
 }

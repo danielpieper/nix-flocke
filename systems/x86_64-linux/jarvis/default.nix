@@ -23,6 +23,7 @@
   services.flocke = {
     caddy.enable = true;
     postgresql.enable = true;
+    authelia.enable = true;
   };
 
   # BIOS boot — override the default systemd-boot/EFI config
