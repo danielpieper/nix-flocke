@@ -19,6 +19,8 @@ in
       authelia-jwt-secret.owner = "authelia-main";
       authelia-storage-encryption-key.owner = "authelia-main";
       authelia-session-secret.owner = "authelia-main";
+      authelia-oidc-hmac-secret.owner = "authelia-main";
+      authelia-oidc-jwks-key.owner = "authelia-main";
       authelia-users.owner = "authelia-main";
       authelia-smtp-password.owner = "authelia-main";
     };
@@ -29,6 +31,8 @@ in
         secrets = {
           jwtSecretFile = config.sops.secrets.authelia-jwt-secret.path;
           storageEncryptionKeyFile = config.sops.secrets.authelia-storage-encryption-key.path;
+          oidcIssuerPrivateKeyFile = config.sops.secrets.authelia-oidc-jwks-key.path;
+          oidcHmacSecretFile = config.sops.secrets.authelia-oidc-hmac-secret.path;
         };
         environmentVariables = {
           AUTHELIA_NOTIFIER_SMTP_PASSWORD_FILE = config.sops.secrets.authelia-smtp-password.path;
@@ -64,6 +68,23 @@ in
           };
 
           access_control.default_policy = "one_factor";
+
+          identity_providers.oidc.clients = [
+            {
+              client_id = "grafana";
+              client_name = "Grafana";
+              client_secret = inputs.nix-secrets.authelia.oidcClients.grafana.clientSecretHash;
+              authorization_policy = "one_factor";
+              redirect_uris = [ "https://grafana.${domain}/login/generic_oauth" ];
+              scopes = [
+                "openid"
+                "profile"
+                "email"
+                "groups"
+              ];
+              token_endpoint_auth_method = "client_secret_basic";
+            }
+          ];
 
           notifier.smtp = {
             address = "smtp://${inputs.nix-secrets.mailgun.host}:${toString inputs.nix-secrets.mailgun.port}";

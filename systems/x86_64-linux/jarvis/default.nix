@@ -24,6 +24,8 @@
     caddy.enable = true;
     postgresql.enable = true;
     authelia.enable = true;
+    ntfy.enable = true;
+    monitoring.enable = true;
   };
 
   # BIOS boot — override the default systemd-boot/EFI config

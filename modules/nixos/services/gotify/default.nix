@@ -23,26 +23,18 @@ in
         };
       };
 
-      traefik = {
-        dynamicConfigOptions = {
-          http = {
-            services = {
-              notify.loadBalancer.servers = [
-                {
-                  url = "http://localhost:8051";
-                }
-              ];
-            };
-
-            routers = {
-              notify = {
-                entryPoints = [ "websecure" ];
-                rule = "Host(`notify.homelab.${inputs.nix-secrets.domain}`)";
-                service = "notify";
-              };
-            };
-          };
+      traefik.dynamicConfigOptions.http = {
+        services.notify.loadBalancer.servers = [ { url = "http://localhost:8051"; } ];
+        routers.notify = {
+          entryPoints = [ "websecure" ];
+          rule = "Host(`notify.homelab.${inputs.nix-secrets.domain}`)";
+          service = "notify";
         };
+      };
+
+      caddy.virtualHosts."gotify.${inputs.nix-secrets.homelabDomain}" = {
+        useACMEHost = inputs.nix-secrets.homelabDomain;
+        extraConfig = "reverse_proxy localhost:8051";
       };
     };
   };

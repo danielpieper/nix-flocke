@@ -25,6 +25,7 @@ in
       grafana_oauth2_client_id.owner = "grafana";
       grafana_oauth2_client_secret.owner = "grafana";
       grafana_secret_key.owner = "grafana";
+      grafana-oidc-client-secret.owner = "grafana";
     };
 
     services = {
@@ -57,6 +58,23 @@ in
               };
             };
           };
+        };
+      };
+
+      caddy.virtualHosts = {
+        "prometheus.${inputs.nix-secrets.homelabDomain}" = {
+          useACMEHost = inputs.nix-secrets.homelabDomain;
+          extraConfig = ''
+            forward_auth 127.0.0.1:9091 {
+              uri /api/authz/forward-auth
+              copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
+            }
+            reverse_proxy 127.0.0.1:3020
+          '';
+        };
+        "grafana.${inputs.nix-secrets.homelabDomain}" = {
+          useACMEHost = inputs.nix-secrets.homelabDomain;
+          extraConfig = "reverse_proxy 127.0.0.1:3010";
         };
       };
 
@@ -105,23 +123,23 @@ in
           server = {
             http_port = 3010;
             http_addr = "127.0.0.1";
-            root_url = "https://grafana.homelab.${inputs.nix-secrets.domain}";
+            root_url = "https://grafana.${inputs.nix-secrets.homelabDomain}";
           };
 
           "auth" = {
-            signout_redirect_url = "https://authentik.homelab.${inputs.nix-secrets.domain}/application/o/grafana/end-session/";
+            signout_redirect_url = "https://auth.${inputs.nix-secrets.homelabDomain}/logout";
             oauth_auto_login = true;
           };
 
           "auth.generic_oauth" = {
             enabled = true;
-            client_id = "$__file{${config.sops.secrets.grafana_oauth2_client_id.path}}";
-            client_secret = "$__file{${config.sops.secrets.grafana_oauth2_client_secret.path}}";
-            scopes = "openid profile email";
-            auth_url = "https://authentik.homelab.${inputs.nix-secrets.domain}/application/o/authorize/";
-            token_url = "https://authentik.homelab.${inputs.nix-secrets.domain}/application/o/token/";
-            api_url = "https://authentik.homelab.${inputs.nix-secrets.domain}/application/o/userinfo/";
-            role_attribute_path = "contains(groups, 'Grafana Admins') && 'Admin' || contains(groups, 'Grafana Editors') && 'Editor' || 'Viewer'";
+            client_id = "grafana";
+            client_secret = "$__file{${config.sops.secrets.grafana-oidc-client-secret.path}}";
+            scopes = "openid profile email groups";
+            auth_url = "https://auth.${inputs.nix-secrets.homelabDomain}/api/oidc/authorization";
+            token_url = "https://auth.${inputs.nix-secrets.homelabDomain}/api/oidc/token";
+            api_url = "https://auth.${inputs.nix-secrets.homelabDomain}/api/oidc/userinfo";
+            role_attribute_path = "contains(groups, 'admin') && 'Admin' || 'Viewer'";
           };
           database = {
             host = "/run/postgresql";
@@ -152,7 +170,7 @@ in
                     owner = "rfmoz";
                     repo = "grafana-dashboards";
                     rev = "master";
-                    sha256 = "sha256-FIOeom1pAuBjD/o3ScEe/QZn/Z8R7eADYXTDZIqlmnM=";
+                    sha256 = "sha256-xRR2VQ/XkqSfhcON+idYgNQIZ5Sn1pSfYtqSdHKD4Bs=";
                   }
                   + "/prometheus/node-exporter-full.json";
               }
@@ -236,7 +254,8 @@ in
             #   }
             # ];
             # https://gist.github.com/krisek/62a98e2645af5dce169a7b506e999cd8
-            rules.path = ./alerts.yaml;
+            # TODO: re-enable after configuring Gotify contact point
+            # rules.path = ./alerts.yaml;
             # contactPoints.settings.deleteContactPoints = [
             #   {
             #     orgId = 1;

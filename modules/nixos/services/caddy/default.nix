@@ -32,6 +32,8 @@ in
         inherit domain;
         extraDomainNames = [ "*.${domain}" ];
         inherit (config.services.caddy) group;
+        # NixOS Caddy module uses cert.pem (leaf only), but we need the full chain
+        postRun = "cp fullchain.pem cert.pem";
       };
     };
 
