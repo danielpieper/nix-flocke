@@ -111,6 +111,20 @@ in
               ];
               token_endpoint_auth_method = "client_secret_basic";
             }
+            {
+              client_id = "mealie";
+              client_name = "Mealie";
+              client_secret = inputs.nix-secrets.authelia.oidcClients.mealie.clientSecretHash;
+              authorization_policy = "one_factor";
+              redirect_uris = [ "https://mealie.${domain}/login" ];
+              scopes = [
+                "openid"
+                "profile"
+                "email"
+                "groups"
+              ];
+              token_endpoint_auth_method = "client_secret_basic";
+            }
           ];
 
           notifier.smtp = {
