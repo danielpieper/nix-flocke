@@ -33,6 +33,8 @@
     };
     miniflux.enable = true;
     mealie.enable = true;
+    immich.enable = true;
+    paperless.enable = true;
     teslamate = {
       enable = true;
       runMigrations = true;

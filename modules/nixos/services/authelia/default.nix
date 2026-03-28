@@ -125,6 +125,36 @@ in
               ];
               token_endpoint_auth_method = "client_secret_basic";
             }
+            {
+              client_id = "immich";
+              client_name = "Immich";
+              client_secret = inputs.nix-secrets.authelia.oidcClients.immich.clientSecretHash;
+              authorization_policy = "one_factor";
+              redirect_uris = [
+                "https://immich.${domain}/auth/login"
+                "https://immich.${domain}/user-settings"
+                "app.immich:///oauth-callback"
+              ];
+              scopes = [
+                "openid"
+                "profile"
+                "email"
+              ];
+              token_endpoint_auth_method = "client_secret_post";
+            }
+            {
+              client_id = "paperless";
+              client_name = "Paperless";
+              client_secret = inputs.nix-secrets.authelia.oidcClients.paperless.clientSecretHash;
+              authorization_policy = "one_factor";
+              redirect_uris = [ "https://paperless.${domain}/accounts/oidc/authelia/login/callback/" ];
+              scopes = [
+                "openid"
+                "profile"
+                "email"
+              ];
+              token_endpoint_auth_method = "client_secret_post";
+            }
           ];
 
           notifier.smtp = {
