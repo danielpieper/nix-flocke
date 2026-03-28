@@ -31,6 +31,10 @@
       enable-runner = false;
       enable-dump = false;
     };
+    teslamate = {
+      enable = true;
+      runMigrations = true;
+    };
   };
 
   # BIOS boot — override the default systemd-boot/EFI config
