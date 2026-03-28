@@ -35,9 +35,8 @@ in
         # lfs.enable = true;
         settings = {
           server = {
-            DOMAIN = "forgejo.homelab.${inputs.nix-secrets.domain}";
-            # You need to specify this to remove the port from URLs in the web UI.
-            ROOT_URL = "https://forgejo.homelab.${inputs.nix-secrets.domain}/";
+            DOMAIN = "forgejo.${inputs.nix-secrets.homelabDomain}";
+            ROOT_URL = "https://forgejo.${inputs.nix-secrets.homelabDomain}/";
             HTTP_ADDR = "127.0.0.1";
             HTTP_PORT = 3083;
           };
@@ -78,6 +77,11 @@ in
             ensureDBOwnership = true;
           }
         ];
+      };
+
+      caddy.virtualHosts."forgejo.${inputs.nix-secrets.homelabDomain}" = {
+        useACMEHost = inputs.nix-secrets.homelabDomain;
+        extraConfig = "reverse_proxy 127.0.0.1:3083";
       };
 
       traefik = {

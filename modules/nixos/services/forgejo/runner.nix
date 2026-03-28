@@ -18,7 +18,7 @@ in
       package = pkgs.forgejo-runner;
       instances.default = {
         enable = true;
-        name = "hal";
+        name = config.networking.hostName;
         url = "http://127.0.0.1:3083";
         # tokenFile should be in format TOKEN=<secret>, since it's EnvironmentFile for systemd
         # if registration fails remove /var/lib/private/gitea-runner/default/.runner

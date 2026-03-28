@@ -13,7 +13,7 @@
     impermanence.enable = true;
     # Disable the default EFI boot module — this host uses BIOS
     boot.enable = lib.mkForce false;
-    stateVersion = "25.05";
+    stateVersion = "26.05";
   };
 
   roles = {
@@ -26,6 +26,11 @@
     authelia.enable = true;
     ntfy.enable = true;
     monitoring.enable = true;
+    forgejo = {
+      enable = true;
+      enable-runner = false;
+      enable-dump = false;
+    };
   };
 
   # BIOS boot — override the default systemd-boot/EFI config

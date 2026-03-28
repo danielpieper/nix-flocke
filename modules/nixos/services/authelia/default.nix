@@ -84,6 +84,20 @@ in
               ];
               token_endpoint_auth_method = "client_secret_basic";
             }
+            {
+              client_id = "forgejo";
+              client_name = "Forgejo";
+              client_secret = inputs.nix-secrets.authelia.oidcClients.forgejo.clientSecretHash;
+              authorization_policy = "one_factor";
+              redirect_uris = [ "https://forgejo.${domain}/user/oauth2/authelia/callback" ];
+              scopes = [
+                "openid"
+                "profile"
+                "email"
+                "groups"
+              ];
+              token_endpoint_auth_method = "client_secret_basic";
+            }
           ];
 
           notifier.smtp = {
