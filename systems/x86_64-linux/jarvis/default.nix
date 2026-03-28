@@ -31,6 +31,7 @@
       enable-runner = false;
       enable-dump = false;
     };
+    miniflux.enable = true;
     teslamate = {
       enable = true;
       runMigrations = true;

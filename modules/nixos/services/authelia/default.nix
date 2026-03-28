@@ -98,6 +98,19 @@ in
               ];
               token_endpoint_auth_method = "client_secret_basic";
             }
+            {
+              client_id = "miniflux";
+              client_name = "Miniflux";
+              client_secret = inputs.nix-secrets.authelia.oidcClients.miniflux.clientSecretHash;
+              authorization_policy = "one_factor";
+              redirect_uris = [ "https://miniflux.${domain}/oauth2/oidc/callback" ];
+              scopes = [
+                "openid"
+                "profile"
+                "email"
+              ];
+              token_endpoint_auth_method = "client_secret_basic";
+            }
           ];
 
           notifier.smtp = {
