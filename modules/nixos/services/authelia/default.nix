@@ -218,7 +218,10 @@ in
         };
         "${domain}" = {
           useACMEHost = domain;
-          extraConfig = "redir https://auth.${domain}{uri} permanent";
+          extraConfig = ''
+            header Content-Type text/html
+            respond `${builtins.readFile ./dashboard.html}`
+          '';
         };
       };
     };

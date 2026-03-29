@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, system-ui, sans-serif; background: #1e1e2e; color: #cdd6f4; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+  .container { max-width: 800px; width: 100%; padding: 2rem; }
+  h1 { text-align: center; margin-bottom: 2rem; font-size: 1.5rem; color: #89b4fa; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; }
+  a { display: flex; align-items: center; justify-content: center; padding: 1.2rem; background: #313244; border-radius: 12px; color: #cdd6f4; text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: background 0.2s, transform 0.1s; }
+  a:hover { background: #45475a; transform: translateY(-2px); }
+  .section { margin-bottom: 2rem; }
+  h2 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: #6c7086; margin-bottom: 0.75rem; padding-left: 0.25rem; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>naseschief.de</h1>
+  <div class="section">
+    <h2>Apps</h2>
+    <div class="grid">
+      <a href="https://ocis.naseschief.de">ownCloud</a>
+      <a href="https://immich.naseschief.de">Immich</a>
+      <a href="https://paperless.naseschief.de">Paperless</a>
+      <a href="https://mealie.naseschief.de">Mealie</a>
+      <a href="https://miniflux.naseschief.de">Miniflux</a>
+      <a href="https://forgejo.naseschief.de">Forgejo</a>
+    </div>
+  </div>
+  <div class="section">
+    <h2>Monitoring</h2>
+    <div class="grid">
+      <a href="https://grafana.naseschief.de">Grafana</a>
+      <a href="https://prometheus.naseschief.de">Prometheus</a>
+      <a href="https://ntfy.naseschief.de">ntfy</a>
+    </div>
+  </div>
+  <div class="section">
+    <h2>System</h2>
+    <div class="grid">
+      <a href="https://auth.naseschief.de">Authelia</a>
+      <a href="https://tesla.naseschief.de">TeslaMate</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>
