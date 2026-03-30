@@ -32,6 +32,11 @@
     flocke = {
       syncthing.enable = true;
       nfs.enable = true;
+      restic.excludes = [
+        ".local/share/Steam"
+        "Downloads"
+        "var/lib/private/ollama"
+      ];
       ollama = {
         enable = true;
         acceleration = "rocm";
