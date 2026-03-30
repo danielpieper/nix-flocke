@@ -34,6 +34,7 @@
       nfs.enable = true;
       restic.excludes = [
         ".local/share/Steam"
+        ".local/share/containers"
         "Downloads"
         "var/lib/private/ollama"
       ];
