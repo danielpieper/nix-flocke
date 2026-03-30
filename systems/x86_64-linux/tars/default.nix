@@ -33,10 +33,17 @@
       syncthing.enable = true;
       nfs.enable = true;
       restic.excludes = [
+        ".local/cache"
         ".local/share/Steam"
         ".local/share/containers"
+        ".local/share/Trash"
+        ".local/share/flatpak"
+        ".terraform/providers"
         "Downloads"
+        "node_modules"
         "var/lib/private/ollama"
+        "*.img"
+        "*.img.zst"
       ];
       ollama = {
         enable = true;
