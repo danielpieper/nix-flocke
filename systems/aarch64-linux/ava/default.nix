@@ -38,7 +38,6 @@
       restic.enable = true;
       monitoring.enable_exporter = true;
       caddy.enable = true;
-      postgresql.enable = true;
       website.enable = true;
     };
   };
