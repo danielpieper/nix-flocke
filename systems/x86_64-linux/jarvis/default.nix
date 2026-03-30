@@ -36,6 +36,16 @@
     immich.enable = true;
     paperless.enable = true;
     ocis.enable = true;
+    restic = {
+      enable = true;
+      excludes = [
+        "var/lib/containers"
+      ];
+      backupPrepareCommand = ''
+        ${pkgs.sudo}/bin/sudo -u postgres ${pkgs.postgresql}/bin/pg_dumpall \
+          > /persist/var/backup/postgres.sql
+      '';
+    };
     teslamate = {
       enable = true;
       runMigrations = true;

@@ -2,7 +2,6 @@
   config,
   pkgs,
   lib,
-  inputs,
   ...
 }:
 with lib;
@@ -13,16 +12,33 @@ in
 {
   options.services.flocke.restic = {
     enable = mkEnableOption "Enable the restic backup client";
+
+    paths = mkOption {
+      type = types.listOf types.str;
+      default = [
+        "/persist"
+        "/home"
+      ];
+      description = "Paths to back up";
+    };
+
+    excludes = mkOption {
+      type = types.listOf types.str;
+      default = [ ];
+      description = "Paths to exclude from backup";
+    };
+
+    backupPrepareCommand = mkOption {
+      type = types.nullOr types.str;
+      default = null;
+      description = "Command to run before backup (e.g. database dump)";
+    };
   };
 
   config = mkIf cfg.enable {
     sops.secrets = {
-      restic_repository_password = {
-        group = "users";
-      };
-      restic_repository = {
-        group = "users";
-      };
+      restic_repository_password.group = "users";
+      restic_repository.group = "users";
       restic_environment = { };
     };
 
@@ -37,35 +53,30 @@ in
       ];
     };
 
+    # SSH config for Storage Box — used by both restic service and manual commands
+    programs.ssh.extraConfig = ''
+      Match host *.your-storagebox.de
+        Port 23
+        IdentityFile /persist/etc/ssh/restic_ed25519
+        StrictHostKeyChecking accept-new
+    '';
+
+    # Ensure backup directory exists for database dumps
+    systemd.tmpfiles.rules = [
+      "d /persist/var/backup 0750 root root -"
+    ];
+
     services.restic.backups.default = {
-      repository = "rest:https://restic.homelab.${inputs.nix-secrets.domain}";
-      initialize = true;
+      repositoryFile = config.sops.secrets.restic_repository.path;
+      initialize = false;
       passwordFile = config.sops.secrets.restic_repository_password.path;
       environmentFile = config.sops.secrets.restic_environment.path;
-      paths = [
-        "/persist"
-        "/home"
-      ];
+      inherit (cfg) paths backupPrepareCommand;
       extraBackupArgs = [
         "--no-scan"
         "--exclude-caches"
-        # /home excludes:
-        "--exclude=.local/share/containers"
-        "--exclude=.local/share/go"
-        "--exclude=.local/share/Trash"
-        "--exclude=steamapps"
-        "--exclude=games"
-        # /persist excludes:
-        "--exclude=valheim_server_Data"
-        "--exclude=satisfactory/FactoryGame"
-        "--exclude=satisfactory/Engine"
-        "--exclude=var/lib/docker"
-        "--exclude=var/lib/containers"
-        "--exclude=var/lib/arr"
-        "--exclude=var/lib/loki"
-        "--exclude=jellyfin/metadata"
-        "--exclude=var/lib/private/ollama"
-      ];
+      ]
+      ++ map (e: "--exclude=${e}") cfg.excludes;
       pruneOpts = [
         "--keep-daily 7"
         "--keep-weekly 5"
