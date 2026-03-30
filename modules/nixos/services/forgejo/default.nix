@@ -84,27 +84,6 @@ in
         extraConfig = "reverse_proxy 127.0.0.1:3083";
       };
 
-      traefik = {
-        dynamicConfigOptions = {
-          http = {
-            services = {
-              forgejo.loadBalancer.servers = [
-                {
-                  url = "http://localhost:3083";
-                }
-              ];
-            };
-
-            routers = {
-              forgejo = {
-                entryPoints = [ "websecure" ];
-                rule = "Host(`forgejo.homelab.${inputs.nix-secrets.domain}`)";
-                service = "forgejo";
-              };
-            };
-          };
-        };
-      };
     };
 
     systemd.services.forgejo.preStart =

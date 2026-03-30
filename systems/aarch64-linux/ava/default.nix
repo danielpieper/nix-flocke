@@ -37,10 +37,9 @@
     flocke = {
       restic.enable = true;
       monitoring.enable_exporter = true;
-      traefik.enable = true;
+      caddy.enable = true;
       postgresql.enable = true;
       website.enable = true;
-      miniflux.enable = true;
     };
   };
 

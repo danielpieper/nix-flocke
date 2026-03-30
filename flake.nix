@@ -78,8 +78,6 @@
 
     zjstatus.url = "github:dj95/zjstatus";
 
-    authentik-nix.url = "github:nix-community/authentik-nix";
-
     catppuccin-obs = {
       url = "github:catppuccin/obs";
       flake = false;
@@ -171,7 +169,6 @@
         lanzaboote.nixosModules.lanzaboote
         impermanence.nixosModules.impermanence
         sops-nix.nixosModules.sops
-        authentik-nix.nixosModules.default
         teslamate.nixosModules.default
         nixos-dns.nixosModules.dns
         tuxedo-nixos.nixosModules.default

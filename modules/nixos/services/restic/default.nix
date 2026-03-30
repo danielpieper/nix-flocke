@@ -29,28 +29,6 @@ in
         appendOnly = false;
       };
 
-      traefik = {
-        dynamicConfigOptions = {
-          http = {
-            services = {
-              restic.loadBalancer.servers = [
-                {
-                  url = "http://localhost:8012";
-                }
-              ];
-            };
-
-            routers = {
-              restic = {
-                entryPoints = [ "websecure" ];
-                rule = "Host(`restic.homelab.${inputs.nix-secrets.domain}`)";
-                service = "restic";
-              };
-            };
-          };
-        };
-      };
-
       prometheus = {
         exporters.restic = {
           enable = true;

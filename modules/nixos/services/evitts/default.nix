@@ -37,23 +37,6 @@ in
         };
         environmentFile = config.sops.secrets.evitts_env.path;
       };
-      traefik = {
-        dynamicConfigOptions = {
-          http = {
-            services = {
-              evitts.loadBalancer.servers = [ { url = "http://localhost:8093"; } ];
-            };
-
-            routers = {
-              evitts = {
-                entryPoints = [ "websecure" ];
-                rule = "Host(`evitts.homelab.${inputs.nix-secrets.domain}`)";
-                service = "evitts";
-              };
-            };
-          };
-        };
-      };
     };
   };
 }

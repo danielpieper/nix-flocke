@@ -87,15 +87,6 @@ in
         ];
       };
 
-      traefik.dynamicConfigOptions.http = {
-        services.teslamate.loadBalancer.servers = [ { url = "http://localhost:4000"; } ];
-        routers.teslamate = {
-          entryPoints = [ "websecure" ];
-          rule = "Host(`tesla.homelab.${inputs.nix-secrets.domain}`)";
-          service = "teslamate";
-        };
-      };
-
       caddy.virtualHosts."tesla.${domain}" = {
         useACMEHost = domain;
         extraConfig = "reverse_proxy 127.0.0.1:4000";

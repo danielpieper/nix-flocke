@@ -44,39 +44,6 @@ in
         clientMaxBodySize = "300m";
       };
 
-      traefik = {
-        dynamicConfigOptions = {
-          http = {
-            # Define middleware for redirecting www to non-www
-            middlewares = {
-              redirect-www-to-root = {
-                redirectRegex = {
-                  regex = "^https?://www\\.(.*)";
-                  replacement = "https://$1";
-                  permanent = true;
-                };
-              };
-            };
-
-            services = {
-              nginx.loadBalancer.servers = [
-                {
-                  url = "http://localhost:8099";
-                }
-              ];
-            };
-
-            routers = {
-              nginx = {
-                entryPoints = [ "websecure" ];
-                rule = "Host(`${inputs.nix-secrets.domain}`) || Host(`www.${inputs.nix-secrets.domain}`)";
-                middlewares = [ "redirect-www-to-root" ];
-                service = "nginx";
-              };
-            };
-          };
-        };
-      };
     };
   };
 }

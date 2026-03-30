@@ -35,26 +35,9 @@ in
         openFirewall = true;
       };
 
-      traefik = {
-        dynamicConfigOptions = {
-          http = {
-            services = {
-              jellyfin.loadBalancer.servers = [
-                {
-                  url = "http://localhost:8096";
-                }
-              ];
-            };
-
-            routers = {
-              jellyfin = {
-                entryPoints = [ "websecure" ];
-                rule = "Host(`jellyfin.homelab.${inputs.nix-secrets.domain}`)";
-                service = "jellyfin";
-              };
-            };
-          };
-        };
+      caddy.virtualHosts."jellyfin.${inputs.nix-secrets.homelabDomain}" = {
+        useACMEHost = inputs.nix-secrets.homelabDomain;
+        extraConfig = "reverse_proxy localhost:8096";
       };
     };
   };

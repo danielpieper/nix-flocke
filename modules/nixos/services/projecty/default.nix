@@ -43,23 +43,6 @@ in
           }
         ];
       };
-      traefik = {
-        dynamicConfigOptions = {
-          http = {
-            services = {
-              projecty.loadBalancer.servers = [ { url = "http://localhost:8083"; } ];
-            };
-
-            routers = {
-              projecty = {
-                entryPoints = [ "websecure" ];
-                rule = "Host(`projecty.homelab.${inputs.nix-secrets.domain}`)";
-                service = "projecty";
-              };
-            };
-          };
-        };
-      };
       flocke = {
         postgresql.enable = true;
         kratos = {

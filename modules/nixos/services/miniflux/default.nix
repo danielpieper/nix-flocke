@@ -35,15 +35,6 @@ in
         };
       };
 
-      traefik.dynamicConfigOptions.http = {
-        services.miniflux.loadBalancer.servers = [ { url = "http://localhost:8910"; } ];
-        routers.miniflux = {
-          entryPoints = [ "websecure" ];
-          rule = "Host(`miniflux.homelab.${inputs.nix-secrets.domain}`)";
-          service = "miniflux";
-        };
-      };
-
       caddy.virtualHosts."miniflux.${domain}" = {
         useACMEHost = domain;
         extraConfig = "reverse_proxy localhost:8910";

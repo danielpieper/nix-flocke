@@ -18,7 +18,7 @@
   };
 
   services.flocke = {
-    traefik.enable = true;
+    caddy.enable = true;
     nfs.enable = true;
     jellyfin.enable = true;
     navidrome.enable = true;
@@ -26,7 +26,12 @@
     monitoring.enable_exporter = true;
     restic = {
       enable = true;
-      enable_server = true;
+      excludes = [
+        "var/lib/docker"
+        "var/lib/containers"
+        "var/lib/arr"
+        "jellyfin/metadata"
+      ];
     };
     syncthing.enable = true;
     arr.enable = false;

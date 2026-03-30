@@ -39,38 +39,6 @@ in
         };
       };
 
-      traefik = {
-        dynamicConfigOptions = {
-          http = {
-            services = {
-              prometheus.loadBalancer.servers = [
-                {
-                  url = "http://localhost:3020";
-                }
-              ];
-              grafana.loadBalancer.servers = [
-                {
-                  url = "http://localhost:3010";
-                }
-              ];
-            };
-
-            routers = {
-              prometheus = {
-                entryPoints = [ "websecure" ];
-                rule = "Host(`prometheus.homelab.${inputs.nix-secrets.domain}`)";
-                service = "prometheus";
-              };
-              grafana = {
-                entryPoints = [ "websecure" ];
-                rule = "Host(`grafana.homelab.${inputs.nix-secrets.domain}`)";
-                service = "grafana";
-              };
-            };
-          };
-        };
-      };
-
       caddy.virtualHosts = {
         "prometheus.${inputs.nix-secrets.homelabDomain}" = {
           useACMEHost = inputs.nix-secrets.homelabDomain;

@@ -24,35 +24,12 @@ in
           MusicFolder = "/mnt/nas/11tb/media/music/library";
           BaseUrl = "";
           PlaylistsPath = "playlists";
-          ReverseProxyUserHeader = "X-Authentik-Name";
-          ReverseProxyWhitelist = "0.0.0.0/0";
         };
       };
 
-      traefik = {
-        dynamicConfigOptions = {
-          http = {
-            services = {
-              navidrome.loadBalancer.servers = [ { url = "http://localhost:4533"; } ];
-            };
-
-            routers = {
-              navidrome = {
-                entryPoints = [ "websecure" ];
-                rule = "Host(`navidrome.homelab.${inputs.nix-secrets.domain}`) && !PathPrefix(`/rest/`)";
-                priority = 1;
-                service = "navidrome";
-                middlewares = [ "authentik" ];
-              };
-              navidrome-api = {
-                entryPoints = [ "websecure" ];
-                rule = "Host(`navidrome.homelab.${inputs.nix-secrets.domain}`) && PathPrefix(`/rest/`)";
-                priority = 99;
-                service = "navidrome";
-              };
-            };
-          };
-        };
+      caddy.virtualHosts."navidrome.${inputs.nix-secrets.homelabDomain}" = {
+        useACMEHost = inputs.nix-secrets.homelabDomain;
+        extraConfig = "reverse_proxy localhost:4533";
       };
     };
   };
