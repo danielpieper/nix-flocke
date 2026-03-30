@@ -91,7 +91,7 @@
     };
 
     lazyvim = {
-      url = "git+ssh://forgejo@forgejo.homelab.daniel-pieper.com/daniel/nvim.git";
+      url = "git+ssh://forgejo@forgejo.naseschief.de/daniel/nvim.git";
       flake = false;
     };
 
@@ -111,12 +111,12 @@
     };
 
     projecty = {
-      url = "git+ssh://forgejo@forgejo.homelab.daniel-pieper.com/daniel/projecty.git";
+      url = "git+ssh://forgejo@forgejo.naseschief.de/daniel/projecty.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     evitts = {
-      url = "git+ssh://forgejo@forgejo.homelab.daniel-pieper.com/daniel/evitts.git";
+      url = "git+ssh://forgejo@forgejo.naseschief.de/daniel/evitts.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

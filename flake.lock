@@ -595,11 +595,11 @@
         "rev": "4918e155478b82bccf5a329fead57740c7aeb2cb",
         "revCount": 16,
         "type": "git",
-        "url": "ssh://forgejo@forgejo.homelab.daniel-pieper.com/daniel/evitts.git"
+        "url": "ssh://forgejo@forgejo.naseschief.de/daniel/evitts.git"
       },
       "original": {
         "type": "git",
-        "url": "ssh://forgejo@forgejo.homelab.daniel-pieper.com/daniel/evitts.git"
+        "url": "ssh://forgejo@forgejo.naseschief.de/daniel/evitts.git"
       }
     },
     "fenix": {
@@ -1604,11 +1604,11 @@
         "rev": "c3d561a1fbb38321d9b632e77b7e69dfc54d4ade",
         "revCount": 211,
         "type": "git",
-        "url": "ssh://forgejo@forgejo.homelab.daniel-pieper.com/daniel/nvim.git"
+        "url": "ssh://forgejo@forgejo.naseschief.de/daniel/nvim.git"
       },
       "original": {
         "type": "git",
-        "url": "ssh://forgejo@forgejo.homelab.daniel-pieper.com/daniel/nvim.git"
+        "url": "ssh://forgejo@forgejo.naseschief.de/daniel/nvim.git"
       }
     },
     "llm-agents": {
@@ -2646,11 +2646,11 @@
         "rev": "9e1d635f563796e2fb8504065f8c2132f6641f2b",
         "revCount": 176,
         "type": "git",
-        "url": "ssh://forgejo@forgejo.homelab.daniel-pieper.com/daniel/projecty.git"
+        "url": "ssh://forgejo@forgejo.naseschief.de/daniel/projecty.git"
       },
       "original": {
         "type": "git",
-        "url": "ssh://forgejo@forgejo.homelab.daniel-pieper.com/daniel/projecty.git"
+        "url": "ssh://forgejo@forgejo.naseschief.de/daniel/projecty.git"
       }
     },
     "pyproject-build-systems": {

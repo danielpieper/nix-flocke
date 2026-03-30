@@ -36,8 +36,8 @@ in
       git = {
         allowedSigners = publicKeyWork;
         urlRewrites = {
-          "ssh://forgejo@forgejo.homelab.${inputs.nix-secrets.domain}" =
-            "https://forgejo.homelab.${inputs.nix-secrets.domain}";
+          "ssh://forgejo@forgejo.${inputs.nix-secrets.homelabDomain}" =
+            "https://forgejo.${inputs.nix-secrets.homelabDomain}";
         };
       };
       ssh.extraHosts = {
@@ -88,7 +88,7 @@ in
 
   home = {
     sessionVariables = {
-      GOPRIVATE = "forgejo.homelab.${inputs.nix-secrets.domain}";
+      GOPRIVATE = inputs.nix-secrets.go.goprivate;
       # OP_SERVICE_ACCOUNT_TOKEN = "$(cat ${config.sops.secrets.opServiceAccountToken.path})";
     };
     packages = [
