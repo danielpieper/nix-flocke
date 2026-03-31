@@ -35,7 +35,7 @@
     mealie.enable = true;
     immich.enable = true;
     paperless.enable = true;
-    ocis.enable = true;
+    filebrowser.enable = true;
     restic = {
       enable = true;
       excludes = [

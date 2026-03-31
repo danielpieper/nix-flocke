@@ -155,27 +155,6 @@ in
               ];
               token_endpoint_auth_method = "client_secret_post";
             }
-            {
-              client_id = "ocis";
-              client_name = "ownCloud";
-              public = true;
-              require_pkce = true;
-              pkce_challenge_method = "S256";
-              authorization_policy = "one_factor";
-              redirect_uris = [
-                "https://ocis.${domain}/"
-                "https://ocis.${domain}/oidc-callback.html"
-                "https://ocis.${domain}/oidc-silent-redirect.html"
-              ];
-              scopes = [
-                "openid"
-                "offline_access"
-                "profile"
-                "email"
-                "groups"
-              ];
-              token_endpoint_auth_method = "none";
-            }
           ];
 
           notifier.smtp = {
@@ -206,15 +185,7 @@ in
       caddy.virtualHosts = {
         "auth.${domain}" = {
           useACMEHost = domain;
-          extraConfig = ''
-            header {
-              Access-Control-Allow-Origin https://ocis.${domain}
-              Access-Control-Allow-Methods "GET, POST, OPTIONS"
-              Access-Control-Allow-Headers "Content-Type, Authorization"
-              Access-Control-Allow-Credentials true
-            }
-            reverse_proxy 127.0.0.1:9091
-          '';
+          extraConfig = "reverse_proxy 127.0.0.1:9091";
         };
         "${domain}" = {
           useACMEHost = domain;
