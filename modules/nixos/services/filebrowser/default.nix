@@ -29,7 +29,7 @@ in
         };
       };
 
-      caddy.virtualHosts."files.${domain}" = {
+      caddy.virtualHosts."filebrowser.${domain}" = {
         useACMEHost = domain;
         extraConfig = ''
           forward_auth 127.0.0.1:9091 {
