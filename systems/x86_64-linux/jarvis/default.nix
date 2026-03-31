@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   lib,
   ...
@@ -36,7 +37,13 @@
     immich.enable = true;
     paperless.enable = true;
     filebrowser.enable = true;
-    syncthing.enable = true;
+    # Run Syncthing as the filebrowser user so synced folders are
+    # directly accessible in Filebrowser's per-user directories.
+    syncthing = {
+      enable = true;
+      inherit (config.services.filebrowser) user group;
+      dataDir = config.services.filebrowser.settings.root;
+    };
     restic = {
       enable = true;
       excludes = [
