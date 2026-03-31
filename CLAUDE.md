@@ -4,16 +4,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**nix-flocke** is a personal NixOS configuration repository managing multiple machines using Nix Flakes and Snowfall Lib. It configures a personal workstation (tars) and home lab servers (hal, jarvis).
+**nix-flocke** is a personal NixOS configuration repository managing multiple machines using Nix Flakes and Snowfall Lib. It configures a personal workstation (tars), a homelab server (hal), and two Hetzner VPS instances (jarvis, ava).
 
-Key technologies: Nix Flakes, Snowfall Lib, Home Manager, sops-nix, Impermanence, Stylix/Catppuccin theming.
+Key technologies: Nix Flakes, Snowfall Lib, Home Manager, sops-nix, Impermanence, Caddy, Authelia, Stylix/Catppuccin theming.
 
 ## Common Commands
 
 ```bash
 just check                  # Run nix flake check (linting, formatting, evaluation)
 just apply                  # Apply configuration to local host (uses nh os switch)
-just deploy <hostname>      # Deploy to remote host via deploy-rs (hal, ava)
+just deploy <hostname>      # Deploy to remote host via deploy-rs (hal, jarvis, ava)
 just deployboot <hostname>  # Deploy on next boot via deploy-rs
 just dns                    # Sync DNS records via octodns
 just iso [minimal|graphical] # Build installation ISO
@@ -41,11 +41,16 @@ Snowfall Lib auto-discovers modules, packages, and systems based on directory st
 
 ### Hosts
 
-| Host | Arch    | Role    | Notes                                                  |
-| ---- | ------- | ------- | ------------------------------------------------------ |
-| tars | x86_64  | Desktop | Tuxedo laptop, Niri                                    |
-| hal  | x86_64  | Server  | Main homelab (Traefik, Home Assistant, Jellyfin, etc.) |
-| ava  | aarch64 | Server  | Hetzner ARM VPS, public webserver                      |
+| Host   | Arch    | Role    | Notes                                                                              |
+| ------ | ------- | ------- | ---------------------------------------------------------------------------------- |
+| tars   | x86_64  | Desktop | Tuxedo laptop, Niri compositor                                                     |
+| hal    | x86_64  | Server  | Homelab (Jellyfin, Navidrome, Syncthing, arr, NFS, avahi)                          |
+| jarvis | x86_64  | Server  | Hetzner VPS — Caddy, Authelia, Grafana, Forgejo, TeslaMate, Immich, Paperless, etc |
+| ava    | aarch64 | Server  | Hetzner ARM VPS — public website only                                              |
+
+### Reverse Proxy & Auth
+
+All services on hal and jarvis use **Caddy** with ACME wildcard certs via Hetzner DNS-01. **Authelia** on jarvis provides SSO (OIDC) for Grafana, Forgejo, Miniflux, Mealie, Immich, Paperless, and OCIS. Services without native OIDC use Caddy `forward_auth` for Authelia protection.
 
 ## Critical: Git Tracking Requirement
 
@@ -117,4 +122,6 @@ Secrets are encrypted with age keys derived from SSH host keys:
 - Format with nixfmt (enforced via pre-commit hooks in flake), 2-space indentation
 - Use Catppuccin Mocha theme via Stylix
 - Never change `stateVersion` on existing systems
-- Prefer native NixOS modules over Podman/OCI containers; only use containers for services with poor or missing NixOS support (e.g. Immich)
+- Prefer native NixOS modules over Podman/OCI containers; only use NixOS containers (systemd-nspawn) when isolation is needed (e.g. arr stack with VPN)
+- Service domain is stored in nix-secrets (`inputs.nix-secrets.homelabDomain`) — never hardcode it
+- Restic backups go to Hetzner Storage Box via SFTP with per-host SSH keys

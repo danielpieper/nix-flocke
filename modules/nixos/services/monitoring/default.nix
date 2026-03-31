@@ -22,8 +22,6 @@ in
 
   config = mkIf cfg.enable {
     sops.secrets = {
-      grafana_oauth2_client_id.owner = "grafana";
-      grafana_oauth2_client_secret.owner = "grafana";
       grafana_secret_key.owner = "grafana";
       grafana-oidc-client-secret.owner = "grafana";
     };
