@@ -36,6 +36,7 @@
     immich.enable = true;
     paperless.enable = true;
     filebrowser.enable = true;
+    syncthing.enable = true;
     restic = {
       enable = true;
       excludes = [

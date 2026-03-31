@@ -26,15 +26,18 @@ in
         overrideDevices = false;
         overrideFolders = false;
         openDefaultPorts = true;
-        settings = {
-          inherit (inputs.nix-secrets.syncthing) devices folders;
-          gui.insecureSkipHostcheck = true;
-        };
+        settings.gui.insecureSkipHostcheck = true;
       };
 
       caddy.virtualHosts."syncthing.${inputs.nix-secrets.homelabDomain}" = {
         useACMEHost = inputs.nix-secrets.homelabDomain;
-        extraConfig = "reverse_proxy localhost:8384";
+        extraConfig = ''
+          forward_auth 127.0.0.1:9091 {
+            uri /api/authz/forward-auth
+            copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
+          }
+          reverse_proxy localhost:8384
+        '';
       };
     };
   };
