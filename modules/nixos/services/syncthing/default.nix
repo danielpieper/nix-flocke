@@ -31,13 +31,7 @@ in
 
       caddy.virtualHosts."syncthing.${inputs.nix-secrets.homelabDomain}" = {
         useACMEHost = inputs.nix-secrets.homelabDomain;
-        extraConfig = ''
-          forward_auth 127.0.0.1:9091 {
-            uri /api/authz/forward-auth
-            copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
-          }
-          reverse_proxy localhost:8384
-        '';
+        extraConfig = "reverse_proxy localhost:8384";
       };
     };
   };
