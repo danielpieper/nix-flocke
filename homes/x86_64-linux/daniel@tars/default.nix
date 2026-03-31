@@ -68,8 +68,6 @@ in
     inherit (inputs.nix-secrets.user) name;
   };
 
-  sops.secrets.opServiceAccountToken = { };
-
   xdg.desktopEntries = {
     "vlc-schweinerei" = {
       type = "Application";
