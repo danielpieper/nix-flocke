@@ -16,12 +16,8 @@ in
     ./prowlarr.nix
     ./radarr.nix
     ./sonarr.nix
-    # replaced by headphones
-    # ./lidarr.nix
-    ./headphones.nix
+    ./lidarr.nix
     ./sabnzbd.nix
-    # does not build
-    # ./premiumizarr.nix
   ];
 
   options.services.flocke.arr = {
@@ -34,7 +30,7 @@ in
     '';
 
     systemd.tmpfiles.rules = [
-      "d /persist/var/lib/arr/traefik 0777 root root"
+      "d /persist/var/lib/arr/caddy 0777 root root"
       "d /persist/var/lib/arr/tailscale 0777 root root"
     ];
 
@@ -60,9 +56,13 @@ in
           hostPath = "/mnt/";
           isReadOnly = false;
         };
-        "/var/lib/traefik/" = {
-          hostPath = "/persist/var/lib/arr/traefik/";
+        "/var/lib/caddy/" = {
+          hostPath = "/persist/var/lib/arr/caddy/";
           isReadOnly = false;
+        };
+        "/var/lib/acme/" = {
+          hostPath = "/var/lib/acme/";
+          isReadOnly = true;
         };
         "/var/lib/tailscale/" = {
           hostPath = "/persist/var/lib/arr/tailscale/";
@@ -71,9 +71,6 @@ in
       };
 
       config = {
-        imports = [
-          inputs.sops-nix.nixosModules.sops
-        ];
         system.stateVersion = "23.11";
 
         users.groups.media = { };
@@ -87,101 +84,36 @@ in
             enable = true;
             # https://github.com/tailscale/tailscale/issues/10319#issuecomment-1886730614
             checkReversePath = "loose";
+            allowedTCPPorts = [
+              80
+              443
+            ];
           };
           nameservers = inputs.nix-secrets.networking.fallbackNameservers;
         };
 
-        systemd.services = {
-          traefik = {
-            after = [ "tailscaled.service" ];
-            serviceConfig.EnvironmentFile = [ config.sops.secrets.traefik_env.path ];
-          };
-        };
-
-        sops = {
-          defaultSopsFile = "${inputs.nix-secrets}/sops/services.yaml";
-          validateSopsFiles = false;
-          age.sshKeyPaths = [ "/persist/etc/ssh/ssh_host_ed25519_key" ];
-          secrets.traefik_env = { };
-        };
+        systemd.services.caddy.after = [ "tailscaled.service" ];
 
         services = {
           tailscale = {
             enable = true;
             disableTaildrop = true;
-            permitCertUid = "traefik";
             extraSetFlags = [
               "--exit-node-allow-lan-access"
             ];
           };
-          traefik = {
+          caddy = {
             enable = true;
-            staticConfigOptions = {
-              log.level = "INFO";
-              metrics.prometheus = { };
-              certificatesResolvers.letsencrypt.acme = {
-                email = inputs.nix-secrets.traefik.acmeEmail;
-                storage = "/var/lib/traefik/cert.json";
-                dnsChallenge = {
-                  provider = "hetzner";
-                  resolvers = [
-                    "1.1.1.1:53"
-                    "8.8.8.8:53"
-                  ];
-                  delayBeforeCheck = 60;
-                  disablePropagationCheck = true;
-                };
-              };
-              entryPoints = {
-                web = {
-                  address = "0.0.0.0:80";
-                  http.redirections.entryPoint = {
-                    to = "websecure";
-                    scheme = "https";
-                    permanent = true;
-                  };
-                };
-                websecure = {
-                  address = "0.0.0.0:443";
-                  http.tls = {
-                    certResolver = "letsencrypt";
-                    domains = [
-                      {
-                        main = inputs.nix-secrets.domain;
-                        sans = [
-                          "*.${inputs.nix-secrets.domain}"
-                          "*.homelab.${inputs.nix-secrets.domain}"
-                        ];
-                      }
-                    ];
-                  };
-                };
-              };
-            };
-            dynamicConfigOptions = {
-              http = {
-                middlewares = {
-                  authentik = {
-                    forwardAuth = {
-                      address = "https://authentik.homelab.${inputs.nix-secrets.domain}/outpost.goauthentik.io/auth/traefik";
-                      trustForwardHeader = true;
-                      authResponseHeaders = [
-                        "X-authentik-username"
-                        "X-authentik-groups"
-                        "X-authentik-email"
-                        "X-authentik-name"
-                        "X-authentik-uid"
-                        "X-authentik-jwt"
-                        "X-authentik-meta-jwks"
-                        "X-authentik-meta-outpost"
-                        "X-authentik-meta-provider"
-                        "X-authentik-meta-app"
-                        "X-authentik-meta-version"
-                      ];
-                    };
-                  };
-                };
-              };
+            globalConfig = ''
+              auto_https disable_redirects
+            '';
+            extraConfig = ''
+              (arr-tls) {
+                tls /var/lib/acme/${inputs.nix-secrets.homelabDomain}/cert.pem /var/lib/acme/${inputs.nix-secrets.homelabDomain}/key.pem
+              }
+            '';
+            virtualHosts."http://" = {
+              extraConfig = "redir https://{host}{uri} permanent";
             };
           };
         };

@@ -29,19 +29,10 @@ in
         };
         services = {
           jellyseerr.enable = true;
-          traefik.dynamicConfigOptions.http = {
-            services.jellyseerr.loadBalancer.servers = [
-              {
-                url = "http://localhost:5055";
-              }
-            ];
-            routers.jellyseerr = {
-              entryPoints = [ "websecure" ];
-              rule = "Host(`jellyseerr.homelab.${inputs.nix-secrets.domain}`)";
-              service = "jellyseerr";
-              middlewares = [ "authentik" ];
-            };
-          };
+          caddy.virtualHosts."jellyseerr.${inputs.nix-secrets.homelabDomain}".extraConfig = ''
+            import arr-tls
+            reverse_proxy localhost:5055
+          '';
         };
       };
     };

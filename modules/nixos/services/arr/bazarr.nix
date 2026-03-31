@@ -28,19 +28,10 @@ in
             enable = true;
             group = "media";
           };
-          traefik.dynamicConfigOptions.http = {
-            services.bazarr.loadBalancer.servers = [
-              {
-                url = "http://localhost:6767";
-              }
-            ];
-            routers.bazarr = {
-              entryPoints = [ "websecure" ];
-              rule = "Host(`bazarr.homelab.${inputs.nix-secrets.domain}`)";
-              service = "bazarr";
-              middlewares = [ "authentik" ];
-            };
-          };
+          caddy.virtualHosts."bazarr.${inputs.nix-secrets.homelabDomain}".extraConfig = ''
+            import arr-tls
+            reverse_proxy localhost:6767
+          '';
         };
       };
     };

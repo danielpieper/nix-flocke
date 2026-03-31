@@ -27,19 +27,10 @@ in
             enable = true;
             group = "media";
           };
-          traefik.dynamicConfigOptions.http = {
-            services.lidarr.loadBalancer.servers = [
-              {
-                url = "http://localhost:8686";
-              }
-            ];
-            routers.lidarr = {
-              entryPoints = [ "websecure" ];
-              rule = "Host(`lidarr.homelab.${inputs.nix-secrets.domain}`)";
-              service = "lidarr";
-              middlewares = [ "authentik" ];
-            };
-          };
+          caddy.virtualHosts."lidarr.${inputs.nix-secrets.homelabDomain}".extraConfig = ''
+            import arr-tls
+            reverse_proxy localhost:8686
+          '';
         };
       };
     };

@@ -34,7 +34,7 @@
       ];
     };
     syncthing.enable = true;
-    arr.enable = false;
+    arr.enable = true;
     avahi.enable = true;
     evitts.enable = false;
   };

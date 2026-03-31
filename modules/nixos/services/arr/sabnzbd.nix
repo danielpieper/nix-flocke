@@ -33,19 +33,10 @@ in
             group = "media";
             configFile = "/var/lib/sabnzbd/config.ini";
           };
-          traefik.dynamicConfigOptions.http = {
-            services.sabnzbd.loadBalancer.servers = [
-              {
-                url = "http://localhost:8090";
-              }
-            ];
-            routers.sabnzbd = {
-              entryPoints = [ "websecure" ];
-              rule = "Host(`sabnzbd.homelab.${inputs.nix-secrets.domain}`)";
-              service = "sabnzbd";
-              middlewares = [ "authentik" ];
-            };
-          };
+          caddy.virtualHosts."sabnzbd.${inputs.nix-secrets.homelabDomain}".extraConfig = ''
+            import arr-tls
+            reverse_proxy localhost:8090
+          '';
         };
         systemd.services.sabnzbd.serviceConfig.UMask = "0002";
       };

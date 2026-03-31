@@ -28,19 +28,10 @@ in
         };
         services = {
           prowlarr.enable = true;
-          traefik.dynamicConfigOptions.http = {
-            services.prowlarr.loadBalancer.servers = [
-              {
-                url = "http://localhost:9696";
-              }
-            ];
-            routers.prowlarr = {
-              entryPoints = [ "websecure" ];
-              rule = "Host(`prowlarr.homelab.${inputs.nix-secrets.domain}`)";
-              service = "prowlarr";
-              middlewares = [ "authentik" ];
-            };
-          };
+          caddy.virtualHosts."prowlarr.${inputs.nix-secrets.homelabDomain}".extraConfig = ''
+            import arr-tls
+            reverse_proxy localhost:9696
+          '';
         };
       };
     };
