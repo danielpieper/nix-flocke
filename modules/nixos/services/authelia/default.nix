@@ -220,7 +220,9 @@ in
           useACMEHost = domain;
           extraConfig = ''
             header Content-Type text/html
-            respond `${builtins.readFile ./dashboard.html}`
+            respond `${
+              builtins.replaceStrings [ "__DOMAIN__" ] [ domain ] (builtins.readFile ./dashboard.html)
+            }`
           '';
         };
       };

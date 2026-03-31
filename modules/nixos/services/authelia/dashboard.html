@@ -6,45 +6,427 @@
 <title>Dashboard</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: -apple-system, system-ui, sans-serif; background: #1e1e2e; color: #cdd6f4; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
-  .container { max-width: 800px; width: 100%; padding: 2rem; }
-  h1 { text-align: center; margin-bottom: 2rem; font-size: 1.5rem; color: #89b4fa; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; }
-  a { display: flex; align-items: center; justify-content: center; padding: 1.2rem; background: #313244; border-radius: 12px; color: #cdd6f4; text-decoration: none; font-size: 0.95rem; font-weight: 500; transition: background 0.2s, transform 0.1s; }
-  a:hover { background: #45475a; transform: translateY(-2px); }
-  .section { margin-bottom: 2rem; }
-  h2 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: #6c7086; margin-bottom: 0.75rem; padding-left: 0.25rem; }
+
+  body {
+    font-family: -apple-system, system-ui, sans-serif;
+    background: #1e1e2e;
+    color: #cdd6f4;
+    min-height: 100vh;
+    padding: 3rem 1.5rem;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  header h1 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #89b4fa;
+    letter-spacing: -0.01em;
+  }
+
+  header p {
+    margin-top: 0.4rem;
+    font-size: 0.875rem;
+    color: #6c7086;
+  }
+
+  .section {
+    margin-bottom: 2.5rem;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .section-header h2 {
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #6c7086;
+  }
+
+  .section-header::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #313244;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.875rem;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.6rem;
+    padding: 1.4rem 1rem 1.2rem;
+    background: #181825;
+    border: 1px solid #313244;
+    border-radius: 14px;
+    color: #cdd6f4;
+    text-decoration: none;
+    transition: background 0.18s ease, border-color 0.18s ease, transform 0.12s ease, box-shadow 0.18s ease;
+  }
+
+  .card:hover {
+    background: #1e1e2e;
+    border-color: #45475a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+  }
+
+  .card-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+  }
+
+  .card-name {
+    font-size: 0.925rem;
+    font-weight: 600;
+    color: #cdd6f4;
+    line-height: 1.2;
+  }
+
+  .card-desc {
+    font-size: 0.775rem;
+    color: #6c7086;
+    line-height: 1.35;
+  }
+
+  @media (max-width: 480px) {
+    body { padding: 2rem 1rem; }
+    header h1 { font-size: 1.4rem; }
+    .grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.75rem; }
+    .card { padding: 1.1rem 0.75rem 1rem; }
+    .card-icon { width: 34px; height: 34px; }
+  }
 </style>
 </head>
 <body>
 <div class="container">
-  <h1>naseschief.de</h1>
+
+  <header>
+    <h1>Dashboard</h1>
+    <p>Self-hosted services</p>
+  </header>
+
+  <!-- Apps -->
   <div class="section">
-    <h2>Apps</h2>
+    <div class="section-header"><h2>Apps</h2></div>
     <div class="grid">
-      <a href="https://ocis.naseschief.de">ownCloud</a>
-      <a href="https://immich.naseschief.de">Immich</a>
-      <a href="https://paperless.naseschief.de">Paperless</a>
-      <a href="https://mealie.naseschief.de">Mealie</a>
-      <a href="https://miniflux.naseschief.de">Miniflux</a>
-      <a href="https://forgejo.naseschief.de">Forgejo</a>
+
+      <a class="card" href="https://ocis.__DOMAIN__">
+        <svg class="card-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- ownCloud: cloud shape with subtle internal highlight -->
+          <path d="M10 26a7 7 0 0 1 1.5-13.8A9 9 0 0 1 29 20a5 5 0 0 1-.5 10H10z" fill="#0082c9"/>
+          <path d="M14 22a3 3 0 0 0 0 6h13a3 3 0 0 0 0-6 3 3 0 0 0-5.8-1A3 3 0 0 0 14 22z" fill="#5eaddf" opacity="0.5"/>
+        </svg>
+        <span class="card-name">ownCloud</span>
+        <span class="card-desc">Cloud storage &amp; file sync</span>
+      </a>
+
+      <a class="card" href="https://immich.__DOMAIN__">
+        <svg class="card-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Immich: stacked photo frames -->
+          <rect x="7" y="13" width="22" height="18" rx="3" fill="#4250af" opacity="0.6"/>
+          <rect x="11" y="9" width="22" height="18" rx="3" fill="#4250af"/>
+          <circle cx="17" cy="16" r="2.5" fill="#a5b4fc"/>
+          <path d="M11 27l5-5 4 4 3-3 5 4" stroke="#a5b4fc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+        <span class="card-name">Immich</span>
+        <span class="card-desc">Photo &amp; video backup</span>
+      </a>
+
+      <a class="card" href="https://paperless.__DOMAIN__">
+        <svg class="card-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Paperless-ngx: document with lines -->
+          <rect x="9" y="6" width="22" height="28" rx="3" fill="#17b57a"/>
+          <rect x="9" y="6" width="22" height="28" rx="3" fill="url(#pgx-fade)"/>
+          <line x1="14" y1="14" x2="26" y2="14" stroke="white" stroke-width="1.8" stroke-linecap="round" opacity="0.85"/>
+          <line x1="14" y1="19" x2="26" y2="19" stroke="white" stroke-width="1.8" stroke-linecap="round" opacity="0.85"/>
+          <line x1="14" y1="24" x2="21" y2="24" stroke="white" stroke-width="1.8" stroke-linecap="round" opacity="0.85"/>
+          <defs>
+            <linearGradient id="pgx-fade" x1="9" y1="6" x2="31" y2="34" gradientUnits="userSpaceOnUse">
+              <stop stop-color="white" stop-opacity="0.08"/>
+              <stop offset="1" stop-color="white" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span class="card-name">Paperless</span>
+        <span class="card-desc">Document management</span>
+      </a>
+
+      <a class="card" href="https://mealie.__DOMAIN__">
+        <svg class="card-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Mealie: fork & spoon forming a leaf shape -->
+          <circle cx="20" cy="20" r="16" fill="#e8a020" opacity="0.15"/>
+          <path d="M16 9v7a4 4 0 0 0 4 4v11" stroke="#e8a020" stroke-width="2" stroke-linecap="round"/>
+          <path d="M13 9v4a3 3 0 0 0 3 3" stroke="#e8a020" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M19 9v4a3 3 0 0 1-3 3" stroke="#e8a020" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M25 9c0 0 2 3 2 7s-2 7-2 7v8" stroke="#e8a020" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="card-name">Mealie</span>
+        <span class="card-desc">Recipe manager</span>
+      </a>
+
+      <a class="card" href="https://miniflux.__DOMAIN__">
+        <svg class="card-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Miniflux: RSS-style radiating arcs -->
+          <circle cx="12" cy="29" r="3" fill="#ff6600"/>
+          <path d="M12 22a9 9 0 0 1 9 9" stroke="#ff6600" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <path d="M12 15a16 16 0 0 1 16 16" stroke="#ff6600" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.6"/>
+          <path d="M12 9a22 22 0 0 1 22 22" stroke="#ff6600" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.3"/>
+        </svg>
+        <span class="card-name">Miniflux</span>
+        <span class="card-desc">RSS feed reader</span>
+      </a>
+
+      <a class="card" href="https://forgejo.__DOMAIN__">
+        <svg class="card-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Forgejo: git graph with two branches -->
+          <circle cx="12" cy="10" r="3.5" fill="#fb8f40"/>
+          <circle cx="12" cy="30" r="3.5" fill="#fb8f40"/>
+          <circle cx="28" cy="20" r="3.5" fill="#fb8f40" opacity="0.7"/>
+          <line x1="12" y1="13.5" x2="12" y2="26.5" stroke="#fb8f40" stroke-width="2" stroke-linecap="round"/>
+          <path d="M12 13.5 Q12 20 28 20" stroke="#fb8f40" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.7"/>
+        </svg>
+        <span class="card-name">Forgejo</span>
+        <span class="card-desc">Git hosting</span>
+      </a>
+
     </div>
   </div>
+
+  <!-- Media -->
   <div class="section">
-    <h2>Monitoring</h2>
+    <div class="section-header"><h2>Media</h2></div>
     <div class="grid">
-      <a href="https://grafana.naseschief.de">Grafana</a>
-      <a href="https://prometheus.naseschief.de">Prometheus</a>
-      <a href="https://ntfy.naseschief.de">ntfy</a>
+
+      <a class="card" href="https://jellyfin.__DOMAIN__">
+        <svg class="card-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Jellyfin: stylized play button inside rounded diamond -->
+          <path d="M20 4 L36 20 L20 36 L4 20 Z" rx="6" fill="#aa5cc3" opacity="0.2"/>
+          <path d="M20 6 L34 20 L20 34 L6 20 Z" fill="none" stroke="#aa5cc3" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M16 14 L28 20 L16 26 Z" fill="#aa5cc3"/>
+        </svg>
+        <span class="card-name">Jellyfin</span>
+        <span class="card-desc">Media streaming</span>
+      </a>
+
+      <a class="card" href="https://navidrome.__DOMAIN__">
+        <svg class="card-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Navidrome: musical note -->
+          <path d="M24 8v16.5a5 5 0 1 1-3-4.6V11l-9 2v13a5 5 0 1 1-3-4.6V10z" fill="#f5832b"/>
+        </svg>
+        <span class="card-name">Navidrome</span>
+        <span class="card-desc">Music streaming</span>
+      </a>
+
+      <a class="card" href="https://jellyseerr.__DOMAIN__">
+        <svg class="card-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Jellyseerr: magnifier over a play button -->
+          <circle cx="18" cy="18" r="10" fill="none" stroke="#aa5cc3" stroke-width="2.5"/>
+          <path d="M25 25 L33 33" stroke="#aa5cc3" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M14 14 L23 18 L14 22 Z" fill="#aa5cc3" opacity="0.8"/>
+        </svg>
+        <span class="card-name">Jellyseerr</span>
+        <span class="card-desc">Media requests</span>
+      </a>
+
+      <a class="card" href="https://radarr.__DOMAIN__">
+        <svg class="card-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Radarr: film reel / camera -->
+          <circle cx="20" cy="20" r="13" fill="none" stroke="#ffc230" stroke-width="2.5"/>
+          <circle cx="20" cy="20" r="5" fill="#ffc230"/>
+          <circle cx="20" cy="8"  r="2.2" fill="#ffc230" opacity="0.7"/>
+          <circle cx="20" cy="32" r="2.2" fill="#ffc230" opacity="0.7"/>
+          <circle cx="8"  cy="20" r="2.2" fill="#ffc230" opacity="0.7"/>
+          <circle cx="32" cy="20" r="2.2" fill="#ffc230" opacity="0.7"/>
+          <circle cx="11.5" cy="11.5" r="2.2" fill="#ffc230" opacity="0.5"/>
+          <circle cx="28.5" cy="11.5" r="2.2" fill="#ffc230" opacity="0.5"/>
+          <circle cx="11.5" cy="28.5" r="2.2" fill="#ffc230" opacity="0.5"/>
+          <circle cx="28.5" cy="28.5" r="2.2" fill="#ffc230" opacity="0.5"/>
+        </svg>
+        <span class="card-name">Radarr</span>
+        <span class="card-desc">Movie management</span>
+      </a>
+
+      <a class="card" href="https://sonarr.__DOMAIN__">
+        <svg class="card-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Sonarr: TV set -->
+          <rect x="6" y="13" width="28" height="20" rx="3" fill="#35c5f4" opacity="0.15"/>
+          <rect x="6" y="13" width="28" height="20" rx="3" stroke="#35c5f4" stroke-width="2.2" fill="none"/>
+          <line x1="15" y1="33" x2="12" y2="38" stroke="#35c5f4" stroke-width="2" stroke-linecap="round"/>
+          <line x1="25" y1="33" x2="28" y2="38" stroke="#35c5f4" stroke-width="2" stroke-linecap="round"/>
+          <path d="M13 8 L20 13 L27 8" stroke="#35c5f4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M15 20 L24 23 L15 26 Z" fill="#35c5f4"/>
+        </svg>
+        <span class="card-name">Sonarr</span>
+        <span class="card-desc">TV show management</span>
+      </a>
+
+      <a class="card" href="https://lidarr.__DOMAIN__">
+        <svg class="card-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Lidarr: vinyl record -->
+          <circle cx="20" cy="20" r="14" fill="#1bc15e" opacity="0.15"/>
+          <circle cx="20" cy="20" r="14" stroke="#1bc15e" stroke-width="2.2" fill="none"/>
+          <circle cx="20" cy="20" r="8"  stroke="#1bc15e" stroke-width="1.5" fill="none" opacity="0.5"/>
+          <circle cx="20" cy="20" r="3"  fill="#1bc15e"/>
+        </svg>
+        <span class="card-name">Lidarr</span>
+        <span class="card-desc">Music management</span>
+      </a>
+
+      <a class="card" href="https://bazarr.__DOMAIN__">
+        <svg class="card-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Bazarr: speech bubble with CC -->
+          <path d="M6 10 Q6 6 10 6 H30 Q34 6 34 10 V24 Q34 28 30 28 H22 L14 34 V28 H10 Q6 28 6 24 Z" fill="#ffdd57" opacity="0.15"/>
+          <path d="M6 10 Q6 6 10 6 H30 Q34 6 34 10 V24 Q34 28 30 28 H22 L14 34 V28 H10 Q6 28 6 24 Z" stroke="#ffdd57" stroke-width="2" fill="none"/>
+          <text x="12" y="22" font-family="system-ui, sans-serif" font-size="10" font-weight="700" fill="#ffdd57">CC</text>
+        </svg>
+        <span class="card-name">Bazarr</span>
+        <span class="card-desc">Subtitle management</span>
+      </a>
+
+      <a class="card" href="https://prowlarr.__DOMAIN__">
+        <svg class="card-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Prowlarr: radar sweep -->
+          <circle cx="20" cy="20" r="14" stroke="#f97316" stroke-width="2" fill="none" opacity="0.3"/>
+          <circle cx="20" cy="20" r="9"  stroke="#f97316" stroke-width="1.5" fill="none" opacity="0.5"/>
+          <circle cx="20" cy="20" r="2.5" fill="#f97316"/>
+          <path d="M20 20 L20 6" stroke="#f97316" stroke-width="2" stroke-linecap="round"/>
+          <path d="M20 20 L31 14" stroke="#f97316" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+          <path d="M20 20 Q26 11 31 14" fill="#f97316" opacity="0.15"/>
+        </svg>
+        <span class="card-name">Prowlarr</span>
+        <span class="card-desc">Indexer management</span>
+      </a>
+
+      <a class="card" href="https://sabnzbd.__DOMAIN__">
+        <svg class="card-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- SABnzbd: downward arrow into a tray -->
+          <rect x="7" y="28" width="26" height="6" rx="2" fill="#f4c842" opacity="0.3"/>
+          <rect x="7" y="28" width="26" height="6" rx="2" stroke="#f4c842" stroke-width="1.8" fill="none"/>
+          <path d="M20 7 L20 24" stroke="#f4c842" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M12 18 L20 26 L28 18" stroke="#f4c842" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+        <span class="card-name">SABnzbd</span>
+        <span class="card-desc">Usenet downloader</span>
+      </a>
+
     </div>
   </div>
+
+  <!-- Monitoring -->
   <div class="section">
-    <h2>System</h2>
+    <div class="section-header"><h2>Monitoring</h2></div>
     <div class="grid">
-      <a href="https://auth.naseschief.de">Authelia</a>
-      <a href="https://tesla.naseschief.de">TeslaMate</a>
+
+      <a class="card" href="https://grafana.__DOMAIN__">
+        <svg class="card-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Grafana: bar chart with upward trend -->
+          <rect x="6"  y="22" width="7" height="12" rx="1.5" fill="#f46800"/>
+          <rect x="17" y="16" width="7" height="18" rx="1.5" fill="#f46800"/>
+          <rect x="28" y="10" width="7" height="24" rx="1.5" fill="#f46800" opacity="0.75"/>
+          <path d="M9.5 22 L20.5 16 L31.5 10" stroke="#f46800" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="2 2" fill="none" opacity="0.5"/>
+        </svg>
+        <span class="card-name">Grafana</span>
+        <span class="card-desc">Metrics &amp; dashboards</span>
+      </a>
+
+      <a class="card" href="https://prometheus.__DOMAIN__">
+        <svg class="card-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Prometheus: flame / torch shape -->
+          <path d="M20 5 C20 5 28 14 28 21 C28 25.4 24.4 29 20 29 C15.6 29 12 25.4 12 21 C12 14 20 5 20 5Z" fill="#e6522c" opacity="0.25"/>
+          <path d="M20 5 C20 5 28 14 28 21 C28 25.4 24.4 29 20 29 C15.6 29 12 25.4 12 21 C12 14 20 5 20 5Z" stroke="#e6522c" stroke-width="2" fill="none"/>
+          <path d="M17 22 C17 22 19 19 21 22 C22.2 23.7 21.3 26 20 26 C18.7 26 17.8 24.3 17 22Z" fill="#e6522c"/>
+          <line x1="15" y1="33" x2="25" y2="33" stroke="#e6522c" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+          <line x1="17" y1="36" x2="23" y2="36" stroke="#e6522c" stroke-width="2" stroke-linecap="round" opacity="0.3"/>
+        </svg>
+        <span class="card-name">Prometheus</span>
+        <span class="card-desc">Metrics collection</span>
+      </a>
+
+      <a class="card" href="https://ntfy.__DOMAIN__">
+        <svg class="card-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- ntfy: notification bell -->
+          <path d="M20 5 C20 5 20 7 20 8 C14 9 10 13.5 10 19 L10 26 L7 29 L33 29 L30 26 L30 19 C30 13.5 26 9 20 8 C20 7 20 5 20 5Z" fill="#4caf96" opacity="0.2"/>
+          <path d="M20 5 C20 5 20 7 20 8 C14 9 10 13.5 10 19 L10 26 L7 29 L33 29 L30 26 L30 19 C30 13.5 26 9 20 8 C20 7 20 5 20 5Z" stroke="#4caf96" stroke-width="2" stroke-linejoin="round" fill="none"/>
+          <path d="M16 29 Q16 33 20 33 Q24 33 24 29" stroke="#4caf96" stroke-width="2" fill="none" stroke-linecap="round"/>
+        </svg>
+        <span class="card-name">ntfy</span>
+        <span class="card-desc">Push notifications</span>
+      </a>
+
     </div>
   </div>
+
+  <!-- System -->
+  <div class="section">
+    <div class="section-header"><h2>System</h2></div>
+    <div class="grid">
+
+      <a class="card" href="https://auth.__DOMAIN__">
+        <svg class="card-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Authelia: shield with keyhole -->
+          <path d="M20 4 L34 10 L34 22 C34 29.7 27.7 35.5 20 37 C12.3 35.5 6 29.7 6 22 L6 10 Z" fill="#89b4fa" opacity="0.15"/>
+          <path d="M20 4 L34 10 L34 22 C34 29.7 27.7 35.5 20 37 C12.3 35.5 6 29.7 6 22 L6 10 Z" stroke="#89b4fa" stroke-width="2" stroke-linejoin="round" fill="none"/>
+          <circle cx="20" cy="18" r="4" fill="none" stroke="#89b4fa" stroke-width="2"/>
+          <rect x="18" y="21" width="4" height="6" rx="1" fill="#89b4fa"/>
+        </svg>
+        <span class="card-name">Authelia</span>
+        <span class="card-desc">Single sign-on</span>
+      </a>
+
+      <a class="card" href="https://tesla.__DOMAIN__">
+        <svg class="card-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- TeslaMate: Tesla "T" on a map pin -->
+          <path d="M20 5 C14 5 9 10 9 16 C9 24 20 36 20 36 C20 36 31 24 31 16 C31 10 26 5 20 5Z" fill="#cc0000" opacity="0.2"/>
+          <path d="M20 5 C14 5 9 10 9 16 C9 24 20 36 20 36 C20 36 31 24 31 16 C31 10 26 5 20 5Z" stroke="#cc0000" stroke-width="2" fill="none"/>
+          <path d="M14 12 L26 12" stroke="#cc0000" stroke-width="2.2" stroke-linecap="round"/>
+          <path d="M20 12 L20 22" stroke="#cc0000" stroke-width="2.2" stroke-linecap="round"/>
+          <path d="M14 12 Q14 10 17 10 Q20 12 23 10 Q26 10 26 12" stroke="#cc0000" stroke-width="1.5" stroke-linecap="round" fill="none" opacity="0.6"/>
+        </svg>
+        <span class="card-name">TeslaMate</span>
+        <span class="card-desc">Tesla vehicle tracking</span>
+      </a>
+
+      <a class="card" href="https://syncthing.__DOMAIN__">
+        <svg class="card-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Syncthing: two circular arrows (sync) -->
+          <path d="M28 12 A12 12 0 0 1 32 20" stroke="#0891b2" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <path d="M32 20 A12 12 0 0 1 12 28" stroke="#0891b2" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <path d="M12 28 A12 12 0 0 1 8 20" stroke="#0891b2" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <path d="M8 20 A12 12 0 0 1 28 12" stroke="#0891b2" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <!-- arrowheads -->
+          <path d="M25 9 L28 12 L24 13" stroke="#0891b2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <path d="M15 31 L12 28 L16 27" stroke="#0891b2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+        <span class="card-name">Syncthing</span>
+        <span class="card-desc">File synchronization</span>
+      </a>
+
+    </div>
+  </div>
+
 </div>
 </body>
 </html>
