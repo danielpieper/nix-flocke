@@ -12,6 +12,18 @@ in
 {
   options.services.flocke.paperless = {
     enable = mkEnableOption "Enable Paperless-ngx document management";
+
+    dataDir = mkOption {
+      type = types.path;
+      default = "/var/lib/paperless";
+      description = "Directory for Paperless data storage";
+    };
+
+    extraGroups = mkOption {
+      type = types.listOf types.str;
+      default = [ ];
+      description = "Extra groups for the paperless user";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -20,11 +32,14 @@ in
       paperless-env.owner = "paperless";
     };
 
+    users.users.paperless.extraGroups = cfg.extraGroups;
+
     services = {
       paperless = {
         enable = true;
         address = "127.0.0.1";
         port = 28981;
+        inherit (cfg) dataDir;
         passwordFile = config.sops.secrets.paperless-password.path;
         environmentFile = config.sops.secrets.paperless-env.path;
         settings = {

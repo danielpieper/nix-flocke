@@ -12,16 +12,30 @@ in
 {
   options.services.flocke.filebrowser = {
     enable = mkEnableOption "Enable Filebrowser";
+
+    dataDir = mkOption {
+      type = types.path;
+      default = "/var/lib/filebrowser/data";
+      description = "Root directory for Filebrowser files";
+    };
+
+    extraGroups = mkOption {
+      type = types.listOf types.str;
+      default = [ ];
+      description = "Extra groups for the filebrowser user";
+    };
   };
 
   config = mkIf cfg.enable {
+    users.users.filebrowser.extraGroups = cfg.extraGroups;
+
     services = {
       filebrowser = {
         enable = true;
         settings = {
           address = "127.0.0.1";
           port = 8085;
-          root = "/var/lib/filebrowser/data";
+          root = cfg.dataDir;
           auth = {
             method = "proxy";
             header = "Remote-User";

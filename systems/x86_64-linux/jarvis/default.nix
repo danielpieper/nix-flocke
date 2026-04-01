@@ -4,6 +4,9 @@
   lib,
   ...
 }:
+let
+  sbMount = config.services.flocke.storagebox.mountPoint;
+in
 {
   imports = [
     ./hardware-configuration.nix
@@ -34,9 +37,22 @@
     };
     miniflux.enable = true;
     mealie.enable = true;
-    immich.enable = true;
-    paperless.enable = true;
-    filebrowser.enable = true;
+    storagebox.enable = true;
+    immich = {
+      enable = true;
+      mediaLocation = "${sbMount}/immich";
+      extraGroups = [ "storagebox" ];
+    };
+    paperless = {
+      enable = true;
+      dataDir = "${sbMount}/paperless";
+      extraGroups = [ "storagebox" ];
+    };
+    filebrowser = {
+      enable = true;
+      dataDir = "${sbMount}/filebrowser";
+      extraGroups = [ "storagebox" ];
+    };
     # Run Syncthing as the filebrowser user so synced folders are
     # directly accessible in Filebrowser's per-user directories.
     syncthing = {
@@ -58,6 +74,14 @@
       enable = true;
       runMigrations = true;
     };
+  };
+
+  # Ensure services wait for the Storage Box mount
+  systemd.services = {
+    filebrowser.unitConfig.RequiresMountsFor = sbMount;
+    immich-server.unitConfig.RequiresMountsFor = sbMount;
+    paperless-scheduler.unitConfig.RequiresMountsFor = sbMount;
+    syncthing.unitConfig.RequiresMountsFor = sbMount;
   };
 
   # BIOS boot — override the default systemd-boot/EFI config

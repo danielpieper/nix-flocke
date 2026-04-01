@@ -12,16 +12,31 @@ in
 {
   options.services.flocke.immich = {
     enable = mkEnableOption "Enable Immich photo management";
+
+    mediaLocation = mkOption {
+      type = types.path;
+      default = "/var/lib/immich";
+      description = "Directory for Immich media storage";
+    };
+
+    extraGroups = mkOption {
+      type = types.listOf types.str;
+      default = [ ];
+      description = "Extra groups for the immich user";
+    };
   };
 
   config = mkIf cfg.enable {
     sops.secrets.immich-oidc-client-secret.owner = "immich";
+
+    users.users.immich.extraGroups = cfg.extraGroups;
 
     services = {
       immich = {
         enable = true;
         host = "127.0.0.1";
         port = 2283;
+        inherit (cfg) mediaLocation;
         settings = {
           server.externalDomain = "https://immich.${domain}";
           newVersionCheck.enabled = false;
