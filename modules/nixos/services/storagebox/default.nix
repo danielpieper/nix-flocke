@@ -24,7 +24,7 @@ in
   config = mkIf cfg.enable {
     sops.secrets.storagebox-data-credentials = { };
 
-    users.groups.storagebox = { };
+    users.groups.storagebox.gid = 990;
 
     environment.systemPackages = [ pkgs.cifs-utils ];
 
