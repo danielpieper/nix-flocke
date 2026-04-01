@@ -52,10 +52,13 @@ in
     };
     # Run Syncthing as the filebrowser user so synced folders are
     # directly accessible in Filebrowser's per-user directories.
+    # dataDir must be local — SQLite WAL mode doesn't work on CIFS.
+    # Sync folder paths are configured in the Syncthing UI to point
+    # to the Storage Box mount.
     syncthing = {
       enable = true;
       inherit (config.services.filebrowser) user group;
-      dataDir = config.services.filebrowser.settings.root;
+      dataDir = "/var/lib/syncthing";
     };
     restic = {
       enable = true;
