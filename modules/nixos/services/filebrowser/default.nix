@@ -19,16 +19,9 @@ in
       description = "Root directory for Filebrowser files";
     };
 
-    extraGroups = mkOption {
-      type = types.listOf types.str;
-      default = [ ];
-      description = "Extra groups for the filebrowser user";
-    };
   };
 
   config = mkIf cfg.enable {
-    users.users.filebrowser.extraGroups = cfg.extraGroups;
-
     services = {
       filebrowser = {
         enable = true;

@@ -41,17 +41,14 @@ in
     immich = {
       enable = true;
       mediaLocation = "${sbMount}/immich";
-      extraGroups = [ "storagebox" ];
     };
     paperless = {
       enable = true;
       dataDir = "${sbMount}/paperless";
-      extraGroups = [ "storagebox" ];
     };
     filebrowser = {
       enable = true;
       dataDir = "${sbMount}/filebrowser";
-      extraGroups = [ "storagebox" ];
     };
     # Run Syncthing as the filebrowser user so synced folders are
     # directly accessible in Filebrowser's per-user directories.

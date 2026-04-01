@@ -19,11 +19,6 @@ in
       description = "Directory for Paperless data storage";
     };
 
-    extraGroups = mkOption {
-      type = types.listOf types.str;
-      default = [ ];
-      description = "Extra groups for the paperless user";
-    };
   };
 
   config = mkIf cfg.enable {
@@ -31,8 +26,6 @@ in
       paperless-password.owner = "paperless";
       paperless-env.owner = "paperless";
     };
-
-    users.users.paperless.extraGroups = cfg.extraGroups;
 
     services = {
       paperless = {

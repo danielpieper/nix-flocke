@@ -24,8 +24,6 @@ in
   config = mkIf cfg.enable {
     sops.secrets.storagebox-data-credentials = { };
 
-    users.groups.storagebox.gid = 990;
-
     environment.systemPackages = [ pkgs.cifs-utils ];
 
     fileSystems.${cfg.mountPoint} = {
@@ -33,9 +31,7 @@ in
       fsType = "cifs";
       options = [
         "credentials=${config.sops.secrets.storagebox-data-credentials.path}"
-        "gid=${toString config.users.groups.storagebox.gid}"
-        "file_mode=0660"
-        "dir_mode=0770"
+        "noperm"
         "x-systemd.automount"
         "x-systemd.idle-timeout=60"
         "x-systemd.device-timeout=5s"

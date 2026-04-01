@@ -19,17 +19,10 @@ in
       description = "Directory for Immich media storage";
     };
 
-    extraGroups = mkOption {
-      type = types.listOf types.str;
-      default = [ ];
-      description = "Extra groups for the immich user";
-    };
   };
 
   config = mkIf cfg.enable {
     sops.secrets.immich-oidc-client-secret.owner = "immich";
-
-    users.users.immich.extraGroups = cfg.extraGroups;
 
     services = {
       immich = {
