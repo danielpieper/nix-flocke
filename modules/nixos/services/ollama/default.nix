@@ -13,6 +13,7 @@ let
       cpu = pkgs.ollama-cpu;
       rocm = pkgs.ollama-rocm;
       cuda = pkgs.ollama-cuda;
+      vulkan = pkgs.ollama-vulkan;
     }
     .${cfg.acceleration};
 in
@@ -25,6 +26,7 @@ in
         "cpu"
         "rocm"
         "cuda"
+        "vulkan"
       ];
       default = "cpu";
       description = "Hardware acceleration backend to use";
@@ -44,7 +46,6 @@ in
       inherit (cfg) loadModels;
       environmentVariables = {
         OLLAMA_KV_CACHE_TYPE = "q8_0";
-        HSA_ENABLE_SDMA = "0";
       };
     };
 
