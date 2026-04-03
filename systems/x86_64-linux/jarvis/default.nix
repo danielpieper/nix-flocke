@@ -62,6 +62,7 @@ in
     };
     restic = {
       enable = true;
+      enable_exporter = true;
       excludes = [
         "var/lib/containers"
       ];

@@ -41,6 +41,7 @@ in
         "git"
         "libvirtd"
         "kvm"
+        "restic-backup"
       ]
       ++ cfg.extraGroups;
     }
