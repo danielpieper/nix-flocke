@@ -33,7 +33,6 @@
         "jellyfin/metadata"
       ];
     };
-    syncthing.enable = true;
     arr.enable = true;
     avahi.enable = true;
     evitts.enable = false;
