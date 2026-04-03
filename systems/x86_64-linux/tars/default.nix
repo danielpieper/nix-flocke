@@ -52,7 +52,7 @@
         loadModels = [ ];
       };
       llama-cpp = {
-        enable = true;
+        enable = false;
         acceleration = "vulkan";
         modelsPreset = {
           "qwen3.5-27b-opus" = {
