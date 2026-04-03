@@ -13,10 +13,10 @@ in
   options.programs.flocke.opencode = with types; {
     enable = mkBoolOpt false "Enable opencode CLI coding agent";
 
-    ollamaHost = mkOption {
+    baseUrl = mkOption {
       type = types.str;
-      default = "http://localhost:11434";
-      description = "Ollama server endpoint";
+      default = "http://localhost:11434/v1";
+      description = "OpenAI-compatible API endpoint";
     };
   };
 
@@ -25,8 +25,16 @@ in
       pkgs.llm-agents.opencode
     ];
 
+    sops.secrets.openrouter_api_key = { };
+
     home.sessionVariables = {
-      OLLAMA_HOST = cfg.ollamaHost;
+      OPENAI_BASE_URL = cfg.baseUrl;
     };
+
+    programs.fish.interactiveShellInit = ''
+      if test -f ${config.sops.secrets.openrouter_api_key.path}
+        set -gx OPENROUTER_API_KEY (cat ${config.sops.secrets.openrouter_api_key.path})
+      end
+    '';
   };
 }

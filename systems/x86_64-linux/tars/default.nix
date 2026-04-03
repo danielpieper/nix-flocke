@@ -42,13 +42,27 @@
         "Downloads"
         "node_modules"
         "var/lib/private/ollama"
+        "var/cache/llama-cpp"
         "*.img"
         "*.img.zst"
       ];
       ollama = {
-        enable = true;
+        enable = false;
         acceleration = "rocm";
         loadModels = [ ];
+      };
+      llama-cpp = {
+        enable = true;
+        acceleration = "vulkan";
+        modelsPreset = {
+          "qwen3.5-27b-opus" = {
+            hf-repo = "Jackrong/Qwen3.5-27B-Claude-4.6-Opus-Reasoning-Distilled-GGUF";
+            hf-file = "Qwen3.5-27B.Q8_0.gguf";
+            alias = "qwen3.5-27b-opus";
+            fit = "on";
+            jinja = "on";
+          };
+        };
       };
     };
 
