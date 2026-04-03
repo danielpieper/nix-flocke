@@ -14,7 +14,10 @@ in
 
   programs = {
     flocke = {
-      opencode.enable = true;
+      opencode = {
+        enable = true;
+        model = "qwen3.5-27b-opus";
+      };
       claude-code.enable = true;
     };
     git.includes = [

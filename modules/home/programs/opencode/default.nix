@@ -18,6 +18,12 @@ in
       default = "http://localhost:11434/v1";
       description = "OpenAI-compatible API endpoint";
     };
+
+    model = mkOption {
+      type = types.nullOr types.str;
+      default = null;
+      description = "Model to use (e.g. qwen3.5-27b-opus)";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -29,6 +35,32 @@ in
 
     home.sessionVariables = {
       OPENAI_BASE_URL = cfg.baseUrl;
+    };
+
+    xdg.configFile."opencode/opencode.json" = {
+      force = true;
+      text = builtins.toJSON (
+        {
+          "$schema" = "https://opencode.ai/config.json";
+          provider = {
+            llama-cpp = {
+              name = "llama-cpp";
+              npm = "@ai-sdk/openai-compatible";
+              options = {
+                baseURL = cfg.baseUrl;
+              };
+              models = lib.optionalAttrs (cfg.model != null) {
+                "${cfg.model}" = {
+                  name = "${cfg.model} (local)";
+                };
+              };
+            };
+          };
+        }
+        // lib.optionalAttrs (cfg.model != null) {
+          model = "llama-cpp/${cfg.model}";
+        }
+      );
     };
 
     programs.fish.interactiveShellInit = ''
