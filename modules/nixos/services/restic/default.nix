@@ -38,12 +38,10 @@ in
   };
 
   config = mkIf cfg.enable {
-    users.groups.restic-backup = { };
-
     sops.secrets = {
-      restic_repository_password.group = "restic-backup";
-      restic_repository.group = "restic-backup";
-      restic_environment.group = "restic-backup";
+      restic_repository_password = { };
+      restic_repository = { };
+      restic_environment = { };
     };
 
     environment = {
@@ -61,12 +59,13 @@ in
       Match host *.your-storagebox.de
         Port 23
         IdentityFile /persist/etc/ssh/restic_ed25519
+        IdentityFile /persist/etc/ssh/restic-exporter_ed25519
         StrictHostKeyChecking accept-new
     '';
 
     systemd.tmpfiles.rules = [
       "d /persist/var/backup 0750 root root -"
-      "z /persist/etc/ssh/restic_ed25519 0640 root restic-backup -"
+      "z /persist/etc/ssh/restic_ed25519 0600 root root -"
     ];
 
     services.restic.backups.default = {

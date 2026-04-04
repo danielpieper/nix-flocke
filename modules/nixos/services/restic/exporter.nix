@@ -17,9 +17,27 @@ in
     users.users.restic-exporter = {
       isSystemUser = true;
       group = "restic-exporter";
-      extraGroups = [ "restic-backup" ];
     };
     users.groups.restic-exporter = { };
+
+    sops.secrets = {
+      restic_repository_password = {
+        group = "restic-exporter";
+        mode = "0440";
+      };
+      restic_repository = {
+        group = "restic-exporter";
+        mode = "0440";
+      };
+      restic_environment = {
+        group = "restic-exporter";
+        mode = "0440";
+      };
+    };
+
+    systemd.tmpfiles.rules = [
+      "z /persist/etc/ssh/restic-exporter_ed25519 0600 restic-exporter restic-exporter -"
+    ];
 
     services.prometheus = {
       exporters.restic = {
