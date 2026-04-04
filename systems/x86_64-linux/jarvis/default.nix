@@ -65,6 +65,9 @@ in
       enable_exporter = true;
       excludes = [
         "var/lib/containers"
+        "var/lib/postgresql"
+        "var/lib/immich/thumbs"
+        "var/lib/immich/encoded-video"
       ];
       backupPrepareCommand = ''
         ${pkgs.sudo}/bin/sudo -u postgres ${pkgs.postgresql}/bin/pg_dumpall \

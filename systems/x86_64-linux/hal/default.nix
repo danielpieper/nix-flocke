@@ -31,6 +31,7 @@
         "var/lib/containers"
         "var/lib/arr"
         "jellyfin/metadata"
+        "jellyfin/transcodes"
       ];
     };
     arr.enable = true;

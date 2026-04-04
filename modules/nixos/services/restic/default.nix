@@ -78,6 +78,8 @@ in
       extraBackupArgs = [
         "--no-scan"
         "--exclude-caches"
+        "--exclude=.cache"
+        "--exclude=var/cache"
       ]
       ++ map (e: "--exclude=${e}") cfg.excludes;
       pruneOpts = [

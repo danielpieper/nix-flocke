@@ -19,6 +19,7 @@ in
         model = "qwen3.5-27b-opus";
       };
       claude-code.enable = true;
+      lm-studio.enable = true;
     };
     git.includes = [
       {
