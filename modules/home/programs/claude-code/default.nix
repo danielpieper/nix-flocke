@@ -19,6 +19,77 @@ in
   };
 
   config = mkIf cfg.enable {
+    home.file.".claude/statusline-command.sh" = {
+      executable = true;
+      text = ''
+        #!/usr/bin/env bash
+        # Claude Code status line: dir | model | git branch | ctx bar | rate bar
+
+        input=$(cat)
+
+        # Current working directory (abbreviated with ~)
+        raw_dir=$(echo "$input" | jq -r '.workspace.current_dir // empty')
+        dir="''${raw_dir/#$HOME/\~}"
+
+        # Model display name
+        model=$(echo "$input" | jq -r '.model.display_name // empty')
+
+        # Git branch (skip optional locks to avoid blocking)
+        branch=$(GIT_OPTIONAL_LOCKS=0 git -C "$(echo "$input" | jq -r '.workspace.current_dir // empty')" symbolic-ref --short HEAD 2>/dev/null)
+
+        # Context usage (pre-calculated percentage)
+        used_pct=$(echo "$input" | jq -r '.context_window.used_percentage // empty')
+
+        # Token counts from last API call
+        input_tokens=$(echo "$input" | jq -r '.context_window.current_usage.input_tokens // empty')
+        output_tokens=$(echo "$input" | jq -r '.context_window.current_usage.output_tokens // empty')
+
+        # Rate limit (5-hour window)
+        rate_pct=$(echo "$input" | jq -r '.rate_limits.five_hour.used_percentage // empty')
+
+        # Progress bar helper: make_bar <percentage> [width=10]
+        make_bar() {
+            local pct=$1 width=''${2:-10}
+            local filled=$(printf "%.0f" "$(echo "$pct * $width / 100" | bc -l)")
+            local empty=$((width - filled))
+            [ "$filled" -gt 0 ] && printf '%0.s█' $(seq 1 "$filled")
+            [ "$empty"  -gt 0 ] && printf '%0.s░' $(seq 1 "$empty")
+        }
+
+        # Build status parts
+        parts=()
+
+        [ -n "$dir" ]    && parts+=("$dir")
+        [ -n "$model" ]  && parts+=("$model")
+        [ -n "$branch" ] && parts+=("$branch")
+
+        # Context window bar
+        if [ -n "$used_pct" ]; then
+            bar=$(make_bar "$used_pct")
+            entry="ctx $bar $(printf '%.0f' "$used_pct")%"
+            if [ -n "$input_tokens" ] && [ -n "$output_tokens" ]; then
+                total=$((input_tokens + output_tokens))
+                if [ "$total" -ge 1000 ]; then
+                    tok=$(printf '%dk' "$((total / 1000))")
+                else
+                    tok=$(printf '%d' "$total")
+                fi
+                entry="$entry · ''${tok}"
+            fi
+            parts+=("$entry")
+        fi
+
+        # Rate limit bar (5-hour window)
+        if [ -n "$rate_pct" ]; then
+            bar=$(make_bar "$rate_pct")
+            parts+=("rate $bar $(printf '%.0f' "$rate_pct")%")
+        fi
+
+        # Join with separator and print
+        printf '%s' "$(IFS=' | '; echo "''${parts[*]}")"
+      '';
+    };
+
     home.packages =
       let
         claude-sandboxed = mkSandbox {

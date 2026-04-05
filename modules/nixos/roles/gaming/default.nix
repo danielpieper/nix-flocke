@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }:
 with lib;
@@ -20,6 +21,9 @@ in
       steam = {
         enable = true;
         extest.enable = true; # XInput translation via uinput
+        package = pkgs.steam.override {
+          extraProfile = "unset NIXOS_OZONE_WL;";
+        };
         remotePlay.openFirewall = false; # Open ports in the firewall for Steam Remote Play
         dedicatedServer.openFirewall = false; # Open ports in the firewall for Source Dedicated Server
         localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
