@@ -43,7 +43,7 @@ Snowfall Lib auto-discovers modules, packages, and systems based on directory st
 
 | Host   | Arch    | Role    | Notes                                                                              |
 | ------ | ------- | ------- | ---------------------------------------------------------------------------------- |
-| tars   | x86_64  | Desktop | Tuxedo laptop, Niri compositor                                                     |
+| tars   | x86_64  | Desktop | Tuxedo InfinityBook Pro 15 Gen10, Niri compositor                                  |
 | hal    | x86_64  | Server  | Homelab (Jellyfin, Navidrome, Syncthing, arr, NFS, avahi)                          |
 | jarvis | x86_64  | Server  | Hetzner VPS — Caddy, Authelia, Grafana, Forgejo, TeslaMate, Immich, Paperless, etc |
 | ava    | aarch64 | Server  | Hetzner ARM VPS — public website only                                              |

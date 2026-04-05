@@ -28,9 +28,8 @@ in
             {
               criteria = "eDP-1";
               position = "0,0";
-              mode = "1920x1200@300.00000";
-              # mode = "2560x1600@240.00Hz";
-              # scale = 1.25;
+              mode = "2560x1600@240.00Hz";
+              scale = 1.25;
             }
           ];
         }
@@ -41,14 +40,12 @@ in
               criteria = "LG Electronics 27GL850 007NTYT59834";
               position = "0,0";
               mode = "2560x1440@144Hz";
-              # mode = "2560x1440@120.00Hz";
             }
             {
               criteria = "eDP-1";
               position = "2560,0";
-              mode = "1920x1200@300.00000";
-              # mode = "2560x1600@240.00Hz";
-              # scale = 1.25;
+              mode = "2560x1600@240.00Hz";
+              scale = 1.25;
             }
           ];
         }
@@ -59,14 +56,12 @@ in
               criteria = "LG Electronics LG HDR WQHD+ 201NTHMLG281";
               position = "0,0";
               mode = "3840x1600@75Hz";
-              # scale = 1.0;
             }
             {
               criteria = "eDP-1";
               position = "3840,0";
-              mode = "1920x1200@300.00000";
-              # mode = "2560x1600@240.00Hz";
-              # scale = 1.25;
+              mode = "2560x1600@240.00Hz";
+              scale = 1.25;
             }
           ];
         }
@@ -77,20 +72,17 @@ in
               criteria = "LG Electronics LG HDR WQHD+ 201NTHMLG281";
               position = "0,0";
               mode = "3840x1600@75Hz";
-              # scale = 1.0;
             }
             {
               criteria = "LG Electronics 27GL850 007NTYT59834";
               position = "3840,0";
               mode = "2560x1440@144Hz";
-              # mode = "2560x1440@59.95Hz";
             }
             {
               criteria = "eDP-1";
               position = "6400,0";
-              mode = "1920x1200@300.00000";
-              # mode = "2560x1600@240.00Hz";
-              # scale = 1.25;
+              mode = "2560x1600@240.00Hz";
+              scale = 1.25;
             }
           ];
         }
@@ -100,7 +92,8 @@ in
             {
               criteria = "eDP-1";
               position = "0,991";
-              mode = "1920x1200@300.00000";
+              mode = "2560x1600@240.00Hz";
+              scale = 1.25;
             }
             {
               # criteria = "DP-1";

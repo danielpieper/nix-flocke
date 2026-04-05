@@ -27,6 +27,8 @@ in
           "flakes"
         ];
         warn-dirty = false;
+        max-jobs = "auto";
+        cores = 0; # use all cores per build job
         system-features = [
           "kvm"
           "big-parallel"

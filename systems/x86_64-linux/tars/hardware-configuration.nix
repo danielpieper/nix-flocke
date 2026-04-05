@@ -25,7 +25,7 @@
     kernelParams = [
       "acpi.ec_no_wakeup=1" # Fixes ACPI wakeup issues
       "amdgpu.dcdebugmask=0x10" # Fixes Wayland slowdowns/freezes
-      "amdgpu.gttsize=45056" # 44 GB GTT — fits 36 GB model + 128k KV cache, leaves ~18 GB for OS
+      "ttm.pages_limit=11534336" # 44 GB GTT (in 4K pages) — fits 36 GB model + 128k KV cache, leaves ~18 GB for OS
       "i8042.reset" # Fixes Keyboard issues: https://www.tuxedocomputers.com/en/Infos/Help-Support/Help-for-my-device/TUXEDO-Book-XC-series/TUXEDO-Book-XC17-Gen11/Keyboard-not-working-properly.tuxedo
       "i8042.nomux"
       "i8042.nopnp"

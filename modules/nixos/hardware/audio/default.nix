@@ -28,12 +28,12 @@ in
           "10-sbc-xq" = {
             "bluez5.enable-sbc-xq" = true;
           };
-          "92-low-latency" = {
+          "92-clock" = {
             context.properties = {
               "default.clock.rate" = 48000;
-              "default.clock.quantum" = 512;
-              "default.clock.min-quantum" = 256;
-              "default.clock.max-quantum" = 1024;
+              "default.clock.quantum" = 1024;
+              "default.clock.min-quantum" = 512;
+              "default.clock.max-quantum" = 2048;
             };
           };
         };
