@@ -47,7 +47,7 @@
         "*.img.zst"
       ];
       ollama = {
-        enable = false;
+        enable = true;
         acceleration = "rocm";
         loadModels = [ ];
       };

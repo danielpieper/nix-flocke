@@ -16,10 +16,17 @@ in
     flocke = {
       opencode = {
         enable = true;
-        model = "qwen3.5-27b-opus";
+        provider = "ollama";
+        baseUrl = "http://localhost:11434/v1";
+        model = "qwen3.5:35b-a3b-q8-coding";
+        extraModels = [
+          "qwen3.5:35b-a3b-q5km-coding"
+          "qwen3.5:35b-a3b-q8-general"
+          "qwen3.5:35b-a3b-q5km-general"
+        ];
       };
       claude-code.enable = true;
-      lm-studio.enable = true;
+      lm-studio.enable = false;
     };
     git.includes = [
       {

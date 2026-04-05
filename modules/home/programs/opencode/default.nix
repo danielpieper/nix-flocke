@@ -13,6 +13,16 @@ in
   options.programs.flocke.opencode = with types; {
     enable = mkBoolOpt false "Enable opencode CLI coding agent";
 
+    provider = mkOption {
+      type = types.enum [
+        "llama-cpp"
+        "lmstudio"
+        "ollama"
+      ];
+      default = "llama-cpp";
+      description = "Which local provider to use";
+    };
+
     baseUrl = mkOption {
       type = types.str;
       default = "http://localhost:11434/v1";
@@ -22,7 +32,13 @@ in
     model = mkOption {
       type = types.nullOr types.str;
       default = null;
-      description = "Model to use (e.g. qwen3.5-27b-opus)";
+      description = "Default model to use";
+    };
+
+    extraModels = mkOption {
+      type = types.listOf types.str;
+      default = [ ];
+      description = "Additional models to make available";
     };
   };
 
@@ -37,31 +53,45 @@ in
       OPENAI_BASE_URL = cfg.baseUrl;
     };
 
-    xdg.configFile."opencode/opencode.json" = {
-      force = true;
-      text = builtins.toJSON (
-        {
-          "$schema" = "https://opencode.ai/config.json";
-          provider = {
-            llama-cpp = {
-              name = "llama-cpp";
-              npm = "@ai-sdk/openai-compatible";
-              options = {
-                baseURL = cfg.baseUrl;
-              };
-              models = lib.optionalAttrs (cfg.model != null) {
-                "${cfg.model}" = {
-                  name = "${cfg.model} (local)";
-                };
-              };
-            };
+    xdg.configFile."opencode/opencode.json" =
+      let
+        providerConfigs = {
+          llama-cpp = {
+            name = "llama-cpp";
+            npm = "@ai-sdk/openai-compatible";
+            options.baseURL = cfg.baseUrl;
           };
-        }
-        // lib.optionalAttrs (cfg.model != null) {
-          model = "llama-cpp/${cfg.model}";
-        }
-      );
-    };
+          lmstudio = {
+            name = "LM Studio (local)";
+            npm = "@ai-sdk/openai-compatible";
+            options.baseURL = cfg.baseUrl;
+          };
+          ollama = {
+            name = "Ollama (local)";
+            npm = "@ai-sdk/openai-compatible";
+            options.baseURL = cfg.baseUrl;
+          };
+        };
+        allModels = (lib.optional (cfg.model != null) cfg.model) ++ cfg.extraModels;
+        modelsAttrs = lib.listToAttrs (map (m: lib.nameValuePair m { name = m; }) allModels);
+        providerConfig =
+          providerConfigs.${cfg.provider}
+          // lib.optionalAttrs (allModels != [ ]) {
+            models = modelsAttrs;
+          };
+      in
+      {
+        force = true;
+        text = builtins.toJSON (
+          {
+            "$schema" = "https://opencode.ai/config.json";
+            provider.${cfg.provider} = providerConfig;
+          }
+          // lib.optionalAttrs (cfg.model != null) {
+            model = "${cfg.provider}/${cfg.model}";
+          }
+        );
+      };
 
     programs.fish.interactiveShellInit = ''
       if test -f ${config.sops.secrets.openrouter_api_key.path}
