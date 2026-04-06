@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   pkgs,
   lib,
   ...
@@ -56,10 +57,13 @@ in
     };
 
     programs.ssh.extraConfig = ''
-      Match host *.your-storagebox.de
+      Host ${inputs.nix-secrets.storageBox.restic.host}
         Port 23
+        User ${inputs.nix-secrets.storageBox.restic.username}
         IdentityFile /persist/etc/ssh/restic_ed25519
         IdentityFile /persist/etc/ssh/restic-exporter_ed25519
+        IdentityFile ~/.ssh/id_ed25519
+        IdentitiesOnly yes
         StrictHostKeyChecking accept-new
     '';
 

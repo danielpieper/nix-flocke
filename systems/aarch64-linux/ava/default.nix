@@ -36,7 +36,6 @@
     fail2ban.enable = true;
     flocke = {
       restic.enable = true;
-      monitoring.enable_exporter = true;
       caddy.enable = true;
       website.enable = true;
     };
