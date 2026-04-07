@@ -18,7 +18,7 @@ in
     programs = {
       mangohud = {
         enable = true;
-        enableSessionWide = true;
+        enableSessionWide = false;
         settings = {
           cpu_load_change = true;
           preset = 2;

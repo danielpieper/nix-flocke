@@ -32,16 +32,6 @@ in
       gtk3
       glib
       sqlite
-      stdenv.cc.cc.lib
-      openal
-      alsa-lib
-      udev
-      fontconfig
-      freetype
-      zlib
-      libdrm
-      libcap
-      dbus
     ];
   };
 }
