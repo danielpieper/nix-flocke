@@ -44,7 +44,11 @@ in
     };
     paperless = {
       enable = true;
-      dataDir = "${sbMount}/paperless";
+      # dataDir stays local (default /var/lib/paperless) — Whoosh index and
+      # locks on CIFS cause granian workers to wedge mid-upload.
+      # Only the bulk document storage lives on the Storage Box.
+      mediaDir = "${sbMount}/paperless/media";
+      consumptionDir = "${sbMount}/paperless/consume";
     };
     filebrowser = {
       enable = true;
