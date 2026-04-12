@@ -7,7 +7,9 @@
 with lib;
 let
   cfg = config.services.flocke.authelia;
-  domain = inputs.nix-secrets.homelabDomain;
+  inherit (inputs.nix-secrets) homelabDomain tailscaleDomain;
+  sunshineHost = inputs.nix-secrets.networking.localHosts.sunshine;
+  domain = homelabDomain;
 in
 {
   options.services.flocke.authelia = {
@@ -192,7 +194,10 @@ in
           extraConfig = ''
             header Content-Type text/html
             respond `${
-              builtins.replaceStrings [ "__DOMAIN__" ] [ domain ] (builtins.readFile ./dashboard.html)
+              builtins.replaceStrings
+                [ "__DOMAIN__" "__TAILSCALE_DOMAIN__" "__SUNSHINE_HOST__" ]
+                [ domain tailscaleDomain sunshineHost ]
+                (builtins.readFile ./dashboard.html)
             }`
           '';
         };

@@ -83,7 +83,7 @@ in
     "vlc-schweinerei" = {
       type = "Application";
       name = "Schweinerei";
-      exec = "vlc --fullscreen rtsp://cam.gate-typhon.ts.net:8080/h264.sdp";
+      exec = "vlc --fullscreen rtsp://cam.${inputs.nix-secrets.tailscaleDomain}:8080/h264.sdp";
       comment = "Guinea pig camera stream";
       icon = "vlc";
       categories = [

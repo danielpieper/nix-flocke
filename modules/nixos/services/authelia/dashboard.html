@@ -112,6 +112,27 @@
     line-height: 1.35;
   }
 
+  .card-links {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.2rem;
+  }
+
+  .card-links a {
+    font-size: 0.7rem;
+    color: #89b4fa;
+    text-decoration: none;
+    padding: 0.2rem 0.5rem;
+    border: 1px solid #313244;
+    border-radius: 6px;
+    transition: border-color 0.18s ease, color 0.18s ease;
+  }
+
+  .card-links a:hover {
+    border-color: #89b4fa;
+    color: #b4d0fb;
+  }
+
   @media (max-width: 480px) {
     body { padding: 2rem 1rem; }
     header h1 { font-size: 1.4rem; }
@@ -211,6 +232,51 @@
         </svg>
         <span class="card-name">Forgejo</span>
         <span class="card-desc">Git-Hosting</span>
+      </a>
+
+      <div class="card">
+        <svg class="card-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Schwein: camera / webcam -->
+          <rect x="6" y="12" width="28" height="18" rx="3" fill="#a6e3a1" opacity="0.15"/>
+          <rect x="6" y="12" width="28" height="18" rx="3" stroke="#a6e3a1" stroke-width="2" fill="none"/>
+          <circle cx="20" cy="21" r="6" stroke="#a6e3a1" stroke-width="2" fill="none"/>
+          <circle cx="20" cy="21" r="2.5" fill="#a6e3a1"/>
+          <rect x="27" y="14" width="4" height="3" rx="1" fill="#a6e3a1" opacity="0.6"/>
+          <circle cx="10" cy="15" r="1.2" fill="#f38ba8"/>
+        </svg>
+        <span class="card-name">Schwein</span>
+        <span class="card-desc">Meerschweinchen-Webcam</span>
+        <div class="card-links">
+          <a target="_blank" href="http://cam.__TAILSCALE_DOMAIN__:8080">Web</a>
+          <a href="rtsp://cam.__TAILSCALE_DOMAIN__:8080/h264.sdp">VLC</a>
+        </div>
+      </div>
+
+      <a class="card" target="_blank" href="https://homeassistant.__TAILSCALE_DOMAIN__">
+        <svg class="card-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Home Assistant: house outline -->
+          <path d="M20 6 L4 20 L8 20 L8 33 L17 33 L17 25 L23 25 L23 33 L32 33 L32 20 L36 20 Z" fill="#18bcf2" opacity="0.15"/>
+          <path d="M20 6 L4 20 L8 20 L8 33 L17 33 L17 25 L23 25 L23 33 L32 33 L32 20 L36 20 Z" stroke="#18bcf2" stroke-width="2" stroke-linejoin="round" fill="none"/>
+        </svg>
+        <span class="card-name">Home Assistant</span>
+        <span class="card-desc">Smart-Home-Steuerung</span>
+      </a>
+
+      <a class="card" target="_blank" href="https://__SUNSHINE_HOST__:47990">
+        <svg class="card-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Sunshine: sun with rays -->
+          <circle cx="20" cy="20" r="7" fill="#f9e2af"/>
+          <line x1="20" y1="5" x2="20" y2="9" stroke="#f9e2af" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="20" y1="31" x2="20" y2="35" stroke="#f9e2af" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="5" y1="20" x2="9" y2="20" stroke="#f9e2af" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="31" y1="20" x2="35" y2="20" stroke="#f9e2af" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="9.4" y1="9.4" x2="12.2" y2="12.2" stroke="#f9e2af" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="27.8" y1="27.8" x2="30.6" y2="30.6" stroke="#f9e2af" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="9.4" y1="30.6" x2="12.2" y2="27.8" stroke="#f9e2af" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="27.8" y1="12.2" x2="30.6" y2="9.4" stroke="#f9e2af" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <span class="card-name">Sunshine</span>
+        <span class="card-desc">Game-Streaming</span>
       </a>
 
     </div>
