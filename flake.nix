@@ -83,9 +83,10 @@
       flake = false;
     };
 
+    # TODO: unpin once upstream fixes stale npmDepsHash and migrates to erlang_27+
+    # https://github.com/teslamate-org/teslamate — last known working rev; uses own nixpkgs (needs erlang_26)
     teslamate = {
-      url = "github:teslamate-org/teslamate";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:teslamate-org/teslamate/00ab26adb998d919c552c2968341b22bf36c4819";
     };
 
     lazyvim = {

@@ -22,13 +22,13 @@ in
         };
       };
       config = {
-        systemd.services.jellyseerr = {
+        systemd.services.seerr = {
           after = [ "tailscaled.service" ];
           # issues with bind mount
           serviceConfig.DynamicUser = lib.mkForce false;
         };
         services = {
-          jellyseerr.enable = true;
+          seerr.enable = true;
           caddy.virtualHosts."jellyseerr.${inputs.nix-secrets.homelabDomain}".extraConfig = ''
             import arr-tls
             reverse_proxy localhost:5055

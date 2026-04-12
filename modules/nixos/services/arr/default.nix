@@ -12,7 +12,7 @@ in
 {
   imports = [
     ./bazarr.nix
-    ./jellyseerr.nix
+    ./seerr.nix
     ./prowlarr.nix
     ./radarr.nix
     ./sonarr.nix
@@ -88,6 +88,26 @@ in
               80
               443
             ];
+            extraCommands = ''
+              # Kill switch: block non-Tailscale outbound traffic on eth0.
+              # Tailscale needs UDP (WireGuard) and TCP 443 (DERP relays) to
+              # bootstrap; once connected, all app traffic routes via tailscale0.
+              iptables -N kill-switch 2>/dev/null || iptables -F kill-switch
+              iptables -A kill-switch -o lo -j ACCEPT
+              iptables -A kill-switch -o tailscale0 -j ACCEPT
+              iptables -A kill-switch -o eth0 -p udp --dport 41641 -j ACCEPT
+              iptables -A kill-switch -o eth0 -p tcp --dport 443 -j ACCEPT
+              iptables -A kill-switch -o eth0 -p udp --dport 53 -j ACCEPT
+              iptables -A kill-switch -o eth0 -p tcp --dport 53 -j ACCEPT
+              iptables -A kill-switch -o eth0 -m state --state ESTABLISHED,RELATED -j ACCEPT
+              iptables -A kill-switch -o eth0 -j REJECT
+              iptables -C OUTPUT -j kill-switch 2>/dev/null || iptables -A OUTPUT -j kill-switch
+            '';
+            extraStopCommands = ''
+              iptables -D OUTPUT -j kill-switch 2>/dev/null || true
+              iptables -F kill-switch 2>/dev/null || true
+              iptables -X kill-switch 2>/dev/null || true
+            '';
           };
           nameservers = inputs.nix-secrets.networking.fallbackNameservers;
         };
@@ -99,7 +119,7 @@ in
             enable = true;
             disableTaildrop = true;
             extraSetFlags = [
-              "--exit-node-allow-lan-access"
+              "--exit-node=${inputs.nix-secrets.networking.tailscale.exitNode}"
             ];
           };
           caddy = {
