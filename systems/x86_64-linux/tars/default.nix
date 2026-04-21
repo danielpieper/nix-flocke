@@ -66,6 +66,10 @@
       };
     };
 
+    udev.extraRules = ''
+      ACTION=="add", SUBSYSTEM=="usb", ATTR{power/wakeup}="disabled"
+    '';
+
     # Let TUXEDO Control Center handle CPU frequencies
     power-profiles-daemon.enable = false;
   };

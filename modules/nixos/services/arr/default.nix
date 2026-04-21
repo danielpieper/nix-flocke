@@ -95,7 +95,7 @@ in
               iptables -N kill-switch 2>/dev/null || iptables -F kill-switch
               iptables -A kill-switch -o lo -j ACCEPT
               iptables -A kill-switch -o tailscale0 -j ACCEPT
-              iptables -A kill-switch -o eth0 -p udp --dport 41641 -j ACCEPT
+              iptables -A kill-switch -o eth0 -p udp --sport 41641 -j ACCEPT
               iptables -A kill-switch -o eth0 -p tcp --dport 443 -j ACCEPT
               iptables -A kill-switch -o eth0 -p udp --dport 53 -j ACCEPT
               iptables -A kill-switch -o eth0 -p tcp --dport 53 -j ACCEPT

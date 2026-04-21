@@ -29,7 +29,7 @@ in
 
       caddy.virtualHosts."navidrome.${inputs.nix-secrets.homelabDomain}" = {
         useACMEHost = inputs.nix-secrets.homelabDomain;
-        extraConfig = "reverse_proxy localhost:4533";
+        extraConfig = "reverse_proxy 127.0.0.1:4533";
       };
     };
   };
