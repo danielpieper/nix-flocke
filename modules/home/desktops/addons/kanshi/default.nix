@@ -87,6 +87,22 @@ in
           ];
         }
         {
+          profile.name = "docked-home-tv";
+          profile.outputs = [
+            {
+              criteria = "eDP-1";
+              position = "0,80";
+              mode = "2560x1600@240.00Hz";
+              scale = 1.25;
+            }
+            {
+              criteria = "LG Electronics LG TV SSCR2 0x01010101";
+              position = "2048,0";
+              mode = "2560x1440@119.998Hz";
+            }
+          ];
+        }
+        {
           profile.name = "ventx-docked";
           profile.outputs = [
             {

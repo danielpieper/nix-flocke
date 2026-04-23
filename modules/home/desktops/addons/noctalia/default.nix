@@ -24,7 +24,7 @@ in
   config = mkIf cfg.enable {
     programs.noctalia-shell = {
       enable = true;
-      systemd.enable = true;
+      systemd.enable = false;
       settings = {
         settingsVersion = 57;
         appLauncher = {

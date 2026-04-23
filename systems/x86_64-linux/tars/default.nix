@@ -24,7 +24,6 @@
   environment.systemPackages = with pkgs; [
     moonlight-qt
     vlc
-    picard
     obsidian
   ];
 
