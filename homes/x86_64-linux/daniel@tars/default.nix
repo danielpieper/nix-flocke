@@ -1,5 +1,6 @@
 {
   inputs,
+  pkgs,
   ...
 }:
 let
@@ -18,11 +19,9 @@ in
         enable = true;
         provider = "ollama";
         baseUrl = "http://localhost:11434/v1";
-        model = "qwen3.5:35b-a3b-q8-coding";
+        model = "qwen3.6:35b-a3b-q8-coding";
         extraModels = [
-          "qwen3.5:35b-a3b-q5km-coding"
-          "qwen3.5:35b-a3b-q8-general"
-          "qwen3.5:35b-a3b-q5km-general"
+          "qwen3.6:27b-q8-coding"
         ];
       };
       claude-code.enable = true;
@@ -102,6 +101,7 @@ in
     };
     packages = [
       inputs.ventx.packages.x86_64-linux.oidc2aws
+      pkgs.pi-coding-agent
     ];
     stateVersion = "23.11";
   };
