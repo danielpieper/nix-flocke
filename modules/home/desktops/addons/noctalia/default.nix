@@ -264,7 +264,7 @@ in
               { id = "Notifications"; }
               { id = "PowerProfile"; }
               { id = "KeepAwake"; }
-              { id = "NightLight"; }
+              { id = "DarkMode"; }
             ];
           };
           cards = [

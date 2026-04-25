@@ -1,5 +1,6 @@
 {
   inputs,
+  lib,
   pkgs,
   ...
 }:
@@ -39,6 +40,14 @@ in
   };
   desktops = {
     niri.enable = true;
+  };
+
+  # Noctalia toggles its in-memory dark mode and fires this hook with
+  # $1 = "true" | "false". flocke-theme-switch flips between the base (dark)
+  # system and the `light` specialisation via switch-to-configuration.
+  programs.noctalia-shell.settings.hooks = {
+    enabled = lib.mkForce true;
+    darkModeChange = lib.mkForce "sudo -n flocke-theme-switch \"$1\"";
   };
 
   cli = {

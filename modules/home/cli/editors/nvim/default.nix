@@ -25,7 +25,11 @@ in
       vimAlias = true;
       vimdiffAlias = true;
       defaultEditor = true;
-      # ensure init.lua is not written by home manager:
+      # Auto-injected provider settings (vim.g.python3_host_prog, ...) make
+      # initLua non-empty even with no user config, which makes HM try to write
+      # init.lua and conflict with the sops-managed file below. sideloadInitLua
+      # passes that content via wrapper --cmd args instead of touching the file.
+      sideloadInitLua = true;
       plugins = lib.mkForce [ ];
       extraPackages = with pkgs; [
         # for mason:

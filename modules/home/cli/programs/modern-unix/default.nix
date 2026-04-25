@@ -33,6 +33,7 @@ in
       grex
       hyperfine
       hexyl
+      jq
       jqp
       jnv
       ouch

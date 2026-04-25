@@ -43,6 +43,7 @@ in
       # mtpfs
       jmtpfs
       brightnessctl
+      glib # provides gsettings
       xdg-utils
       wl-clipboard
       clipse

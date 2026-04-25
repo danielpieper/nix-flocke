@@ -47,10 +47,11 @@ in
       icons = {
         enable = true;
         package = pkgs.catppuccin-papirus-folders.override {
-          flavor = "mocha";
+          flavor = if cfg.dark then "mocha" else "latte";
           accent = "lavender";
         };
         dark = "Papirus-Dark";
+        light = "Papirus-Light";
       };
 
       image = pkgs.flocke.wallpapers.earth;
