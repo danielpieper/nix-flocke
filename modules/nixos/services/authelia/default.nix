@@ -157,6 +157,19 @@ in
               ];
               token_endpoint_auth_method = "client_secret_post";
             }
+            {
+              client_id = "trilium";
+              client_name = "Trilium";
+              client_secret = inputs.nix-secrets.authelia.oidcClients.trilium.clientSecretHash;
+              authorization_policy = "one_factor";
+              redirect_uris = [ "https://trilium.${domain}/callback" ];
+              scopes = [
+                "openid"
+                "profile"
+                "email"
+              ];
+              token_endpoint_auth_method = "client_secret_basic";
+            }
           ];
 
           notifier.smtp = {

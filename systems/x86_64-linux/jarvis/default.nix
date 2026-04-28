@@ -82,6 +82,7 @@ in
       enable = true;
       runMigrations = true;
     };
+    trilium.enable = true;
   };
 
   # Ensure services wait for the Storage Box mount
