@@ -17,7 +17,7 @@ in
   programs = {
     flocke = {
       opencode = {
-        enable = true;
+        enable = false;
         provider = "ollama";
         baseUrl = "http://localhost:11434/v1";
         model = "qwen3.6:35b-a3b-q8-coding";
@@ -110,7 +110,7 @@ in
     };
     packages = [
       inputs.ventx.packages.x86_64-linux.oidc2aws
-      pkgs.pi-coding-agent
+      pkgs.llm-agents.pi
     ];
     stateVersion = "23.11";
   };
