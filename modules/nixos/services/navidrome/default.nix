@@ -24,6 +24,8 @@ in
           MusicFolder = "/mnt/nas/11tb/media/music/library";
           BaseUrl = "";
           PlaylistsPath = "playlists";
+          Scanner.WatcherEnabled = false;
+          Scanner.Schedule = "@daily";
         };
       };
 
