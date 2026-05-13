@@ -18,7 +18,7 @@ in
     programs.flocke.zed-edit.enable = false;
     cli = {
       editors.nvim.enable = true;
-      multiplexers.zellij.enable = true;
+      multiplexers.zellij.enable = false;
 
       programs = {
         atuin.enable = true;
