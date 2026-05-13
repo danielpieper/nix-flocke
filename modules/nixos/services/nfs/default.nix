@@ -33,8 +33,8 @@ in
           "nounix"
           "noauto"
           "x-systemd.automount"
-          "x-systemd.idle-timeout=60"
-          "x-systemd.mount-timeout=5s"
+          "x-systemd.idle-timeout=1h"
+          "x-systemd.mount-timeout=30s"
         ];
       };
     };
