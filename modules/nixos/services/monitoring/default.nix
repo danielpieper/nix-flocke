@@ -31,9 +31,8 @@ in
         enable = true;
         settings = {
           ntfyUrl = "http://localhost:2586/alerts";
+          bauthUser = "admin";
           bauthPass = builtins.toFile "grafana-to-ntfy-pass" inputs.nix-secrets.grafanaToNtfy.password;
-          # Workaround: nixpkgs module has type bug (path with null default)
-          ntfyBAuthPass = builtins.toFile "empty" "";
         };
       };
 
