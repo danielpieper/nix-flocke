@@ -18,7 +18,14 @@ in
     gaming.enable = true;
   };
 
+  gtk.gtk4.theme = null;
+
   programs = {
+    neovim = {
+      withRuby = false;
+      withPython3 = false;
+    };
+    firefox.configPath = "${config.xdg.configHome}/mozilla/firefox";
     flocke = {
       opencode = {
         enable = false;
