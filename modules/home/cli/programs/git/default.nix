@@ -25,15 +25,21 @@ in
     signingKey =
       mkOpt str "/home/${inputs.nix-secrets.user.name}/.ssh/id_ed25519.pub"
         "The public key used for signing commits";
-    allowedSigners = mkOpt str "" "List of public keys to verify commit signatures locally";
+    allowedSigners =
+      mkOpt (listOf (attrsOf str))
+        [
+          {
+            inherit (inputs.nix-secrets.user) email;
+            key = inputs.nix-secrets.user.pubKey;
+          }
+        ]
+        "Signers trusted to verify git commit signatures locally. Each entry needs an `email` (principal) and `key` (full public key string, e.g. 'ssh-ed25519 AAAA... comment').";
   };
 
   config = mkIf cfg.enable {
     home = {
-      file.".ssh/allowed_signers".text = ''
-        * /home/${inputs.nix-secrets.user.name}/.ssh/id_ed25519.pub
-        * ${cfg.allowedSigners}
-      '';
+      file.".ssh/allowed_signers".text =
+        concatMapStringsSep "\n" (s: ''${s.email} namespaces="git" ${s.key}'') cfg.allowedSigners + "\n";
       packages = with pkgs; [
         git-extras
         git-absorb

@@ -53,7 +53,16 @@ in
   cli = {
     programs = {
       git = {
-        allowedSigners = publicKeyWork;
+        allowedSigners = [
+          {
+            inherit (inputs.nix-secrets.user) email;
+            key = inputs.nix-secrets.user.pubKey;
+          }
+          {
+            inherit (inputs.nix-secrets.work) email;
+            key = inputs.nix-secrets.work.pubKey;
+          }
+        ];
         urlRewrites = {
           "ssh://forgejo@forgejo.${inputs.nix-secrets.homelabDomain}" =
             "https://forgejo.${inputs.nix-secrets.homelabDomain}";
