@@ -1,4 +1,5 @@
 {
+  config,
   inputs,
   lib,
   pkgs,
@@ -6,6 +7,9 @@
 }:
 let
   publicKeyWork = "/home/${inputs.nix-secrets.user.name}/.ssh/${inputs.nix-secrets.work.publicKeyFilename}";
+  vlcSchweinerei = pkgs.writeShellScriptBin "vlc-schweinerei" ''
+    exec ${pkgs.vlc}/bin/vlc --fullscreen "$(cat ${config.sops.secrets.schweinerei_rtsp_url.path})"
+  '';
 in
 {
   roles = {
@@ -96,11 +100,13 @@ in
     inherit (inputs.nix-secrets.user) name;
   };
 
+  sops.secrets.schweinerei_rtsp_url = { };
+
   xdg.desktopEntries = {
     "vlc-schweinerei" = {
       type = "Application";
       name = "Schweinerei";
-      exec = "vlc --fullscreen rtsp://cam.${inputs.nix-secrets.tailscaleDomain}:8080/h264.sdp";
+      exec = "${vlcSchweinerei}/bin/vlc-schweinerei";
       comment = "Guinea pig camera stream";
       icon = "vlc";
       categories = [
