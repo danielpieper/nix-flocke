@@ -22,7 +22,8 @@ in
       with pkgs;
       [
         efibootmgr
-        efitools
+        # TODO: remove comment when build succeeds
+        # efitools
         efivar
         fwupd
       ]
