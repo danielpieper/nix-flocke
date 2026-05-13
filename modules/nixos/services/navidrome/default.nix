@@ -14,8 +14,12 @@ in
   };
 
   config = mkIf cfg.enable {
-    systemd.services.navidrome.unitConfig = {
-      RequiresMountsFor = "/mnt/nas/11tb";
+    systemd.services.navidrome = {
+      unitConfig.RequiresMountsFor = "/mnt/nas/11tb";
+      serviceConfig = {
+        Restart = "on-failure";
+        RestartSec = 10;
+      };
     };
     services = {
       navidrome = {
@@ -24,8 +28,6 @@ in
           MusicFolder = "/mnt/nas/11tb/media/music/library";
           BaseUrl = "";
           PlaylistsPath = "playlists";
-          Scanner.WatcherEnabled = false;
-          Scanner.Schedule = "@daily";
         };
       };
 
