@@ -1,6 +1,5 @@
 {
   config,
-  pkgs,
   lib,
   ...
 }:
@@ -27,10 +26,10 @@ in
       flocke.geforcenow.enable = true;
     };
 
-    home.packages = with pkgs; [
-      lutris
-      bottles
-      # chiaki
-    ];
+    # home.packages = with pkgs; [
+    #   lutris
+    #   bottles
+    #   chiaki
+    # ];
   };
 }
