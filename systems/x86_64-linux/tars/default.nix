@@ -86,6 +86,12 @@ in
     flocke = {
       syncthing.enable = true;
       nfs.enable = true;
+      usbip-export = {
+        enable = true;
+        # Valve Steam Controller Puck (2026 wireless dongle).
+        deviceVidPid = "28de:1304";
+        inherit user;
+      };
       restic.excludes = [
         ".local/cache"
         ".local/share/Steam"
@@ -101,7 +107,7 @@ in
         "*.img.zst"
       ];
       ollama = {
-        enable = true;
+        enable = false;
         acceleration = "rocm";
         loadModels = [ ];
       };
