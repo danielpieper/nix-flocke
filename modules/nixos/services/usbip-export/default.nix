@@ -67,10 +67,37 @@ let
     runtimeInputs = [ pkgs.moonlight-qt ];
     text = ''
       cleanup() {
+        if [ -n "''${WATCHER_PID:-}" ]; then
+          kill "$WATCHER_PID" 2>/dev/null || true
+        fi
         sudo -n flocke-usbip-unbind || true
       }
       trap cleanup EXIT INT TERM
-      sudo -n flocke-usbip-bind
+
+      # Initial bind (no-op if device isn't present yet).
+      sudo -n flocke-usbip-bind || true
+
+      # The Steam Controller puck re-enumerates the first time you power the
+      # controller on against an already-active puck (it transits bootloader
+      # mode and renegotiates). usbip-host bindings are per device instance
+      # and don't survive that, so without this watcher the re-enumerated
+      # puck binds to hid-generic and the usbip path is lost mid-session.
+      # The local pre-check avoids spamming sudo/journal when nothing changes.
+      (
+        while sleep 5; do
+          ${findBusid}
+          [ -n "$busid" ] || continue
+          drv=""
+          if [ -L "/sys/bus/usb/devices/$busid/driver" ]; then
+            drv=$(basename "$(readlink "/sys/bus/usb/devices/$busid/driver")")
+          fi
+          if [ "$drv" != "usbip-host" ]; then
+            sudo -n flocke-usbip-bind >/dev/null 2>&1 || true
+          fi
+        done
+      ) &
+      WATCHER_PID=$!
+
       moonlight "$@"
     '';
   };
