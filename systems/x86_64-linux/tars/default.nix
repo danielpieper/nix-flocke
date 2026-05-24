@@ -147,8 +147,6 @@ in
   };
 
   hardware = {
-    xone.enable = true;
-
     # https://fnune.com/hardware/2025/07/20/nixos-on-a-tuxedo-infinitybook-pro-14-gen9-amd/
     tuxedo-control-center.enable = true;
   };
