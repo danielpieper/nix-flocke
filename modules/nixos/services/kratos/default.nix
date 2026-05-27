@@ -104,7 +104,12 @@ in
 
           serviceConfig = {
             EnvironmentFile = mkIf (cfg.environmentFile != null) cfg.environmentFile;
-            ExecStart = "${kratos} -c ${kratosConfigFile} serve";
+            # --watch-courier runs the mail dispatcher in-process. Without it
+            # Kratos only queues messages (courier_messages.status = queued) and
+            # never sends them — verification/recovery emails silently never
+            # arrive. Fine for a single-node deploy; an HA setup would instead
+            # run a dedicated `kratos courier watch`.
+            ExecStart = "${kratos} -c ${kratosConfigFile} serve --watch-courier";
             Restart = "always";
             User = "kratos";
             Group = "kratos";
