@@ -90,12 +90,25 @@ in
       };
 
       # Cloudflare terminates TLS at the edge and cloudflared dials out, so the
-      # origin is plain HTTP. One block matches the apex, the auth host and every
-      # tenant subdomain; the app dispatches by Host. `http://` keeps Caddy from
-      # attempting ACME and outranks the global http:// redirect in the caddy module.
-      caddy.virtualHosts."http://${projectzDomain}, http://*.${projectzDomain}".extraConfig = ''
-        reverse_proxy localhost:8083
-      '';
+      # origin is plain HTTP. The apex + tenant subdomains all go to the app,
+      # which dispatches by Host. `http://` keeps Caddy from attempting ACME and
+      # outranks the global http:// redirect in the caddy module.
+      caddy.virtualHosts = {
+        # The auth host is shared between the app (login/registration UI, served
+        # by GET routes) and Kratos's public API. Kratos's browser endpoints —
+        # the form submits behind ui.action, logout, webauthn — must reach Kratos
+        # directly on :4433; otherwise the native form POST falls through to the
+        # app, whose text/event-stream guard 406s every non-SSE mutation. An
+        # exact host beats the wildcard below, so this block owns auth.${domain}.
+        "http://auth.${projectzDomain}".extraConfig = ''
+          @kratos path /self-service/* /.well-known/ory/* /schemas/* /sessions/*
+          reverse_proxy @kratos localhost:4433
+          reverse_proxy localhost:8083
+        '';
+        "http://${projectzDomain}, http://*.${projectzDomain}".extraConfig = ''
+          reverse_proxy localhost:8083
+        '';
+      };
     };
 
     # the app must come up after its dependencies (the upstream module already
