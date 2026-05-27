@@ -109,8 +109,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    projecty = {
-      url = "git+ssh://forgejo@forgejo.naseschief.de/daniel/projecty.git";
+    projectz = {
+      url = "git+ssh://forgejo@forgejo.naseschief.de/daniel/projectz.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 

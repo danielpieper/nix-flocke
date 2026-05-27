@@ -39,6 +39,8 @@
       monitoring.enable_exporter = true;
       caddy.enable = true;
       website.enable = true;
+      projectz.enable = true;
+      cloudflared.enable = true;
     };
   };
 

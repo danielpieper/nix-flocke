@@ -10,8 +10,9 @@ let
   yamlFormat = pkgs.formats.yaml { };
   jsonFormat = pkgs.formats.json { };
   identitySchemaFile = jsonFormat.generate "identity.schema.json" cfg.identitySchema;
+  # dsn comes from cfg.settings (default "memory"); prod consumers set a
+  # postgres dsn, which also enables the migrate preStart below.
   kratosConfig = cfg.settings // {
-    dsn = "memory";
     identity = {
       default_schema_id = "default";
       schemas = [
@@ -110,6 +111,9 @@ in
           };
         }
         (mkIf (cfg.settings.dsn != "memory") {
+          # postgres-backed: wait for the DB (and its ensured role/database) and run migrations.
+          after = [ "postgresql.service" ];
+          requires = [ "postgresql.service" ];
           preStart = "${kratos} -c ${kratosConfigFile} migrate sql -y ${cfg.settings.dsn}";
         })
       ];
