@@ -101,6 +101,20 @@ in
             local.path = "/var/lib/tempo/blocks";
           };
           compactor.compaction.block_retention = "336h";
+          # TraceQL metrics (rate()/count_over_time(), the Explore metrics view)
+          # are served by the metrics-generator; without it queries fail with
+          # "empty ring". local-blocks is the processor that powers them — no
+          # Prometheus remote_write needed (that's only for span-metrics /
+          # service-graphs, which we can add later).
+          metrics_generator = {
+            processor.local_blocks.flush_to_storage = true;
+            storage = {
+              path = "/var/lib/tempo/generator/wal";
+              remote_write = [ ];
+            };
+            traces_storage.path = "/var/lib/tempo/generator/traces";
+          };
+          overrides.defaults.metrics_generator.processors = [ "local-blocks" ];
         };
       };
 
