@@ -21,6 +21,10 @@ in
   };
 
   config = mkIf cfg.enable {
+    # Tempo's OTLP receiver is reachable only over the tailnet (where ava's
+    # otelcol lives) — never on the public interface.
+    networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 4317 ];
+
     sops.secrets = {
       grafana_secret_key.owner = "grafana";
       grafana-oidc-client-secret.owner = "grafana";
@@ -80,6 +84,24 @@ in
             ];
           }
         ];
+      };
+
+      # Trace backend. ava's otelcol forwards OTLP here over the tailnet
+      # (firewall below restricts 4317 to tailscale0). Grafana reads it on
+      # localhost:3200 via the Tempo datasource. Local-FS storage, 14d retention.
+      tempo = {
+        enable = true;
+        settings = {
+          server.http_listen_address = "127.0.0.1";
+          server.http_listen_port = 3200;
+          distributor.receivers.otlp.protocols.grpc.endpoint = "0.0.0.0:4317";
+          storage.trace = {
+            backend = "local";
+            wal.path = "/var/lib/tempo/wal";
+            local.path = "/var/lib/tempo/blocks";
+          };
+          compactor.compaction.block_retention = "336h";
+        };
       };
 
       postgresql = {
@@ -203,6 +225,14 @@ in
                   type = "prometheus";
                   access = "proxy";
                   url = "http://127.0.0.1:${toString config.services.prometheus.port}";
+                  editable = false;
+                }
+                {
+                  name = "Tempo";
+                  type = "tempo";
+                  uid = "tempo";
+                  access = "proxy";
+                  url = "http://127.0.0.1:${toString config.services.tempo.settings.server.http_listen_port}";
                   editable = false;
                 }
               ];
