@@ -85,6 +85,18 @@ in
               level = "info";
               format = "text";
             };
+            # OTLP traces → local otelcol on ava (HTTP 4318) → Tempo on jarvis.
+            # Keto spans every permission check; 1.0 sampling is fine pre-launch.
+            tracing = {
+              provider = "otel";
+              service_name = "Ory Keto";
+              deployment_environment = "production";
+              providers.otlp = {
+                server_url = "127.0.0.1:4318";
+                insecure = true;
+                sampling.sampling_ratio = 1.0;
+              };
+            };
           };
         };
       };

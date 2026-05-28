@@ -40,6 +40,7 @@
       caddy.enable = true;
       website.enable = true;
       projectz.enable = true;
+      otelcol.enable = true;
       cloudflared.enable = true;
     };
   };
