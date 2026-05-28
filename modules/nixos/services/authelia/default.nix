@@ -71,12 +71,20 @@ in
 
           access_control.default_policy = "one_factor";
 
+          # Authelia 4.39 stopped putting custom claims (groups) in the ID token
+          # by default; a claims policy is required. Grafana maps its role from
+          # the groups claim in the ID token (its access token is opaque), so
+          # without this it sees no groups and everyone lands on the Viewer
+          # fallback in role_attribute_path.
+          identity_providers.oidc.claims_policies.with_groups.id_token = [ "groups" ];
+
           identity_providers.oidc.clients = [
             {
               client_id = "grafana";
               client_name = "Grafana";
               client_secret = inputs.nix-secrets.authelia.oidcClients.grafana.clientSecretHash;
               authorization_policy = "one_factor";
+              claims_policy = "with_groups";
               redirect_uris = [ "https://grafana.${domain}/login/generic_oauth" ];
               scopes = [
                 "openid"
