@@ -43,6 +43,9 @@ in
       homeManagerIntegration.autoImport = false;
       homeManagerIntegration.followSystem = false;
       targets.nixvim.enable = false;
+      # kmscon isn't used on any host; newer Stylix writes the removed
+      # services.kmscon.extraConfig/fonts options, which break eval.
+      targets.kmscon.enable = false;
 
       image = pkgs.flocke.wallpapers.earth;
 

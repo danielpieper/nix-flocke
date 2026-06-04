@@ -18,8 +18,6 @@ in
     gaming.enable = true;
   };
 
-  gtk.gtk4.theme = null;
-
   programs = {
     neovim = {
       withRuby = false;
@@ -130,10 +128,9 @@ in
       GOPRIVATE = inputs.nix-secrets.go.goprivate;
       # OP_SERVICE_ACCOUNT_TOKEN = "$(cat ${config.sops.secrets.opServiceAccountToken.path})";
     };
-    packages = [
-      inputs.ventx.packages.x86_64-linux.oidc2aws
-      pkgs.llm-agents.pi
-    ];
+    # packages = [
+    #   inputs.ventx.packages.x86_64-linux.oidc2aws
+    # ];
     stateVersion = "23.11";
   };
 }
