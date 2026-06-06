@@ -20,6 +20,15 @@ in
         the tailnet. Plaintext is fine — the tailnet is WireGuard-encrypted.
       '';
     };
+
+    lokiEndpoint = mkOption {
+      type = types.str;
+      default = "jarvis:3100";
+      description = ''
+        host:port of Loki's OTLP HTTP ingest on jarvis, reached over the
+        tailnet. The collector posts logs to http://<this>/otlp/v1/logs.
+      '';
+    };
   };
 
   config = mkIf cfg.enable {
@@ -35,14 +44,28 @@ in
           http.endpoint = "127.0.0.1:4318";
         };
         processors.batch = { };
-        exporters.otlp = {
-          endpoint = cfg.exporterEndpoint;
-          tls.insecure = true;
+        exporters = {
+          # Traces → Tempo (OTLP gRPC).
+          otlp = {
+            endpoint = cfg.exporterEndpoint;
+            tls.insecure = true;
+          };
+          # Logs → Loki's native OTLP ingest (OTLP HTTP). otlphttp appends
+          # /v1/logs, so the base must include Loki's /otlp prefix.
+          "otlphttp/loki" = {
+            logs_endpoint = "http://${cfg.lokiEndpoint}/otlp/v1/logs";
+            tls.insecure = true;
+          };
         };
         service.pipelines.traces = {
           receivers = [ "otlp" ];
           processors = [ "batch" ];
           exporters = [ "otlp" ];
+        };
+        service.pipelines.logs = {
+          receivers = [ "otlp" ];
+          processors = [ "batch" ];
+          exporters = [ "otlphttp/loki" ];
         };
       };
     };

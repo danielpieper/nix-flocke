@@ -21,9 +21,13 @@ in
   };
 
   config = mkIf cfg.enable {
-    # Tempo's OTLP receiver is reachable only over the tailnet (where ava's
-    # otelcol lives) — never on the public interface.
-    networking.firewall.interfaces.tailscale0.allowedTCPPorts = [ 4317 ];
+    # Tempo's OTLP receiver (4317) and Loki's OTLP HTTP ingest (3100) are
+    # reachable only over the tailnet (where ava's otelcol lives) — never on the
+    # public interface.
+    networking.firewall.interfaces.tailscale0.allowedTCPPorts = [
+      4317
+      3100
+    ];
 
     sops.secrets = {
       grafana_secret_key.owner = "grafana";
@@ -115,6 +119,55 @@ in
             traces_storage.path = "/var/lib/tempo/generator/traces";
           };
           overrides.defaults.metrics_generator.processors = [ "local-blocks" ];
+        };
+      };
+
+      # Log backend. ava's otelcol forwards OTLP logs here over the tailnet
+      # (firewall above restricts 3100 to tailscale0). Grafana reads it on
+      # localhost:3100 via the Loki datasource. Single-binary, filesystem
+      # storage, 14d retention to match Tempo. OTLP ingest (/otlp/v1/logs) is
+      # built in; structured-metadata must be enabled for OTLP resource attrs.
+      loki = {
+        enable = true;
+        configuration = {
+          auth_enabled = false;
+          server = {
+            http_listen_address = "0.0.0.0";
+            http_listen_port = 3100;
+            grpc_listen_port = 9096;
+          };
+          common = {
+            instance_addr = "127.0.0.1";
+            path_prefix = "/var/lib/loki";
+            storage.filesystem = {
+              chunks_directory = "/var/lib/loki/chunks";
+              rules_directory = "/var/lib/loki/rules";
+            };
+            replication_factor = 1;
+            ring.kvstore.store = "inmemory";
+          };
+          schema_config.configs = [
+            {
+              from = "2024-01-01";
+              store = "tsdb";
+              object_store = "filesystem";
+              schema = "v13";
+              index = {
+                prefix = "index_";
+                period = "24h";
+              };
+            }
+          ];
+          limits_config = {
+            retention_period = "336h";
+            allow_structured_metadata = true;
+            volume_enabled = true;
+          };
+          compactor = {
+            working_directory = "/var/lib/loki/compactor";
+            retention_enabled = true;
+            delete_request_store = "filesystem";
+          };
         };
       };
 
@@ -247,6 +300,14 @@ in
                   uid = "tempo";
                   access = "proxy";
                   url = "http://127.0.0.1:${toString config.services.tempo.settings.server.http_listen_port}";
+                  editable = false;
+                }
+                {
+                  name = "Loki";
+                  type = "loki";
+                  uid = "loki";
+                  access = "proxy";
+                  url = "http://127.0.0.1:${toString config.services.loki.configuration.server.http_listen_port}";
                   editable = false;
                 }
               ];

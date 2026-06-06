@@ -123,21 +123,33 @@ in
       };
     };
 
-    # the app must come up after its dependencies (the upstream module already
-    # orders after postgresql + kratos; add keto and make the deps hard requirements).
-    systemd.services.projectz = {
-      after = [ "keto.service" ];
-      requires = [
-        "postgresql.service"
-        "kratos.service"
-        "keto.service"
+    systemd = {
+      # the app must come up after its dependencies (the upstream module already
+      # orders after postgresql + kratos + the migrate oneshot; add keto and make
+      # the deps hard requirements). The workers process needs the same set — it
+      # runs the Keto reconciler and AuthSync against kratos.
+      services.projectz = {
+        after = [ "keto.service" ];
+        requires = [
+          "postgresql.service"
+          "kratos.service"
+          "keto.service"
+        ];
+      };
+      services.projectz-workers = {
+        after = [ "keto.service" ];
+        requires = [
+          "postgresql.service"
+          "kratos.service"
+          "keto.service"
+        ];
+      };
+
+      # document storage (fs backend, PROJECTZ_STORAGE_FS_ROOT); persisted via /var/lib.
+      tmpfiles.rules = [
+        "d /var/lib/projectz 0750 projectz projectz -"
+        "d /var/lib/projectz/storage 0750 projectz projectz -"
       ];
     };
-
-    # document storage (fs backend, PROJECTZ_STORAGE_FS_ROOT); persisted via /var/lib.
-    systemd.tmpfiles.rules = [
-      "d /var/lib/projectz 0750 projectz projectz -"
-      "d /var/lib/projectz/storage 0750 projectz projectz -"
-    ];
   };
 }
