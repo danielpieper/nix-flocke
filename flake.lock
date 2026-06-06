@@ -2455,11 +2455,11 @@
         "pre-commit-hooks": "pre-commit-hooks_3"
       },
       "locked": {
-        "lastModified": 1780739331,
-        "narHash": "sha256-i/6UdKbY/HHXsX/qm7irUzioIoDNAWPcNAygDcyWXng=",
+        "lastModified": 1780741303,
+        "narHash": "sha256-Da72T5n3rj8nGJCTLfah9Vcw14CXdHSFwBXYQfTdpdQ=",
         "ref": "refs/heads/main",
-        "rev": "fd9daabf65e02a9d29e5f991cb68781efe004508",
-        "revCount": 456,
+        "rev": "3a26fbd80f5ce6002bd21701d89f9c12842638f1",
+        "revCount": 459,
         "type": "git",
         "url": "ssh://forgejo@forgejo.naseschief.de/daniel/projectz.git"
       },
