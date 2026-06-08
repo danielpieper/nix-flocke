@@ -124,25 +124,55 @@ in
     };
 
     systemd = {
-      # the app must come up after its dependencies (the upstream module already
-      # orders after postgresql + kratos + the migrate oneshot; add keto and make
-      # the deps hard requirements). The workers process needs the same set — it
-      # runs the Keto reconciler and AuthSync against kratos.
-      services.projectz = {
-        after = [ "keto.service" ];
-        requires = [
-          "postgresql.service"
-          "kratos.service"
-          "keto.service"
-        ];
-      };
-      services.projectz-workers = {
-        after = [ "keto.service" ];
-        requires = [
-          "postgresql.service"
-          "kratos.service"
-          "keto.service"
-        ];
+      services = {
+        # the app must come up after its dependencies (the upstream module already
+        # orders after postgresql + kratos + the migrate oneshot; add keto and make
+        # the deps hard requirements). The workers process needs the same set — it
+        # runs the Keto reconciler and AuthSync against kratos.
+        projectz = {
+          after = [ "keto.service" ];
+          requires = [
+            "postgresql.service"
+            "kratos.service"
+            "keto.service"
+          ];
+        };
+        projectz-workers = {
+          after = [ "keto.service" ];
+          requires = [
+            "postgresql.service"
+            "kratos.service"
+            "keto.service"
+          ];
+        };
+
+        # Manual demo seed (large ~5k-employee company). No wantedBy → it never
+        # runs on activation; trigger it deliberately with `systemctl start
+        # projectz-seed`. Reuses the app's environment (incl. the Kratos key from
+        # nix-secrets) + the sops EnvironmentFile + package, so seeding has the
+        # exact config the running app does. Idempotent; suppresses seed emails.
+        projectz-seed = {
+          description = "ProjectZ demo seed — large company (manual one-shot)";
+          after = [
+            "postgresql.service"
+            "kratos.service"
+            "keto.service"
+            "projectz-migrate.service"
+          ];
+          requires = [
+            "postgresql.service"
+            "kratos.service"
+            "keto.service"
+          ];
+          environment = config.services.projectz.environment;
+          serviceConfig = {
+            Type = "oneshot";
+            User = "projectz";
+            Group = "projectz";
+            EnvironmentFile = config.services.projectz.environmentFile;
+            ExecStart = "${config.services.projectz.package}/bin/projectz seed --size large";
+          };
+        };
       };
 
       # document storage (fs backend, PROJECTZ_STORAGE_FS_ROOT); persisted via /var/lib.
