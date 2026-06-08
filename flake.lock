@@ -1468,11 +1468,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1780723669,
-        "narHash": "sha256-1GqON+bTWMrA8tTfZ194tk5Fi8R4YWjBUaScB1mTkmA=",
+        "lastModified": 1780898277,
+        "narHash": "sha256-0VC7EFQNn+W6m8HvywnZ3/j99//VTtaRw+AEj9Y8YgM=",
         "owner": "numtide",
         "repo": "llm-agents.nix",
-        "rev": "7aa0fff2d50775e8b79040824385eaf250a250a9",
+        "rev": "6a40b159e43386df7db43ffcb0435e1af25e3d8d",
         "type": "github"
       },
       "original": {
@@ -2455,11 +2455,11 @@
         "pre-commit-hooks": "pre-commit-hooks_3"
       },
       "locked": {
-        "lastModified": 1780745690,
-        "narHash": "sha256-Nnatwy0MD5T/PoRQnhIslqc/tLfW+MxHCf4Z5vumbGQ=",
+        "lastModified": 1780953099,
+        "narHash": "sha256-NfMhhHlM3XTC+AGxu6XQ07r4J6hz4IkETN7n+kctWro=",
         "ref": "refs/heads/main",
-        "rev": "dc787625734a1be37ebc7f9b0188a539b0402941",
-        "revCount": 462,
+        "rev": "6d3a82170c92c16a60dbfeb204df0e9fccbb5baf",
+        "revCount": 486,
         "type": "git",
         "url": "ssh://forgejo@forgejo.naseschief.de/daniel/projectz.git"
       },
