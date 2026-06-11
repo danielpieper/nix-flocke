@@ -36,7 +36,10 @@ in
       enable-dump = false;
     };
     miniflux.enable = true;
-    mealie.enable = true;
+    mealie = {
+      enable = true;
+      bring.enable = true;
+    };
     storagebox.enable = true;
     immich = {
       enable = true;
