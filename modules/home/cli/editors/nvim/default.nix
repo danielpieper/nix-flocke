@@ -45,6 +45,7 @@ in
         statix
         nixd
 
+        lazygit
         # marksman
 
         # previous config without mason:
