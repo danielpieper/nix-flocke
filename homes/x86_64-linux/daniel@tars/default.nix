@@ -1,7 +1,6 @@
 {
   config,
   inputs,
-  lib,
   pkgs,
   ...
 }:
@@ -51,12 +50,12 @@ in
     niri.enable = true;
   };
 
-  # Noctalia toggles its in-memory dark mode and fires this hook with
-  # $1 = "true" | "false". flocke-theme-switch flips between the base (dark)
-  # system and the `light` specialisation via switch-to-configuration.
-  programs.noctalia-shell.settings.hooks = {
-    enabled = lib.mkForce true;
-    darkModeChange = lib.mkForce "sudo -n flocke-theme-switch \"$1\"";
+  # Noctalia fires this hook when its theme mode changes, exporting
+  # $NOCTALIA_THEME_MODE = "dark" | "light" | "auto". flocke-theme-switch flips
+  # between the base (dark) system and the `light` specialisation via
+  # switch-to-configuration.
+  programs.noctalia.settings.hooks = {
+    theme_mode_changed = "sudo -n flocke-theme-switch \"$NOCTALIA_THEME_MODE\"";
   };
 
   cli = {

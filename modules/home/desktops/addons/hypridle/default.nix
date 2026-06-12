@@ -8,6 +8,17 @@ with lib;
 with lib.flocke;
 let
   cfg = config.desktops.addons.hypridle;
+  # noctalia v5's `status` IPC no longer exposes lockScreenActive, so gate the
+  # 60s suspend on logind's LockedHint (set by `loginctl lock-session`) instead.
+  suspendIfLocked = pkgs.writeShellScript "suspend-if-locked" ''
+    sid="''${XDG_SESSION_ID:-}"
+    if [ -z "$sid" ]; then
+      sid=$(${pkgs.systemd}/bin/loginctl list-sessions --no-legend \
+        | ${pkgs.gawk}/bin/awk -v u="$USER" '$3 == u { print $1; exit }')
+    fi
+    locked=$(${pkgs.systemd}/bin/loginctl show-session "$sid" -p LockedHint --value 2>/dev/null)
+    [ "$locked" = "yes" ] && exec ${pkgs.systemd}/bin/systemctl suspend
+  '';
 in
 {
   options.desktops.addons.hypridle = with types; {
@@ -19,15 +30,15 @@ in
       enable = true;
       settings = {
         general = {
-          before_sleep_cmd = "loginctl lock-session; noctalia-shell ipc call media pause";
-          lock_cmd = "noctalia-shell ipc call lockScreen lock";
+          before_sleep_cmd = "loginctl lock-session; noctalia msg media stop";
+          lock_cmd = "noctalia msg session lock";
         };
 
         listener = [
           {
             timeout = 60;
-            # jq -e, das mit Exit-Code 1 beendet wenn der Wert false ist, und Exit-Code 0 bei true.
-            on-timeout = "noctalia-shell ipc call state all | jq -e '.state.lockScreenActive' > /dev/null && systemctl suspend";
+            # Suspend only if the session is already locked (LockedHint=yes).
+            on-timeout = "${suspendIfLocked}";
           }
           {
             timeout = 5 * 60;

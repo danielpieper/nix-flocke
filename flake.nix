@@ -174,7 +174,6 @@
         nixos-dns.nixosModules.dns
         tuxedo-nixos.nixosModules.default
         niri.nixosModules.niri
-        inputs.noctalia.nixosModules.default
       ];
 
       systems.hosts = {

@@ -6,9 +6,10 @@
 }:
 let
   user = inputs.nix-secrets.user.name;
-  # Invoked by Noctalia's darkModeChange hook (which substitutes $1=true|false)
-  # via `sudo -n flocke-theme-switch $1`. Runs as root, switches the active
-  # specialisation in-place — no rebuild.
+  # Invoked by Noctalia's theme_mode_changed hook (which exports
+  # $NOCTALIA_THEME_MODE=dark|light) via `sudo -n flocke-theme-switch
+  # "$NOCTALIA_THEME_MODE"`. Runs as root, switches the active specialisation
+  # in-place — no rebuild.
   themeSwitch = pkgs.writeShellApplication {
     name = "flocke-theme-switch";
     text = ''
@@ -39,7 +40,7 @@ in
     styles.stylix.dark = lib.mkForce false;
     home-manager.users.${user} = {
       styles.stylix.dark = lib.mkForce false;
-      programs.noctalia-shell.settings.colorSchemes.darkMode = lib.mkForce false;
+      programs.noctalia.settings.theme.mode = lib.mkForce "light";
       # Stylix sets this to "default" (= "no preference") for light polarity,
       # which xdg-desktop-portal then exports as 0. Apps that "follow system"
       # see no preference and keep their existing (dark) state. Force the
@@ -62,6 +63,14 @@ in
       ];
     }
   ];
+
+  # Autologin straight into the uwsm-managed niri session, bypassing the
+  # regreet greeter (which currently fails to start). greetd still keeps
+  # regreet as default_session for subsequent logins after logout.
+  services.greetd.settings.initial_session = {
+    command = "${pkgs.uwsm}/bin/uwsm start -F -- /run/current-system/sw/bin/niri-session";
+    inherit user;
+  };
 
   system.impermanence.enable = true;
 

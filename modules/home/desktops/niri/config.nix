@@ -116,7 +116,7 @@ in
           }
           # { command = [ "${pkgs.networkmanagerapplet}/bin/nm-applet" ]; }
           # { command = [ "${pkgs.blueman}/bin/blueman-applet" ]; }
-          { command = [ "noctalia-shell" ]; }
+          { command = [ "noctalia" ]; }
         ]
         ++ (map (cmd: {
           command = [
