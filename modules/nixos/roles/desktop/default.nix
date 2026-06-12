@@ -1,6 +1,7 @@
 {
   lib,
   config,
+  pkgs,
   ...
 }:
 with lib;
@@ -51,6 +52,33 @@ in
     };
 
     programs.regreet.enable = true;
+    # regreet 0.4.0 added animated/video login backgrounds via GTK's GtkMediaFile,
+    # which needs GStreamer's playbin3 element. The upstream wrapper wires no
+    # GST_PLUGIN path, so the greeter dies with "playbin3 element not found".
+    # Re-wrap regreet to expose gst-plugins-{base,good} (base provides playbin3;
+    # good provides webm/vp8/vp9 demux+decode for video backgrounds).
+    programs.regreet.package = pkgs.symlinkJoin {
+      name = "regreet-gst";
+      inherit (pkgs.regreet) version;
+      paths = [ pkgs.regreet ];
+      nativeBuildInputs = [ pkgs.makeWrapper ];
+      postBuild = ''
+        wrapProgram $out/bin/regreet \
+          --prefix GST_PLUGIN_SYSTEM_PATH_1_0 : "${
+            lib.makeSearchPath "lib/gstreamer-1.0" (
+              with pkgs.gst_all_1;
+              [
+                gstreamer
+                gst-plugins-base
+                gst-plugins-good
+              ]
+            )
+          }"
+      '';
+      meta = pkgs.regreet.meta // {
+        mainProgram = "regreet";
+      };
+    };
 
     services = {
       irqbalance.enable = true;
