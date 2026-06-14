@@ -22,7 +22,6 @@ in
       chafa
       doggo
       duf
-      delta
       dust
       dysk
       entr

@@ -85,27 +85,10 @@ in
 
         core = {
           editor = lib.getExe pkgs.neovim;
-          pager = lib.getExe pkgs.delta;
         };
 
         color = {
           ui = true;
-        };
-
-        interactive = {
-          diffFilter = "delta --color-only";
-        };
-
-        delta = {
-          enable = true;
-          options = {
-            dark = "true";
-            side-by-side = "false";
-            line-numbers = "true";
-            navigate = "true";
-            syntax-theme = "catppuccin";
-            # syntax-theme = "Monokai Extended";
-          };
         };
 
         pull = {

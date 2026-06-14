@@ -14,8 +14,11 @@ in
   };
 
   config = mkIf cfg.enable {
-    home.packages = [ pkgs.devenv ];
-    programs.flocke.zed-edit.enable = false;
+    home.packages = with pkgs; [
+      devenv
+      lazygit
+    ];
+    programs.flocke.zed-edit.enable = true;
     cli = {
       editors.nvim.enable = true;
       multiplexers.zellij.enable = false;
@@ -26,6 +29,7 @@ in
         bottom.enable = true;
         db.enable = true;
         direnv.enable = true;
+        delta.enable = true;
         eza.enable = true;
         fzf.enable = true;
         git.enable = true;
