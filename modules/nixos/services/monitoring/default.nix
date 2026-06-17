@@ -104,21 +104,18 @@ in
             wal.path = "/var/lib/tempo/wal";
             local.path = "/var/lib/tempo/blocks";
           };
-          compactor.compaction.block_retention = "336h";
-          # TraceQL metrics (rate()/count_over_time(), the Explore metrics view)
-          # are served by the metrics-generator; without it queries fail with
-          # "empty ring". local-blocks is the processor that powers them — no
-          # Prometheus remote_write needed (that's only for span-metrics /
-          # service-graphs, which we can add later).
-          metrics_generator = {
-            processor.local_blocks.flush_to_storage = true;
-            storage = {
-              path = "/var/lib/tempo/generator/wal";
-              remote_write = [ ];
-            };
-            traces_storage.path = "/var/lib/tempo/generator/traces";
+          # Tempo 3.0: compactor + metrics-generator local-blocks are gone;
+          # block building and TraceQL metrics are handled by the live-store,
+          # and compaction keeps a 336h (14d) retention by default. The
+          # live-store, block-builder, and backend-scheduler default their
+          # working paths to /var/tempo (unwritable under StateDirectory), so
+          # pin them under /var/lib/tempo.
+          live_store = {
+            wal.path = "/var/lib/tempo/live-store/traces";
+            shutdown_marker_dir = "/var/lib/tempo/live-store/shutdown-marker";
           };
-          overrides.defaults.metrics_generator.processors = [ "local-blocks" ];
+          block_builder.wal.path = "/var/lib/tempo/block-builder/traces";
+          backend_scheduler.local_work_path = "/var/lib/tempo/scheduler";
         };
       };
 
