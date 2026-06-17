@@ -28,7 +28,7 @@ in
             {
               criteria = "eDP-1";
               position = "0,0";
-              mode = "2560x1600@240.00Hz";
+              mode = "2560x1600@60.00Hz"; # 60Hz: 240Hz blanks/flickers on amdgpu 7.1.0 (gfx1150 eDP)
               scale = 1.25;
             }
           ];
@@ -44,7 +44,7 @@ in
             {
               criteria = "eDP-1";
               position = "2560,0";
-              mode = "2560x1600@240.00Hz";
+              mode = "2560x1600@60.00Hz"; # 60Hz: 240Hz blanks/flickers on amdgpu 7.1.0 (gfx1150 eDP)
               scale = 1.25;
             }
           ];
@@ -60,7 +60,7 @@ in
             {
               criteria = "eDP-1";
               position = "3840,0";
-              mode = "2560x1600@240.00Hz";
+              mode = "2560x1600@60.00Hz"; # 60Hz: 240Hz blanks/flickers on amdgpu 7.1.0 (gfx1150 eDP)
               scale = 1.25;
             }
           ];
@@ -81,7 +81,7 @@ in
             {
               criteria = "eDP-1";
               position = "6400,0";
-              mode = "2560x1600@240.00Hz";
+              mode = "2560x1600@60.00Hz"; # 60Hz: 240Hz blanks/flickers on amdgpu 7.1.0 (gfx1150 eDP)
               scale = 1.25;
             }
           ];
@@ -92,7 +92,7 @@ in
             {
               criteria = "eDP-1";
               position = "0,80";
-              mode = "2560x1600@240.00Hz";
+              mode = "2560x1600@60.00Hz"; # 60Hz: 240Hz blanks/flickers on amdgpu 7.1.0 (gfx1150 eDP)
               scale = 1.25;
             }
             {
@@ -108,7 +108,7 @@ in
             {
               criteria = "eDP-1";
               position = "0,991";
-              mode = "2560x1600@240.00Hz";
+              mode = "2560x1600@60.00Hz"; # 60Hz: 240Hz blanks/flickers on amdgpu 7.1.0 (gfx1150 eDP)
               scale = 1.25;
             }
             {
