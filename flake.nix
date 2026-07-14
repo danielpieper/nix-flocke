@@ -189,7 +189,7 @@
       overlays = with inputs; [
         nixgl.overlay
         nur.overlays.default
-        llm-agents.overlays.default
+        llm-agents.overlays.shared-nixpkgs
       ];
 
       deploy = lib.mkDeploy { inherit (inputs) self; };

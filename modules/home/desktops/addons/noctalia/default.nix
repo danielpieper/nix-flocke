@@ -23,6 +23,13 @@ in
   # no GStreamer plumbing is required. Most settings hot-reload via inotify and
   # can also be tweaked at runtime in the Settings panel.
   config = mkIf cfg.enable {
+    # Stylix ships an auto-enabled noctalia target that forces
+    # theme.source = "custom" (a base16-derived palette) and drives theme.mode
+    # from polarity. We theme noctalia explicitly with the builtin Catppuccin
+    # palette and switch light/dark via the `light` specialisation, so disable
+    # the Stylix target to avoid conflicting definitions on theme.{source,mode}.
+    stylix.targets.noctalia.enable = false;
+
     programs.noctalia = {
       enable = true;
       # Niri spawns noctalia at startup (see niri/config.nix), so the user
