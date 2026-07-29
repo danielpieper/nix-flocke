@@ -39,9 +39,6 @@ in
     # TODO: move this to somewhere
     home.packages = with pkgs; [
       mplayer
-      # TODO: check if it builds
-      # mtpfs
-      jmtpfs
       brightnessctl
       glib # provides gsettings
       xdg-utils

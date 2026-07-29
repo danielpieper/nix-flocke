@@ -13,7 +13,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    services.blueman.enable = true;
     hardware = {
       bluetooth = {
         enable = true;
