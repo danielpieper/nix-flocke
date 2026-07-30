@@ -25,7 +25,12 @@ in
   };
 
   services.flocke = {
-    caddy.enable = true;
+    caddy = {
+      enable = true;
+      # Every vhost here resolves to jarvis' tailnet address; none are meant to
+      # be public.
+      tailnetOnly = true;
+    };
     postgresql.enable = true;
     authelia.enable = true;
     ntfy.enable = true;
