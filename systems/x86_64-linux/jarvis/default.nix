@@ -86,6 +86,7 @@ in
       runMigrations = true;
     };
     trilium.enable = true;
+    futo-notes.enable = true;
   };
 
   # Ensure services wait for the Storage Box mount

@@ -35,6 +35,7 @@ in
       };
       claude-code.enable = true;
       lm-studio.enable = false;
+      futo-notes.enable = true;
     };
     git.includes = [
       {
