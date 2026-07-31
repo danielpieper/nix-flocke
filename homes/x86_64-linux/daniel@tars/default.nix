@@ -79,9 +79,9 @@ in
       };
       ssh.extraHosts = {
         "${inputs.nix-secrets.work.sshExtraHost}" = {
-          hostname = inputs.nix-secrets.work.sshExtraHost;
-          identityFile = publicKeyWork;
-          identitiesOnly = true;
+          HostName = inputs.nix-secrets.work.sshExtraHost;
+          IdentityFile = publicKeyWork;
+          IdentitiesOnly = true;
         };
       };
     };

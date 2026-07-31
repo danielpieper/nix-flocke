@@ -17,15 +17,15 @@ in
       type = lib.types.attrsOf (
         lib.types.submodule {
           options = {
-            hostname = lib.mkOption {
+            HostName = lib.mkOption {
               type = lib.types.str;
               description = "The hostname or IP address of the SSH host.";
             };
-            identityFile = lib.mkOption {
+            IdentityFile = lib.mkOption {
               type = lib.types.str;
               description = "The path to the identity file for the SSH host.";
             };
-            identitiesOnly = lib.mkOption {
+            IdentitiesOnly = lib.mkOption {
               type = lib.types.bool;
               description = "Only allow the specified identities for the SSH host.";
             };
@@ -33,13 +33,16 @@ in
         }
       );
       default = { };
-      description = "A set of extra SSH hosts.";
+      description = ''
+        A set of extra SSH hosts. Keys are OpenSSH directive names, as
+        expected by `programs.ssh.settings`.
+      '';
       example = literalExample ''
         {
           "gitlab-personal" = {
-            hostname = "gitlab.com";
-            identityFile = "~/.ssh/id_ed25519_personal";
-            identitiesOnly = true;
+            HostName = "gitlab.com";
+            IdentityFile = "~/.ssh/id_ed25519_personal";
+            IdentitiesOnly = true;
           };
         }
       '';
@@ -50,7 +53,7 @@ in
     programs.ssh = {
       enable = true;
       enableDefaultConfig = false;
-      matchBlocks = inputs.nix-secrets.ssh.matchBlocks // cfg.extraHosts;
+      settings = inputs.nix-secrets.ssh.settings // cfg.extraHosts;
     };
   };
 }

@@ -33,9 +33,19 @@ in
       open-sans
     ];
 
+    # Stylix's cursor target defines `home.pointerCursor` without an explicit
+    # `enable`, which home-manager now warns about. Opt in ourselves.
+    home.pointerCursor.enable = true;
+
     # TODO: Possible to use stylix instead?
-    catppuccin.flavor = flavor;
-    catppuccin.fish.enable = true;
+    catppuccin = {
+      # `enable` is the global toggle; `autoEnable` would enroll every port.
+      # Keep enrolling opt-in — only the ports listed below are themed here.
+      enable = true;
+      autoEnable = false;
+      inherit flavor;
+      fish.enable = true;
+    };
 
     stylix = {
       enable = true;
