@@ -194,6 +194,27 @@
 
       deploy = lib.mkDeploy { inherit (inputs) self; };
 
+      # DNS outputs live outside `packages/` on purpose: they depend on
+      # `self.nixosConfigurations`, and Snowfall's package overlay evaluates
+      # every discovered package's `meta` strictly. Since nixpkgs' `linkFarm`
+      # derives `meta.position` from its entries, discovering them here would
+      # make any `pkgs.flocke.*` reference inside a host config recurse back
+      # into `nixosConfigurations`.
+      outputs-builder = channels: {
+        packages = {
+          # nix build .#octodns
+          octodns = import ./dns/octodns.nix {
+            inherit inputs;
+            pkgs = channels.nixpkgs;
+          };
+          # nix build .#zonefiles
+          zonefiles = import ./dns/zonefiles.nix {
+            inherit inputs;
+            pkgs = channels.nixpkgs;
+          };
+        };
+      };
+
       # nix eval .#dnsDebugHost
       dnsDebugHost = inputs.nixos-dns.utils.debug.host inputs.self.nixosConfigurations.hal;
 
