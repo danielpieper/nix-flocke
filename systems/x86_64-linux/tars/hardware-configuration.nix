@@ -24,7 +24,10 @@
     kernelModules = [ "kvm-amd" ];
     kernelParams = [
       "acpi.ec_no_wakeup=1" # Fixes ACPI wakeup issues
-      "amdgpu.dcdebugmask=0x10" # Fixes Wayland slowdowns/freezes
+      # 0x10 DC_DISABLE_PSR: fixes Wayland slowdowns/stalled redraws on eDP
+      # 0x800 DC_DISABLE_IPS: DMCUB fails to ack IPS2 exit on DCN3.5, wedging
+      # amdgpu_dm_atomic_commit_tail in an endless MMIO poll -> full system hang
+      "amdgpu.dcdebugmask=0x810"
       "ttm.pages_limit=11534336" # 44 GB GTT (in 4K pages) — fits 36 GB model + 128k KV cache, leaves ~18 GB for OS
       "i8042.reset" # Fixes Keyboard issues: https://www.tuxedocomputers.com/en/Infos/Help-Support/Help-for-my-device/TUXEDO-Book-XC-series/TUXEDO-Book-XC17-Gen11/Keyboard-not-working-properly.tuxedo
       "i8042.nomux"
