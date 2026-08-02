@@ -34,6 +34,7 @@ in
         ];
       };
       claude-code.enable = true;
+      pi.enable = true;
       lm-studio.enable = false;
       futo-notes.enable = true;
     };
