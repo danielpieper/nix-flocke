@@ -22,14 +22,12 @@ in
         side-by-side = "false"; # https://github.com/dandavison/delta/issues/359
         line-numbers = "true";
         navigate = "true";
-        syntax-theme = "Monokai Extended";
+        # Atom One Dark port, to match neovim's onedark_vivid (onedarkpro.nvim)
+        syntax-theme = "TwoDark";
         zero-style = "dim syntax";
 
-        # Catppuccin Mocha diff styling (upstream catppuccin/delta tints)
-        minus-style = "syntax #34293a";
-        minus-emph-style = "bold syntax #53394c";
-        plus-style = "syntax #2c3239";
-        plus-emph-style = "bold syntax #404f4a";
+        # +/- line backgrounds are left at delta's defaults; the Catppuccin
+        # tints were too low-contrast to tell additions from removals.
         line-numbers-minus-style = "bold #f38ba8";
         line-numbers-plus-style = "bold #a6e3a1";
         line-numbers-zero-style = "#6c7086";

@@ -30,6 +30,7 @@ in
         db.enable = true;
         direnv.enable = true;
         delta.enable = true;
+        difftastic.enable = true;
         eza.enable = true;
         fzf.enable = true;
         git.enable = true;
