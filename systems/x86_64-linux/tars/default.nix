@@ -77,7 +77,8 @@ in
   # Arm the hardware watchdog so a hard hang reboots itself instead of needing a
   # manual power-cycle (firmware reboots if systemd stops pinging for 20s).
   systemd.settings.Manager = {
-    RuntimeWatchdogSec = "20s";
+    # Resets the laptop ~30s into every suspend since s2idle stopped reaching s0ix.
+    # RuntimeWatchdogSec = "20s";
     RebootWatchdogSec = "30s";
   };
 
