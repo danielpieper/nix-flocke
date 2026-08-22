@@ -15,14 +15,10 @@ in
   };
 
   config = mkIf cfg.enable {
-    hardware = {
-      logitech.wireless.enable = true;
-      logitech.wireless.enableGraphical = true; # Solaar.
-    };
+    hardware.logitech.wireless.enable = true;
 
-    environment.systemPackages = with pkgs; [
-      solaar
-    ];
+    # Solaar. Also pulls pkgs.solaar into environment.systemPackages.
+    programs.solaar.enable = true;
 
     services.udev.packages = with pkgs; [
       logitech-udev-rules

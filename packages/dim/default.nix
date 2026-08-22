@@ -59,6 +59,6 @@ rustPlatform.buildRustPackage {
     ];
     mainProgram = "dim";
     platforms = platforms.linux;
-    broken = stdenv.isDarwin;
+    broken = stdenv.hostPlatform.isDarwin;
   };
 }
