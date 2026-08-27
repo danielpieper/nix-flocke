@@ -118,6 +118,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # TODO: drop the ref once the BLE/PWA work lands on main.
+    btkm = {
+      url = "git+ssh://forgejo@forgejo.naseschief.de/daniel/btkm.git?ref=feat/ble-config-pwa";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     tuxedo-nixos.url = "github:sund3RRR/tuxedo-nixos";
 
     llm-agents = {

@@ -33,6 +33,7 @@ in
     };
     postgresql.enable = true;
     authelia.enable = true;
+    btkm.enable = true;
     ntfy.enable = true;
     monitoring.enable = true;
     forgejo = {
