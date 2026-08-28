@@ -124,22 +124,22 @@ in
         "*.img.zst"
       ];
       ollama = {
-        enable = false;
+        enable = true;
         acceleration = "rocm";
-        loadModels = [ ];
+        loadModels = [
+          # Ollama's own build: curated template, known-good tool calling, and
+          # the vision encoder. Kept as the fallback if the Unsloth build below
+          # turns out to break pi's tools.
+          "qwen3.8:27b"
+          # Unsloth Dynamic v3.0 varies bit width per tensor from an imatrix
+          # calibration, so it holds accuracy better than a flat quant of the
+          # same size. 31.5 GB against the 44 GiB the 890M reports.
+          "hf.co/unsloth/Qwen3.8-27B-GGUF:UD-Q8_K_XL"
+        ];
       };
       llama-cpp = {
         enable = false;
         acceleration = "vulkan";
-        modelsPreset = {
-          "qwen3.5-27b-opus" = {
-            hf-repo = "Jackrong/Qwen3.5-27B-Claude-4.6-Opus-Reasoning-Distilled-GGUF";
-            hf-file = "Qwen3.5-27B.Q8_0.gguf";
-            alias = "qwen3.5-27b-opus";
-            fit = "on";
-            jinja = "on";
-          };
-        };
       };
     };
 

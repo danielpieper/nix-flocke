@@ -46,6 +46,11 @@ in
       inherit (cfg) loadModels;
       environmentVariables = {
         OLLAMA_KV_CACHE_TYPE = "q8_0";
+        # Ollama discards integrated GPUs unless this is set, falling back to
+        # CPU. On an APU the iGPU is the only accelerator there is, and with no
+        # GPU claimed Ollama also reports total_vram=0 and drops its
+        # VRAM-scaled context window to the 4096 floor.
+        OLLAMA_IGPU_ENABLE = "1";
       };
     };
 

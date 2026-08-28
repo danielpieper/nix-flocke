@@ -28,13 +28,42 @@ in
         enable = false;
         provider = "ollama";
         baseUrl = "http://localhost:11434/v1";
-        model = "qwen3.6:35b-a3b-q8-coding";
+        model = "hf.co/unsloth/Qwen3.8-27B-GGUF:UD-Q8_K_XL";
         extraModels = [
-          "qwen3.6:27b-q8-coding"
+          "qwen3.8:27b"
         ];
       };
       claude-code.enable = true;
-      pi.enable = true;
+      pi = {
+        enable = true;
+        # Ollama speaks the OpenAI API but pi has no built-in local backend, so
+        # it is registered as a custom provider. The key is a placeholder that
+        # Ollama ignores; pi hides models with no auth configured, so dropping
+        # it would make qwen3.8 invisible in /model. Both compat flags follow
+        # pi's own Ollama guidance: Ollama rejects the `developer` role, and
+        # reasoning_effort is left unsent (the model still thinks server-side).
+        defaultProvider = "ollama";
+        defaultModel = "hf.co/unsloth/Qwen3.8-27B-GGUF:UD-Q8_K_XL";
+        providers.ollama = {
+          baseUrl = "http://localhost:11434/v1";
+          api = "openai-completions";
+          apiKey = "ollama";
+          compat = {
+            supportsDeveloperRole = false;
+            supportsReasoningEffort = false;
+          };
+          models = [
+            {
+              id = "hf.co/unsloth/Qwen3.8-27B-GGUF:UD-Q8_K_XL";
+              reasoning = true;
+            }
+            {
+              id = "qwen3.8:27b";
+              reasoning = true;
+            }
+          ];
+        };
+      };
       lm-studio.enable = false;
       futo-notes.enable = true;
     };
