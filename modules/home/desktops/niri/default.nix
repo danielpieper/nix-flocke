@@ -21,6 +21,7 @@ in
     desktops.addons = {
       kanshi.enable = true;
       noctalia.enable = true;
+      solaar.enable = true;
     };
   };
 }
