@@ -85,7 +85,9 @@
 
     teslamate = {
       url = "github:teslamate-org/teslamate";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # No nixpkgs.follows: teslamate builds with beam.packagesWith, which
+      # nixpkgs removed, so it needs the nixpkgs it pins itself.
+      # Retry the follows once upstream moves to an OTP-specific set.
     };
 
     lazyvim = {
@@ -118,9 +120,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # TODO: drop the ref once the BLE/PWA work lands on main.
     btkm = {
-      url = "git+ssh://forgejo@forgejo.naseschief.de/daniel/btkm.git?ref=feat/ble-config-pwa";
+      url = "git+ssh://forgejo@forgejo.naseschief.de/daniel/btkm.git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
