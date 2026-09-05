@@ -9,6 +9,13 @@ with lib;
 with lib.flocke;
 let
   cfg = config.services.flocke.restic;
+
+  repoSettings = {
+    repositoryFile = config.sops.secrets.restic_repository.path;
+    initialize = false;
+    passwordFile = config.sops.secrets.restic_repository_password.path;
+    environmentFile = config.sops.secrets.restic_environment.path;
+  };
 in
 {
   imports = [ ./exporter.nix ];
@@ -30,6 +37,12 @@ in
       default = [ ];
       description = "Paths to exclude from backup";
     };
+
+    maintenance = mkEnableOption ''
+      repo-wide forget/prune. `restic forget` applies the retention policy to
+      every host's snapshots, not just the local one, so exactly one always-on
+      host should enable this
+    '';
 
     backupPrepareCommand = mkOption {
       type = types.nullOr types.str;
@@ -72,42 +85,82 @@ in
       "z /persist/etc/ssh/restic_ed25519 0600 root root -"
     ];
 
-    services.restic.backups.default = {
-      repositoryFile = config.sops.secrets.restic_repository.path;
-      initialize = false;
-      passwordFile = config.sops.secrets.restic_repository_password.path;
-      environmentFile = config.sops.secrets.restic_environment.path;
-      inherit (cfg) paths backupPrepareCommand;
-      extraBackupArgs = [
-        "--no-scan"
-        "--exclude-caches"
-        "--exclude=.cache"
-        "--exclude=var/cache"
-      ]
-      ++ map (e: "--exclude=${e}") cfg.excludes;
-      pruneOpts = [
-        "--keep-within 2d"
-        "--keep-daily 7"
-        "--keep-weekly 4"
-        "--keep-monthly 12"
-        "--keep-yearly 3"
-      ];
-      timerConfig = {
-        OnCalendar = "00:05";
-        RandomizedDelaySec = "5h";
-      };
-    };
+    services.restic.backups = mkMerge [
+      {
+        default = repoSettings // {
+          inherit (cfg) paths backupPrepareCommand;
+          extraBackupArgs = [
+            "--no-scan"
+            # Wait out a repo that is busy rather than failing instantly: the
+            # hosts share one repository and prune takes an exclusive lock.
+            "--retry-lock 30m"
+            "--exclude-caches"
+            "--exclude=.cache"
+            "--exclude=var/cache"
+          ]
+          ++ map (e: "--exclude=${e}") cfg.excludes;
+          # Deliberately empty: forget/prune is repo-wide, not per-host, so it
+          # runs on one always-on host instead (cfg.maintenance) rather than
+          # four times a night from machines that may suspend mid-repack.
+          pruneOpts = [ ];
+          timerConfig = {
+            OnCalendar = "00:05";
+            RandomizedDelaySec = "5h";
+          };
+        };
+      }
+
+      (mkIf cfg.maintenance {
+        # Prune-only job: with no paths the upstream module emits an ExecStart
+        # of `restic unlock` followed by `restic forget --prune`, so stale-lock
+        # cleanup runs first and unconditionally -- it is no longer stranded
+        # behind a backup that the lock itself is blocking.
+        maintenance = repoSettings // {
+          paths = [ ];
+          pruneOpts = [
+            "--retry-lock 30m"
+            "--keep-within 2d"
+            "--keep-daily 7"
+            "--keep-weekly 4"
+            "--keep-monthly 12"
+            "--keep-yearly 3"
+          ];
+          # The 00:05 + 5h jitter window has closed by now, so the nightly
+          # backups have landed.
+          timerConfig = {
+            OnCalendar = "07:00";
+            RandomizedDelaySec = "30m";
+          };
+        };
+      })
+    ];
 
     # see https://github.com/NixOS/nixpkgs/issues/196547#issuecomment-2044540904
-    systemd.services."restic-backups-default" = {
-      serviceConfig = {
-        Restart = "on-failure";
-        RestartSec = "60s";
-      };
-      unitConfig = {
-        StartLimitIntervalSec = 3600;
-        StartLimitBurst = 15;
-      };
-    };
+    systemd.services = mkMerge [
+      {
+        "restic-backups-default" = {
+          serviceConfig = {
+            Restart = "on-failure";
+            RestartSec = "60s";
+          };
+          unitConfig = {
+            StartLimitIntervalSec = 3600;
+            StartLimitBurst = 15;
+          };
+        };
+      }
+      (mkIf cfg.maintenance {
+        "restic-backups-maintenance" = {
+          serviceConfig = {
+            Restart = "on-failure";
+            RestartSec = "60s";
+          };
+          unitConfig = {
+            StartLimitIntervalSec = 3600;
+            StartLimitBurst = 15;
+          };
+        };
+      })
+    ];
   };
 }

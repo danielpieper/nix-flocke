@@ -101,6 +101,7 @@ in
 
   services = {
     flocke = {
+      monitoring.enable_exporter = true;
       syncthing.enable = true;
       nfs.enable = true;
       usbip-export = {

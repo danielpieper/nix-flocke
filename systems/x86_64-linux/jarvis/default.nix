@@ -76,6 +76,9 @@ in
     restic = {
       enable = true;
       enable_exporter = true;
+      # jarvis owns the repo-wide forget/prune: always on, and in Hetzner's
+      # network with the storage box, so the repack does not crawl.
+      maintenance = true;
       excludes = [
         "var/lib/containers"
         "var/lib/postgresql"

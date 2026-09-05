@@ -74,7 +74,10 @@ in
           };
         };
 
-        # TODO: work out this is on a different host
+        # Reached over the tailnet by MagicDNS name. Splitting the jobs matters:
+        # "Node down 2" alerts on up{job="nodes"}, so only always-on hosts
+        # belong there. Every other rule matches bare node_* metrics and so
+        # covers both jobs.
         scrapeConfigs = [
           {
             job_name = "nodes";
@@ -82,7 +85,21 @@ in
               {
                 targets = [
                   "127.0.0.1:${toString config.services.prometheus.exporters.node.port}"
+                  "hal:${toString config.services.prometheus.exporters.node.port}"
                   "ava:${toString config.services.prometheus.exporters.node.port}"
+                ];
+              }
+            ];
+          }
+          {
+            # tars is a laptop: being off or suspended is normal, not an
+            # incident, so it stays out of job="nodes" to keep the down alert
+            # from crying wolf.
+            job_name = "nodes-intermittent";
+            static_configs = [
+              {
+                targets = [
+                  "tars:${toString config.services.prometheus.exporters.node.port}"
                 ];
               }
             ];
