@@ -96,11 +96,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1788594923,
-        "narHash": "sha256-pBnAUTYEbHTSHgybupYY0m0NN5uFllzMj4jy9SjS9pg=",
+        "lastModified": 1790762804,
+        "narHash": "sha256-8nmQjMtr1eZBFqazvULTOVFFNF6CYdV2ZjB9+LAIBTg=",
         "ref": "refs/heads/main",
-        "rev": "53cf5bdacd5c9d1189a3afcf930241d7b6dfb7fb",
-        "revCount": 155,
+        "rev": "588ea95cf696c47a176c9f6d0659ada8939ba3ad",
+        "revCount": 163,
         "type": "git",
         "url": "ssh://forgejo@forgejo.naseschief.de/daniel/btkm.git"
       },
