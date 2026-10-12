@@ -85,7 +85,10 @@ in
 
     networking.firewall = mkIf cfg.openFirewall {
       allowedUDPPorts = [ 7777 ];
-      allowedTCPPorts = [ 7777 ];
+      allowedTCPPorts = [
+        7777
+        8888
+      ];
     };
   };
 }

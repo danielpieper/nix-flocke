@@ -32,11 +32,15 @@
         "var/lib/arr"
         "jellyfin/metadata"
         "jellyfin/transcodes"
+        # Server install is re-downloaded by steamcmd; keep only the saves
+        "var/lib/satisfactory/*"
+        "!var/lib/satisfactory/.config"
       ];
     };
     arr.enable = true;
     avahi.enable = true;
     evitts.enable = false;
+    satisfactory.enable = true;
   };
 
   boot = {
