@@ -35,7 +35,6 @@
     impermanence.url = "github:nix-community/impermanence";
     lanzaboote.url = "github:nix-community/lanzaboote";
 
-    nixgl.url = "github:nix-community/nixGL";
     stylix = {
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -194,7 +193,6 @@
       # ];
 
       overlays = with inputs; [
-        nixgl.overlay
         nur.overlays.default
         llm-agents.overlays.shared-nixpkgs
       ];

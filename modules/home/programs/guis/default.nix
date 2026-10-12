@@ -24,7 +24,7 @@ in
       gvfs
       loupe
 
-      libreoffice-fresh
+      libreoffice
 
       nautilus
       ffmpegthumbnailer # thumbnails
