@@ -53,6 +53,12 @@ in
       base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-${flavor}.yaml";
       polarity = lib.mkDefault polarity;
       targets.nixvim.enable = false;
+      # Rofi isn't used, and Stylix's rofi target still sets the renamed
+      # `programs.rofi.font`, which warns on every evaluation.
+      targets.rofi.enable = false;
+      # HM forbids nixpkgs.overlays with useGlobalPkgs; the NixOS-level Stylix
+      # overlays already apply to the shared pkgs (mirrors Stylix's autoImport).
+      overlays.enable = false;
 
       icons = {
         enable = true;

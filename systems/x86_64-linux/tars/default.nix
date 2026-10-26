@@ -160,7 +160,40 @@ in
 
   boot = {
     supportedFilesystems = lib.mkForce [ "btrfs" ];
-    kernelPackages = pkgs.linuxPackages_latest;
+    # nixpkgs' tuxedo-drivers 4.20.1 doesn't build on 7.3 (struct acpi_driver
+    # removed); 4.25.0 does. Its wrapper Makefile also re-expands $(MAKEFLAGS)
+    # in a shell, which chokes on nixpkgs' `cmd_sign=...$(space)$@` flag, so
+    # drive kbuild directly. Drop once nixpkgs catches up.
+    kernelPackages = pkgs.linuxPackages_latest.extend (
+      _: prev: {
+        tuxedo-drivers = prev.tuxedo-drivers.overrideAttrs (old: {
+          version = "4.25.0";
+          src = old.src.override {
+            rev = "v4.25.0";
+            hash = "sha256-AER+JPl3lem1OFV51VdOZAnr3Uy1BFSpEJNrE+shYis=";
+          };
+          postInstall = ''
+            substituteInPlace files/usr/lib/udev/rules.d/* \
+              --replace-quiet "/bin/bash" "${lib.getExe pkgs.bash}" \
+              --replace-quiet "/bin/sh" "${lib.getExe pkgs.bash}"
+            install -Dm 0644 -t $out/etc/udev/rules.d files/usr/lib/udev/rules.d/*
+          '';
+          makeFlags = old.makeFlags ++ [
+            "-C"
+            "${prev.kernel.dev}/lib/modules/${prev.kernel.modDirVersion}/build"
+            "M=$(PWD)"
+          ];
+          buildFlags = [ "modules" ];
+          installTargets = [ "modules_install" ];
+        });
+        # Pulled in by nixos-hardware. It doesn't use kernelModuleMakeFlags, so
+        # it ships its own depmod indexes (colliding with the kernel's) and no
+        # kmodigest signature, which the module env now requires.
+        yt6801 = prev.yt6801.overrideAttrs (old: {
+          makeFlags = old.makeFlags ++ prev.kernelModuleMakeFlags;
+        });
+      }
+    );
     resumeDevice = "/dev/disk/by-label/nixos";
   };
 

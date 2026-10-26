@@ -36,9 +36,7 @@ in
         "loglevel=3"
         "udev.log_level=0"
       ];
-      initrd.verbose = !cfg.plymouth;
       consoleLogLevel = lib.mkIf cfg.plymouth 0;
-      initrd.systemd.enable = true;
 
       lanzaboote = mkIf cfg.secureBoot {
         enable = true;

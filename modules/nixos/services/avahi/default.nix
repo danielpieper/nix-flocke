@@ -15,13 +15,18 @@ in
   config = mkIf cfg.enable {
     services.avahi = {
       enable = true;
-      ipv4 = true;
-      ipv6 = true;
       nssmdns4 = true;
       nssmdns6 = true;
-      publish = {
-        enable = true;
-        userServices = true;
+      settings = {
+        server = {
+          use-ipv4 = true;
+          use-ipv6 = true;
+        };
+        publish = {
+          disable-publishing = false;
+          disable-user-service-publishing = false;
+          publish-addresses = true;
+        };
       };
     };
   };
