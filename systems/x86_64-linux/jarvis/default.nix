@@ -94,7 +94,6 @@ in
       enable = true;
       runMigrations = true;
     };
-    trilium.enable = true;
     futo-notes.enable = true;
   };
 
