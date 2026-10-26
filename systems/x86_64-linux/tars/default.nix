@@ -202,5 +202,18 @@ in
     tuxedo-control-center.enable = true;
   };
 
+  # tuxedo-control-center 2.1.23's unit quotes the whole command
+  # (`ExecStart="systemctl stop tccd"`), which systemd treats as one binary name.
+  systemd.services.tccd-sleep.serviceConfig = {
+    ExecStart = [
+      ""
+      "systemctl stop tccd"
+    ];
+    ExecStop = [
+      ""
+      "systemctl start tccd"
+    ];
+  };
+
   system.stateVersion = "23.11";
 }
