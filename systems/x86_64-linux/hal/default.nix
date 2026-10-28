@@ -37,10 +37,11 @@
         "!var/lib/satisfactory/.config"
       ];
     };
-    arr.enable = true;
+    arr.enable = false;
     avahi.enable = true;
     evitts.enable = false;
-    satisfactory.enable = true;
+    satisfactory.enable = false;
+    valheim.enable = true;
   };
 
   boot = {

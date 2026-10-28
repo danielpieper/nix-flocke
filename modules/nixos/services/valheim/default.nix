@@ -36,7 +36,7 @@ in
     world = mkOption {
       type = types.str;
       description = "Server World Name";
-      default = "default";
+      default = "BamBam2";
     };
 
     port = mkOption {
