@@ -27,6 +27,10 @@ in
           MusicFolder = "/mnt/nas/11tb/media/music/library";
           BaseUrl = "";
           PlaylistsPath = "playlists";
+          # nixpkgs points Plugins.Folder at finalPackage/share/plugins, which
+          # doesn't exist without plugins; navidrome then crashes trying to
+          # mkdir it in the read-only store
+          Plugins.Enabled = false;
         };
       };
 
