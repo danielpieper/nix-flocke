@@ -57,6 +57,19 @@ in
       default = false;
     };
 
+    modifiers = mkOption {
+      type = types.attrsOf types.str;
+      default = { };
+      example = {
+        deathpenalty = "casual";
+        raids = "less";
+      };
+      description = ''
+        World modifiers passed as `-modifier <key> <value>`.
+        See https://valheim.fandom.com/wiki/World_Modifiers
+      '';
+    };
+
     openFirewall = mkOption {
       type = types.bool;
       default = true;
@@ -93,7 +106,8 @@ in
             ${lib.optionalString (cfg.world != "") "-world " + lib.escapeShellArg cfg.world} \
             -password $SERVER_PASS \
             -public ${if cfg.public then "1" else "0"} \
-            -backups ${if cfg.backups then "1" else "0"}
+            -backups ${if cfg.backups then "1" else "0"} \
+            ${concatStringsSep " " (mapAttrsToList (k: v: "-modifier ${k} ${v}") cfg.modifiers)}
           '';
           # ExecStart = "${pkgs.glibc}/lib/ld-linux-x86-64.so.2 ${cfg.dataDir}/valheim_server.x86_64 ${lib.escapeShellArgs launchOptions}";
           Restart = "always";

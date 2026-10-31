@@ -41,7 +41,10 @@
     avahi.enable = true;
     evitts.enable = false;
     satisfactory.enable = false;
-    valheim.enable = true;
+    valheim = {
+      enable = true;
+      modifiers.deathpenalty = "casual";
+    };
   };
 
   boot = {
