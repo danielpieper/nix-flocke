@@ -145,7 +145,6 @@ in
         environment = {
           # linux64 directory is required by Valheim.
           LD_LIBRARY_PATH = "linux64:${pkgs.glibc}/lib";
-          SERVER_PASS = "test";
         };
 
         preStart = ''
