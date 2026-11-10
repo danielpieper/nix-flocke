@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  inputs,
   ...
 }:
 {
@@ -44,6 +45,7 @@
     valheim = {
       enable = true;
       modifiers.deathpenalty = "casual";
+      inherit (inputs.nix-secrets.valheim) adminList permittedList;
     };
   };
 

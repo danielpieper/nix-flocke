@@ -70,6 +70,26 @@ in
       '';
     };
 
+    adminList = mkOption {
+      type = types.listOf types.str;
+      default = [ ];
+      example = [ "Steam_76561197960287930" ];
+      description = ''
+        Platform IDs (e.g. `Steam_<id>`, `PlayStation_<id>`) written to adminlist.txt.
+        Admins are automatically added to the permitted list.
+      '';
+    };
+
+    permittedList = mkOption {
+      type = types.listOf types.str;
+      default = [ ];
+      example = [ "Steam_76561197960287930" ];
+      description = ''
+        Platform IDs written to permittedlist.txt. When non-empty, only these
+        players (plus admins) may join.
+      '';
+    };
+
     openFirewall = mkOption {
       type = types.bool;
       default = true;
@@ -86,6 +106,14 @@ in
       let
         steamcmd = lib.getExe cfg.steamcmdPackage;
         steam-run = lib.getExe pkgs.steam-run;
+        adminListFile = pkgs.writeText "valheim-adminlist.txt" (
+          concatLines ([ "// List admin players ID  ONE per line" ] ++ cfg.adminList)
+        );
+        permittedListFile = pkgs.writeText "valheim-permittedlist.txt" (
+          concatLines (
+            [ "// List permitted players ID ONE per line" ] ++ unique (cfg.adminList ++ cfg.permittedList)
+          )
+        );
       in
       {
         description = "Valheim Dedicated Server";
@@ -130,6 +158,10 @@ in
           # Fix a missplaced library
           mkdir -p ~/.steam/sdk64
           ln -fs ${cfg.dataDir}/linux64/steamclient.so ~/.steam/sdk64
+
+          # Declaratively managed player lists
+          cp --no-preserve=mode ${adminListFile} ${cfg.dataDir}/adminlist.txt
+          cp --no-preserve=mode ${permittedListFile} ${cfg.dataDir}/permittedlist.txt
         '';
       };
 
