@@ -22,6 +22,8 @@ in
 
       settings = {
         PasswordAuthentication = false;
+        # Without this, PAM still offers a password prompt via keyboard-interactive
+        KbdInteractiveAuthentication = false;
         # PermitRootLogin = "no";
         StreamLocalBindUnlink = "yes";
         GatewayPorts = "clientspecified";

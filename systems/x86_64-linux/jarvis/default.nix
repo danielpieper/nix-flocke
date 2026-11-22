@@ -24,6 +24,12 @@ in
     server.enable = true;
   };
 
+  services.fail2ban = {
+    enable = true;
+    # never ban our own tailnet (deploys, failed key attempts from tars)
+    ignoreIP = [ "100.64.0.0/10" ];
+  };
+
   services.flocke = {
     caddy = {
       enable = true;

@@ -33,7 +33,11 @@
   };
 
   services = {
-    fail2ban.enable = true;
+    fail2ban = {
+      enable = true;
+      # never ban our own tailnet (deploys, failed key attempts from tars)
+      ignoreIP = [ "100.64.0.0/10" ];
+    };
     flocke = {
       restic.enable = true;
       monitoring.enable_exporter = true;
