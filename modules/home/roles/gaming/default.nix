@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 with lib;
@@ -26,10 +27,9 @@ in
       flocke.geforcenow.enable = true;
     };
 
-    # home.packages = with pkgs; [
-    #   lutris
-    #   bottles
-    #   chiaki
-    # ];
+    home.packages = with pkgs; [
+      lutris
+      wowup-cf
+    ];
   };
 }
