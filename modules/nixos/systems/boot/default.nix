@@ -52,8 +52,10 @@ in
           enable = !cfg.secureBoot;
           # 20 kernel+initrd sets never fit a 511M ESP — each aarch64 pair is
           # ~45M, so ava filled up and a deploy died with ENOSPC while
-          # systemd-boot staged the new entry. 5 leaves comfortable headroom.
-          configurationLimit = 5;
+          # systemd-boot staged the new entry. tars' initrd alone is ~74M
+          # (amdgpu firmware + plymouth), so 5 x86 sets plus a new kernel
+          # overflowed too. 3 keeps room for a fresh kernel+initrd pair.
+          configurationLimit = 3;
           editor = false;
         };
       };
