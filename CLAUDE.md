@@ -50,7 +50,7 @@ Snowfall Lib auto-discovers modules, packages, and systems based on directory st
 
 ### Reverse Proxy & Auth
 
-All services on hal and jarvis use **Caddy** with ACME wildcard certs via Hetzner DNS-01. **Authelia** on jarvis provides SSO (OIDC) for Grafana, Forgejo, Miniflux, Mealie, Immich, Paperless, and OCIS. Services without native OIDC use Caddy `forward_auth` for Authelia protection.
+All services on hal and jarvis use **Caddy** with ACME wildcard certs via Hetzner DNS-01. **Authelia** on jarvis provides SSO (OIDC) for Grafana, Forgejo, Miniflux, Mealie, Immich, and Paperless. Services without native OIDC use Caddy `forward_auth` for Authelia protection.
 
 ## Critical: Git Tracking Requirement
 
